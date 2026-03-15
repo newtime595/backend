@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="ko">
   <head>
@@ -19,7 +21,6 @@
       rel="stylesheet"
       href="/Oulim/asset/css/pages/user/find-idpassword/id-find.css"
     />
-    <script defer src="/Oulim/asset/js/pages/main/include.js"></script>
     <script
       defer
       src="/Oulim/asset/js/pages/user/find-idpassword/id-find.js"
@@ -27,11 +28,11 @@
   </head>
 
   <body>
-    <div id="header"></div>
+  	<jsp:include page="/app/include/header-nologin.jsp" />
     <div class="l-main">
       <div class="l-container">
         <div class="p-id-find">
-          <form action="/Oulim/front/html/user/find-idpassword/id-find-view.html">
+          <form action="">
             <div class="l-id-find-layout">
               <div>
                 <h2>아이디 찾기</h2>
@@ -96,6 +97,7 @@
               </div>
               <div class="c-id-find-nextbtn">
                 <button
+                  type="button"
                   id="is-id-find-btn"
                   class="c-button c-button--primary c-button--md"
                 >
@@ -107,6 +109,6 @@
         </div>
       </div>
     </div>
-    <div id="footer"></div>
+    <jsp:include page="/app/include/footer.jsp" />
   </body>
 </html>
