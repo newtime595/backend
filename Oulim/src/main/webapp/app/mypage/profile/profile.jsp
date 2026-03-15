@@ -1,15 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="ko">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>coming-volunteer</title>
+  <title>profile</title>
 
+  <!-- base css 필수 삽입-->
   <link rel="stylesheet" href="/Oulim/asset/css/core/reset.css" />
   <link rel="stylesheet" href="/Oulim/asset/css/core/variable.css" />
   <link rel="stylesheet" href="/Oulim/asset/css/core/typography.css" />
 
+  <!-- 컨포넌트 css 선택-->
   <link rel="stylesheet" href="/Oulim/asset/css/component/pagination.css" />
   <link rel="stylesheet" href="/Oulim/asset/css/component/input.css" />
   <link rel="stylesheet" href="/Oulim/asset/css/component/button.css" />
@@ -18,20 +22,18 @@
   <link rel="stylesheet" href="/Oulim/asset/css/component/DetailCard.css" />
   <link rel="stylesheet" href="/Oulim/asset/css/component/badge.css" />
 
-  <link rel="stylesheet" href="/Oulim/asset/css/pages/mypage/volunteer-history/coming-volunteer.css" />
+  <!-- <script src="/Oulim/asset//assets/js/include.js"></script> -->
 
-  <script defer src="/Oulim/asset/js/pages/main/include.js"></script>
+  <link rel="stylesheet" href="/Oulim/asset/css/pages/mypage/profile/profile.css" />
+
 </head>
 
 <body>
-
-  <div id="header"></div>
+<jsp:include page="/app/include/header-nologin.jsp" />
 
   <main class="l-main">
-
+    <!-- 팀원들 작성 영역 이 안에서 작업하기!!퍼블 작업진행 -->
     <div class="main-container">
-
-      <!-- aside -->
       <div class="main-aside">
         <aside>
           <div class="main-aside-list">
@@ -86,114 +88,117 @@
         </aside>
       </div>
 
-
-      <!-- content -->
       <div class="main-2">
-
         <div class="main-section1">
-          <a href="/Oulim/front/html/volunteer-activity/volunAct-detail.html">
-          <h1>예정된 봉사 이력 조회</h1>
+          <img src="/Oulim/asset/image/character/komi-lv9.svg" alt="펫사진" />
+          <div class="sec1-text">
+            <h1>zl존봉사12</h1>
+            <br>
+            <h5>총 봉사 횟수 : 145회</h5>
+            <h5>총 봉사 시간 : 1456시간</h5>
+            <h5>랭킹 포인트 : 44,100p</h5>
+            <h5>현재 포인트 : 50p</h5>
+          </div>
         </div>
 
+        <div class="main-section2">
+          <a href="/Oulim/front/html/volunteer-activity/volunAct-detail.html">
+          <div class="c-card">
+            <h5>나의 예정된 봉사</h5>
+            <hr />
+            <br>
+            <div class="c-card__header">
+              <span class="c-badge c-badge--primary">모집중</span>
+            </div>
+            <h3 class="c-card__title">주민과 함께하는 제설작업 봉사 모집</h3>
+            <p class="c-card__desc">
+              지역 주민들과 함께하는 봉사 활동입니다.
+            </p>
+            <div class="c-card__footer">
+              <span>2026.02.03 ~ 2026.02.06</span>
+            </div>
+          </div>
+          </a>
+
+          <a href="/Oulim/front/html/volunteer-activity/volunAct-detail.html">
+          <div class="c-card">
+            <h5>나의 완료된 봉사</h5>
+            <hr />
+            <br>
+            <div class="c-card__header">
+              <span class="c-badge c-badge--primary">완료</span>
+            </div>
+            <h3 class="c-card__title">주민과 함께하는 제설작업 봉사 모집</h3>
+            <p class="c-card__desc">
+              지역 주민들과 함께하는 봉사 활동입니다.
+            </p>
+            <div class="c-card__footer">
+              <span>2026.02.03 ~ 2026.02.06</span>
+            </div>
+          </div>
+          </a>
+        </div>
 
         <div class="main-section3">
-
+          <a href="/Oulim/front/html/mypage/point-history/point-history.html">
           <div class="c-card">
+            <h5>나의포인트</h5>
+            <hr />
+            <br>
+            <div class="c-card__header">
+              <span class="c-badge c-badge--primary">완료</span>
+            </div>
+            <h3 class="c-card__title">주민과 함께하는 제설작업 봉사 모집</h3>
+            <p class="c-card__desc">
+              봉사를 마치고 150p를 획득했어요!
+            </p>
+            <div class="c-card__footer">
+              <span>2026-01-04</span>
+            </div>
+            <br>
+            <div class="c-card__header">
+              <span class="c-badge c-badge--primary">완료</span>
+            </div>
+            <h3 class="c-card__title">주민과 함께하는 제설작업 봉사 모집</h3>
+            <p class="c-card__desc">
+              봉사를 마치고 200p를 획득했어요!
+            </p>
+            <div class="c-card__footer">
+              <span>2026-01-04</span>
+            </div>
+            <br>
 
             <div class="c-card__header">
-              <span class="c-badge c-badge--primary">모집중</span>
+              <span class="c-badge c-badge--primary">완료</span>
             </div>
-
-            <h3 class="c-card__title">
-              주민과 함께하는 제설작업 봉사 모집
-            </h3>
-
+            <h3 class="c-card__title">주민과 함께하는 제설작업 봉사 모집</h3>
             <p class="c-card__desc">
-              지역 주민들과 함께하는 봉사 활동입니다.
+              봉사를 마치고 50p를 획득했어요!
             </p>
-
             <div class="c-card__footer">
-              <span>2026.02.03 ~ 2026.02.06</span>
+              <span>2026-01-04</span>
             </div>
-            </a>
-          </div>
-
-
-          <a href="/Oulim/front/html/volunteer-activity/volunAct-detail.html">
-          <div class="c-card">
+            <br>
             <div class="c-card__header">
-              <span class="c-badge c-badge--primary">모집중</span>
+              <span class="c-badge c-badge--primary">완료</span>
             </div>
-
-            <h3 class="c-card__title">
-              주민과 함께하는 제설작업 봉사 모집
-            </h3>
-
+            <h3 class="c-card__title">주민과 함께하는 제설작업 봉사 모집</h3>
             <p class="c-card__desc">
-              지역 주민들과 함께하는 봉사 활동입니다.
+              봉사를 마치고 100p를 획득했어요!
             </p>
-
             <div class="c-card__footer">
-              <span>2026.02.03 ~ 2026.02.06</span>
+              <span>2026-01-04</span>
             </div>
-            </a>
+
           </div>
-
-          <a href="/Oulim/front/html/volunteer-activity/volunAct-detail.html">
-          <div class="c-card">
-
-            <div class="c-card__header">
-              <span class="c-badge c-badge--primary">모집중</span>
-            </div>
-
-            <h3 class="c-card__title">
-              주민과 함께하는 제설작업 봉사 모집
-            </h3>
-
-            <p class="c-card__desc">
-              지역 주민들과 함께하는 봉사 활동입니다.
-            </p>
-
-            <div class="c-card__footer">
-              <span>2026.02.03 ~ 2026.02.06</span>
-            </div>
-            </a>
-          </div>
-
+          </a>
         </div>
 
-
-        <div class="page">
-
-          <nav class="c-pagination">
-
-            <a class="c-pagination__link is-disabled">‹</a>
-            <a class="c-pagination__link is-active">1</a>
-            <a class="c-pagination__link">2</a>
-            <a class="c-pagination__link">3</a>
-            <a class="c-pagination__link">4</a>
-            <a class="c-pagination__link">5</a>
-            <a class="c-pagination__link">6</a>
-            <a class="c-pagination__link">7</a>
-            <a class="c-pagination__link">8</a>
-            <a class="c-pagination__link">9</a>
-            <a class="c-pagination__link">10</a>
-            <a class="c-pagination__link">›</a>
-
-          </nav>
-
-        </div>
 
       </div>
-
     </div>
-
-    </div>
-
   </main>
-
-  <div id="footer"></div>
-
+  <jsp:include page="/app/include/footer.jsp" />
 </body>
 
 </html>

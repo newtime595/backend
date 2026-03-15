@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="ko">
 
@@ -15,14 +17,13 @@
 
   <link rel="stylesheet" href="/Oulim/asset/css/pages/mypage/check/check.css">
 
-  <script defer src="/Oulim/asset/js/pages/main/include.js"></script>
-
   <script defer src="/Oulim/asset/js/pages/mypage/check/check.js"></script>
+
 </head>
 
 <body>
 
-  <div id="header"></div>
+  <jsp:include page="/app/include/header-nologin.jsp" />
 
   <main class="l-main">
 
@@ -115,7 +116,7 @@
 
   </main>
 
-  <div id="footer"></div>
+  <jsp:include page="/app/include/footer.jsp" />
 
 </body>
 
