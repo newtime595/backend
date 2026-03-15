@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>volunteer-manage-edit</title>
+
+    <!-- base css 필수 삽입-->
+    <link rel="stylesheet" href="/Oulim/asset/css/core/reset.css" />
+    <link rel="stylesheet" href="/Oulim/asset/css/core/variable.css" />
+    <link rel="stylesheet" href="/Oulim/asset/css/core/typography.css" />
+    <link rel="stylesheet" href="/Oulim/asset/css/core/layout.css">
+    <link rel="stylesheet" href="/Oulim/asset/css/pages/volunteer-manage/volunteer-manage-edit.css" />
+
+    <!-- 컨포넌트 css 선택-->
+    <link rel="stylesheet" href="/Oulim/asset/css/component/input.css" />
+    <link rel="stylesheet" href="/Oulim/asset/css/component/button.css" />
+    <link rel="stylesheet" href="/Oulim/asset/css/component/card.css" />
+    <link rel="stylesheet" href="/Oulim/asset/css/component/select.css" />
+
+    <script defer src="/Oulim/asset/js/pages/main/include.js"></script>
+    <script defer src="/Oulim/asset/js/pages/volunteer-manage/volunteer-manage-edit.js"></script>
+</head>
+
+<body>
+    <div id="header"></div>
+    <!-- <%@ include file="header.jsp" %> -->
+
+    <main class="l-main">
+        <div class="l-container">
+            <form action="/Oulim/front/html/volunteer-management/volunteer-manage-list.html">
+                <div class="p-volunteer-manage-edit_header">
+                    <h1 class="p-volunteer-manage-edit_title">봉사수정</h1>
+                </div>
+
+                <div class="l-volunteer-manage-edit_form">
+                    <div class="l-volunteer-manage-edit_form-grid">
+                        <div class="l-volunteer-manage-edit_form-item">
+                            <label class="l-volunteer-manage-edit_form-label">봉사기간</label>
+                            <div
+                                class="l-volunteer-manage-edit_form-field l-volunteer-manage-edit_form-field--period">
+                                <input type="date" class="c-input" id="volunteerStartDate" name="volunteerStartDate"/>
+                                <span class="l-volunteer-manage-edit_form-tilde">~</span>
+                                <input type="date" class="c-input" id="volunteerEndDate" name="volunteerEndDate"/>
+                            </div>
+                        </div>
+
+                        <div class="l-volunteer-manage-edit_form-item">
+                            <label class="l-volunteer-manage-edit_form-label">봉사시간</label>
+                            <div
+                                class="l-volunteer-manage-edit_form-field l-volunteer-manage-edit_form-field--period">
+                                <input type="text" id="volunteerStartTime" name="volunteerStartTime" class="c-input" placeholder="10시">
+                                <span class="l-volunteer-manage-edit_form-tilde">~</span>
+                                <input type="text" id="volunteerEndTime" name="volunteerEndTime" class="c-input" placeholder="18시">
+                            </div>
+                        </div>
+
+                        <div class="l-volunteer-manage-edit_form-item">
+                            <label class="l-volunteer-manage-edit_form-label">모집기간</label>
+                            <div
+                                class="l-volunteer-manage-edit_form-field l-volunteer-manage-edit_form-field--period">
+                                <input type="date" class="c-input" id="recruitStartDate" name="recruitStartDate"/>
+                                <span class="l-volunteer-manage-edit_form-tilde">~</span>
+                                <input type="date" class="c-input" id="recruitEndDate" name="recruitEndDate"/>
+                            </div>
+                        </div>
+
+                        <div class="l-volunteer-manage-edit_form-item">
+                            <label class="l-volunteer-manage-edit_form-label">봉사자연령</label>
+                            <div class="l-volunteer-manage-edit_form-field">
+                                <select id="volunteerAge" name="volunteerAge" class="c-select">
+                                    <option value="teenage">청소년 (14~19세)</option>
+                                    <option value="youth">청년 (20~29세)</option>
+                                    <option value="officeWork">직장인 (30~세)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="l-volunteer-manage-edit_form-item">
+                            <label class="l-volunteer-manage-edit_form-label">일자당 모집 인원</label>
+                            <div class="l-volunteer-manage-edit_form-field">
+                                <select id="volunteerCapacity" name="volunteerCapacity" class="c-select">
+                                    <option value="30">30명</option>
+                                    <option value="25">25명</option>
+                                    <option value="20">20명</option>
+                                    <option value="15">15명</option>
+                                    <option value="10">10명</option>
+                                    <option value="30">5명 내외</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="l-volunteer-manage-edit_form-item">
+                            <label class="l-volunteer-manage-edit_form-label">활동분야</label>
+                            <div class="l-volunteer-manage-edit_form-field">
+                                <select id="volunteerCategory" name="volunteerCategory" class="c-select">
+                                    <option value="environment">환경</option>
+                                    <option value="medical">의료</option>
+                                    <option value="education">교육</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="l-volunteer-manage-edit_form-item">
+                            <label class="l-volunteer-manage-edit_form-label">모집기관</label>
+                            <div class="l-volunteer-manage-edit_form-field">
+                                <input type="text" id="OrganizationName" name="OrganizationName" class="c-input" placeholder="등록된 기관명 노출 예정"
+                                    readonly />
+                            </div>
+                        </div>
+
+                        <div class="l-volunteer-manage-edit_form-item">
+                            <label class="l-volunteer-manage-edit_form-label">봉사대상</label>
+                            <div class="l-volunteer-manage-edit_form-field">
+                                <input type="text" id="volunteerTarget" name="volunteerTarget" class="c-input" placeholder="봉사 대상을 입력해주세요." />
+                            </div>
+                        </div>
+
+                        <div class="l-volunteer-manage-edit_form-item">
+                            <label class="l-volunteer-manage-edit_form-label">봉사장소</label>
+                            <div class="l-volunteer-manage-edit_form-field">
+                                <input type="text" id="volunteerLocation" name="volunteerLocation" class="c-input" placeholder="장소를 입력해주세요." />
+                            </div>
+                        </div>
+
+                        <div class="l-volunteer-manage-edit_form-item">
+                            <label class="l-volunteer-manage-edit_form-label">포인트</label>
+                            <div class="l-volunteer-manage-edit_form-field">
+                                <input type="text" id="volunteerPoint" name="volunteerPoint" class="c-input" placeholder="숫자만 입력 가능합니다." />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="l-volunteer-manage-edit_form">
+                    <div class="l-volunteer-manage-edit_form-item">
+                        <label class="l-volunteer-manage-edit_form-label">봉사 제목</label>
+                        <div class="l-volunteer-manage-edit_form-field">
+                            <input type="text" id="volunteerTitle" name="volunteerTitle" class="c-input" placeholder="제목을 입력해주세요." />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="l-volunteer-manage-edit_detail">
+                    <label class="l-volunteer-manage-edit_detail-label">봉사 상세 내용</label>
+                    <textarea id="volunteerDetail" name="volunteerDetail" class="c-input" placeholder="내용을 입력해주세요."></textarea>
+                </div>
+
+                <div class="c-button--volunteer-manage-edit">
+
+                    <button type="submit" id="editButton" class="c-button c-button--primary c-button--md">
+                        수정
+                    </button>
+                    <button type="button" id="cancelButton"
+                        class="c-button c-button--secondary c-button--md">취소</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- <%@ include file="footer.jsp" %> -->
+    <div id="footer"></div>
+</body>
+
+</html>

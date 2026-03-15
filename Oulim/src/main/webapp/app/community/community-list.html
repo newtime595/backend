@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>어울림터 봉사 후기</title>
+
+    <!-- base css 필수 삽입-->
+    <link rel="stylesheet" href="/Oulim/asset/css/core/reset.css" />
+    <link rel="stylesheet" href="/Oulim/asset/css/core/variable.css" />
+    <link rel="stylesheet" href="/Oulim/asset/css/core/Typography.css" />
+    <link rel="stylesheet" href="/Oulim/asset/css/core/layout.css" />
+
+    <!-- 컨포넌트 css 선택-->
+    <link rel="stylesheet" href="/Oulim/asset/css/component/pagination.css" />
+    <link rel="stylesheet" href="/Oulim/asset/css/component/input.css" />
+    <link rel="stylesheet" href="/Oulim/asset/css/component/button.css" />
+    <link rel="stylesheet" href="/Oulim/asset/css/component/list.css" />
+    <link rel="stylesheet" href="/Oulim/asset/css/component/card.css" />
+    <link rel="stylesheet" href="/Oulim/asset/css/component/DetailCard.css" />
+    <link rel="stylesheet" href="/Oulim/asset/css/component/badge.css" />
+    <link rel="stylesheet" href="/Oulim/asset/css/component/select.css" />
+
+    <!-- css 연결 -->
+    <link
+      rel="stylesheet"
+      href="/Oulim/asset/css/pages/community/community-list.css"
+    />
+    <script defer src="/Oulim/asset/js/pages/main/include.js"></script>
+    <script
+      defer
+      src="/Oulim/asset/js/pages/community/community-list.js"
+    ></script>
+  </head>
+
+  <script defer>
+    fetch("/Oulim/header-login.html")
+      .then((r) => r.text())
+      .then((t) => (header.innerHTML = t));
+    fetch("/Oulim/footer.html")
+      .then((r) => r.text())
+      .then((t) => (footer.innerHTML = t));
+  </script>
+  <div id="header"></div>
+
+  <body>
+    <!-- Header 자동 삽입 -->
+    <!-- <%@ include file="header.jsp" %> -->
+
+    <main class="l-main">
+      <!-- 팀원들 작성 영역 이 안에서 작업하기!!퍼블 작업진행 -->
+      <div class="l-container">
+        <div class="p-community-list-main">
+          <div class="c-community-list-title">
+            <h2>어울림터 봉사 후기</h2>
+          </div>
+          <div class="l-community-list-search-group">
+            <div class="c-community-post-btn">
+              <button class="c-button c-button--primary c-button--lg">
+                글쓰기
+              </button>
+            </div>
+            <div class="l-community-search-box">
+              <!-- <select class="c-community-search" name="search-type" id=""> -->
+              <div class="c-select-size-controler">
+                <select class="c-select" name="search-type" id="">
+                  <option value="title">제목</option>
+                  <option value="writer">작성자</option>
+                </select>
+              </div>
+
+              <input
+                class="c-input"
+                type="text"
+                name="keyword"
+                placeholder="검색어 입력"
+              />
+
+              <div class="c-community-list-search-btn-container">
+                <button class="c-button c-button--primary">검색</button>
+              </div>
+            </div>
+          </div>
+          <!-- 공통 컴포넌트 c-list-list--5col 사용 -->
+          <div class="c-list c-list--5col">
+            <!-- header -->
+            <div class="c-list__header">
+              <span class="c-list__col">순서</span>
+              <span class="c-list__col">제목</span>
+              <span class="c-list__col">닉네임</span>
+              <span class="c-list__col">작성일</span>
+              <span class="c-list__col">추천수</span>
+            </div>
+            <!-- body -->
+            <div class="c-list__body">
+              <!-- 임시 데이터 -->
+              <a href="/Oulim/front/html/community/community-detail.html">
+                <div class="c-list__row">
+                  <span class="c-list__col"> 1 </span>
+                  <span class="c-list__col">제목</span>
+                  <span class="c-list__col">닉네임</span>
+                  <span class="c-list__col">2026.03.08</span>
+                  <span class="c-list__col">5001</span>
+                </div>
+              </a>
+              <div class="c-list__row">
+                <span class="c-list__col"> 2 </span>
+                <span class="c-list__col">제목2</span>
+                <span class="c-list__col">닉네임2</span>
+                <span class="c-list__col">2026.03.08</span>
+                <span class="c-list__col">5002</span>
+              </div>
+              <div class="c-list__row">
+                <span class="c-list__col"> 3 </span>
+                <span class="c-list__col">제목3</span>
+                <span class="c-list__col">닉네임3</span>
+                <span class="c-list__col">2026.03.08</span>
+                <span class="c-list__col">5003</span>
+              </div>
+              <div class="c-list__row">
+                <span class="c-list__col"> 4 </span>
+                <span class="c-list__col">제목4</span>
+                <span class="c-list__col">닉네임4</span>
+                <span class="c-list__col">2026.03.08</span>
+                <span class="c-list__col">5004</span>
+              </div>
+              <div class="c-list__row">
+                <span class="c-list__col"> 5 </span>
+                <span class="c-list__col">제목5</span>
+                <span class="c-list__col">닉네임5</span>
+                <span class="c-list__col">2026.03.08</span>
+                <span class="c-list__col">5005</span>
+              </div>
+              <div class="c-list__row">
+                <span class="c-list__col"> 6 </span>
+                <span class="c-list__col">제목6</span>
+                <span class="c-list__col">닉네임6</span>
+                <span class="c-list__col">2026.03.08</span>
+                <span class="c-list__col">5006</span>
+              </div>
+              <div class="c-list__row">
+                <span class="c-list__col"> 7 </span>
+                <span class="c-list__col">제목7</span>
+                <span class="c-list__col">닉네임7</span>
+                <span class="c-list__col">2026.03.08</span>
+                <span class="c-list__col">5007</span>
+              </div>
+              <div class="c-list__row">
+                <span class="c-list__col"> 8 </span>
+                <span class="c-list__col">제목8</span>
+                <span class="c-list__col">닉네임8</span>
+                <span class="c-list__col">2026.03.08</span>
+                <span class="c-list__col">5008</span>
+              </div>
+              <div class="c-list__row">
+                <span class="c-list__col"> 9 </span>
+                <span class="c-list__col">제목9</span>
+                <span class="c-list__col">닉네임9</span>
+                <span class="c-list__col">2026.03.08</span>
+                <span class="c-list__col">5009</span>
+              </div>
+              <div class="c-list__row">
+                <span class="c-list__col"> 10 </span>
+                <span class="c-list__col">제목10</span>
+                <span class="c-list__col">닉네임10</span>
+                <span class="c-list__col">2026.03.08</span>
+                <span class="c-list__col">5010</span>
+              </div>
+            </div>
+          </div>
+          <!-- 페이지네이션 -->
+          <!-- 공통 컴포넌트  c-pagination 사용-->
+          <div
+            class="l-community-list-pagination"
+            style="width: 900px; margin: 50px"
+          >
+            <!-- 페이지네이션  c-pagination-->
+            <nav class="c-pagination">
+              <a class="c-pagination__link is-disabled">‹</a>
+              <a class="c-pagination__link is-active">1</a>
+              <a class="c-pagination__link">2</a>
+              <a class="c-pagination__link">3</a>
+              <a class="c-pagination__link">›</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer 자동 삽입 -->
+    <!-- <%@ include file="footer.jsp" %> -->
+  </body>
+  <div id="footer"></div>
+</html>

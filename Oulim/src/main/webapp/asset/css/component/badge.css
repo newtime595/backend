@@ -1,0 +1,83 @@
+/* =========================
+   Badge Base
+========================= */
+
+.c-badge {
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:4px 10px;
+  font-size:12px;
+  font-weight:600;
+  line-height:1;
+  border-radius:20px;
+  white-space:nowrap;
+
+}
+
+/* =========================
+   Badge Size
+========================= */
+
+.c-badge--sm {
+
+  font-size:11px;
+  padding:3px 8px;
+
+}
+
+.c-badge--md {
+  font-size:12px;
+  padding:4px 10px;
+
+}
+
+.c-badge--lg {
+  font-size:13px;
+  padding:6px 12px;
+
+}
+
+/* =========================
+   Badge Color
+========================= */
+
+/* 모집중 */
+
+.c-badge--primary {
+  background:#eef2ff;
+  color:#2e43fa;
+
+}
+
+/* 카테고리 */
+
+.c-badge--orange {
+  background:#f3c996;
+  color:#ea580c;
+
+}
+
+/* 완료 */
+
+.c-badge--success {
+  background:#ecfdf5;
+  color:#059669;
+
+}
+
+/* 대기 */
+
+.c-badge--gray {
+  background:#f3f4f6;
+  color:#6b7280;
+}
+
+/* 경고 */
+
+.c-badge--danger {
+  background:#fee2e2;
+  color:#dc2626;
+
+}

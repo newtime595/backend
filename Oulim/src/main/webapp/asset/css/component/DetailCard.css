@@ -1,0 +1,82 @@
+/* =========================
+   Detail Card
+========================= */
+
+.c-detail-card {
+  width:100%;
+  background:var(--color-background);
+  border:1px solid var(--color-border);
+  border-radius:12px;
+  padding:28px;
+  margin-bottom: 14px;
+
+}
+
+/* header (badge 영역) */
+
+.c-detail-card__header {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:12px;
+
+}
+
+/* title */
+
+.c-detail-card__title {
+  font-size:22px;
+  font-weight:700;
+  line-height:1.4;
+  margin-bottom:24px;
+}
+
+/* info 영역 */
+
+.c-detail-card__info {
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:14px;
+
+}
+
+/* row */
+
+.c-detail-card__row {
+
+  display:flex;
+
+  align-items:flex-start;
+
+  gap:20px;
+
+}
+
+/* label */
+
+.c-detail-card__label {
+
+  min-width:100px;
+
+  font-size:14px;
+
+  font-weight:600;
+
+  color:#666;
+
+}
+
+/* value */
+
+.c-detail-card__value {
+
+  font-size:14px;
+
+  color:#333;
+
+  flex:1;
+
+}

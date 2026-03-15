@@ -1,0 +1,83 @@
+# =============================
+# OS
+# =============================
+.DS_Store
+Thumbs.db
+._*
+Desktop.ini
+
+# =============================
+# IDE & Editors
+# =============================
+
+# IntelliJ
+.idea/
+*.iml
+*.iws
+out/
+
+# VSCode
+.vscode/
+
+# Eclipse / STS
+.classpath
+.project
+.settings/
+.metadata/
+
+# =============================
+# Build & Compiled
+# =============================
+*.class
+/build/
+/target/
+/bin/
+/out/
+
+# =============================
+# Logs & Runtime
+# =============================
+*.log
+logs/
+catalina.out
+hs_err_pid*
+replay_pid*
+tmp/
+temp/
+work/
+
+# =============================
+# Uploaded files (runtime only)
+# =============================
+uploads/
+
+# =============================
+# JAR 처리 (수동 JAR 방식)
+# =============================
+
+# 기본적으로 jar는 무시
+*.jar
+
+# 하지만 WEB-INF/lib 안의 jar는 반드시 포함
+!src/main/webapp/WEB-INF/lib/*.jar
+
+# =============================
+# DB & Local Config (보안)
+# =============================
+src/main/resources/db.properties
+db.properties
+jdbc.properties
+.env
+.env.*
+
+# 예시 설정 파일은 포함
+!src/main/resources/db-example.properties
+
+# =============================
+# Backup & Temp
+# =============================
+*.tmp
+*.bak
+*.swp
+*.orig
+*.rej

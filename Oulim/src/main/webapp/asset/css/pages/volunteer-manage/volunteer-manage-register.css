@@ -1,0 +1,128 @@
+/* 페이지 전체 상하 여백 */
+.l-main {
+    padding: 100px 0 140px;
+}
+
+/* 페이지 상단 제목 영역 */
+.p-volunteer-manage-register_header {
+    margin-bottom: 56px;
+    text-align: center;
+}
+
+/* 제목 스타일 설정 */
+.p-volunteer-manage-register_title {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+/* 전체 폼 2열 그리드 구성 */
+.l-volunteer-manage-register_form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 32px;
+    row-gap: 16px;
+}
+
+/* 각 줄: 라벨 + 입력 필드 */
+.l-volunteer-manage-register_form-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* 왼쪽 라벨 폭 고정 */
+.l-volunteer-manage-register_form-label {
+    flex-shrink: 0;
+    width: 88px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #222;
+    line-height: 1.5;
+}
+
+/* 입력필드 영역 - 남은 공간 채우기 */
+.l-volunteer-manage-register_form-field {
+    flex: 1;
+    min-width: 0;
+}
+
+/* 기간입력 영역 */
+.l-volunteer-manage-register_form-field--period {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 기간 입력부분 균등하게 */
+.l-volunteer-manage-register_form-field--period .c-input {
+    flex: 1;
+    min-width: 0;
+}
+
+.l-volunteer-manage-register_form-field .c-select{
+    width: 100%;
+}
+
+/* ~ */
+.l-volunteer-manage-register_form-tilde {
+    flex-shrink: 0;
+    color: #666;
+    font-size: 16px;
+}
+
+/* 봉사 제목 간격 조절 */
+.l-volunteer-manage-register_form{
+    margin-top: 24PX;;
+}
+
+/* 제목은 한 줄 전체 사용 */
+.l-volunteer-manage-register_form-item--full {
+    grid-column: 1 / -1;
+}
+
+/* 봉사 상세 내역 */
+.l-volunteer-manage-register_detail {
+    margin-top: 32px;
+}
+
+.l-volunteer-manage-register_detail-label {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.l-volunteer-manage-register_detail textarea {
+    width: 100%;
+    min-height: 240px;
+    padding: 16px 20px;
+    resize: vertical;
+    box-sizing: border-box;
+    line-height: 1.2;
+}
+
+.l-volunteer-manage-register_detail textarea.c-input {
+    min-height: 480px;
+    resize: vertical;
+}
+
+/* 버튼 영역 */
+.c-button--volunteer-manage-register {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 56px;
+}
+
+/* 오류 */
+.is-error-text{
+  color: red;
+  font-size: 12px;
+  margin-top: 2px;
+  min-height: 8px;
+}
+
+.c-input.is-error{
+  border: 1px solid red;
+}

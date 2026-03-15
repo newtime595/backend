@@ -1,0 +1,90 @@
+header {
+    background-color: black;
+}
+
+footer {
+    background-color: black;
+}
+
+.l-mypage {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    margin: 100px;
+}
+
+.l-mypage--aside {
+    width: 250px;
+    background-color: #F0F0F0;
+}
+
+.p-point-history--menu {
+    text-align: center;
+    padding: 100px 30px;
+}
+
+.p-point-history--menu-group {
+    margin: 60px auto;
+    text-align: left;
+}
+
+.l-mypage--content {
+    width: 700px;
+    justify-content: center;
+}
+
+.p-point-history--header {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    align-items: center;
+    height: 100px;
+}
+
+.p-point-history--body {
+    padding: 30px;
+}
+
+.p-point-history--pagination>nav {
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.p-point-history--nav>nav {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.p-point-history--earn-list>ul>li {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0;
+    align-items: center;
+}
+
+.p-point-history--use-list>ul>li {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0;
+    align-items: center;
+    
+}
+
+#plus {
+    cursor: pointer;
+    flex: 1;
+}
+
+#minus {
+    cursor: pointer;
+    flex: 1;
+}
+
+#a {
+    display: block;
+}
+
+#b {
+    display: none;
+}

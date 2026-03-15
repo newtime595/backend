@@ -1,0 +1,64 @@
+/* 일반 일때 나오는 약관 */
+#is-general-terms{
+    display: block;
+}
+/* 기업 일때 나오는 약관 */
+#is-business-terms{
+    display: none;
+}
+
+
+.p-signup{
+    display: block;
+    width: 100%;
+}
+
+.l-signup-choice{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.l-signup-choice img{
+    width: 100px;
+    height: 100px;
+    border-radius: var(--radius-md);
+    background-color: var(--color-background-sub);
+}
+
+.l-signup-main{
+    width: 1080px;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.l-signup-main h2{
+    text-align: center;
+    margin: 30px 0;
+}
+
+.l-signup-toplayout{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.c-signup-textarea{
+    width: 1080px;
+    height: 300px;
+    padding: 20px;
+    /* overflow-y: scroll; */
+    overflow-y: auto;
+    margin-bottom: 20px;
+    background-color: var(--color-text-detail);
+}
+
+.c-signup-btn{
+    text-align: center;
+}
+.c-signup-btn button{
+    width: 100%;
+    margin-bottom: 50px;
+}
+

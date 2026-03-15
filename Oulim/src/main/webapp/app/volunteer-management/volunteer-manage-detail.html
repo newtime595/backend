@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>volunteer-manage-detail</title>
+
+  <!-- base css 필수 삽입-->
+  <link rel="stylesheet" href="/Oulim/asset/css/core/reset.css" />
+  <link rel="stylesheet" href="/Oulim/asset/css/core/variable.css" />
+  <link rel="stylesheet" href="/Oulim/asset/css/core/typography.css" />
+  <link rel="stylesheet" href="/Oulim/asset/css/core/layout.css">
+  <link rel="stylesheet" href="/Oulim/asset/css/pages/volunteer-manage/volunteer-manage-detail.css">
+  <!-- 컨포넌트 css 선택-->
+  <link rel="stylesheet" href="/Oulim/asset/css/component/pagination.css" />
+  <link rel="stylesheet" href="/Oulim/asset/css/component/button.css" />
+  <link rel="stylesheet" href="/Oulim/asset/css/component/list.css" />
+  <link rel="stylesheet" href="/Oulim/asset/css/component/card.css" />
+  <link rel="stylesheet" href="/Oulim/asset/css/component/DetailCard.css" />
+  <link rel="stylesheet" href="/Oulim/asset/css/component/badge.css">
+
+  <script defer src="/Oulim/asset/js/pages/main/include.js"></script>
+  <script defer src="/Oulim/asset/js/pages/volunteer-manage/volunteer-manage-detail.js"></script>
+  <script defer src="/Oulim/asset/js/pages/main/include.js"></script>
+</head>
+
+<body>
+
+  <div id="header"></div>
+  <!-- Header 자동 삽입 -->
+  <!-- <%@ include file="header.jsp" %> -->
+
+  <main class="l-main">
+    <div class="l-container">
+      <div class="p-volunteer-manage-detail_header">
+        <h1 class="p-volunteer-manage-detail_title">봉사 상세</h1>
+        <div class="c-button-group">
+          <button class="edit-btn c-button c-button--primary c-button--md">수정</button>
+          <button class="delete-btn c-button c-button--secondary c-button--md">삭제</button>
+        </div>
+      </div>
+      <div class="c-detail-card" id="volunteerDetailCard">
+        <div class="c-detail-card__header">
+          <span class="c-badge c-badge--primary" id="volunteerStatus"></span>
+          <span class="c-badge c-badge--orange" id="volunteerTarget"></span>
+        </div>
+
+        <h2 class="c-detail-card__title" id="volunteerTitle"></h2>
+
+        <div class="c-detail-card__info">
+          <div class="c-detail-card__row">
+            <span class="c-detail-card__label">봉사장소</span>
+            <span class="c-detail-card__value" id="volunteerLocation"></span>
+          </div>
+          <div class="c-detail-card__row">
+            <span class="c-detail-card__label">봉사기간</span>
+            <span class="c-detail-card__value" id="volunteerPeriod"></span>
+          </div>
+          <div class="c-detail-card__row">
+            <span class="c-detail-card__label">모집기간</span>
+            <span class="c-detail-card__value" id="recruitPeriod"></span>
+          </div>
+          <div class="c-detail-card__row">
+            <span class="c-detail-card__label">봉사시간</span>
+            <span class="c-detail-card__value" id="volunteerTime"></span>
+          </div>
+          <div class="c-detail-card__row">
+            <span class="c-detail-card__label">모집인원</span>
+            <span class="c-detail-card__value" id="volunteerCapacity"></span>
+          </div>
+          <div class="c-detail-card__row">
+            <span class="c-detail-card__label">포인트</span>
+            <span class="c-detail-card__value" id="volunteerPoint"></span>
+          </div>
+          <div class="c-detail-card__row">
+            <span class="c-detail-card__label">봉사자연령</span>
+            <span class="c-detail-card__value" id="volunteerAge"></span>
+          </div>
+        </div>
+      </div>
+      <div class="c-list c-list--6col">
+
+        <!-- header -->
+        <div class="c-list__header">
+          <span class="c-list__col">추천</span>
+          <span class="c-list__col">봉사자</span>
+          <span class="c-list__col">연령</span>
+          <span class="c-list__col">봉사일자</span>
+          <span class="c-list__col">상태</span>
+          <span class="c-list__col">출결승인</span>
+        </div>
+        <!-- body -->
+        <div class="c-list__body" id="participantListBody">
+          
+        </div>
+      </div>
+
+      <!-- 페이지네이션  c-pagination-->
+      <nav class="c-pagination">
+        <a class="c-pagination__link is-disabled">‹</a>
+        <a class="c-pagination__link is-active">1</a>
+        <a class="c-pagination__link">2</a>
+        <a class="c-pagination__link">3</a>
+        <a class="c-pagination__link">4</a>
+        <a class="c-pagination__link">5</a>
+        <a class="c-pagination__link">6</a>
+        <a class="c-pagination__link">7</a>
+        <a class="c-pagination__link">8</a>
+        <a class="c-pagination__link">9</a>
+        <a class="c-pagination__link">10</a>
+        <a class="c-pagination__link">›</a>
+      </nav>
+
+      <div class="c-button--volunteer-manage-detail">
+        <a href="/Oulim/front/html/volunteer-management/volunteer-manage-list.html">
+          <button class="c-button c-button--primary c-button--md">
+            봉사 리스트로 돌아가기
+          </button>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer 자동 삽입 -->
+  <!-- <%@ include file="footer.jsp" %> -->
+  <div id="footer"></div>
+</body>
+
+</html>

@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>post-list</title>
+  <!-- base css 필수 삽입-->
+  <link rel="stylesheet" href="/Oulim/asset/css/core/reset.css" />
+  <link rel="stylesheet" href="/Oulim/asset/css/core/variable.css" />
+  <link rel="stylesheet" href="/Oulim/asset/css/core/Typography.css" />
+  <!-- 컨포넌트 css 선택-->
+  <link rel="stylesheet" href="/Oulim/asset/css/component/pagination.css" />
+  <link rel="stylesheet" href="/Oulim/asset/css/component/input.css" />
+  <link rel="stylesheet" href="/Oulim/asset/css/component/button.css" />
+  <link rel="stylesheet" href="/Oulim/asset/css/component/list.css" />
+  <link rel="stylesheet" href="/Oulim/asset/css/component/card.css" />
+  <link rel="stylesheet" href="/Oulim/asset/css/component/DetailCard.css" />
+  <link rel="stylesheet" href="/Oulim/asset/css/component/badge.css" />
+
+  <link rel="stylesheet" href="/Oulim/admin/css/community-manage/post-list.css" />
+
+  <script defer src = "/Oulim/admin/js/community-manage/post-list.js"></script>
+</head>
+
+<body>
+  <!-- Header 자동 삽입 -->
+  <!-- <%@ include file="header.jsp" %> -->
+
+  <main class="l-main">
+    <!-- 사이드바 -->
+    <aside>
+      <!-- 관리자 영역 -->
+      <div class="adminnow">
+        <img src="" width="40" height="40" />
+
+        <button class="c-button c-button--primary c-button--md">
+          로그아웃
+        </button>
+      </div>
+
+      <!-- 사이드바 메뉴 -->
+      <nav class="sidebar-menu">
+        <ul>
+          <li class="menu-item">
+            <a href="/Oulim/admin/html/dashboard/dashboard.html">통계</a>
+          </li>
+
+          <!-- 회원관리 -->
+          <li class="menu-item dropdown">
+            <a href="#" class="menu-title"> 회원관리 </a>
+
+            <ul class="submenu">
+              <li><a href="/Oulim/admin/html/member-manage/company-certification.html">기업회원</a></li>
+              <li><a href="/Oulim/admin/html/member-manage/mem-list.html">회원조회</a></li>
+            </ul>
+          </li>
+
+          <!-- 봉사활동관리 -->
+          <li class="menu-item dropdown">
+            <a href="/Oulim/admin/html/volunteer-manage/volun-list.html" class="menu-title"> 봉사활동관리 </a>
+          </li>
+
+          <!-- 게시판관리 -->
+          <li class="menu-item dropdown">
+            <a href="/Oulim/admin/html/community-manage/post-list.html" class="menu-title"> 게시판관리 </a>
+          </li>
+      </nav>
+    </aside>
+
+      <section class="l-content">
+        <!-- 메인 위에 헤더 -->
+        <div class="header">
+          <h1>게시글 관리</h1>
+        </div>
+        <div id="content-area">
+          <select class="search-item">
+            <option>게시글 번호</option>
+            <option>닉네임</option>
+            <option>게시글 제목</option>
+            <option>작성일</option>
+            <option>추천수</option>
+            <option>조회수</option>
+          </select>
+          <input type="text" class="c-input" placeholder="검색 조건">
+          <button class="c-button c-button--primary c-button--md">조회</button>
+        </div>
+
+        <div class="c-list c-list--8col">
+          <!-- header -->
+          <div class="c-list__header">
+            <label class="c-checkbox">
+              <input type="checkbox" />
+              <span class="c-checkbox__box"></span>
+            </label>
+            <span class="c-list__col">게시글 번호</span>
+            <span class="c-list__col">닉네임</span>
+            <span class="c-list__col">게시글 제목</span>
+            <span class="c-list__col">작성일</span>
+            <span class="c-list__col">추천수</span>
+            <span class="c-list__col">조회수</span>
+            <span class="c-list__col">삭제여부</span>
+          </div>
+          <!-- body -->
+          <div class="c-list__body">
+            <div class="c-list__row">
+              <label class="c-checkbox">
+                <input type="checkbox" />
+                <span class="c-checkbox__box"></span>
+              </label>
+              <span class="c-list__col">
+                1
+              </span>
+              <span class="c-list__col">
+                아무개
+              </span>
+              <span class="c-list__col">
+                제목입니다
+              </span>
+              <span class="c-list__col">
+                2023-01-15
+              </span>
+              <span class="c-list__col">
+                11
+              </span>
+              <span class="c-list__col">
+                1000
+              </span>
+              <div class="c-list__actions">
+                <button class="c-button c-button--primary c-button--md">
+                  삭제
+                </button>
+                <div class="c-list__actions">
+                </div>
+              </div>
+            </div>
+            <div class="c-list__row">
+              <label class="c-checkbox">
+                <input type="checkbox" />
+                <span class="c-checkbox__box"></span>
+              </label>
+              <span class="c-list__col">
+                1
+              </span>
+              <span class="c-list__col">
+                아무개
+              </span>
+              <span class="c-list__col">
+                제목입니다
+              </span>
+              <span class="c-list__col">
+                2023-01-15
+              </span>
+              <span class="c-list__col">
+                11
+              </span>
+              <span class="c-list__col">
+                1000
+              </span>
+              <div class="c-list__actions">
+                <button class="c-button c-button--primary c-button--md">
+                  삭제
+                </button>
+              </div>
+            </div>
+            <div class="c-list__row">
+              <label class="c-checkbox">
+                <input type="checkbox" />
+                <span class="c-checkbox__box"></span>
+              </label>
+              <span class="c-list__col">
+                1
+              </span>
+              <span class="c-list__col">
+                아무개
+              </span>
+              <span class="c-list__col">
+                제목입니다
+              </span>
+              <span class="c-list__col">
+                2023-01-15
+              </span>
+              <span class="c-list__col">
+                11
+              </span>
+              <span class="c-list__col">
+                1000
+              </span>
+              <div class="c-list__actions">
+                <button class="c-button c-button--primary c-button--md">
+                  삭제
+                </button>
+              </div>
+            </div>
+            <div class="c-list__row">
+              <label class="c-checkbox">
+                <input type="checkbox" />
+                <span class="c-checkbox__box"></span>
+              </label>
+              <span class="c-list__col">
+                1
+              </span>
+              <span class="c-list__col">
+                아무개
+              </span>
+              <span class="c-list__col">
+                제목입니다
+              </span>
+              <span class="c-list__col">
+                2023-01-15
+              </span>
+              <span class="c-list__col">
+                11
+              </span>
+              <span class="c-list__col">
+                1000
+              </span>
+              <div class="c-list__actions">
+                <button class="c-button c-button--primary c-button--md">
+                  삭제
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page">
+          <!-- 페이지네이션  c-pagination-->
+          <nav class="c-pagination">
+            <a class="c-pagination__link is-disabled">‹‹</a>
+            <a class="c-pagination__link is-disabled">‹</a>
+            <a class="c-pagination__link is-active">1</a>
+            <a class="c-pagination__link">2</a>
+            <a class="c-pagination__link">3</a>
+            <a class="c-pagination__link">4</a>
+            <a class="c-pagination__link">5</a>
+            <a class="c-pagination__link">6</a>
+            <a class="c-pagination__link">7</a>
+            <a class="c-pagination__link">8</a>
+            <a class="c-pagination__link">9</a>
+            <a class="c-pagination__link">10</a>
+            <a class="c-pagination__link">›</a>
+            <a class="c-pagination__link">››</a>
+          </nav>
+        </div>
+      </section>
+
+  </main>
+
+
+  <!-- Footer 자동 삽입 -->
+  <!-- <%@ include file="footer.jsp" %> -->
+</body>
+
+</html>

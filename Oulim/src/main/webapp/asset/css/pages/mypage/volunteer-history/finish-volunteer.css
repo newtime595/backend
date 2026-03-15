@@ -1,0 +1,58 @@
+header {
+    background-color: black;
+}
+
+footer {
+    background-color: black;
+}
+
+.main-container {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    margin: 100px;
+}
+
+.main-aside {
+    width: 250px;
+    background-color: #F0F0F0;
+}
+
+.main-aside-list {
+    text-align: center;
+    padding: 100px 30px;
+}
+
+.list1,
+.list2,
+.list3,
+.list4,
+.list5 {
+    margin: 60px auto;
+    text-align: left;
+}
+
+.main-2 {
+    width: 700px;
+}
+
+.main-section1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.main-section3 {
+    padding: 30px;
+}
+
+.main-section3 .c-card {
+    margin-bottom: 20px;
+}
+
+.page {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}

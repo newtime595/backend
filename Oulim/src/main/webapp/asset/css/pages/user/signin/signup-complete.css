@@ -1,0 +1,49 @@
+
+.p-signup-complete{
+    width: 100%;
+}
+
+.l-signup-complete-layout{
+    width: 450px;
+    margin: 0 auto;
+    /* border: 1px solid red; */
+}
+
+.l-signup-complete-layout div img{
+    margin: 10px auto;
+    width: 100px;
+    height: 100px;
+}
+
+.l-signup-complete-title{
+    margin: 0 100px;
+}
+.l-signup-complete-title div{
+    margin: 10px 0;
+}
+
+.l-signup-complete-title h3{
+    margin-top: 30px;
+}
+
+.l-siginup-complete-textarea-layout{
+    display: flex;
+    width: 900px;
+    margin: 30px auto;
+    justify-content: space-between;
+
+}
+.c-siginup-complete-text-left{
+    text-align: left;
+}
+
+.c-siginup-complete-text-right{
+    text-align: right;
+}
+.c-signup-complete{
+    margin: 100px auto 0 auto;
+    width: 400px;
+}
+.c-signup-complete button{
+    width: 100%;
+}

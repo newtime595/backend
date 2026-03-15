@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kkomi-training-center</title>
+
+  <link rel="stylesheet" href="/Oulim/asset/css/core/reset.css" />
+  <link rel="stylesheet" href="/Oulim/asset/css/core/variable.css" />
+  <link rel="stylesheet" href="/Oulim/asset/css/core/typography.css" />
+  <link rel="stylesheet" href="/Oulim/asset/css/core/layout.css" />
+
+  <link rel="stylesheet" href="/Oulim/asset/css/component/badge.css">
+  <link rel="stylesheet" href="/Oulim/asset/css/pages/kkomi/Kkomi-training-center.css">
+
+  <script defer src="/Oulim/asset/js/pages/kkomi/KKomi-trainiing-center.js"></script>
+
+  <script defer>
+    fetch('/Oulim/header-login.html')
+      .then(r => r.text())
+      .then(t => document.querySelector("#header").innerHTML = t)
+
+    fetch('/Oulim/footer.html')
+      .then(r => r.text())
+      .then(t => document.querySelector("#footer").innerHTML = t)
+  </script>
+
+</head>
+
+<body>
+
+  <div id="header"></div>
+
+  <main class="l-main">
+    <div class="l-container">
+
+      <section class="p-komi-training">
+
+        <!-- 캐릭터 -->
+
+        <div class="c-character">
+
+          <div class="c-rank-bubble">
+            현재 순위 <strong class="js-rank"></strong>
+          </div>
+
+          <img 
+            id="komiCharacter"
+            src=""
+            class="c-character__img"
+            alt="꼬미 캐릭터"
+          >
+
+        </div>
+
+
+        <!-- 성장 카드 -->
+
+        <div class="c-growth-card">
+
+          <div class="c-growth-card__header">
+
+            <h3 class="c-growth-card__title">
+              현재 순위 <span class="js-rank"></span>위
+            </h3>
+
+            <button class="c-button c-button--primary c-button--sm">
+              순위 보러가기
+            </button>
+
+          </div>
+
+
+          <!-- 레벨 -->
+
+          <div class="c-level">
+
+            <span class="c-badge c-badge--level js-level"></span>
+
+            <span class="c-level__text">
+
+              흡수된 도력 :
+              <strong class="js-absorb"></strong>P
+
+              |
+
+              남은 도력
+              <strong class="js-remain"></strong>P
+
+            </span>
+
+          </div>
+
+
+          <!-- 게이지 -->
+
+          <div class="c-progress">
+
+            <div class="c-progress__bar">
+
+              <div 
+                class="c-progress__value js-progress"
+              ></div>
+
+            </div>
+
+          </div>
+
+
+          <!-- 액션 -->
+
+          <div class="c-action-grid">
+
+            <button class="c-action-card js-feed">
+              <img src="/Oulim/asset/image/flower-icon.svg">
+              <span>먹이주기</span>
+            </button>
+
+            <button class="c-action-card js-mission">
+              <img src="/Oulim/asset/image/game-icon.svg">
+              <span>미션</span>
+            </button>
+
+            <button class="c-action-card js-storage">
+              <img src="/Oulim/asset/image/game-icon.svg">
+              <span>보관함</span>
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+</body>
+</html>

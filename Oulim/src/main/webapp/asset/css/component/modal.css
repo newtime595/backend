@@ -1,0 +1,107 @@
+.c-modal{
+
+  position:fixed;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:100%;
+
+  background:rgba(0,0,0,0.45);
+
+  display:none;
+
+  align-items:center;
+  justify-content:center;
+
+  z-index:1000;
+
+}
+
+
+.c-modal.is-open{
+  display:flex;
+}
+
+
+/* modal box */
+
+.c-modal__box{
+
+  width:420px;
+
+  background:white;
+
+  border-radius:var(--radius-lg);
+
+  padding:var(--space-6);
+
+  box-shadow:var(--shadow-lg);
+
+  display:flex;
+  flex-direction:column;
+
+  gap:var(--space-4);
+
+}
+
+
+/* header */
+
+.c-modal__header{
+
+  display:flex;
+
+  justify-content:space-between;
+  align-items:center;
+
+}
+
+
+.c-modal__title{
+
+  font-size:var(--font-lg);
+
+  font-weight:600;
+
+}
+
+
+/* close */
+
+.c-modal__close{
+
+  background:none;
+
+  border:none;
+
+  font-size:18px;
+
+  cursor:pointer;
+
+}
+
+
+/* body */
+
+.c-modal__body{
+
+  font-size:var(--font-md);
+
+  color:var(--color-text-sub);
+
+}
+
+
+/* footer */
+
+.c-modal__footer{
+
+  display:flex;
+
+  justify-content:flex-end;
+
+  gap:var(--space-3);
+
+}

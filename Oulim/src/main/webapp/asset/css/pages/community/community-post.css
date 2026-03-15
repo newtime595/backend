@@ -1,0 +1,115 @@
+.div-title{
+  display: flex;
+  align-content: flex-start;
+}
+
+.l-community-post-main{
+  display: flex;
+  flex-direction: column  ;
+  width: 1080px;
+  gap: 20px;
+}
+.p-community-post{
+  display: flex;
+  justify-content: center;
+  width: 1080px;
+  flex-wrap: wrap;
+  margin :  auto;
+}
+
+.c-community-post-page-title{
+  display: flex;
+  width: 100%;
+  height: auto;
+  justify-content: center;  
+}
+
+.c-community-post-title{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.c-community-post-title label{
+  white-space: nowrap;
+}
+
+.l-community-post-title{
+  display: flex;
+  justify-content: space-between;
+}
+
+.l-community-post-detail{
+  display: flex;
+  gap: 20px;
+}
+
+.c-textarea{
+  width: 100%;
+  height: 500px;
+  resize: none;       /* 크기 조절 막기 (선택) */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.l-community-post-img-attach{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.c-community-post-img-attatch-label{
+  display: flex;
+}
+
+.c-community-post-img-row{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#imageInput{
+  display: none;
+}
+
+.c-file-btn{
+  padding:10px 18px;
+  background:var(--color-primary);
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.c-community-post-file-name{
+  flex:1;
+  height:44px;
+  padding:0 12px;
+  border:none;
+  border-radius:8px;
+  background:#dcdcdc;
+  font-size:14px;
+}
+
+.l-community-post-btn-group{
+  margin-top: 20px;
+  display: flex;
+  justify-content:space-evenly;
+  gap: 20px;
+}
+
+.l-community-post-btn-group div{
+  display: flex;
+  width: 167px;
+}
+
+/* 오류 */
+.is-error-text{
+  color: red;
+  font-size: 12px;
+  margin-top: 2px;
+  min-height: 8px;
+}
+
+.c-input.is-error{
+  border: 1px solid red;
+}

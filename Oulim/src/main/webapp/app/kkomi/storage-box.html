@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>storage-box</title>
+    <link rel="stylesheet" href="/Oulim/asset/css/core/reset.css" />
+    <link rel="stylesheet" href="/Oulim/asset/css/core/variable.css" />
+    <link rel="stylesheet" href="/Oulim/asset/css/core/layout.css" />
+    <link rel="stylesheet" href="/Oulim/asset/css/core/Typography.css">
+
+    <link rel="stylesheet" href="/Oulim/asset/css/component/button.css">
+    <link rel="stylesheet" href="/Oulim/asset/css/pages/kkomi/storage-box.css" />
+
+
+
+
+  <script defer src="/Oulim/asset/js/pages/main/include.js"></script> 
+  <script src="/Oulim/asset/js/pages/kkomi/storage-box.js"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <main class="l-main">
+        <div class="l-container">
+            <section class="storage-header">
+                <h2 class="storage-title">보관함</h2>
+            </section>
+
+            <div class="storage-list">
+                <div class="storage-item">
+                    <div class="storage-item__img">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="9" fill="#E3F2FD" stroke="#2196F3" stroke-width="1.5"/>
+                            <path d="M16 8C16 8 14.5 7 12 7C9.5 7 8 8 8 8" stroke="#2196F3" stroke-linecap="round"/>
+                            <circle cx="9" cy="10" r="1.5" fill="#2196F3"/>
+                            <path d="M12 17C14.7614 17 17 14.7614 17 12" stroke="#2196F3" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
+                        </svg>
+                    </div>
+                    <div class="storage-item__info">
+                        <h3 class="item-name">영롱한 구슬</h3>
+                        <p class="item-desc">여우의 도력을 일시적으로 2배 높여주는 신비한 구슬입니다.</p>
+                    </div>
+                    <div class="storage-item__status">
+                        <span class="expire-date">남은 유효 기간 : 7일</span>
+                        <button class="c-button c-button--primary c-button--md">사용하기</button>
+                    </div>
+                </div>
+
+                <div class="storage-item">
+                    <div class="storage-item__img">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C12 22 12 18 12 15M12 15C12 11 14 7 19 5C17 10 13 12 12 15ZM12 15C12 11 10 7 5 5C7 10 11 12 12 15Z" stroke="#4CAF50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 15V10" stroke="#4CAF50" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+                        </svg>
+                    </div>
+                    <div class="storage-item__info">
+                        <h3 class="item-name">천년초</h3>
+                        <p class="item-desc">여우의 털색을 은빛으로 변경할 수 있는 희귀한 약초입니다.</p>
+                    </div>
+                    <div class="storage-item__status">
+                        <span class="expire-date">남은 유효 기간 : 30일</span>
+                        <button class="c-button c-button--primary c-button--md">사용하기</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="c-pagination">
+                <button class="c-pagination__arrow">&lt;&lt;</button>
+                <button class="c-pagination__arrow">&lt;</button>
+                <button class="c-pagination__num is-active">1</button>
+                <button class="c-pagination__num">2</button>
+                <button class="c-pagination__num">3</button>
+                <button class="c-pagination__num">4</button>
+                <button class="c-pagination__num">5</button>
+                <button class="c-pagination__arrow">&gt;</button>
+                <button class="c-pagination__arrow">&gt;&gt;</button>
+            </div>
+
+            <div class="storage-footer">
+                <button class="c-button c-button--secondary c-button--md" 
+                        onclick="location.href='Kkomi-training-center.html'">
+                    수련소로 돌아가기
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+</body>
+</html>

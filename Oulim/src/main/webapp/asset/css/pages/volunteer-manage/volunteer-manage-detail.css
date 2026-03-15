@@ -1,0 +1,62 @@
+.l-container {
+    padding: 100px 0 140px;
+}
+
+.p-volunteer-manage-detail_header {
+    position: relative;
+    margin-bottom: 48px;
+    text-align: center;
+}
+
+.p-volunteer-manage-detail_header .c-button-group{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+
+/* 결석버튼 따로 적용 */
+.l-container .absent-btn {
+  background-color: #eb5757;
+  border-color: #eb5757;
+  color: #fff;
+}
+
+.l-container .absent-btn:hover {
+  background-color: #d64545;
+  border-color: #d64545;
+  color: #fff;
+}
+
+.l-container .absent-btn:disabled {
+  background-color: #f4b3b3;
+  border-color: #f4b3b3;
+  color: #fff;
+}
+
+.p-volunteer-manage-detail_header 
+.c-button--secondary{
+  background-color: #f2f2f2;
+  color: #666;
+}
+
+/* 페이지네이션 영역 */
+.l-container .c-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 36px auto 0;
+    width: fit-content;
+}
+
+.c-button--volunteer-manage-detail {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 52px;
+}
+
+button:disabled{
+  opacity:0.5;
+  cursor:not-allowed;
+}

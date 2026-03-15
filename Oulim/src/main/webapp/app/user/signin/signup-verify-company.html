@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>기업 회원가입 본인인증</title>
+
+    <!-- base css 필수 삽입-->
+    <link rel="stylesheet" href="/Oulim/asset/css/core/reset.css" />
+    <link rel="stylesheet" href="/Oulim/asset/css/core/variable.css" />
+    <link rel="stylesheet" href="/Oulim/asset/css/core/Typography.css" />
+    <!-- 컨포넌트 css 선택-->
+    <link rel="stylesheet" href="/Oulim/asset/css/component/input.css" />
+    <link rel="stylesheet" href="/Oulim/asset/css/component/button.css" />
+    <link rel="stylesheet" href="/Oulim/asset/css/core/layout.css" />
+    <link
+      rel="stylesheet"
+      href="/Oulim/asset/css/pages/user/signin/signup-verify-company.css"
+    />
+    <script defer src="/Oulim/asset/js/pages/main/include.js"></script>
+    <script
+      defer
+      src="/Oulim/asset/js/pages/user/signin/signup-verify-company.js"
+    ></script>
+  </head>
+
+  <body>
+    <div id="header"></div>
+    <div class="l-main">
+      <div class="l-container">
+        <div class="p-signup-verify-company-main">
+          <form action="/Oulim/front/html/user/signin/signup-info-company.html">
+            <div class="l-signup-verify-company-layout">
+              <div>
+                <h2>회원가입</h2>
+              </div>
+
+              <div class="c-signup-verify-company-text">
+                <h4>가입자의 본인확인을 진행합니다</h4>
+                <br />
+                <h6>인증된 기본정보로 가입을 진행합니다</h6>
+              </div>
+
+              <div class="c-signup-verify-company-input">
+                <h6>기관명</h6>
+                <input
+                  type="text"
+                  name=""
+                  id="company-name"
+                  class="c-input"
+                  placeholder="소속회사"
+                />
+                <p id="is-company-name-error" class="is-error-text"></p>
+              </div>
+              <div class="c-signup-verify-company-input">
+                <h6>이름</h6>
+                <input
+                  type="text"
+                  name=""
+                  id="company-user-name"
+                  class="c-input"
+                  placeholder="이름 입력해주세요"
+                />
+                <p id="is-company-user-name-error" class="is-error-text"></p>
+              </div>
+              <div class="c-signup-verify-company-input">
+                <h6>생년월일</h6>
+                <input
+                  type="text"
+                  name=""
+                  id="company-birth"
+                  class="c-input"
+                  placeholder="생년월일을 입력해주세요"
+                />
+                <p id="is-company-birth-error" class="is-error-text"></p>
+              </div>
+              <div class="c-signup-verify-company-input">
+                <h6>이메일</h6>
+                <input
+                  type="text"
+                  name=""
+                  id="company-email"
+                  class="c-input"
+                  placeholder="이메일을 입력해주세요"
+                />
+                <p id="is-company-email-error" class="is-error-text"></p>
+              </div>
+              <div class="c-signup-verify-company-input-number">
+                <h6>인증번호</h6>
+                <div class="l-signup-verify-company-number-layout">
+                  <div>
+                    <input
+                      type="text"
+                      name=""
+                      id=""
+                      class="c-input"
+                      placeholder="인증번호입력"
+                    />
+                    <div class="c-signup-verify-company-numbertime">3:00</div>
+                  </div>
+                  <div>
+                    <button class="c-button c-button--secondary c-button--md">
+                      인증확인
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="c-signup-verify-company-input-file">
+                <h6>사업자 등록증 사본</h6>
+                <div>
+                  <input
+                    type="text"
+                    name=""
+                    id="company-file-name-1"
+                    class="c-siginup-verify-company-filename"
+                    placeholder="사본 등록"
+                    readonly
+                  />
+                  <input
+                    type="file"
+                    name=""
+                    id="company-file-1"
+                    class="c-siginup-verify-company-file"
+                  />
+                  <div class="c-signup-company-btn">
+                    <button
+                      class="c-button c-button--secondary c-button--md"
+                      type="button"
+                      id="company-file-btn-1"
+                    >
+                      첨부파일
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="c-signup-verify-company-input-file">
+                <h6>사업자 등록증 사본</h6>
+                <div>
+                  <input
+                    type="text"
+                    name=""
+                    id="company-file-name-2"
+                    class="c-siginup-verify-company-filename"
+                    placeholder="사본 등록"
+                    readonly
+                  />
+                  <input
+                    type="file"
+                    name=""
+                    id="company-file-2"
+                    class="c-siginup-verify-company-file"
+                  />
+                  <div class="c-signup-company-btn">
+                    <button
+                      class="c-button c-button--secondary c-button--md"
+                      type="button"
+                      id="company-file-btn-2"
+                    >
+                      첨부파일
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="c-signup-verify-company-nextbtn">
+                <button
+                  class="c-button c-button--primary c-button--md"
+                  id="is-company-next-btn"
+                >
+                  다 음
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div id="footer"></div>
+  </body>
+</html>

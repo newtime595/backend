@@ -1,0 +1,60 @@
+/* 기본 스타일 */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* 내용 묶음 */
+.l-main {
+  display: flex;
+  width: 500px;
+  /* border: 1px solid black; */
+  line-height: 50px;
+}
+
+/* 로그인 버튼 */
+.c-button--md {
+  width: 500px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* 로그인 밑 알림 */
+.text {
+  background-color: aliceblue;
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 10px;
+  width: 500px;
+}
+
+.login-help {
+  border: 1px solid black;
+  text-align: center;
+  border-radius: 5px;
+}
+
+/* 비밀번호 박스안 eye img 고정 */
+.pw-box-layout {
+  position: relative;
+
+}
+
+#c-password-btn-toggle {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  right: 13px;
+  top: +12px;
+  /* top: -12px; */
+}
+
+/* #c-password-btn-toggle img{ */
+/* width: 100%; */
+/* height: 100%; */
+/* object-fit: cover; */
+/* opacity: 0.4; */
+}

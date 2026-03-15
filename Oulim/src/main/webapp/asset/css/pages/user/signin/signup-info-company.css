@@ -1,0 +1,91 @@
+
+.p-signup-info-company{
+    width: 100%;
+}
+.l-signup-info-company-layout{
+    width: 357px;
+    margin: 0 auto;
+}
+
+.l-signup-info-company-layout h2{
+    text-align: center;
+    margin: 30px 0;
+}
+.c-signup-info-company-text h4{
+    width: auto;
+    margin: 30px 0;
+}
+
+.l-signup-info-company-input-layout{
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+}
+.l-signup-info-company-input-layout div:first-child{
+  flex: 1;
+}
+
+.c-signup-info-company-input-number{
+    margin: 10px 0;
+}
+
+.c-signup-info-company-input-number h6{
+    margin: 10px 0;
+}
+
+.c-signup-info-company-nextbtn button{
+    margin: 50px 0;
+    width: 100%;
+}
+
+/* 에러 */
+.is-error-text{
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+  min-height: 16px;
+}
+
+.c-input.is-error{
+  border: 1px solid red;
+}
+
+/* 비번 표시  */
+
+.l-toggle-layout {
+  position: relative;
+}
+
+#c-password-btn-toggle{
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  right: 12px;
+  top: 7px;
+}
+
+#c-password-btn-toggle img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+}
+
+.l-toggle-layout-2 {
+  position: relative;
+}
+
+#c-password-btn-toggle-2{
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  right: 12px;
+  top: 7px;
+}
+
+#c-password-btn-toggle-2 img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+}

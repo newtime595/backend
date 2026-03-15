@@ -1,0 +1,115 @@
+/* storage.css */
+.storage-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.storage-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.storage-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.storage-item {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #f0f0f0; /* 구분선 */
+}
+
+.storage-item__img {
+    width: 80px;
+    height: 80px;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 30px;
+    border-radius: 8px;
+}
+
+.storage-item__img img {
+    width: 60%;
+    object-fit: contain;
+}
+
+.storage-item__info {
+    flex: 2;
+}
+
+.item-name {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.item-desc {
+    color: #888;
+    font-size: 0.95rem;
+}
+
+.storage-item__status {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.expire-date {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* 페이지네이션 스타일 */
+.c-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 50px;
+}
+
+.c-pagination__num, .c-pagination__arrow {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    color: #888;
+}
+
+.c-pagination__num.is-active {
+    background-color: var(--color-primary, #76b13a); /* 포인트 컬러 */
+    color: #fff;
+    border-radius: 4px;
+}
+
+.storage-footer {
+    display: flex;
+    justify-content: center;
+}
+
+
+/* 아이템 이미지 박스 안의 SVG 중앙 정렬 */
+.storage-item__img {
+    width: 80px;
+    height: 80px;
+    background-color: #f8f9fa; /* 연한 배경색 */
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+
+/* SVG 아이콘에 은은한 애니메이션 추가 (선택) */
+.storage-item:hover svg {
+    transform: scale(1.1) rotate(5deg);
+    transition: transform 0.3s ease;
+}

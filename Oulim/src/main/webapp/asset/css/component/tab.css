@@ -1,0 +1,39 @@
+.c-tab{
+
+  display:flex;
+
+  gap:var(--space-2);
+
+  border-bottom:1px solid var(--color-border);
+
+}
+
+.c-tab__item{
+
+  padding:var(--space-3) var(--space-5);
+
+  cursor:pointer;
+
+  font-size:var(--font-md);
+
+  color:var(--color-text-sub);
+
+}
+
+.c-tab__item.is-active{
+
+  border-bottom:3px solid var(--color-primary);
+
+  color:var(--color-text);
+
+  font-weight:600;
+
+}
+
+.c-tab-panel{
+ display:none;
+}
+
+.c-tab-panel.is-active{
+ display:block;
+}

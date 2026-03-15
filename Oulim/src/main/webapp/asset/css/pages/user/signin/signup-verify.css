@@ -1,0 +1,85 @@
+
+.p-signup-verify-main{
+    width: 100%;
+}
+
+.l-signup-verify-layout{
+    width: 263px;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.l-signup-verify-layout h2{
+    text-align: center;
+    margin: 30px 0;
+}
+
+.c-signup-verify-input{
+    width: 263px;
+}
+.c-signup-verify-input h6{
+    margin: 10px 0;
+}
+.l-signup-verify-layout-btn {
+    display: flex;
+    gap: 10px;
+}
+.c-signup-btn {
+    width: 180px;
+    white-space: nowrap;
+}
+
+.c-signup-verify-text{
+    margin-bottom: 30px;
+}
+
+.c-signup-verify-input-number{  
+    width: 155px;
+    margin-top: 10px;
+
+}
+
+.l-signup-verify-number-layout{
+    display: flex;
+    padding: 10px 0;
+    gap: 10px;
+}
+.l-signup-verify-number-layout div:first-child{
+    display: flex;
+    position: relative;
+}
+.l-signup-verify-number-layout div:first-child input{
+    
+    width: 150px;
+}
+.l-signup-verify-number-layout div:last-child{
+    margin: auto;
+}
+
+.l-signup-verify-number-layout div:last-child button{
+    width:100px;
+}
+.c-signup-verify-numbertime{
+    position: absolute;
+    top: 10px;
+    right: 5px;
+}
+.c-signup-verify-nextbtn button{
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+
+/* 에러 */
+
+.is-error-text{
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+  min-height: 16px;
+}
+
+.c-input.is-error{
+  border: 1px solid red;
+}

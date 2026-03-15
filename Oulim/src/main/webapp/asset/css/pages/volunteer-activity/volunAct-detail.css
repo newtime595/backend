@@ -1,0 +1,42 @@
+.p-volunteer-manage-detail_header{
+display: flex;
+  width: 100%;
+  height: auto;
+  justify-content: center;
+}
+
+.l-return-button{
+    display: flex;
+    justify-content: center;
+    margin-top: 46px;
+}
+
+.l-return-button .c-button{
+   width: 168px;
+   height: 50px;
+}
+
+.c-volunteer-detail-desc__box {
+  background-color: #f9f9f9;
+  border: 1px solid #dcdcdc;
+  border-radius: 16px;
+  padding: 32px 28px;
+  min-height: 220px;
+
+  font-size: 16px;
+  line-height: 1.8;
+  color: #333;
+
+  white-space: pre-line;
+  box-sizing: border-box;
+}
+
+.l-volunAct-apply{
+    display: flex;
+    justify-content: center;
+}
+
+button:disabled{
+  opacity: 0.5;
+  cursor: not-allowed;
+}

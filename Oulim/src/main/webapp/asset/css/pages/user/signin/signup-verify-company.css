@@ -1,0 +1,96 @@
+
+.p-signup-verify-company-main{
+    width: 100%;
+}
+
+.l-signup-verify-company-layout{
+    width: 263px;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.l-signup-verify-company-layout h2{
+    text-align: center;
+    margin: 30px 0;
+}
+
+.c-signup-verify-company-input{
+    width: 263px;
+}
+.c-signup-verify-company-input h6{
+    margin: 10px 0;
+}
+
+.c-signup-verify-company-text{
+    margin-bottom: 30px;
+}
+
+.c-signup-verify-company-input-number{  
+    width: 155px;
+    margin-top: 10px;
+
+}
+
+.l-signup-verify-company-number-layout{
+    display: flex;
+    padding: 10px 0;
+    gap: 10px;
+}
+.l-signup-verify-company-number-layout div:first-child{
+    display: flex;
+    position: relative;
+}
+.l-signup-verify-company-number-layout div:first-child input{
+    
+    width: 150px;
+}
+.l-signup-verify-company-number-layout div:last-child{
+    margin: auto;
+}
+
+.l-signup-verify-company-number-layout div:last-child button{
+    width:100px;
+}
+.c-signup-verify-company-numbertime{
+    position: absolute;
+    top: 10px;
+    right: 5px;
+}
+.c-signup-verify-company-nextbtn button{
+    width: 100%;
+    margin-bottom: 50px;
+}
+/* 파일업로드 */
+.c-signup-verify-company-input-file h6{
+    margin: 10px 0;
+}
+.c-siginup-verify-company-filename{
+    width: 170px;
+    height: 40px;
+    border: none;
+    background:var(--color-secondary-disable);
+    padding: 10px;
+}
+.c-siginup-verify-company-file{
+    display: none;
+}
+
+.c-signup-verify-company-input-file div{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+
+/* 에러 */
+.is-error-text{
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+  min-height: 16px;
+}
+
+.c-input.is-error{
+  border: 1px solid red;
+}

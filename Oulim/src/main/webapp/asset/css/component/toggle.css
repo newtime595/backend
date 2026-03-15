@@ -1,0 +1,66 @@
+.c-toggle{
+
+  position:relative;
+
+  display:inline-block;
+
+  width:44px;
+  height:24px;
+
+}
+
+.c-toggle input{
+  display:none;
+}
+
+.c-toggle__slider{
+
+  position:absolute;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:100%;
+
+  background:var(--color-border);
+
+  border-radius:999px;
+
+  transition:var(--transition-base);
+
+}
+
+.c-toggle__slider::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:18px;
+  height:18px;
+
+  left:3px;
+  top:3px;
+
+  background:white;
+
+  border-radius:50%;
+
+  box-shadow:var(--shadow-sm);
+
+  transition:var(--transition-base);
+
+}
+
+.c-toggle input:checked + .c-toggle__slider{
+
+  background:var(--color-primary);
+
+}
+
+.c-toggle input:checked + .c-toggle__slider::before{
+
+  transform:translateX(20px);
+
+}

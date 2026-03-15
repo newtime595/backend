@@ -1,0 +1,118 @@
+/* ========================
+   INPUT
+======================== */
+
+.c-input {
+
+  width:100%;
+  height:44px;
+
+  padding:0 14px;
+
+  font-size:var(--font-md);
+  color:var(--color-text);
+
+  border:1px solid var(--color-border);
+  border-radius:var(--radius-sm);
+
+  background:#fff;
+
+  transition:border var(--transition-fast),
+  box-shadow var(--transition-fast);
+
+}
+
+
+/* placeholder */
+
+.c-input::placeholder{
+
+  color:#9ca3af;
+
+}
+
+
+/* focus */
+
+.c-input:focus{
+  outline:none;
+  border-color:var(--color-primary);
+}
+
+
+/* disabled */
+
+.c-input:disabled{
+
+  background:var(--color-secondary-disable);
+
+  color:var(--color-text);
+
+  cursor:not-allowed;
+
+}
+
+
+/* ========================
+   FORM FIELD
+======================== */
+
+.c-form-field{
+
+  display:flex;
+  flex-direction:column;
+
+  gap:var(--space-2);
+
+  margin-bottom:var(--space-4);
+
+}
+
+
+/* label */
+
+.c-form-field__label{
+
+  font-size:var(--font-sm);
+  font-weight:600;
+
+  color:var(--color-text);
+
+}
+
+
+/* helper text */
+
+.c-form-field__helper{
+
+  font-size:var(--font-xs);
+
+  color:var(--color-text-detail);
+
+}
+
+
+/* error */
+
+.c-form-field__error{
+
+  font-size:var(--font-xs);
+
+  color:var(--color-danger);
+
+}
+
+
+/* error state */
+
+.c-form-field.is-error .c-input{
+
+  border-color:var(--color-danger);
+
+}
+
+.c-form-field.is-error .c-form-field__helper{
+
+  display:none;
+
+}

@@ -1,0 +1,85 @@
+/* reset.css */
+
+/* box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* margin reset */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* html 기본 */
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* body */
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+}
+
+/* list */
+ul,
+ol {
+  list-style: none;
+}
+
+/* link */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* button */
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+/* input */
+input,
+textarea,
+select {
+  font: inherit;
+  border: inherit;
+  outline: inherit;
+}
+
+/* image */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* table */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* form */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* textarea resize */
+textarea {
+  resize: vertical;
+}

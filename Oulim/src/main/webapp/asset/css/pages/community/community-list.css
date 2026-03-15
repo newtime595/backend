@@ -1,0 +1,64 @@
+.p-community-list-main {
+  display: flex;
+  justify-content: center;
+  width: 1080px;
+  flex-wrap: wrap;
+  margin: auto;
+}
+
+.c-community-list-title {
+  display: flex;
+  width: 100%;
+  height: auto;
+  justify-content: center;
+}
+
+.l-community-list-search-group {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.l-community-search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 60%;
+  justify-content: flex-end;
+}
+
+.c-community-search {
+  width: 130px;
+  height: 40px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.l-community-search-box .c-input {
+  flex: 1;
+  min-width: 0;
+}
+
+.l-community-list-pagination{
+  display: flex;
+  justify-content: center;
+}
+
+.c-list__row a{
+  display: flex;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.c-select-size-controler .c-select{
+  width: 130px;
+  height: 40px;
+}
+
+.c-community-list-search-btn-container .c-button{
+  width: 50px;
+  height: 50px;
+}

@@ -1,0 +1,51 @@
+
+.p-id-find-view{
+    width: 100%;
+}
+
+.l-id-find-view-layout{
+    width: 520px;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.l-id-find-view-layout h2{
+    text-align: center;
+    margin: 50px 0;
+}
+.c-id-find-view-text{
+  border-bottom: 1px solid var(--color-border);
+  padding: 10px 0;
+}
+
+
+.l-id-find-view-info-layout{
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 0;
+  border-bottom: 1px solid var(--color-border);
+  padding: 10px 0;
+}
+
+.c-id-find-view-nextbtn{
+  display: flex;
+  gap: 20px;
+}
+.c-id-find-view-nextbtn button{
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+/* 에러 */
+
+.is-error-text{
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+  min-height: 16px;
+}
+
+.c-input.is-error{
+  border: 1px solid red;
+}

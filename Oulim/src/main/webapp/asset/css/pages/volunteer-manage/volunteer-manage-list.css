@@ -1,0 +1,36 @@
+.p-volunteer-manage-list {
+    padding: 100px 0 140px;
+}
+
+.p-volunteer-manage-list_header {
+    position: relative;
+    margin-bottom: 56px;
+    text-align: center;
+}
+
+/* 리스트 호버시 3행 색 변경 */
+.c-list__row:hover .c-list__col:nth-child(3) {
+    color: #2f80ed;
+}
+
+/* 봉사 등록 버튼 정렬 */
+.p-volunteer-manage-list_header .c-button {
+    display: block;
+    margin-left: auto;
+}
+
+.p-volunteer-manage-list_content {
+    width: 100%;
+}
+
+.p-volunteer-manage-list .c-list {
+    width: 100%;
+}
+
+/* 페이지네이션 영역 */
+.p-volunteer-manage-list .c-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:36px;
+}

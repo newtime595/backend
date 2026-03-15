@@ -1,0 +1,100 @@
+/* =========================
+   List Base
+========================= */
+
+.c-list{
+
+  width:100%;
+  border-top:1px solid #e5e7eb;
+
+}
+
+/* header */
+
+.c-list__header{
+
+  display:grid;
+  padding:14px 16px;
+  font-size:14px;
+  font-weight:600;
+  background:#f9fafb;
+
+}
+
+/* body */
+
+.c-list__body{
+
+  width:100%;
+
+}
+
+/* row */
+
+.c-list__row{
+
+  display:grid;
+  padding:16px;
+  border-bottom:1px solid #eee;
+  align-items:center;
+  transition:background .15s ease;
+
+}
+
+.c-list__row:hover{
+
+  background:var(--color-secondary);
+
+}
+
+/* column */
+
+.c-list__col{
+
+  display:flex;
+  align-items:center;
+  font-size:14px;
+
+}
+
+/* actions */
+
+.c-list__actions{
+  display:flex;
+  gap:8px;
+}
+
+/* =========================
+   Column Layout
+========================= */
+
+/* 3 column */
+
+.c-list--3col .c-list__header,
+.c-list--3col .c-list__row{
+  grid-template-columns:2fr 1fr 1fr;
+
+}
+
+/* 4 column */
+
+.c-list--4col .c-list__header,
+.c-list--4col .c-list__row{
+  grid-template-columns:2fr 1fr 1fr 1fr;
+
+}
+
+/* 5 column */
+.c-list--5col .c-list__header,
+.c-list--5col .c-list__row{
+
+  grid-template-columns:2fr 1fr 1fr 1fr 1fr;
+
+}
+/* 6 column */
+.c-list--6col .c-list__header,
+.c-list--6col .c-list__row{
+
+  grid-template-columns:2fr 1fr 1fr 1fr 1fr 1fr;
+
+}

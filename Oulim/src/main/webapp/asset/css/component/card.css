@@ -1,0 +1,53 @@
+/* =========================
+CARD
+========================= */
+
+.c-card{
+
+  background:#fff;
+  border:1px solid var(--color-border);
+  border-radius:var( --radius-md);
+  padding:20px;
+  transition:all .2s ease;
+  margin-bottom: var(--space-4);
+
+}
+
+.c-card:hover{
+  box-shadow:var(--shadow-md);
+}
+
+/* header */
+
+.c-card__header{
+  margin-bottom:10px;
+}
+
+/* title */
+
+.c-card__title{
+
+  font-size:var(--font-lg);
+  font-weight:600;
+  margin-bottom:var(--space-2);
+
+}
+
+/* description */
+
+.c-card__desc{
+
+  font-size:var(--font-sm);
+  color:#666;
+  margin-bottom:12px;
+
+}
+
+/* footer */
+
+.c-card__footer{
+
+  font-size:var(--font-xs);
+  color:#888;
+
+}

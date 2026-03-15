@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mission</title>
+<!-- 기본css -->
+  <link rel="stylesheet" href="/Oulim/asset/css/core/reset.css" />
+  <link rel="stylesheet" href="/Oulim/asset/css/core/variable.css" />
+  <link rel="stylesheet" href="/Oulim/asset/css/core/typography.css" />
+  <link rel="stylesheet" href="/Oulim/asset/css/core/layout.css" />
+<!-- 컴포넌트 -->
+  <link rel="stylesheet" href="/Oulim/asset/css/component/button.css">
+  <link rel="stylesheet" href="/Oulim/asset/css/component/tab.css">
+  <link rel="stylesheet" href="/Oulim/asset/css/pages/kkomi/mission.css" />
+<!-- 스크립트 -->
+  <script src="/Oulim/asset/js/pages/kkomi/mission.js"></script>
+  <script src="/Oulim/asset/js/components/tab.js"></script>
+  <script defer src="/Oulim/asset/js/pages/main/include.js"></script> 
+</head>
+<body>
+    <div id="header"></div>
+
+    <main class="l-main">
+        <div class="l-container">
+            <section class="mission-header">
+                <h2 class="mission-title">도력 찾기</h2>
+                <p class="mission-desc">봉사를 통해 도력을 쌓고 인간이 되기 위한 꼬리를 찾아보세요!</p>
+            </section>
+
+            <div class="c-tab">
+                <button class="c-tab__item is-active" data-tab="normal">일반 미션</button>
+                <button class="c-tab__item" data-tab="special">특별 미션</button>
+            </div>
+
+            <div class="c-tab-content">
+                <div class="c-tab-panel is-active" data-panel="normal">
+                    <div class="mission-list">
+                        
+                        <div class="mission-card">
+                            <div class="mission-card__info">
+                                <h3 class="mission-card__title">초보 수행자의 첫걸음</h3>
+                                <p class="mission-card__text">봉사 활동 1회 완료하기</p>
+                                <div class="mission-card__progress-container">
+                                    <div class="mission-card__progress-bar" style="width: 0%;"></div>
+                                    <span class="mission-card__progress-text">진행도 0 / 1</span>
+                                </div>
+                            </div>
+                            <div class="mission-card__reward">
+                                <span class="reward-label">보상</span>
+                                <span class="reward-value">500 DP</span>
+                                <button class="c-button c-button--primary c-button--sm is-disabled" disabled>보상받기</button>
+                            </div>
+                        </div>
+
+                        <div class="mission-card is-complete">
+                            <div class="mission-card__info">
+                                <h3 class="mission-card__title">마을의 수호신</h3>
+                                <p class="mission-card__text">우리 동네 환경 정화 봉사 3회 참여</p>
+                                <div class="mission-card__progress-container">
+                                    <div class="mission-card__progress-bar" style="width: 100%;"></div>
+                                    <span class="mission-card__progress-text">진행도 3 / 3</span>
+                                </div>
+                            </div>
+                            <div class="mission-card__reward">
+                                <span class="reward-label">보상</span>
+                                <span class="reward-value">1,200 DP</span>
+                                <button class="c-button c-button--primary c-button--sm">보상받기</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="c-tab-panel" data-panel="special">
+                    <div class="empty-state">준비된 특별 미션이 없습니다.</div>
+                </div>
+            </div>
+
+            <div class="mission-footer">
+                <button class="c-button c-button--secondary c-button--lg" onclick="location.href='/training'">수련소로 돌아가기</button>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+</body>
+</html>

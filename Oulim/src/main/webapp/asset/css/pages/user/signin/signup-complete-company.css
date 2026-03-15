@@ -1,0 +1,49 @@
+
+.p-signup-complete-company{
+    width: 100%;
+}
+
+.l-signup-complete-company-layout{
+    width: 450px;
+    margin: 0 auto;
+    /* border: 1px solid red; */
+}
+
+.l-signup-complete-company-layout div img{
+    margin: 10px auto;
+    width: 100px;
+    height: 100px;
+}
+
+.l-signup-complete-company-title{
+    margin: 0 100px;
+}
+.l-signup-complete-company-title div{
+    margin: 10px 0;
+}
+
+.l-signup-complete-company-title h3{
+    margin-top: 30px;
+}
+
+.l-siginup-complete-company-textarea-layout{
+    display: flex;
+    width: 900px;
+    margin: 30px auto;
+    justify-content: space-between;
+
+}
+.c-siginup-complete-company-text-left{
+    text-align: left;
+}
+
+.c-siginup-complete-company-text-right{
+    text-align: right;
+}
+.c-signup-complete-company{
+    margin: 100px auto 0 auto;
+    width: 400px;
+}
+.c-signup-complete-company button{
+    width: 100%;
+}

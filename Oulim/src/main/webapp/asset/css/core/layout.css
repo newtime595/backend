@@ -1,0 +1,19 @@
+/* =========================
+Layout
+========================= */
+
+.l-main{
+  min-height: calc(100vh - 160px);
+}
+
+/* =========================
+Container
+========================= */
+
+.l-container{
+  width:100%;
+  max-width:1080px;
+  margin:0 auto;
+  padding:0 16px;
+
+}
