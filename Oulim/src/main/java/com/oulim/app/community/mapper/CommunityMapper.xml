@@ -1,7 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <mapper namespace="community">
+	<!-- 개시물 총 갯수 계산 -->
+	<select id="getTotalPost" resultType="int">
+		SELECT COUNT(post_no) FROM tbl_community_post
+	</select>
+	
+	<!-- 댓글 총 갯수 계산 -->
+	<select id="getTotalComment" parameterType="int" resultType="int">
+		SELECT COUNT(COMMENT_NO) FROM TBL_COMMUNITY_COMMENT
+		WHERE POST_NO = #{postNo}
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="updateReadCount" parameterType="int">
+		UPDATE tbl_community_post
+		set Post_View_Count = Post_View_Count + 1
+		WHERE post_no = #{postNo}
+	</update>
 
-
-
+	<!-- 게시글 삭제 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM tbl_community_post
+		WHERE post_no = #{postNo}
+	</delete>
+	
+	<!-- 게시글 수정 -->
+	<update id="updatePost" parameterType="CommunityPostDTO">
+		UPDATE TBL_COMMUNITY_POST
+		SET Post_Title = #{postTitle}, POST_CONTENT = #{postContent}, USER_NICKNAME= #{userNickname}
+		WHERE POST_NO = #{postNo}
+	</update>
+	
+	<!-- 댓글 작성 -->
+	<insert id="commentPost" parameterType="CommunityCommentDTO">
+		INSERT INTO TBL_COMMUNITY_COMMENT (COMMENT_NO, USER_NO, POST_NO, USER_NICKNAME, COMMENT_CONTENT, POST_DATE)
+		VALUES(SEQ_TBL_COMMUNITY_COMMENT.nextval, #{userNo}, #{postNo}, #{userNickname, #{commentContent}, #{postDate})
+	</insert>
+	
+	<!-- 전체 게시글 조회 -->
+	<select id="selectPostAll" resultType="CommunityPostJoinLikeDTO">
+		<![CDATA[
+			SELECT * FROM (
+			SELECT ROWNUM AS RNUM, subquery.*
+			FROM (
+				SELECT tcp.post_no,tcp.user_no, tcp.post_title, tcp.user_nickname, tcp.post_date, 
+				(select count(post_like_no) from tbl_post_like tpl where tpl.post_no = tcp.post_no) as like_count
+				FROM tbl_community_post tcp
+				ORDER BY tcp.post_date DESC			
+			) subquery
+			) WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+		]]>
+	</select>
+	
+	<!-- 게시글 상세 -->
+	<select id="selectPost" parameterType="int" resultType="CommunityPostJoinLikeDTO">
+	<![CDATA[
+		SELECT tcp.post_no,tcp.user_no, tcp.post_title, tcp.user_nickname, tcp.post_date, tcp.post_content,
+		tcp.post_view_count, 
+		(select count(post_like_no) from tbl_post_like tpl where tpl.post_no = tcp.post_no) as like_count
+		FROM tbl_community_post tcp
+		where tcp.post_no = #{postNo}
+	]]>
+	</select>
+	
+	<!-- 댓글 조회 --> 
+	<select id="selectPostComment" parameterType="int" resultType="CommunityCommentDTO">
+		<![CDATA[
+			SELECT * FROM(
+				SELECT ROWNUM AS rnum, subquery.*
+				FROM (
+					SELECT tcc.comment_no, tcc.user_no, tcc.user_nickname, tcc.coment_content, tcc.post_date
+					FROM tbl_community_comment tcc
+					WHERE tcc.post_no = #{postNo}
+					ORDER BY tcc.post_date desc ) subquery
+				) WHERE rnum between #{startRow} and #{endRow}
+		]]>
+	</select>
 </mapper>
