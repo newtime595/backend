@@ -1,0 +1,64 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<header>
+	<div class="p-header-page">
+		<div class="l-header-layout">
+			<c:choose>
+				<c:when test="${empty sessionScope.memberNumber}">
+					<div class="l-header-right">
+						<img src="" alt="logo" />
+						<div>
+							<a href="">봉사활동</a>
+						</div>
+						<div>
+							<a href="">어울림터</a>
+						</div>
+
+						<c:if test="${sessionScope.memberNumber==1}">
+							<div>
+								<a href="">꼬미수련소</a>
+							</div>
+						</c:if>
+
+						<c:if test="${sessionScope.memberNumber==2}">
+							<div>
+								<a href="">봉사관리</a>
+							</div>
+						</c:if>
+
+					</div>
+					<div class="l-header-left">
+						<div class="c-button c-button--secondary c-button--md">
+							<a href="">로그인/회원가입</a>
+						</div>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="l-header-right">
+						<img src="" alt="logo" />
+						<div>
+							<a href="">봉사활동</a>
+						</div>
+						<div>
+							<a href="">어울림터</a>
+						</div>
+
+					</div>
+					<div class="l-header-left">
+						<div>
+							<h3>OOO님</h3>
+						</div>
+						<div class="c-button c-button--secondary c-button--md">
+							<a href="">로그아웃</a>
+						</div>
+						<div class="c-button c-button--secondary c-button--md">
+							<a href="">마이페이지</a>
+						</div>
+					</div>
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</div>
+</header>
+

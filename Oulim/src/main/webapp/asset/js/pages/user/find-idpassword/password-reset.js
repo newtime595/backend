@@ -53,10 +53,10 @@ const pwToggleIcon = document.getElementById("c-password-toggle-img");
 pwBtn.addEventListener("click", () => {
   if (userPw.type === "password") {
     userPw.type = "text";
-    pwToggleIcon.src = "/Oulim/asset/image/user/password-off.png";
+    pwToggleIcon.src = contextPath + "/asset/image/user/password-off.png";
   } else {
     userPw.type = "password";
-    pwToggleIcon.src = "/Oulim/asset/image/user/password-on.png";
+    pwToggleIcon.src = contextPath + "/asset/image/user/password-on.png";
   }
 });
 
@@ -68,9 +68,9 @@ const pwToggleIcon2 = document.getElementById("c-password-toggle-img-2");
 pwBtn2.addEventListener("click", () => {
   if (userPw2.type === "password") {
     userPw2.type = "text";
-    pwToggleIcon2.src = "/Oulim/asset/image/user/password-off.png";
+    pwToggleIcon2.src = contextPath + "/asset/image/user/password-off.png";
   } else {
     userPw2.type = "password";
-    pwToggleIcon2.src = "/Oulim/asset/image/user/password-on.png";
+    pwToggleIcon2.src = contextPath + "/asset/image/user/password-on.png";
   }
 });

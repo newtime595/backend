@@ -9,22 +9,24 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/reset.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/variable.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/typography.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/Typography.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/layout.css" />
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/button.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/badge.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/kkomi/Kkomi-training-center.css">
-
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
 <script defer src="${pageContext.request.contextPath}/asset/js/pages/kkomi/KKomi-training-center.js"></script>
 </head>
-<jsp:include page="/app/include/header-login.jsp" />
+
 <script>
 	const contextPath = "${Pagecontext.request.ContextPath}";
 </script>
 <body>
 
-	<div id="header"></div>
-
+	<jsp:include page="/app/include/header.jsp" />
 	<main class="l-main">
 		<div class="l-container">
 			<section class="p-komi-training">
@@ -74,7 +76,8 @@
 			</section>
 		</div>
 	</main>
+	<jsp:include page="/app/include/footer.jsp" />
 </body>
-<jsp:include page="/app/include/footer.jsp" />
+
 
 </html>

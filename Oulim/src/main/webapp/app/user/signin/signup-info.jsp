@@ -1,132 +1,118 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>회원가입 추가정보</title>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>회원가입 추가정보</title>
 
-    <!-- base css 필수 삽입-->
-    <link rel="stylesheet" href="/Oulim/asset/css/core/reset.css" />
-    <link rel="stylesheet" href="/Oulim/asset/css/core/variable.css" />
-    <link rel="stylesheet" href="/Oulim/asset/css/core/Typography.css" />
-    <!-- 컨포넌트 css 선택-->
-    <link rel="stylesheet" href="/Oulim/asset/css/component/input.css" />
-    <link rel="stylesheet" href="/Oulim/asset/css/component/button.css" />
-    <link rel="stylesheet" href="/Oulim/asset/css/core/layout.css" />
+<!-- base css 필수 삽입-->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/asset/css/core/reset.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/asset/css/core/variable.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/asset/css/core/Typography.css" />
+<!-- 컨포넌트 css 선택-->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/asset/css/component/input.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/asset/css/component/button.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/asset/css/core/layout.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/asset/css/pages/user/signin/signup-info.css" />
+<script defer
+	src="${pageContext.request.contextPath}/asset/js/pages/user/signin/signup-info.js"></script>
+<script>
+	const contextPath = "${pageContext.request.contextPath}";
+</script>
+</head>
 
-    <link
-      rel="stylesheet"
-      href="/Oulim/asset/css/pages/user/signin/signup-info.css"
-    />
-    <script
-      defer
-      src="/Oulim/asset/js/pages/user/signin/signup-info.js"
-    ></script>
-  </head>
-
-  <body>
-    <jsp:include page="/app/include/header-nologin.jsp" />
-    <div class="l-main">
-      <div class="l-container">
-        <form action="/Oulim/front/html/user/signin/signup-complete.html">
-          <div class="p-signup-info">
-            <div class="l-signup-info-layout">
-              <div>
-                <h2>회원가입</h2>
-              </div>
-              <div class="c-signup-info-text">
-                <h4>가입하실 아이디와 비밀번호를 작성해 주세요.</h4>
-              </div>
-              <div>
-                <h6>닉네임</h6>
-                <div class="l-signup-info-input-layout">
-                  <div>
-                    <input
-                      type="text"
-                      name=""
-                      id="user-nickname"
-                      class="c-input"
-                      placeholder="닉네임 입력"
-                    />
-                    <p id="is-user-nickname-error" class="is-error-text"></p>
-                  </div>
-                  <div class="c-signup-btn">
-                    <button
-                      type="button"
-                      class="c-button c-button--secondary c-button--md"
-                      id="c-nickname-dbcheck-btn"
-                    >
-                      중복확인
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <h6>아이디</h6>
-                <div class="l-signup-info-input-layout">
-                  <div>
-                    <input
-                      type="text"
-                      name=""
-                      id="user-id"
-                      class="c-input"
-                      placeholder="아이디 입력"
-                    />
-                    <p id="is-user-id-error" class="is-error-text"></p>
-                  </div>
-                  <div class="c-signup-btn">
-                    <button
-                      type="button"
-                      class="c-button c-button--secondary c-button--md"
-                      id="c-id-dbcheck-btn"
-                    >
-                      중복확인
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div class="c-signup-info-input-number">
-                <h6>비밀번호</h6>
-                <div class="l-toggle-layout">
-                <input
-                  type="password"
-                  name=""
-                  id="user-password"
-                  class="c-input"
-                />
-                <button type="button" id="c-password-btn-toggle"><img src="/Oulim/asset/image/user/password-on.png" alt="eye" id="c-password-toggle-img" /></button>
-                </div>
-                <p id="is-user-password-error" class="is-error-text"></p>
-              </div>
-              <div class="c-signup-info-input-number">
-                <h6>비밀번호확인</h6>
-                <div class="l-toggle-layout-2">
-                <input
-                  type="password"
-                  name=""
-                  id="user-password-check"
-                  class="c-input"
-                />
-                <button type="button" id="c-password-btn-toggle-2"><img src="/Oulim/asset/image/user/password-off.png" alt="eye" id="c-password-toggle-img-2" /></button>
-                </div>
-                <p id="is-user-password-check-error" class="is-error-text"></p>
-              </div>
-              <div class="c-signup-info-nextbtn">
-                <button
-                  class="c-button c-button--primary c-button--md"
-                  id="is-signup-btn"
-                  
-                >
-                  회원가입
-                </button>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-    <jsp:include page="/app/include/footer.jsp" />
-  </body>
+<body>
+	<jsp:include page="/app/include/header.jsp" />
+	<div class="l-main">
+		<div class="l-container">
+			<form
+				action="${pageContext.request.contextPath}/front/html/user/signin/signup-complete.html">
+				<div class="p-signup-info">
+					<div class="l-signup-info-layout">
+						<div>
+							<h2>회원가입</h2>
+						</div>
+						<div class="c-signup-info-text">
+							<h4>가입하실 아이디와 비밀번호를 작성해 주세요.</h4>
+						</div>
+						<div>
+							<h6>닉네임</h6>
+							<div class="l-signup-info-input-layout">
+								<div>
+									<input type="text" name="" id="user-nickname" class="c-input"
+										placeholder="닉네임 입력" />
+									<p id="is-user-nickname-error" class="is-error-text"></p>
+								</div>
+								<div class="c-signup-btn">
+									<button type="button"
+										class="c-button c-button--secondary c-button--md"
+										id="c-nickname-dbcheck-btn">중복확인</button>
+								</div>
+							</div>
+						</div>
+						<div>
+							<h6>아이디</h6>
+							<div class="l-signup-info-input-layout">
+								<div>
+									<input type="text" name="" id="user-id" class="c-input"
+										placeholder="아이디 입력" />
+									<p id="is-user-id-error" class="is-error-text"></p>
+								</div>
+								<div class="c-signup-btn">
+									<button type="button"
+										class="c-button c-button--secondary c-button--md"
+										id="c-id-dbcheck-btn">중복확인</button>
+								</div>
+							</div>
+						</div>
+						<div class="c-signup-info-input-number">
+							<h6>비밀번호</h6>
+							<div class="l-toggle-layout">
+								<input type="password" name="" id="user-password"
+									class="c-input" />
+								<button type="button" id="c-password-btn-toggle">
+									<img
+										src="${pageContext.request.contextPath}/asset/image/user/password-on.png"
+										alt="eye" id="c-password-toggle-img" />
+								</button>
+							</div>
+							<p id="is-user-password-error" class="is-error-text"></p>
+						</div>
+						<div class="c-signup-info-input-number">
+							<h6>비밀번호확인</h6>
+							<div class="l-toggle-layout-2">
+								<input type="password" name="" id="user-password-check"
+									class="c-input" />
+								<button type="button" id="c-password-btn-toggle-2">
+									<img
+										src="${pageContext.request.contextPath}/asset/image/user/password-off.png"
+										alt="eye" id="c-password-toggle-img-2" />
+								</button>
+							</div>
+							<p id="is-user-password-check-error" class="is-error-text"></p>
+						</div>
+						<div class="c-signup-info-nextbtn">
+							<button class="c-button c-button--primary c-button--md"
+								id="is-signup-btn">회원가입</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<jsp:include page="/app/include/footer.jsp" />
+</body>
 </html>

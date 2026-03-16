@@ -8,26 +8,28 @@
     <title>id 현황</title>
 
     <!-- base css 필수 삽입-->
-    <link rel="stylesheet" href="/Oulim/asset/css/core/reset.css" />
-    <link rel="stylesheet" href="/Oulim/asset/css/core/variable.css" />
-    <link rel="stylesheet" href="/Oulim/asset/css/core/Typography.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/reset.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/variable.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/Typography.css" />
     <!-- 컨포넌트 css 선택-->
-    <link rel="stylesheet" href="/Oulim/asset/css/component/input.css" />
-    <link rel="stylesheet" href="/Oulim/asset/css/component/button.css" />
-    <link rel="stylesheet" href="/Oulim/asset/css/core/layout.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/input.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/button.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/layout.css" />
 
     <link
       rel="stylesheet"
-      href="/Oulim/asset/css/pages/user/find-idpassword/id-find-view.css"
+      href="${pageContext.request.contextPath}/asset/css/pages/user/find-idpassword/id-find-view.css"
     />
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css" />
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
   </head>
-
+	
   <body>
-    <jsp:include page="/app/include/header-nologin.jsp" />
+    <jsp:include page="/app/include/header.jsp" />
     <div class="l-main">
       <div class="l-container">
         <div class="p-id-find-view">
-          <form action="/Oulim/front/html/user/find-idpassword/password-find.html">
+          <form action="${pageContext.request.contextPath}/front/html/user/find-idpassword/password-find.html">
             <div class="l-id-find-view-layout">
               <div>
                 <h2>아이디 현황</h2>
@@ -52,7 +54,7 @@
                   비밀번호 찾기
                 </button>
                 <button class="c-button c-button--secondary c-button--md" type="button"
-                onclick="location.href='/Oulim/front/html/user/login/login.html'">
+                onclick="location.href='${pageContext.request.contextPath}/front/html/user/login/login.html'">
                   로그인 페이지 이동하기
                 </button>
               </div>

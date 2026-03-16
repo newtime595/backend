@@ -7,19 +7,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>rank</title>
-  <link rel="stylesheet" href="/Oulim/asset/css/core/reset.css" />
-  <link rel="stylesheet" href="/Oulim/asset/css/core/variable.css" />
-  <link rel="stylesheet" href="/Oulim/asset/css/core/typography.css" />
-  <link rel="stylesheet" href="/Oulim/asset/css/core/layout.css" />
-  <link rel="stylesheet" href="/Oulim/asset/css/component/badge.css">
-  <link rel="stylesheet" href="/Oulim/asset/css/pages/kkomi/rank.css">
-
-  <script defer src="/Oulim/asset/js/pages/kkomi/rank.js"></script>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/reset.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/variable.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/typography.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/layout.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/badge.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/kkomi/rank.css">
+  <link rel="stylesheet"
+	href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css" />
+  <link rel="stylesheet"
+	href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
+  <script defer src="${pageContext.request.contextPath}/asset/js/pages/kkomi/rank.js"></script>
   
-    <jsp:include page="/app/include/header-login.jsp" />
+
 </head>
 
 <body>
+  <jsp:include page="/app/include/header.jsp" />
   <main class="l-main">
     <div class="l-container">
       <section class="p-rank">
@@ -38,7 +42,8 @@
       </section>
     </div>
   </main>
+  <jsp:include page="/app/include/footer.jsp" />
 </body>
-<jsp:include page="/app/include/footer.jsp" />
+
 
 </html>

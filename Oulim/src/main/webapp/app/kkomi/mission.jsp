@@ -7,22 +7,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>mission</title>
 <!-- 기본css -->
-  <link rel="stylesheet" href="/Oulim/asset/css/core/reset.css" />
-  <link rel="stylesheet" href="/Oulim/asset/css/core/variable.css" />
-  <link rel="stylesheet" href="/Oulim/asset/css/core/typography.css" />
-  <link rel="stylesheet" href="/Oulim/asset/css/core/layout.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/reset.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/variable.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/Typography.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/layout.css" />
 <!-- 컴포넌트 -->
-  <link rel="stylesheet" href="/Oulim/asset/css/component/button.css">
-  <link rel="stylesheet" href="/Oulim/asset/css/component/tab.css">
-  <link rel="stylesheet" href="/Oulim/asset/css/pages/kkomi/mission.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/button.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/tab.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/kkomi/mission.css" />
 <!-- 스크립트 -->
-  <script src="/Oulim/asset/js/pages/kkomi/mission.js"></script>
-  <script src="/Oulim/asset/js/components/tab.js"></script>
-  
-  <jsp:include page="/app/include/header-login.jsp" />
+  <script src="${pageContext.request.contextPath}/asset/js/pages/kkomi/mission.js"></script>
+  <script src="${pageContext.request.contextPath}/asset/js/components/tab.js"></script>
+  <link rel="stylesheet"
+	href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css" />
+  <link rel="stylesheet"
+	href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
+
    
 </head>
 <body>
+  <jsp:include page="/app/include/header.jsp" />
     <main class="l-main">
         <div class="l-container">
             <section class="mission-header">
@@ -83,8 +87,8 @@
                 <button class="c-button c-button--secondary c-button--lg" onclick="location.href='/training'">수련소로 돌아가기</button>
             </div>
         </div>
-    </main>    
+    </main>  
+    <jsp:include page="/app/include/footer.jsp" />  
 </body>
-<jsp:include page="/app/include/footer.jsp" />
 
 </html>

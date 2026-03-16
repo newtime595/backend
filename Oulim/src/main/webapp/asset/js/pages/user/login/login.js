@@ -48,9 +48,9 @@ const pwToggleIcon = document.getElementById("c-password-toggle-img");
 pwBtn.addEventListener("click", () => {
   if (userPw.type === "password") {
     userPw.type = "text";
-    pwToggleIcon.src = "/Oulim/asset/image/user/password-on.png";
+    pwToggleIcon.src = contextPath + "/asset/image/user/password-on.png";
   } else {
     userPw.type = "password";
-    pwToggleIcon.src = "/Oulim/asset/image/user/password-off.png";
+    pwToggleIcon.src = contextPath + "/asset/image/user/password-off.png";
   }
 });
