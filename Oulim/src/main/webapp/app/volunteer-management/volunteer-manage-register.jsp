@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="ko">
 
@@ -7,25 +9,28 @@
     <title>volunteer-manage-register</title>
 
     <!-- base css 필수 삽입-->
-    <link rel="stylesheet" href="/Oulim/asset/css/core/reset.css" />
-    <link rel="stylesheet" href="/Oulim/asset/css/core/variable.css" />
-    <link rel="stylesheet" href="/Oulim/asset/css/core/typography.css" />
-    <link rel="stylesheet" href="/Oulim/asset/css/core/layout.css">
-    <link rel="stylesheet" href="/Oulim/asset/css/pages/volunteer-manage/volunteer-manage-register.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/reset.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/variable.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/typography.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/layout.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/volunteer-manage/volunteer-manage-register.css" />
+    <link rel="stylesheet"
+	href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
 
     <!-- 컨포넌트 css 선택-->
-    <link rel="stylesheet" href="/Oulim/asset/css/component/input.css" />
-    <link rel="stylesheet" href="/Oulim/asset/css/component/button.css" />
-    <link rel="stylesheet" href="/Oulim/asset/css/component/card.css" />
-    <link rel="stylesheet" href="/Oulim/asset/css/component/select.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/input.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/button.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/card.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/select.css" />
 
-    <script defer src="/Oulim/asset/js/pages/main/include.js"></script>
-    <script defer src="/Oulim/asset/js/pages/volunteer-manage/volunteer-manage-register.js"></script>
+    <script defer src="${pageContext.request.contextPath}/asset/js/pages/main/include.js"></script>
+    <script defer src="${pageContext.request.contextPath}/asset/js/pages/volunteer-manage/volunteer-manage-register.js"></script>
 </head>
 
 <body>
-    <div id="header"></div>
-    <!-- <%@ include file="header.jsp" %> -->
+<jsp:include page="/app/include/header.jsp" />
 
     <main class="l-main">
         <div class="l-container">
@@ -158,8 +163,7 @@
         </div>
     </main>
 
-    <!-- <%@ include file="footer.jsp" %> -->
-    <div id="footer"></div>
+<jsp:include page="/app/include/footer.jsp" />
 </body>
 
 </html>

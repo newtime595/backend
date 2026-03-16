@@ -18,14 +18,12 @@
 	href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
-<script defer src="${pageContext.request.contextPath}/asset/js/pages/kkomi/KKomi-training-center.js"></script>
-</head>
-
 <script>
 	const contextPath = "${Pagecontext.request.ContextPath}";
 </script>
+<script defer src="${pageContext.request.contextPath}/asset/js/pages/kkomi/KKomi-training-center.js"></script>
+</head>
 <body>
-
 	<jsp:include page="/app/include/header.jsp" />
 	<main class="l-main">
 		<div class="l-container">

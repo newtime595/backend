@@ -18,83 +18,59 @@ public class UserMissionDTO {
 	private int missionID; 	// 미션ID
 	private int userNo; // 유저 번호
 	private int missionCount; // 진행 횟수
-	private boolean isRewarded; // 보상 수령 여부
+	private boolean missionIsReward; // 보상 수령 여부
 	private LocalDateTime lastUpdateDate; // 마지막 미션 변동 시기 
-	private String missionName; // 미션 이름
-	private String missionDetail; // 미션 설명
-	private int rewardId; // 보상 ID
 
-	public boolean isRewarded() {
-		return isRewarded;
-	}
-
-	public void setRewarded(boolean isRewarded) {
-		this.isRewarded = isRewarded;
-	}
-
-	public String getMissionName() {
-		return missionName;
-	}
-
-	public void setMissionName(String missionName) {
-		this.missionName = missionName;
-	}
-
-	public String getMissionDetail() {
-		return missionDetail;
-	}
-
-	public void setMissionDetail(String missionDetail) {
-		this.missionDetail = missionDetail;
-	}
-
-	public int getRewardId() {
-		return rewardId;
-	}
-
-	public void setRewardId(int rewardId) {
-		this.rewardId = rewardId;
-	}
-
+	
 	public int getMissionID() {
 		return missionID;
 	}
+
 
 	public void setMissionID(int missionID) {
 		this.missionID = missionID;
 	}
 
+
 	public int getUserNo() {
 		return userNo;
 	}
+
 
 	public void setUserNo(int userNo) {
 		this.userNo = userNo;
 	}
 
+
 	public int getMissionCount() {
 		return missionCount;
 	}
+
 
 	public void setMissionCount(int missionCount) {
 		this.missionCount = missionCount;
 	}
 
+
 	public boolean isMissionIsReward() {
-		return isRewarded;
+		return missionIsReward;
 	}
+
 
 	public void setMissionIsReward(boolean missionIsReward) {
-		this.isRewarded = missionIsReward;
+		this.missionIsReward = missionIsReward;
 	}
 
-	public LocalDateTime getMissionLastUpdateDate() {
+
+	public LocalDateTime getLastUpdateDate() {
 		return lastUpdateDate;
 	}
 
-	public void setMissionLastUpdateDate(LocalDateTime missionLastUpdateDate) {
-		this.lastUpdateDate = missionLastUpdateDate;
+
+	public void setLastUpdateDate(LocalDateTime lastUpdateDate) {
+		this.lastUpdateDate = lastUpdateDate;
 	}
+
 
 	@Override
 	public String toString() {

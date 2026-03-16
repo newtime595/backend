@@ -12,8 +12,6 @@ public class RankingDTO {
 	private int userNo;
 	private int rankPoint;
 	private int rankSeasonInfo;
-	private int ranking;
-	private int kkomiLev;
 
 	public int getUserNo() {
 		return userNo;
@@ -37,22 +35,6 @@ public class RankingDTO {
 
 	public void setRankSeasonInfo(int rankSeasonInfo) {
 		this.rankSeasonInfo = rankSeasonInfo;
-	}
-
-	public int getRanking() {
-		return ranking;
-	}
-
-	public void setRanking(int ranking) {
-		this.ranking = ranking;
-	}
-	
-	public int getKkomiLev() {
-		return kkomiLev;
-	}
-	
-	public void setKkomiLev(int kkomiLev) {
-		this.kkomiLev = kkomiLev;
 	}
 
 	@Override
