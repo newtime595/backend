@@ -36,4 +36,8 @@
   /* border: 1px solid black; */
 }
 
-
+.logoimgs{
+	width: 100px;
+	height: 100px;
+	cursor: pointer;
+}

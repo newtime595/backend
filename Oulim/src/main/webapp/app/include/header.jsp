@@ -7,7 +7,7 @@
 			<c:choose>
 				<c:when test="${empty sessionScope.memberNumber}">
 					<div class="l-header-right">
-						<img src="" alt="logo" />
+						<a herf=""><img src="${pageContext.request.contextPath}/asset/image/logo/logo.png" alt="logo" class="logoimgs" /></a>
 						<div>
 							<a href="">봉사활동</a>
 						</div>
@@ -36,7 +36,7 @@
 				</c:when>
 				<c:otherwise>
 					<div class="l-header-right">
-						<img src="" alt="logo" />
+						<a herf=""><img src="${pageContext.request.contextPath}/asset/image/logo/logo.png" alt="logo" class="logoimgs" /></a>
 						<div>
 							<a href="">봉사활동</a>
 						</div>
