@@ -29,6 +29,15 @@
 		<typeAlias type="com.oulim.app.kkomi.dto.RankingDTO" alias="RankingDTO"></typeAlias>
 		<typeAlias type="com.oulim.app.kkomi.dto.RewardStorageDTO" alias="RewardStorageDTO"></typeAlias>
 		<typeAlias type="com.oulim.app.kkomi.dto.UserMissionDTO" alias="UserMissionDTO"></typeAlias>
+		<typeAlias type="com.oulim.app.kkomi.dto.RankingJoinDTO" alias="RankingJoinDTO"></typeAlias>
+		<typeAlias type="com.oulim.app.kkomi.dto.KkomiJoinDTO" alias="KkomiJoinDTO"></typeAlias>
+		
+		<!-- community DTO Alias -->
+		<typeAlias type="com.oulim.app.community.dto.CommunityCommentDTO" alias="CommunityCommentDTO"/>
+		<typeAlias type="com.oulim.app.community.dto.CommunityPostDTO" alias="CommunityPostDTO"/>
+		<typeAlias type="com.oulim.app.community.dto.CommunityPostJoinDTO" alias="CommunityPostJoinDTO"/>
+		<typeAlias type="com.oulim.app.community.dto.PostImageDTO" alias="PostImageDTO"/>
+		<typeAlias type="com.oulim.app.community.dto.PostLikeDTO" alias="PostLikeDTO"/>
 		
 		<!-- Volunteer DTO -->
 		<typeAlias type="com.oulim.app.volunteer.dto.VolunActivityDTO" alias="VolunActivityDTO"></typeAlias>

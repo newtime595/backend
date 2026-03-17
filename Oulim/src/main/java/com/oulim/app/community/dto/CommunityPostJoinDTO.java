@@ -1,6 +1,6 @@
 package com.oulim.app.community.dto;
 
-public class CommunityPostJoinLikeDTO {
+public class CommunityPostJoinDTO {
 	private int postNo;
 	private int userNo;
 	private String postTitle;

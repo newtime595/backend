@@ -48,7 +48,7 @@
 	</insert>
 	
 	<!-- 전체 게시글 조회 -->
-	<select id="selectPostAll" resultType="CommunityPostJoinLikeDTO">
+	<select id="selectPostAll" resultType="CommunityPostJoinDTO">
 		<![CDATA[
 			SELECT * FROM (
 			SELECT ROWNUM AS RNUM, subquery.*
@@ -63,12 +63,14 @@
 	</select>
 	
 	<!-- 게시글 상세 -->
-	<select id="selectPost" parameterType="int" resultType="CommunityPostJoinLikeDTO">
+	<select id="selectPost" parameterType="int" resultType="CommunityPostJoinDTO">
 	<![CDATA[
 		SELECT tcp.post_no,tcp.user_no, tcp.post_title, tcp.user_nickname, tcp.post_date, tcp.post_content,
 		tcp.post_view_count, 
 		(select count(post_like_no) from tbl_post_like tpl where tpl.post_no = tcp.post_no) as like_count
+		tpi.Post_Img_System_Name, tpi.Post_Img_Origin_Name
 		FROM tbl_community_post tcp
+		LEFT JOIN tbl_post_image tpi on tpi.post_no = tcp.post_no
 		where tcp.post_no = #{postNo}
 	]]>
 	</select>
@@ -93,4 +95,23 @@
 		VALUES (SEQ_TBL_POST_LIKE.nextval, #{postNo}, #{userNo})
 	</insert>
 
+
+	<!-- 게시글 이미지 추가 -->
+	<insert id="insertImage" parameterType="FileDTO">
+		Insert INTO tbl_Post_Image (Image_No,Post_No,Post_Img_System_Name, Post_Img_Origin_Name)
+		VALUES(SEQ_TBL_POST_IMAGE.nextval, #{postNo}, #{postImgSystemName}, PostImgOriginName)
+	</insert>
+	
+	<!-- 파일 조회 -->
+	<select id="selectImage" parameterType="int" resultType="PostImageDTO">
+		SELECT post_img_system_name, post_img_origin_name, post_no
+		FROM tbl_post_image
+		where post_no = #{postNo}
+	</select> 
+	
+	<!-- 파일 삭제 -->
+	<delete id="deleteImage" parameterType="int">
+		DELETE FROM tbl_post_image
+	 	WHERE post_no = #{postNo}
+	</delete>
 </mapper>
