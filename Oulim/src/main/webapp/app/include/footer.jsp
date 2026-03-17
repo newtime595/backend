@@ -5,7 +5,7 @@
 		<div class="l-footer-layout">
 			<div class="l-footer-main">
 				<div>
-					<img src="" alt="logo" />
+					<a herf=""><img src="${pageContext.request.contextPath}/asset/image/logo/logo.png" alt="logo" class="logoimgs" /></a>
 				</div>
 				<div>
 					<h6 class="footer">copyright ⓒ 2015 KOREA INFORMATION
