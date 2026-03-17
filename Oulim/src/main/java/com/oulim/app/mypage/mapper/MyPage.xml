@@ -87,7 +87,7 @@ user_phone_num = #{userPhoneNum},
 user_address = #{userAddress},
 user_address_detail = #{userAddressDetail},
 user_postnum = #{userPostnum},
-WHERE user_no = #{userNo}
+WHERE user_no = #{userNo} AND user_type = 1
 </update>
 
 
@@ -185,10 +185,12 @@ ORDER BY LOG_NO DESC
 
 <select id="mypost" parameterType="int">
 
+<![CDATA[
 SELECT tcp.postNo, tcp.postTitle, tcp.postDate, tpl.postLikeNo 
 FROM tbl_community_post tcp 
 JOIN tbl_post_like tpl 
 ON tcp.userno = #{userNo}
+]]>
 
 </select>
 
@@ -199,7 +201,8 @@ ON tcp.userno = #{userNo}
 <update id="quit">
 
 UPDATE tbl_user SET
-WHERE user_status = 1 AND #{userNo}
+user_status = 0;
+WHERE user_no = #{userNo}
 
 
 </update>
