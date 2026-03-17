@@ -1,0 +1,97 @@
+<select id="selectVolunteerList"
+        parameterType="map"
+        resultType="com.oulim.app.volunteer.dto.VolunActivityDTO">
+
+    SELECT
+        Volun_Act_No AS volunActNo, <!-- 봉사번호 -->
+        Volun_Act_Title AS volunActTitle, <!-- 봉사제목 -->
+        Volun_Act_Recru_Begin AS volunActRecruBegin, <!-- 모집시작 -->
+        Volun_Act_Recru_End AS volunActRecruEnd, <!-- 모집종료 -->
+        Volun_Act_Proc_Begin AS volunActProcBegin, <!-- 봉사시작 -->
+        Volun_Act_Proc_End AS volunActProcEnd, <!-- 봉사 종료일 -->
+        Volun_Act_Point AS volunActPoint,  <!-- 봉사포인트 -->
+        Volun_Act_Act_Type AS volunActActType,  <!-- 활동분야 -->
+        Volun_Act_Age_Group AS volunActAgeGroup, <!-- 참여가능연령 -->
+        Volun_Act_Address AS volunActAddress <!-- 봉사주소 -->
+    FROM TBL_VOLUN_ACTIVITY
+
+    <where>
+
+        <!--
+            기본 조건
+            현재 날짜가 모집 종료일보다 작은 경우만 조회
+            즉 모집이 끝나지 않은 봉사활동만 목록에 표시
+        -->
+        <![CDATA[
+        Volun_Act_Recru_End >= SYSDATE
+        ]]>
+
+        <!--
+            활동 분야 검색
+            0은 전체이므로 조건을 적용하지 않음
+            1~5 값이 들어오면 해당 봉사유형만 조회
+        -->
+        <if test="actType != null and actType != 0">
+            AND Volun_Act_Act_Type = #{actType}
+        </if>
+
+
+        <!--
+            참여 가능 연령 검색
+            0은 전체이므로 조건을 적용하지 않음
+        -->
+        <if test="ageGroup != null and ageGroup != 0">
+            AND Volun_Act_Age_Group = #{ageGroup}
+        </if>
+
+
+        <!--
+            모집 상태 검색
+            OPEN : 모집중
+            CLOSE : 모집마감
+        -->
+        <if test="recruitStatus != null and recruitStatus == 'OPEN'">
+            AND Volun_Act_Recru_End >= SYSDATE
+        </if>
+
+        <if test="recruitStatus != null and recruitStatus == 'CLOSE'">
+			<![CDATA[
+			AND Volun_Act_Recru_End < SYSDATE
+			]]>
+        </if>
+
+
+        <!--
+            봉사 기간 검색
+            사용자가 선택한 날짜가
+            봉사 시작일 ~ 봉사 종료일 사이에 있는 활동 조회
+        -->
+        <if test="volunDate != null and volunDate != ''">
+        	<![CDATA[
+            AND Volun_Act_Proc_Begin <= #{volunDate}
+            AND Volun_Act_Proc_End >= #{volunDate}
+            ]]>
+        </if>
+
+
+        <!--
+            키워드 검색
+            제목 또는 포인트 기준으로 검색 가능
+        -->
+
+        <!-- 제목 검색 -->
+        <if test="searchType == 'title' and keyword != null and keyword != ''">
+            AND Volun_Act_Title LIKE '%' || #{keyword} || '%'
+        </if>
+
+        <!-- 포인트 검색 -->
+        <if test="searchType == 'point' and keyword != null and keyword != ''">
+            AND Volun_Act_Point = #{keyword}
+        </if>
+
+    </where>
+
+    <!-- 최신 등록 순 정렬 -->
+    ORDER BY Volun_Act_No DESC
+
+</select>
