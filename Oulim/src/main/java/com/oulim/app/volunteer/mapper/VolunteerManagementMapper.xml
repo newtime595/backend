@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="volunteerManagement">
+	<!-- 봉사관리조회 -->
+	<select id="volManageSelect" parameterType="VolunActivityDTO"
+		resultType="VolunActivityDTO">
+		<![CDATA[
+			SELECT 
+	        VOLUN_ACT_NO,
+	        VOLUN_ACT_TITLE,
+	        VOLUN_ACT_RECRU_BEGIN,
+	        VOLUN_ACT_RECRU_END,
+	        CASE
+	            WHEN SYSDATE < VOLUN_ACT_RECRU_BEGIN THEN '모집예정'
+	            WHEN SYSDATE < VOLUN_ACT_RECRU_END + 1 THEN '모집중'
+	            ELSE '모집완료'
+	        END RECRU_STATUS
+	    FROM TBL_VOLUN_ACTIVITY
+	    where volun_act_organ_no = #{volunActOrganNo}
+	    ORDER BY VOLUN_ACT_RECRU_END DESC	
+    ]]>
+	</select>
+
+	<!-- 봉사관리총갯수 -->
+	<select id="volManageSelectAll" parameterType="int"
+		resultType="int">
+		SELECT count(Volun_Act_No) FROM TBL_VOLUN_ACTIVITY WHERE
+		volun_act_organ_no=#{volunActOrganNo}
+	</select>
+
+
+	<!-- 봉사관리조회 -->
+	<insert id=" " parameterType="UserDTO">
+
+	</insert>
+	<!-- 로그인 쿼리 -->
+	<select id="login" parameterType="UserDTO" resultType="UserDTO">
+		SELECT
+		user_no,
+		user_nickname,
+		user_type
+		FROM tbl_user
+		WHERE user_id = #{userId}
+		AND user_pw = #{userPw}
+		AND user_status = 1
+	</select>
+
+</mapper>

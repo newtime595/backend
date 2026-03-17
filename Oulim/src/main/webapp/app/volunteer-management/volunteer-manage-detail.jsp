@@ -26,8 +26,8 @@
 	href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
-<script defer
-	src="${pageContext.request.contextPath}/asset/js/pages/volunteer-manage/volunteer-manage-detail.js"></script>
+<%-- <script defer
+	src="${pageContext.request.contextPath}/asset/js/pages/volunteer-manage/volunteer-manage-detail.js"></script>  --%>
 <script defer src="${pageContext.request.contextPath}/asset/js/pages/main/include.js"></script>
 </head>
 

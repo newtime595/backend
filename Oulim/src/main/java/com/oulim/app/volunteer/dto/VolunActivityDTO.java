@@ -37,6 +37,13 @@ public class VolunActivityDTO {
 	private String volunActPostnum;
 	private int volunActRecruMaxCount;
 	private String volunActDetail;
+	private String recurStatus;
+	public String getRecurStatus() {
+		return recurStatus;
+	}
+	public void setRecurStatus(String recurStatus) {
+		this.recurStatus = recurStatus;
+	}
 	public int getVolunActNo() {
 		return volunActNo;
 	}
@@ -148,7 +155,8 @@ public class VolunActivityDTO {
 				+ volunActEndTime + ", volunActActType=" + volunActActType + ", volunActAgeGroup=" + volunActAgeGroup
 				+ ", volunActOrganNo=" + volunActOrganNo + ", volunActAddress=" + volunActAddress
 				+ ", volunActAddressDetail=" + volunActAddressDetail + ", volunActPostnum=" + volunActPostnum
-				+ ", volunActRecruMaxCount=" + volunActRecruMaxCount + ", volunActDetail=" + volunActDetail + "]";
+				+ ", volunActRecruMaxCount=" + volunActRecruMaxCount + ", volunActDetail=" + volunActDetail
+				+ ", recurStatus=" + recurStatus + "]";
 	}
 	
 	
