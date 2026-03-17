@@ -111,7 +111,7 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>VolunManage</servlet-name>
-		<servlet-class>com.oulim.app.volunteer.manangement.controller.VolunManageFrontController</servlet-class>
+		<servlet-class>com.oulim.app.volunteer.management.controller.VolunManageFrontController</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>VolunManage</servlet-name>
