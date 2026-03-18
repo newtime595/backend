@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="VolunteerManagement">
+	<!--포인트 지급-->
+	<update id="updateCurrency" parameterType="PointJoinDTO">
+		MERGE INTO TBL_CURRENCY c
+		USING (
+			SELECT
+				#{currencyId} AS Currency_ID,
+				#{userNo} AS User_No,
+				#{changeAmount} AS Change_Amount
+			FROM DUAL
+		) src
+		ON (
+			c.Currency_ID = src.Currency_ID
+			AND c.User_No = src.User_No
+		)
+		WHEN MATCHED THEN
+			UPDATE SET c.Total_Amount = c.Total_Amount + src.Change_Amount
+		WHEN NOT MATCHED THEN
+			INSERT (Currency_ID, User_No, Total_Amount)
+			VALUES (src.Currency_ID, src.User_No, src.Change_Amount)
+	</update>
+	
 	<!--봉사 삭제  -->
 	<delete id="volManageDelete" parameterType="int">
 		DELETE FROM TBL_VOLUN_ACTIVITY

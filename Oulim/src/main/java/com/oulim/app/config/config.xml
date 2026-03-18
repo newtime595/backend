@@ -41,6 +41,7 @@
 		<!-- Volunteer DTO -->
 		<typeAlias type="com.oulim.app.volunteer.dto.VolunActivityDTO" alias="VolunActivityDTO"></typeAlias>
 		<typeAlias type="com.oulim.app.volunteer.dto.VolunApplyDTO" alias="VolunApplyDTO"></typeAlias>
+		<typeAlias type="com.oulim.app.volunteer.dto.PointJoinDTO" alias="PointJoinDTO"></typeAlias>
 		
 		
 		
