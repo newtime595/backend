@@ -1,0 +1,48 @@
+package com.oulim.app.mypage.controller;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.oulim.app.common.controller.Execute;
+import com.oulim.app.common.controller.Result;
+import com.oulim.app.mypage.dao.MyPageJoinDAO;
+import com.oulim.app.mypage.dto.MyPageJoinDTO;
+
+public class MyPageUserEditOkController implements Execute {
+
+	@Override
+	public Result execute(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Result result = new Result();
+		
+		MyPageJoinDTO mypageDTO = new MyPageJoinDTO();
+		MyPageJoinDAO mypageDAO = new MyPageJoinDAO();
+		HttpSession session = request.getSession();
+		String path = null;
+
+		Integer userNo = (Integer) session.getAttribute("userNo");
+		
+		mypageDTO.setUserNickname(request.getParameter("userNickName"));
+		mypageDTO.setUserEmail(request.getParameter("userNickName"));
+		mypageDTO.setUserPhoneNum(request.getParameter("userPhoneNum"));
+		mypageDTO.setUserPw(request.getParameter("userNickName"));
+		mypageDTO.setUserAddress(request.getParameter("userNickName"));
+		mypageDTO.setUserAddressDetail(request.getParameter("userNickName"));
+		mypageDTO.setUserPostnum(request.getParameter("userPostnum"));
+		
+		mypageDAO.userEdit(mypageDTO);
+		
+		path = "/app/mypage/profile/profile.jsp";
+		
+		result.setPath(path);
+		result.setRedirect(true);
+		
+		return result;
+	}
+
+}

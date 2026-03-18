@@ -2,11 +2,12 @@ package com.oulim.app.mypage.dto;
 
 
 
-public class MypageJoinDTO {
+public class MyPageJoinDTO {
 	
 	private int volunActNo;
 	private int volunActEndTime;
 	private int volunActBeginTime;
+	private int totalVolunTime;
 	private int rankPoint;
 	private int totalAmount;
 	private String volunActTitle;
@@ -20,25 +21,19 @@ public class MypageJoinDTO {
 	private String userNickname;
 	private String userPw;
 	private String userEmail;
+	private String userPhoneNum;
+	private String organName;
+	private int organNo;
+	private int organCertNum;
 	private String postTitle;
 	private String postDate;
-	private String postLikeNo;
+	private int postLikeNo;
+	private int postNo;
+	private String logReason;
+	private String logDate;
+	private int changeAmount;
 	
 	
-	
-	
-	
-	
-	@Override
-	public String toString() {
-		return "MypageJoinDTO [volunActNo=" + volunActNo + ", volunActEndTime=" + volunActEndTime
-				+ ", volunActBeginTime=" + volunActBeginTime + ", rankPoint=" + rankPoint + ", totalAmount="
-				+ totalAmount + ", volunActTitle=" + volunActTitle + ", volunActProcBegin=" + volunActProcBegin
-				+ ", volunActProcEnd=" + volunActProcEnd + ", userStatus=" + userStatus + ", userNo=" + userNo
-				+ ", userAddress=" + userAddress + ", userAddressDetail=" + userAddressDetail + ", userPostnum="
-				+ userPostnum + ", userNickname=" + userNickname + ", userPw=" + userPw + ", userEmail=" + userEmail
-				+ ", postTitle=" + postTitle + ", postDate=" + postDate + ", postLikeNo=" + postLikeNo + "]";
-	}
 	public int getVolunActNo() {
 		return volunActNo;
 	}
@@ -56,6 +51,12 @@ public class MypageJoinDTO {
 	}
 	public void setVolunActBeginTime(int volunActBeginTime) {
 		this.volunActBeginTime = volunActBeginTime;
+	}
+	public int getTotalVolunTime() {
+		return totalVolunTime;
+	}
+	public void setTotalVolunTime(int totalVolunTime) {
+		this.totalVolunTime = totalVolunTime;
 	}
 	public int getRankPoint() {
 		return rankPoint;
@@ -135,6 +136,24 @@ public class MypageJoinDTO {
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
+	public String getOrganName() {
+		return organName;
+	}
+	public void setOrganName(String organName) {
+		this.organName = organName;
+	}
+	public int getOrganNo() {
+		return organNo;
+	}
+	public void setOrganNo(int organNo) {
+		this.organNo = organNo;
+	}
+	public int getOrganCertNum() {
+		return organCertNum;
+	}
+	public void setOrganCertNum(int organCertNum) {
+		this.organCertNum = organCertNum;
+	}
 	public String getPostTitle() {
 		return postTitle;
 	}
@@ -147,13 +166,59 @@ public class MypageJoinDTO {
 	public void setPostDate(String postDate) {
 		this.postDate = postDate;
 	}
-	public String getPostLikeNo() {
+	public int getPostLikeNo() {
 		return postLikeNo;
 	}
-	public void setPostLikeNo(String postLikeNo) {
+	public void setPostLikeNo(int postLikeNo) {
 		this.postLikeNo = postLikeNo;
 	}
+	public int getPostNo() {
+		return postNo;
+	}
+	public void setPostNo(int postNo) {
+		this.postNo = postNo;
+	}
+	public String getUserPhoneNum() {
+		return userPhoneNum;
+	}
+	public void setUserPhoneNum(String userPhoneNum) {
+		this.userPhoneNum = userPhoneNum;
+	}
+	public String getLogReason() {
+		return logReason;
+	}
+	public void setLogReason(String logReason) {
+		this.logReason = logReason;
+	}
+	public String getLogDate() {
+		return logDate;
+	}
+	public void setLogDate(String logDate) {
+		this.logDate = logDate;
+	}
+	public int getChangeAmount() {
+		return changeAmount;
+	}
+	public void setChangeAmount(int changeAmount) {
+		this.changeAmount = changeAmount;
+	}
+	@Override
+	public String toString() {
+		return "MyPageJoinDTO [volunActNo=" + volunActNo + ", volunActEndTime=" + volunActEndTime
+				+ ", volunActBeginTime=" + volunActBeginTime + ", totalVolunTime=" + totalVolunTime + ", rankPoint="
+				+ rankPoint + ", totalAmount=" + totalAmount + ", volunActTitle=" + volunActTitle
+				+ ", volunActProcBegin=" + volunActProcBegin + ", volunActProcEnd=" + volunActProcEnd + ", userStatus="
+				+ userStatus + ", userNo=" + userNo + ", userAddress=" + userAddress + ", userAddressDetail="
+				+ userAddressDetail + ", userPostnum=" + userPostnum + ", userNickname=" + userNickname + ", userPw="
+				+ userPw + ", userEmail=" + userEmail + ", userPhoneNum=" + userPhoneNum + ", organName=" + organName
+				+ ", organNo=" + organNo + ", organCertNum=" + organCertNum + ", postTitle=" + postTitle + ", postDate="
+				+ postDate + ", postLikeNo=" + postLikeNo + ", postNo=" + postNo + ", logReason=" + logReason
+				+ ", logDate=" + logDate + ", changeAmount=" + changeAmount + "]";
+	}
+
 	
+	
+
 	
 	
 }
