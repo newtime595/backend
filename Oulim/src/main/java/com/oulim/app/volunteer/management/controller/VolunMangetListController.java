@@ -21,9 +21,9 @@ public class VolunMangetListController implements Execute {
 		VolunteerMangementDAO volunteerManagementDAO = new VolunteerMangementDAO();
 		VolunActivityDTO volunActivityDTO = new VolunActivityDTO();
 		Result result = new Result();
-			
-		request.getSession().setAttribute("organNo", 1); // 테스트용
-		Integer organNo = (Integer) request.getSession().getAttribute("organNo");		//세션 정보값
+
+//		Integer organNo = (Integer) request.getSession().getAttribute("organNo");		//세션 정보값
+		Integer organNo = 1; // 테스트용
 		String actType = request.getParameter("actType");
 		String recruitStatus = request.getParameter("recruitStatus");
 		String keyword = request.getParameter("keyword");

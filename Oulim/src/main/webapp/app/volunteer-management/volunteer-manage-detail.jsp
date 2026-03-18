@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>		
 <!doctype html>
 <html lang="ko">
 <head>
@@ -33,85 +34,168 @@
 
 <body>
 	<jsp:include page="/app/include/header.jsp" />
-
+	<input type="hidden" name="volunActNo" value="${volunDetail.volunActNo}"> 
+	<input type="hidden" name="volunActAgeGroup" value="${volunDetail.volunActAgeGroup}"> 
 	<main class="l-main">
 		<div class="l-container">
 			<div class="p-volunteer-manage-detail_header">
 				<h1 class="p-volunteer-manage-detail_title">봉사 상세</h1>
+				<div class="c-button-add">
+            		<button class="edit-btn c-button c-button--primary c-button--md">출석 처리</button>
+          		</div>
 				<div class="c-button-group">
-					<button class="edit-btn c-button c-button--primary c-button--md">수정</button>
-					<button
-						class="delete-btn c-button c-button--secondary c-button--md">삭제</button>
+					<button class="edit-btn c-button c-button--primary c-button--md" type="button"
+					onclick="location.href='${pageContext.request.contextPath}/volunteer-manage/update.vm?volunActNo=${volunDetail.volunActNo}'"
+					>수정</button>
+					<form action="${pageContext.request.contextPath}/volunteer-manage/delete.vm" method="post">
+						<input type="hidden" name="volunActNo" value="${volunDetail.volunActNo}">
+						<button type="submit" class="delete-btn c-button c-button--secondary c-button--md"
+							onclick="return confirm('정말 삭제하시겠습니까?')">
+							삭제
+						</button>
+					</form>
 				</div>
 			</div>
 			<div class="c-detail-card" id="volunteerDetailCard">
 				<div class="c-detail-card__header">
-					<span class="c-badge c-badge--primary" id="volunteerStatus"></span>
-					<span class="c-badge c-badge--orange" id="volunteerTarget"></span>
+					<span class="c-badge c-badge--primary" id="volunteerStatus">
+						${volunDetail.recruStatus}
+					</span>
+					<span class="c-badge c-badge--orange" id="volunteerTarget">
+						<c:choose>
+							<c:when test="${volunDetail.volunActAgeGroup == 1}">청소년</c:when>
+							<c:when test="${volunDetail.volunActAgeGroup == 2}">청년</c:when>
+							<c:when test="${volunDetail.volunActAgeGroup == 3}">직장인</c:when>
+							<c:otherwise>${volunDetail.volunActAgeGroup}</c:otherwise>
+						</c:choose>
+					</span>
 				</div>
 
-				<h2 class="c-detail-card__title" id="volunteerTitle"></h2>
+				<h2 class="c-detail-card__title" id="volunteerTitle">
+					${volunDetail.volunActTitle}
+				</h2>
 
 				<div class="c-detail-card__info">
 					<div class="c-detail-card__row">
-						<span class="c-detail-card__label">봉사장소</span> <span
-							class="c-detail-card__value" id="volunteerLocation"></span>
+						<span class="c-detail-card__label">봉사장소</span>
+						<span class="c-detail-card__value" id="volunteerLocation">
+							${volunDetail.volunActAddress}
+						</span>
 					</div>
 					<div class="c-detail-card__row">
-						<span class="c-detail-card__label">봉사기간</span> <span
-							class="c-detail-card__value" id="volunteerPeriod"></span>
+						<span class="c-detail-card__label">봉사기간</span>
+						<span class="c-detail-card__value" id="volunteerPeriod">
+							${volunDetail.volunActProcBegin} ~ ${volunDetail.volunActProcEnd}
+						</span>
 					</div>
 					<div class="c-detail-card__row">
-						<span class="c-detail-card__label">모집기간</span> <span
-							class="c-detail-card__value" id="recruitPeriod"></span>
+						<span class="c-detail-card__label">모집기간</span>
+						<span class="c-detail-card__value" id="recruitPeriod">
+							${volunDetail.volunActRecruBegin} ~ ${volunDetail.volunActRecruEnd}
+						</span>
 					</div>
 					<div class="c-detail-card__row">
-						<span class="c-detail-card__label">봉사시간</span> <span
-							class="c-detail-card__value" id="volunteerTime"></span>
+						<span class="c-detail-card__label">봉사시간</span>
+						<span class="c-detail-card__value" id="volunteerTime">
+							${volunDetail.volunActEndTime - volunDetail.volunActBeginTime}시간
+						</span>
 					</div>
 					<div class="c-detail-card__row">
-						<span class="c-detail-card__label">모집인원</span> <span
-							class="c-detail-card__value" id="volunteerCapacity"></span>
+						<span class="c-detail-card__label">모집인원</span>
+						<span class="c-detail-card__value" id="volunteerCapacity">
+							${volunDetail.volunActRecruMaxCount}명
+						</span>
 					</div>
 					<div class="c-detail-card__row">
-						<span class="c-detail-card__label">포인트</span> <span
-							class="c-detail-card__value" id="volunteerPoint"></span>
+						<span class="c-detail-card__label">포인트</span>
+						<span class="c-detail-card__value" id="volunteerPoint">
+							${volunDetail.volunActPoint}p
+						</span>
 					</div>
 					<div class="c-detail-card__row">
-						<span class="c-detail-card__label">봉사자연령</span> <span
-							class="c-detail-card__value" id="volunteerAge"></span>
+						<span class="c-detail-card__label">봉사자연령</span>
+						<span class="c-detail-card__value" id="volunteerAge">
+							<c:choose>
+								<c:when test="${volunDetail.volunActAgeGroup == 1}">청소년</c:when>
+								<c:when test="${volunDetail.volunActAgeGroup == 2}">청년</c:when>
+								<c:when test="${volunDetail.volunActAgeGroup == 3}">직장인</c:when>
+								<c:otherwise>${volunDetail.volunActAgeGroup}</c:otherwise>
+							</c:choose>
+						</span>
 					</div>
 				</div>
 			</div>
-			<div class="c-list c-list--6col">
-
-				<!-- header -->
-				<div class="c-list__header">
-					<span class="c-list__col">추천</span> <span class="c-list__col">봉사자</span>
-					<span class="c-list__col">연령</span> <span class="c-list__col">봉사일자</span>
-					<span class="c-list__col">상태</span> <span class="c-list__col">출결승인</span>
+			
+			<!-- 글내용 영역 추가 -->
+			<div class="c-detail-card">
+				<div class="c-detail-card__info">
+					<div class="c-detail-card__row">
+						<span class="c-detail-card__label">추가내용 작성</span>
+					</div>
+					<div class="c-detail-card__row">
+						<div class="volunActDetailPlus">
+							${volunDetail.volunActDetail}
+						</div>
+					</div>
 				</div>
-				<!-- body -->
-				<div class="c-list__body" id="participantListBody"></div>
 			</div>
+		
+		<div class="c-list c-list--5col">
+			<div class="c-list__header">
+				<span class="c-list__col">선택</span>
+				<span class="c-list__col">봉사자</span>
+				<span class="c-list__col">나이</span>
+				<span class="c-list__col">봉사날짜</span>
+				<span class="c-list__col">상태</span>
+			</div>
+		
+			<div class="c-list__body" id="participantListBody">
+				<c:choose>
+					<c:when test="${not empty applyList}">
+						<c:forEach var="apply" items="${applyList}">
+							<div class="c-list__row">
+								<span class="c-list__col">
+									<input type="checkbox" name="attendanceUser"
+										value="${apply.userNo}"
+										data-user-no="${apply.userNo}"
+										data-volun-act-no="${apply.volunActNo}">
+								</span>
+								<span class="c-list__col">${apply.userName}</span>
+								<span class="c-list__col">${apply.userBirth}</span>
+								<span class="c-list__col">${apply.volunActApplyDate}</span>
+								<span class="c-list__col">-</span>
+							</div>
+						</c:forEach>
+					</c:when>
+		
+					<c:otherwise>
+						<div class="c-list__row">
+							<span class="c-list__col">-</span>
+							<span class="c-list__col">지원자가 없습니다.</span>
+							<span class="c-list__col">-</span>
+							<span class="c-list__col">-</span>
+							<span class="c-list__col">-</span>
+						</div>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</div>
 
 			<!-- 페이지네이션  c-pagination-->
 			<nav class="c-pagination">
-				<a class="c-pagination__link is-disabled">‹</a> <a
+				<!-- <a class="c-pagination__link is-disabled">‹</a> <a
 					class="c-pagination__link is-active">1</a> <a
 					class="c-pagination__link">2</a> <a class="c-pagination__link">3</a>
 				<a class="c-pagination__link">4</a> <a class="c-pagination__link">5</a>
 				<a class="c-pagination__link">6</a> <a class="c-pagination__link">7</a>
 				<a class="c-pagination__link">8</a> <a class="c-pagination__link">9</a>
-				<a class="c-pagination__link">10</a> <a class="c-pagination__link">›</a>
+				<a class="c-pagination__link">10</a> <a class="c-pagination__link">›</a> -->
 			</nav>
 
 			<div class="c-button--volunteer-manage-detail">
-				<a
-					href="/Oulim/front/html/volunteer-management/volunteer-manage-list.html">
-					<button class="c-button c-button--primary c-button--md">
+					<button class="c-button c-button--primary c-button--md"
+					onclick="location.href='${pageContext.request.contextPath}/volunteer-manage/list.vm'">
 						봉사 리스트로 돌아가기</button>
-				</a>
 			</div>
 		</div>
 	</main>

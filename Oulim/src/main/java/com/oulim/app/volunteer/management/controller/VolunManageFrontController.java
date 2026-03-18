@@ -44,11 +44,57 @@ public class VolunManageFrontController extends HttpServlet {
 		
 		switch(target) {
 		case "/volunteer-manage/list.vm":
-			System.out.println("봉사관리 리스트 요청");
+			System.out.println("봉사관리 리스트 페이지 요청");
 			result = new VolunMangetListController().execute(request, response);
 			System.out.println("봉사관리 리스트 완료");
 			break;
+			
+		case "/volunteer-manage/register.vm":
+			System.out.println("봉사관리 등록 페이지 요청");
+			result = new VolunManageInsertController().execute(request, response);
+			System.out.println("봉사관리 등록 페이지 완료");
+			break;
 		
+		case "/volunteer-manage/registerOk.vm":
+			System.out.println("봉사관리 등록 요청");
+			result = new VolunManageInsertOkController().execute(request, response);
+			System.out.println("봉사관리 등록 완료");
+			break;
+			
+		case "/volunteer-manage/detail.vm":
+			System.out.println("봉사관리 상세 페이지 요청");
+			result = new VolunManageDetailController().execute(request, response);
+			System.out.println("봉사관리 상세 페이지 완료");
+			break;
+			
+		case "/volunteer-manage/update.vm":
+			System.out.println("봉사관리 수정 페이지 요청");
+			result = new VolunManageUpdateController().execute(request, response);
+			System.out.println("봉사관리 수정 페이지 완료");
+			break;
+
+		case "/volunteer-manage/updateOk.vm":
+			System.out.println("봉사관리 수정 요청");
+			result = new VolunManageUpdateOkController().execute(request, response);
+			System.out.println("봉사관리 수정 완료");
+			break;
+			
+		case "/volunteer-manage/delete.vm":
+			System.out.println("봉사관리 삭제 요청");
+			result = new VolunManageDeleteController().execute(request, response);
+			System.out.println("봉사관리 삭제 완료");
+			break;
+		}
+		
+		
+		
+		
+		if(result != null && result.getPath() != null) {
+			if(result.isRedirect()) {
+				response.sendRedirect(result.getPath());
+			} else {
+				request.getRequestDispatcher(result.getPath()).forward(request, response);
+			}
 		}
 	}
 

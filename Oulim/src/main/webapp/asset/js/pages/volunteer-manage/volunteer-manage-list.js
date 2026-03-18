@@ -1,4 +1,4 @@
-const volunteerData = [
+/*const volunteerData = [
   { id: 1, title: "제설 봉사", startDate: "26.02.03", endDate: "26.02.05", status: "모집중" },
   { id: 2, title: "환경 정화", startDate: "26.02.04", endDate: "26.02.04", status: "모집중" },
   { id: 3, title: "급식 봉사", startDate: "26.02.05", endDate: "26.02.06", status: "완료" },
@@ -91,4 +91,4 @@ function renderPagination() {
 }
 
 // 첫 페이지네이션 초기 실행
-showPage(1);
+showPage(1);*/

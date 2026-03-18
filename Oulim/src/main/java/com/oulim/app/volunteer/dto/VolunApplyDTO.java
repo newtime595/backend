@@ -14,6 +14,8 @@ public class VolunApplyDTO {
 	private String volunActApplyDate;
 	private int volunActApplyStatus;
 	private int volunActAttendance;
+	private String userName;	//이름
+	private String userBirth;	//생년월일
 	
 	public int getVolunActNo() {
 		return volunActNo;
@@ -45,12 +47,25 @@ public class VolunApplyDTO {
 	public void setVolunActAttendance(int volunActAttendance) {
 		this.volunActAttendance = volunActAttendance;
 	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getUserBirth() {
+		return userBirth;
+	}
+	public void setUserBirth(String userBirth) {
+		this.userBirth = userBirth;
+	}
 	@Override
 	public String toString() {
 		return "VolunApplyDTO [volunActNo=" + volunActNo + ", userNo=" + userNo + ", volunActApplyDate="
 				+ volunActApplyDate + ", volunActApplyStatus=" + volunActApplyStatus + ", volunActAttendance="
-				+ volunActAttendance + "]";
+				+ volunActAttendance + ", userName=" + userName + ", userBirth=" + userBirth + "]";
 	}
+	
 	
 	
 }

@@ -60,3 +60,20 @@ button:disabled{
   opacity:0.5;
   cursor:not-allowed;
 }
+
+.c-button-add button{
+	width: 100%;
+	margin : 20px 0;
+}
+
+.volunActDetailPlus{
+	width:100%;
+	min-height:400px;
+	line-height:1.6;
+	padding:10px;
+	overflow-y: auto; 
+	overflow-x: hidden;
+	white-space: normal;
+}
+
+

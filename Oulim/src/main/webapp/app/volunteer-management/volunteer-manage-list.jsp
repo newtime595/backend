@@ -30,8 +30,6 @@
 
 
 <script defer src="${pageContext.request.contextPath}/asset/js/pages/main/include.js"></script>
-<script defer
-	src="${pageContext.request.contextPath}/asset/js/pages/volunteer-manage/volunteer-manage-register.js"></script>
 <script
 	src="${pageContext.request.contextPath}/asset/js/pages/volunteer-manage/volunteer-manage-list.js"
 	defer></script>
@@ -47,7 +45,7 @@
 					<h1 class="p-volunteer-manage-list_title">봉사관리</h1>
 					</div>
 						<!-- 봉사활동 조회 옵션 선택 그룹 -->
-				          <form action="${pageContext.request.contextPath}/volunteer-management/list.vm" method="get">
+				          <form action="${pageContext.request.contextPath}/volunteer-manage/list.vm" method="get">
 							<div class="l-volunAct-list-search-option-group">
 								<div class="l-volunAct-list-search-grid">
 									<div class="l-volunAct-list-search-item">
@@ -84,7 +82,8 @@
 							</div>
 						</form>
 					<div class="p-volunteer-manage-list_header">
-						<button class="c-button c-button--primary c-button--md">봉사
+						<button class="c-button c-button--primary c-button--md" type="button"
+						onclick="location.href='${pageContext.request.contextPath}/volunteer-manage/register.vm'">봉사
 							등록</button>
 					</div>
 				<div class="p-volunteer-manage-list_content">
@@ -100,11 +99,15 @@
 								<c:when test="${not empty volunteerList}">
 									<c:forEach var="volunteer" items="${volunteerList}">
 										<div class="c-list__row">
-											<span class="c-list__col">${volunteer.volunActTitle}</span>
+											<span class="c-list__col">
+												<a href="${pageContext.request.contextPath}/volunteer-manage/detail.vm?volunActNo=${volunteer.volunActNo}">
+													${volunteer.volunActTitle}
+												</a>
+											</span>								
 											<span class="c-list__col">
 												${volunteer.volunActRecruBegin} ~ ${volunteer.volunActRecruEnd}
 											</span>
-											<span class="c-list__col">${volunteer.recurStatus}</span>
+											<span class="c-list__col">${volunteer.recruStatus}</span>
 										</div>
 									</c:forEach>
 								</c:when>
