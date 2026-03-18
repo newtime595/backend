@@ -82,8 +82,8 @@
           <div class="c-list c-list--5col">
             <!-- header -->
             <div class="c-list__header">
-              <span class="c-list__col">순서</span>
               <span class="c-list__col">제목</span>
+              <span class="c-list__col">번호</span>
               <span class="c-list__col">닉네임</span>
               <span class="c-list__col">작성일</span>
               <span class="c-list__col">추천수</span>
@@ -93,26 +93,22 @@
             	<c:choose>
             		<c:when test="${not empty postList}">
             			<c:forEach var="post" items="${postList}">
-            				<div class="c-list__row">
-            					<span class="c-list__col">
-            						<c:out value="${post.getPostNo()}"/>
-            					</span>
-            					<span class="c-list__col">
-            						<a href="${pageContext.request.contextPath}/community/commuReadOk.commu?postNo=${post.postNo}">
-            							<c:out value="${post.getPostTitle()}"/>
-            						</a>
-            					</span>
-            					<span class="c-list__col">
-            						<c:out value="${post.getUserNickname()}"/>
-            					</span>
-            					<span class="c-list__col">
-            						<c:out value="${post.getPostDate()}"/>
-            					</span>
-            					<span class="c-list__col">
-            						<c:out value="${post.getLikeCount() }"/>
-            					</span>
-            				</div>
-            			</c:forEach>
+							<a href="${pageContext.request.contextPath}/community/detail.commu?postNo=${post.postNo}">
+									<div class="c-list__row">
+											<span class="c-list__col"> <c:out
+													value="${post.getPostTitle()}" />
+											</span> <span class="c-list__col"> <c:out
+													value="${post.getPostNo()}" />
+											</span> <span class="c-list__col"> <c:out
+													value="${post.getUserNickname()}" />
+											</span> <span class="c-list__col"> <c:out
+													value="${post.getPostDate()}" />
+											</span> <span class="c-list__col"> <c:out
+													value="${post.getLikeCount() }" />
+											</span>
+										</div>
+							</a>
+						</c:forEach>
             		</c:when>
             		<c:otherwise>
             			<div>

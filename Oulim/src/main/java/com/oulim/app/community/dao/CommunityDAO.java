@@ -62,6 +62,16 @@ public class CommunityDAO {
 		System.out.println("게시글 삭제 성공");
 	}
 
+	// 게시글 추천 확인
+	public boolean checkPostLike(PostLikeDTO postLikeDTO) {
+		System.out.println("게시글 추천 확인 - checkPostLike 메소드 실행");
+		int result = sqlSession.selectOne("community.isRecomended", postLikeDTO);
+		if(result > 0 ) {
+			return false;
+		}
+		return true;		
+	}
+	
 	// 게시글 추천
 	public void doPostLike(PostLikeDTO postLikeDTO) {
 		System.out.println("게시글 추천 - doPostLike 메소드 실행");

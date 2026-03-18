@@ -149,4 +149,5 @@
 		</where>
 		ORDER BY post_date DESC
 	</select>
+	
 </mapper>
