@@ -43,6 +43,8 @@
 		<typeAlias type="com.oulim.app.volunteer.dto.VolunApplyDTO" alias="VolunApplyDTO"></typeAlias>
 		<typeAlias type="com.oulim.app.volunteer.dto.PointJoinDTO" alias="PointJoinDTO"></typeAlias>
 		
+		<!-- MyPage DTO  -->	
+		<!-- <typeAlias type="com.oulim.app.mypage.dto.MyPageJoinDTO" alias="MyPageJoinDTO"></typeAlias> -->
 		
 		
 	</typeAliases>
@@ -63,10 +65,14 @@
 	<mappers>
 		<mapper resource="com/oulim/app/user/mapper/UserMapper.xml" />
 		<mapper resource="com/oulim/app/volunteer/mapper/VolunteerManagementMapper.xml"/>
- 		<mapper resource="com/oulim/app/community/mapper/CommunityMapper.xml"/>
+		<mapper resource="com/oulim/app/community/mapper/CommunityMapper.xml"/>
 		<mapper resource="com/oulim/app/community/mapper/CommunityFileMapper.xml"/> 
  		<mapper resource="com/oulim/app/kkomi/mapper/KkomiMapper.xml"/> 
+		<mapper resource="com/oulim/app/volunteer/mapper/VolunteerMapper.xml"/>	
 		<mapper resource="com/oulim/app/volunteer/mapper/VolunteerMapper.xml"/>
+		<mapper resource="com/oulim/app/volunteer/mapper/VolunteerMapper.xml"/>	 
+		<mapper resource="com/oulim/app/volunteer/mapper/VolunteerMapper.xml"/>
+		<!-- <mapper resource="com/oulim/app/mypage/mapper/MyPageMapper.xml"/> -->
 	</mappers>
 </configuration>
 

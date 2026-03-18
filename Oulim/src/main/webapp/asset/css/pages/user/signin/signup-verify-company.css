@@ -31,7 +31,10 @@
     margin-top: 10px;
 
 }
-
+.l-signup-info-company-input-layout {
+	display: flex;
+	gap: 10px;
+}
 .l-signup-verify-company-number-layout{
     display: flex;
     padding: 10px 0;
@@ -51,7 +54,9 @@
 
 .l-signup-verify-company-number-layout div:last-child button{
     width:100px;
+    white-space: nowrap;
 }
+
 .c-signup-verify-company-numbertime{
     position: absolute;
     top: 10px;
@@ -93,4 +98,8 @@
 
 .c-input.is-error{
   border: 1px solid red;
+}
+
+.is-success-text {
+  color: #51AF01 !important;
 }

@@ -29,7 +29,10 @@
 	href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
 <script defer
 	src="${pageContext.request.contextPath}/asset/js/pages/user/signin/signup-verify-company.js"></script>
-</head> 
+<script>
+	const contextPath = "${pageContext.request.contextPath}";
+</script>
+</head>
 
 <body>
 	<jsp:include page="/app/include/header.jsp" />
@@ -74,23 +77,19 @@
 								class="c-input" placeholder="사업자 등록 번호를 입력해주세요" />
 							<p id="is-company-user-name-error" class="is-error-text"></p>
 						</div>
+						
 						<div class="c-signup-verify-company-input">
 							<h6>이메일</h6>
-							<input type="text" name="userEmail" id="company-email"
-								class="c-input" placeholder="이메일을 입력해주세요" />
-							<p id="is-company-email-error" class="is-error-text"></p>
-						</div>
-						<div class="c-signup-verify-company-input-number">
-							<h6>인증번호</h6>
-							<div class="l-signup-verify-company-number-layout">
-								<div>
-									<input type="text" name="" id="" class="c-input"
-										placeholder="인증번호입력" />
-									<div class="c-signup-verify-company-numbertime">3:00</div>
+							<div class="l-signup-info-company-input-layout">
+								<div class="c-signup-verify-company-input">
+									<input type="text" name="userEmail" id="company-email" class="c-input"
+										placeholder="이메일을 입력해주세요" />
+									<p id="is-company-email-error" class="is-error-text"></p>
 								</div>
-								<div>
-									<button class="c-button c-button--secondary c-button--md">
-										인증확인</button>
+								<div class="c-signup-company-btn">
+									<button type="button"
+										class="c-button c-button--secondary c-button--md"
+										id="company-email-check-btn">중복확인</button>
 								</div>
 							</div>
 						</div>

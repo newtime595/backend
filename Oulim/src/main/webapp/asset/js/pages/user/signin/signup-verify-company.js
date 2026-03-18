@@ -9,6 +9,75 @@ const birthError = document.getElementById("is-company-birth-error");
 const emailError = document.getElementById("is-company-email-error");
 
 const nextBtn = document.getElementById("is-company-next-btn");
+const emailCheckBtn = document.getElementById("company-email-check-btn");
+
+let isEmailChecked = false;
+let isEmailAvailable = false;
+
+email.addEventListener("input", () => {
+  isEmailChecked = false;
+  isEmailAvailable = false;
+
+  emailError.textContent = "";
+  email.classList.remove("is-error");
+  emailError.classList.remove("is-success-text");
+  emailError.classList.add("is-error-text");
+});
+
+emailCheckBtn.addEventListener("click", () => {
+  const value = email.value.trim();
+
+  if (value === "") {
+    emailError.textContent = "이메일을 입력해주세요.";
+    email.classList.add("is-error");
+    emailError.classList.remove("is-success-text");
+    emailError.classList.add("is-error-text");
+    email.focus();
+
+    isEmailChecked = false;
+    isEmailAvailable = false;
+    return;
+  }
+
+  fetch(`${contextPath}/user/checkOk.usr?type=email&value=${encodeURIComponent(value)}`)
+    .then(res => res.text())
+    .then(result => {
+      result = result.trim();
+
+      if (result === "duplicated") {
+        emailError.textContent = "이미 사용 중인 이메일입니다.";
+        email.classList.add("is-error");
+        emailError.classList.remove("is-success-text");
+        emailError.classList.add("is-error-text");
+
+        isEmailChecked = true;
+        isEmailAvailable = false;
+      } else if (result === "available") {
+        emailError.textContent = "사용 가능한 이메일입니다.";
+        email.classList.remove("is-error");
+        emailError.classList.remove("is-error-text");
+        emailError.classList.add("is-success-text");
+
+        isEmailChecked = true;
+        isEmailAvailable = true;
+      } else {
+        emailError.textContent = "중복확인 중 오류가 발생했습니다.";
+        emailError.classList.remove("is-success-text");
+        emailError.classList.add("is-error-text");
+
+        isEmailChecked = false;
+        isEmailAvailable = false;
+      }
+    })
+    .catch(() => {
+      emailError.textContent = "서버 요청 중 오류가 발생했습니다.";
+      emailError.classList.remove("is-success-text");
+      emailError.classList.add("is-error-text");
+
+      isEmailChecked = false;
+      isEmailAvailable = false;
+    });
+});
 
 nextBtn.addEventListener("click", function (e) {
   let hasError = false;
@@ -49,6 +118,16 @@ nextBtn.addEventListener("click", function (e) {
     email.classList.add("is-error");
     if (!hasError) email.focus();
     hasError = true;
+  } else if (!isEmailChecked) {
+    emailError.textContent = "이메일 중복확인을 해주세요.";
+    email.classList.add("is-error");
+    if (!hasError) email.focus();
+    hasError = true;
+  } else if (!isEmailAvailable) {
+    emailError.textContent = "이미 사용 중인 이메일입니다.";
+    email.classList.add("is-error");
+    if (!hasError) email.focus();
+    hasError = true;
   }
 
   if (hasError) {
@@ -56,7 +135,6 @@ nextBtn.addEventListener("click", function (e) {
     alert("입력값을 확인해주세요.");
   }
 });
-
 
 // 첨부파일 작업
 const fileBtn1 = document.getElementById("company-file-btn-1");

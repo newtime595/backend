@@ -40,6 +40,9 @@ emailCheckBtn.addEventListener("click", () => {
 	fetch(`${contextPath}/user/checkOk.usr?type=email&value=${encodeURIComponent(value)}`)
 		.then(res => res.text())
 		.then(result => {
+			console.log("이메일 응답 원본:", result);
+			result = result.trim();
+			console.log("이메일 응답 trim:", result);
 			result = result.trim();
 
 			if (result === "duplicated") {
