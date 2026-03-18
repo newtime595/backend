@@ -25,4 +25,11 @@ public class UserDAO {
         return sqlSession.selectOne("user.findId", userDTO);
     }
     
+    public UserDTO findPw(UserDTO userDTO) {
+    	return sqlSession.selectOne("user.findPw", userDTO);
+    }
+    
+    public void updatePw(UserDTO userDTO) {
+    	sqlSession.update("user.updatePw", userDTO);
+    }
 }

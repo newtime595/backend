@@ -1,18 +1,24 @@
 const generalBtn = document.querySelector(".is-general");
 const businessBtn = document.querySelector(".is-business");
-
+const userTypeInput = document.getElementById("user-type");
 const generalTerms = document.getElementById("is-general-terms");
 const businessTerms = document.getElementById("is-business-terms");
+const form = document.getElementById("signup-terms-form");
+const contextPath = form.dataset.contextPath;
 
 generalBtn.addEventListener("click", function () {
   generalTerms.style.display = "block";
   businessTerms.style.display = "none";
+  userTypeInput.value = "1";
+  form.action = contextPath + "/app/user/signin/signup-verify.jsp";
   resetCheck();
 });
 
 businessBtn.addEventListener("click", function () {
   generalTerms.style.display = "none";
   businessTerms.style.display = "block";
+  userTypeInput.value = "2";
+  form.action = contextPath + "/app/user/signin/signup-verify-company.jsp";
   resetCheck();
   
 });

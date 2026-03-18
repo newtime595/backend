@@ -22,9 +22,11 @@ public class LogoutController implements Execute {
 			session.invalidate(); // 세션 전체 삭제
 		}
 
+		String referer = request.getHeader("Referer");
+
 		Result result = new Result();
 		result.setRedirect(true);
-		result.setPath("/user/login.usr");
+		result.setPath(referer != null ? referer : "/"); // 이전 페이지로 이동
 
 		return result;
 	}

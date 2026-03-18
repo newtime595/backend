@@ -34,7 +34,7 @@ public class NormalJoinSecondOkController implements Execute {
 
         userDAO.normaljoin(userDTO);
 
-        result.setPath("/app/signin/signup-complete.jsp");
+        result.setPath("/app/user/signin/signup-complete.jsp");
         result.setRedirect(false);
 
         return result;

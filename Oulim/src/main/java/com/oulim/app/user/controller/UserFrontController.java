@@ -29,9 +29,9 @@ public class UserFrontController extends HttpServlet {
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String requestURI = request.getRequestURI();              // /Oulim/user/loginOk.usr
-		String contextPath = request.getContextPath();            // /Oulim
-		String target = requestURI.substring(contextPath.length()); // /user/loginOk.usr
+		String requestURI = request.getRequestURI();              
+		String contextPath = request.getContextPath();           
+		String target = requestURI.substring(contextPath.length()); 
 
 		System.out.println("UserFrontController 실행");
 		System.out.println("URI : " + requestURI);
@@ -63,8 +63,16 @@ public class UserFrontController extends HttpServlet {
 		} else if (target.equals("/user/idFindOk.usr")) {
 			System.out.println("아이디 찾기 처리 요청");
 		    execute = new IdFindController();
-		}
+		    
+		} else if (target.equals("/user/pwFind.usr")) {
+		    System.out.println("비밀번호 찾기 확인 요청");
+		    execute = new PwChangeController();
 
+		} else if (target.equals("/user/pwChangeOk.usr")) {
+		    System.out.println("비밀번호 변경 요청");
+		    execute = new PwChangeOkController();
+		}
+		
 		if (execute != null) {
 			result = execute.execute(request, response);
 		}

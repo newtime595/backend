@@ -50,7 +50,8 @@
               </div>
 
               <div class="c-id-find-view-nextbtn">
-                <button class="c-button c-button--primary c-button--md">
+                <button type="button" class="c-button c-button--primary c-button--md"
+                onclick="location.href='${pageContext.request.contextPath}/user/pwFind.usr'">
                   비밀번호 찾기
                 </button>
                 <button type="button" class="c-button c-button--secondary c-button--md"

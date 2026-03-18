@@ -1,5 +1,5 @@
 const form = document.getElementById("loginForm");
-const idInput = document.getElementById("userID");
+const idInput = document.getElementById("userId");
 const pwInput = document.getElementById("userPw");
 
 const idError = document.getElementById("userIDError");

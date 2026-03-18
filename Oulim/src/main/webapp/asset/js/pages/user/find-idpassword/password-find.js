@@ -8,7 +8,6 @@ const userNameError = document.getElementById("is-find-user-name-error");
 const birthError = document.getElementById("is-find-user-birth-error");
 const emailError = document.getElementById("is-find-user-email-error");
 
-
 const findBtn = document.getElementById("is-password-find-btn");
 
 findBtn.addEventListener("click", function (e) {

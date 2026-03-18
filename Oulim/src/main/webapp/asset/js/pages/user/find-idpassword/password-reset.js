@@ -1,11 +1,6 @@
 const password = document.getElementById("reset-password");
 const passwordCheck = document.getElementById("reset-password-check");
 
-const passwordError = document.getElementById("is-reset-password-error");
-const passwordCheckError = document.getElementById(
-  "is-reset-password-check-error",
-);
-
 const resetBtn = document.getElementById("is-reset-btn");
 
 resetBtn.addEventListener("click", function (e) {

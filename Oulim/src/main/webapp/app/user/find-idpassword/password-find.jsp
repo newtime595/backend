@@ -34,11 +34,21 @@
 
 <body>
 	<jsp:include page="/app/include/header.jsp" />
+	<%
+	String error = (String) request.getAttribute("error");
+	if (error != null) {
+	%>
+	<script>
+		alert('<%=error%>');
+	</script>
+	<%
+	}
+	%>
 	<div class="l-main">
 		<div class="l-container">
 			<div class="p-password-find">
-				<form
-					action="/Oulim/front/html/user/find-idpassword/password-reset.html">
+				<form action="${pageContext.request.contextPath}/user/pwFind.usr"
+					method="post">
 					<div class="l-password-find-layout">
 						<div>
 							<h2>비밀번호찾기</h2>
@@ -50,26 +60,26 @@
 
 						<div class="c-password-find-input">
 							<h6>아이디</h6>
-							<input type="text" name="" id="find-user-id" class="c-input"
-								placeholder="아이디 입력해주세요" />
+							<input type="text" name="userId" id="find-user-id"
+								class="c-input" placeholder="아이디 입력해주세요" />
 							<p id="is-find-user-id-error" class="is-error-text"></p>
 						</div>
 						<div class="c-password-find-input">
 							<h6>이름</h6>
-							<input type="text" name="" id="find-user-name" class="c-input"
-								placeholder="이름 입력해주세요" />
+							<input type="text" name="userName" id="find-user-name"
+								class="c-input" placeholder="이름 입력해주세요" />
 							<p id="is-find-user-name-error" class="is-error-text"></p>
 						</div>
 						<div class="c-password-find-input">
 							<h6>생년월일</h6>
-							<input type="text" name="" id="find-user-birth" class="c-input"
-								placeholder="생년월일 입력해주세요" />
+							<input type="text" name="userBirth" id="find-user-birth"
+								class="c-input" placeholder="생년월일 입력해주세요" />
 							<p id="is-find-user-birth-error" class="is-error-text"></p>
 						</div>
 						<div class="c-password-find-input">
 							<h6>이메일</h6>
-							<input type="text" name="" id="find-user-email" class="c-input"
-								placeholder="이메일 입력해주세요" />
+							<input type="text" name="userEmail" id="find-user-email"
+								class="c-input" placeholder="이메일 입력해주세요" />
 							<p id="is-find-user-email-error" class="is-error-text"></p>
 						</div>
 						<div class="c-password-find-input-number">
@@ -87,7 +97,8 @@
 							</div>
 						</div>
 						<div class="c-password-find-nextbtn">
-							<button class="c-button c-button--primary c-button--md"
+							<button type="submit"
+								class="c-button c-button--primary c-button--md"
 								id="is-password-find-btn">비밀번호 찾기</button>
 						</div>
 					</div>

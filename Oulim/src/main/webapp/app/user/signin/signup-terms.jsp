@@ -39,7 +39,10 @@
 	<div class="l-main">
 		<div class="l-container">
 			<div class="p-signup">
-				<form action="${pageContext.request.contextPath}/app/user/signin/signup-verify.jsp" method="get">
+				<form id="signup-terms-form"
+					action="${pageContext.request.contextPath}/app/user/signin/signup-verify.jsp"
+					method="get" data-context-path="${pageContext.request.contextPath}">
+					<input type="hidden" name="userType" id="user-type" value="1" />
 					<div class="l-signup-main">
 						<div>
 							<h2>회원가입</h2>
@@ -104,7 +107,7 @@
 								필수항목: 이름, 생년월일, 성별, 아이디, 비밀번호, 본인인증정보(CI), 주소, 소속센터, 봉사 희망분야,
 								휴대폰번호 관련법령에 의한 정보보유 사유 - 개인정보 보호법 등 관계법령의 규정에 의하여 보유가 필요한 경우
 								1365자원봉사포털은 법령에서 정한 기간동안 회원정보를 수집·처리합니다. 보유 및 이용 기간</div>
-							<div class="c-signup-btn">
+							<div type="submit" class="c-signup-btn">
 								<button class="c-button c-button--primary c-button--md"
 									id="is-next-btn">다음</button>
 							</div>
@@ -163,7 +166,7 @@
 								소속센터, 봉사 희망분야, 휴대폰번호 관련법령에 의한 정보보유 사유 - 개인정보 보호법 등 관계법령의 규정에 의하여
 								보유가 필요한 경우 1365자원봉사포털은 법령에서 정한 기간동안 회원정보를 수집·처리합니다. 보유 및 이용 기간</div>
 							<div class="c-signup-btn">
-								<button class="c-button c-button--primary c-button--md"
+								<button type="submit" class="c-button c-button--primary c-button--md"
 									id="is-next-btn-general">다음</button>
 							</div>
 						</div>

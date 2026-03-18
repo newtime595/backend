@@ -41,7 +41,7 @@
 	<div class="l-main">
 		<div class="l-container">
 			<div class="p-password-reset">
-				<form action="/Oulim/front/html/user/login/login.html">
+				<form action="${pageContext.request.contextPath}/user/pwChangeOk.usr" method="post">
 					<div class="l-password-reset-layout">
 						<div>
 							<h2>비밀번호 재설정</h2>
@@ -54,7 +54,7 @@
 						<div class="c-password-reset-input">
 							<h6>비밀번호</h6>
 							<div class="l-toggle-layout">
-								<input type="password" name="" id="reset-password"
+								<input type="password" name="userPw" id="reset-password"
 									class="c-input" />
 								<button type="button" id="c-password-btn-toggle">
 									<img
@@ -67,7 +67,7 @@
 						<div class="c-password-reset-input">
 							<h6>비밀번호확인</h6>
 							<div class="l-toggle-layout-2">
-								<input type="password" name="" id="reset-password-check"
+								<input type="password" name="userPwCheck" id="reset-password-check"
 									class="c-input" />
 								<button type="button" id="c-password-btn-toggle-2">
 									<img
@@ -83,7 +83,7 @@
 								class="c-button c-button--primary c-button--md">비밀번호 변경</button>
 							<button type="button"
 								class="c-button c-button--secondary c-button--md"
-								onclick="location.href='/Oulim/front/html/user/login/login.html'">
+								onclick="location.href='${pageContext.request.contextPath}/user/login.usr'">
 								취소</button>
 						</div>
 					</div>

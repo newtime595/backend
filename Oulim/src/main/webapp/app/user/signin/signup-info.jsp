@@ -38,7 +38,7 @@
 	<jsp:include page="/app/include/header.jsp" />
 	<div class="l-main">
 		<div class="l-container">
-			<form action="${pageContext.request.contextPath}/user/normalJoinSecondOkz.usr" method="post">
+			<form action="${pageContext.request.contextPath}/user/normalJoinSecondOk.usr" method="post">
 				<input type="hidden" name="userName" value="${userName}">
 				<input type="hidden" name="userBirth" value="${userBirth}">
 				<input type="hidden" name="userEmail" value="${userEmail}">

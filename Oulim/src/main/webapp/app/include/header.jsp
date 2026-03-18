@@ -5,7 +5,7 @@
 	<div class="p-header-page">
 		<div class="l-header-layout">
 			<c:choose>
-				<c:when test="${empty sessionScope.memberNumber}">
+				<c:when test="${empty sessionScope.userNo}">
 					<div class="l-header-right">
 						<a herf=""><img src="${pageContext.request.contextPath}/asset/image/logo/logo.png" alt="logo" class="logoimgs" /></a>
 						<div>
@@ -14,23 +14,10 @@
 						<div>
 							<a href="${pageContext.request.contextPath}/community/list.commu">어울림터</a>
 						</div>
-
-						<c:if test="${sessionScope.memberNumber==1}">
-							<div>
-								<a href="">꼬미수련소</a>
-							</div>
-						</c:if>
-
-						<c:if test="${sessionScope.memberNumber==2}">
-							<div>
-								<a href="">봉사관리</a>
-							</div>
-						</c:if>
-
 					</div>
 					<div class="l-header-left">
 						<div class="c-button c-button--secondary c-button--md">
-							<a href="">로그인/회원가입</a>
+							<a href="${pageContext.request.contextPath}/user/login.usr">로그인/회원가입</a>
 						</div>
 					</div>
 				</c:when>
@@ -43,18 +30,31 @@
 						<div>
 							<a href="">어울림터</a>
 						</div>
+						
+						<c:if test="${sessionScope.userNo== 1}">
+							<div>
+								<a href="">꼬미수련소</a>
+							</div>
+						</c:if>
 
+						<c:if test="${sessionScope.userNo== 2}">
+							<div>
+								<a href="${pageContext.request.contextPath}/app/volunteer-management/volunteer-management-list.jsp">봉사관리</a>
+							</div>
+						</c:if>
+						
 					</div>
 					<div class="l-header-left">
 						<div>
-							<h3>OOO님</h3>
-						</div>
-						<div class="c-button c-button--secondary c-button--md">
-							<a href="">로그아웃</a>
+							<h4>${sessionScope.userNickname}님</h4>
 						</div>
 						<div class="c-button c-button--secondary c-button--md">
 							<a href="">마이페이지</a>
 						</div>
+						<div class="c-button c-button--secondary c-button--md">
+							<a href="${pageContext.request.contextPath}/user/logout.usr">로그아웃</a>
+						</div>
+						
 					</div>
 				</c:otherwise>
 			</c:choose>
