@@ -100,8 +100,12 @@
     margin-bottom: 16px;
 }
 
-.l-community-detail-image img{
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
+.mainImage{
+	display:flex;
+	align-items: center;
+	width : 80%;
+}
+
+.mainImage img{
+	width: 500px;
 }
