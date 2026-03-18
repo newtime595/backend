@@ -28,7 +28,9 @@
   <!-- css 연결 -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/community/community-repost.css">
   <script defer src="${pageContext.request.contextPath}/asset/js/pages/main/include.js"></script>
-
+  <script>
+   	const contextPath = "${pageContext.request.contextPath}";
+  </script>
 </head>
 <!-- js 연결 -->
 <script defer src="${pageContext.request.contextPath}/asset/js/pages/community/community-repost.js"></script>
@@ -45,7 +47,7 @@
             <h2>봉사 후기 수정</h2>
           </div>
 
-          <form action="">
+          <form action="${pageContext.request.contextPath}/community/repostOk.commu">
             <div class="l-community-repost-top">
               <div class="c-delete-post-btn">
                 <button class="c-warning-delete-button">삭제</button>

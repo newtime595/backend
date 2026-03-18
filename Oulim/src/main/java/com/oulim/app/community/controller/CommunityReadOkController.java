@@ -68,7 +68,7 @@ public class CommunityReadOkController implements Execute{
 	   	request.setAttribute("post", postJoinDTO);
 	   	result.setPath("/app/community/community-detail.jsp");
 	   	result.setRedirect(false);
-		return null;
+		return result;
 	}
 	
 }
