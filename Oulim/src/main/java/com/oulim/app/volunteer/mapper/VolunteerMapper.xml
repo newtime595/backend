@@ -1,6 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="volunAct">
 <select id="selectVolunteerList"
         parameterType="map"
-        resultType="com.oulim.app.volunteer.dto.VolunActivityDTO">
+        resultType="VolunActivityDTO">
 
     SELECT
         Volun_Act_No AS volunActNo, <!-- 봉사번호 -->
@@ -95,3 +98,34 @@
     ORDER BY Volun_Act_No DESC
 
 </select>
+
+<select id="selectVolunDetail" parameterType="int"
+        resultType="VolunActivityDTO">
+
+    SELECT 
+        V.Volun_Act_No              AS volunActNo,
+        V.Volun_Act_Title           AS volunActTitle,
+        V.Volun_Act_Recru_Begin     AS volunActRecruBegin,
+        V.Volun_Act_Recru_End       AS volunActRecruEnd,
+        V.Volun_Act_Proc_Begin      AS volunActProcBegin,
+        V.Volun_Act_Proc_End        AS volunActProcEnd,
+        V.Volun_Act_Point           AS volunActPoint,
+        V.Volun_Act_Recru_Max_Count AS volunActRecruMaxCount,
+        V.Volun_Act_Address         AS volunActAddress,
+        V.Volun_Act_Address_Detail  AS volunActAddressDetail,
+        V.Volun_Act_Detail          AS volunActDetail,
+
+        /* 모집 상태 */
+        CASE 
+        <![CDATA[
+            WHEN SYSDATE < V.Volun_Act_Recru_Begin THEN '모집예정'
+            WHEN SYSDATE > V.Volun_Act_Recru_End THEN '마감'
+            ELSE '모집중'
+        END AS recruStatus
+		]]>
+    FROM TBL_VOLUN_ACTIVITY V
+    WHERE V.Volun_Act_No = #{volunActNo}
+
+</select>
+
+</mapper>

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <select id="selectVolunDetail" parameterType="int"
-        resultType="com.oulim.app.volunteer.dto.VolunActivityDTO">
+        resultType="VolunActivityDTO">
 
     SELECT 
         V.Volun_Act_No              AS volunActNo,
