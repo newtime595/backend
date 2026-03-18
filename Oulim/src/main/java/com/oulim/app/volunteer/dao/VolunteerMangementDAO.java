@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.oulim.app.config.MyBatisConfig;
+import com.oulim.app.volunteer.dto.PointJoinDTO;
 import com.oulim.app.volunteer.dto.VolunActivityDTO;
 import com.oulim.app.volunteer.dto.VolunApplyDTO;
 
@@ -49,6 +50,11 @@ public class VolunteerMangementDAO {
 	// 봉사활동 삭제
 	public void volManageDelete(int volunActNo) {
 		sqlSession.delete("VolunteerManagement.volManageDelete", volunActNo);
+	}
+	
+	// 포인트 지급
+	public void updateCurrency(PointJoinDTO pointjoinDTO ) {
+		sqlSession.update("VolunteerManagement.updateCurrency", pointjoinDTO);
 	}
 
 }

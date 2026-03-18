@@ -84,7 +84,17 @@ public class VolunManageFrontController extends HttpServlet {
 			result = new VolunManageDeleteController().execute(request, response);
 			System.out.println("봉사관리 삭제 완료");
 			break;
+			
+		case "/volunteer-manage/attendance.vm":
+			System.out.println("출석 처리 요청");
+			result = new VolunAttendanceController().execute(request, response);
+			System.out.println("출석 처리 완료");
+			break;
+		
+		
+		
 		}
+		
 		
 		
 		

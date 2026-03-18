@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="VolunteerManagement">
 	<!--포인트 지급-->
-	<update id="updateCurrency" parameterType="PointJoinDTO">
+	<update id="updateCurrency" parameterType="PointJoinDTO" >
 		MERGE INTO TBL_CURRENCY c
 		USING (
 			SELECT
