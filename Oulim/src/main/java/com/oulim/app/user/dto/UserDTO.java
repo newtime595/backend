@@ -14,7 +14,8 @@ public class UserDTO {
     private Date userLastLogin;
     private String userNickname;
     private String organName;
-    private String userPhoneNum;
+    private String organNo;
+	private String userPhoneNum;
     private String userAddress;
     private String userAddressDetail;
     private String userPostnum;
@@ -85,6 +86,13 @@ public class UserDTO {
 	public void setOrganName(String organName) {
 		this.organName = organName;
 	}
+    public String getOrganNo() {
+		return organNo;
+	}
+	public void setOrganNo(String organNo) {
+		this.organNo = organNo;
+	}
+
 	public String getUserPhoneNum() {
 		return userPhoneNum;
 	}
@@ -115,9 +123,8 @@ public class UserDTO {
 		return "UserDTO [userNo=" + userNo + ", userName=" + userName + ", userId=" + userId + ", userPw=" + userPw
 				+ ", userBirth=" + userBirth + ", userEmail=" + userEmail + ", userType=" + userType + ", userStatus="
 				+ userStatus + ", userLastLogin=" + userLastLogin + ", userNickname=" + userNickname + ", organName="
-				+ organName + ", userPhoneNum=" + userPhoneNum + ", userAddress=" + userAddress + ", userAddressDetail="
-				+ userAddressDetail + ", userPostnum=" + userPostnum + "]";
+				+ organName + ", organNo=" + organNo + ", userPhoneNum=" + userPhoneNum + ", userAddress=" + userAddress
+				+ ", userAddressDetail=" + userAddressDetail + ", userPostnum=" + userPostnum + "]";
 	}
-    
     
 }

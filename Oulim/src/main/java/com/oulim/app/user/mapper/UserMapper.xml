@@ -59,7 +59,7 @@
 		#{userName},
 		#{userId},
 		#{userPw},
-		#{userBirth},
+		TO_DATE(#{userBirth}, 'YYYY-MM-DD'),
 		#{userEmail},
 		1,
 		1,
@@ -112,5 +112,11 @@
 		SET USER_PW = #{userPw}
 		WHERE USER_NO = #{userNo}
 	</update>
-
+	
+	<!-- 실제 존재하는 유저인지 체크하는 쿼리 -->
+   <select id="checkUserNo" parameterType="int">
+      SELECT user_no FROM TBL_USER
+      WHERE  user_no = #{userNo}
+   </select>
+   
 </mapper>

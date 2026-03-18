@@ -57,7 +57,7 @@
 						</div>
 						<div class="c-signup-verify-input">
 							<h6>생년월일</h6>
-							<input type="text" name="userBirth" id="user-birth" class="c-input"
+							<input type="date" name="userBirth" id="user-birth" class="c-input"
 								placeholder="생년월일을 입력해주세요" />
 							<p id="is-user-birth-error" class="is-error-text"></p>
 						</div>
