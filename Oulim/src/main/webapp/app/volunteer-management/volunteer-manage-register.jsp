@@ -100,9 +100,13 @@
 						<label class="l-volunteer-manage-register_form-label">활동분야</label>
 						<div class="l-volunteer-manage-register_form-field">
 							<select id="volunActActType" name="volunActActType" class="c-select">
+								<option value="">선택</option>
 								<option value="1">환경</option>
 								<option value="2">의료</option>
 								<option value="3">교육</option>
+								<option value="4">생활 편의</option>
+								<option value="5">문화·체육·예술</option>
+								<option value="6">기타</option>
 							</select>
 						</div>
 					</div>

@@ -75,5 +75,13 @@ button:disabled{
 	overflow-x: hidden;
 	white-space: normal;
 }
+.b-btn-layout{
+	text-align:center;
+	justify-content:center;
+	/* border: 1px solid;	 */
+}
+.b-btn-layout button{
+	margin:10px;
+}
 
 

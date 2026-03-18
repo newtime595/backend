@@ -180,6 +180,10 @@
 				</c:choose>
 			</div>
 		</div>
+					<div class="b-btn-layout">
+							<button class="c-button c-button--primary c-button--md">출석</button>
+							<button class="c-button c-button--secondary c-button--md">결석</button>
+					</div>
 
 			<!-- 페이지네이션  c-pagination-->
 			<nav class="c-pagination">

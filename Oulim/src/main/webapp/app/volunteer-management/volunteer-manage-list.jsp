@@ -51,10 +51,13 @@
 									<div class="l-volunAct-list-search-item">
 										<label class="c-volunAct-list-search-label">활동분야</label>
 										<select class="c-select" name="actType">
-											<option value="">선택</option>
-											<option value="environment">환경</option>
-											<option value="medical">의료</option>
-											<option value="education">교육</option>
+											<option value="">모두</option>
+											<option value="1">환경</option>
+											<option value="2">의료</option>
+											<option value="3">교육</option>
+											<option value="4">생활·편의</option>
+											<option value="5">문화·체육·예술</option>
+											<option value="6">기타</option>
 										</select>
 									</div>
 						
@@ -87,10 +90,10 @@
 							등록</button>
 					</div>
 				<div class="p-volunteer-manage-list_content">
-					<div class="c-list c-list--3col">
+					<div class="c-list c-list--4col">
 						<!-- header -->
 						<div class="c-list__header">
-							<span class="c-list__col">제목</span> <span class="c-list__col">기간</span>
+							<span class="c-list__col">제목</span> <span class="c-list__col">기간</span> <span class="c-list__col">활동 분야</span>
 							<span class="c-list__col">상태</span> 
 						</div>
 						<!-- body -->
@@ -103,9 +106,20 @@
 												<a href="${pageContext.request.contextPath}/volunteer-manage/detail.vm?volunActNo=${volunteer.volunActNo}">
 													${volunteer.volunActTitle}
 												</a>
-											</span>								
+											</span>																		
 											<span class="c-list__col">
 												${volunteer.volunActRecruBegin} ~ ${volunteer.volunActRecruEnd}
+											</span>
+											<span class="c-list__col">
+											    <c:choose>
+											        <c:when test="${volunteer.volunActActType == 1}">환경</c:when>
+											        <c:when test="${volunteer.volunActActType == 2}">의료</c:when>
+											        <c:when test="${volunteer.volunActActType == 3}">교육</c:when>
+											        <c:when test="${volunteer.volunActActType == 4}">생활 편의</c:when>
+											        <c:when test="${volunteer.volunActActType == 5}">문화체육예술</c:when>
+											        <c:when test="${volunteer.volunActActType == 6}">기타</c:when>
+											        <c:otherwise>-</c:otherwise>
+											    </c:choose>
 											</span>
 											<span class="c-list__col">${volunteer.recruStatus}</span>
 										</div>

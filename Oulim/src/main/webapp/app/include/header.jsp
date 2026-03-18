@@ -7,7 +7,7 @@
 			<c:choose>
 				<c:when test="${empty sessionScope.userNo}">
 					<div class="l-header-right">
-						<a herf=""><img src="${pageContext.request.contextPath}/asset/image/logo/logo.png" alt="logo" class="logoimgs" /></a>
+						<a herf="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/asset/image/logo/logo.png" alt="logo" class="logoimgs" /></a>
 						<div>
 							<a href="">봉사활동</a>
 						</div>
@@ -31,15 +31,15 @@
 							<a href="">어울림터</a>
 						</div>
 						
-						<c:if test="${sessionScope.userNo== 1}">
+						<c:if test="${sessionScope.userType== 1}">
 							<div>
 								<a href="">꼬미수련소</a>
 							</div>
 						</c:if>
 
-						<c:if test="${sessionScope.userNo== 2}">
+						<c:if test="${sessionScope.userType== 2}">
 							<div>
-								<a href="${pageContext.request.contextPath}/app/volunteer-management/volunteer-management-list.jsp">봉사관리</a>
+								<a href="${pageContext.request.contextPath}/volunteer-manage/list.vm">봉사관리</a>
 							</div>
 						</c:if>
 						

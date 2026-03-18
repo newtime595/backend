@@ -51,10 +51,10 @@
 	    SELECT
 	        VOLUN_ACT_NO,
 	        VOLUN_ACT_TITLE,
-	        VOLUN_ACT_RECRU_BEGIN,
-	        VOLUN_ACT_RECRU_END,
-	        VOLUN_ACT_PROC_BEGIN,
-	        VOLUN_ACT_PROC_END,
+	        TO_CHAR(VOLUN_ACT_RECRU_BEGIN, 'YYYY-MM-DD')as VOLUN_ACT_RECRU_BEGIN,
+	        TO_CHAR(VOLUN_ACT_RECRU_END, 'YYYY-MM-DD')as VOLUN_ACT_RECRU_END,
+	        TO_CHAR(VOLUN_ACT_PROC_BEGIN, 'YYYY-MM-DD')as VOLUN_ACT_PROC_BEGIN,
+	        TO_CHAR(VOLUN_ACT_PROC_END, 'YYYY-MM-DD')as VOLUN_ACT_PROC_END,
 	        VOLUN_ACT_POINT,
 	        VOLUN_ACT_BEGIN_TIME,
 	        VOLUN_ACT_END_TIME,
@@ -122,8 +122,9 @@
 		SELECT
 		VOLUN_ACT_NO,
 		VOLUN_ACT_TITLE,
-		VOLUN_ACT_RECRU_BEGIN,
-		VOLUN_ACT_RECRU_END,
+		VOLUN_ACT_ACT_TYPE,
+		TO_CHAR(VOLUN_ACT_RECRU_BEGIN, 'YYYY-MM-DD') AS VOLUN_ACT_RECRU_BEGIN,
+        TO_CHAR(VOLUN_ACT_RECRU_END, 'YYYY-MM-DD') AS VOLUN_ACT_RECRU_END,
 		CASE
 		WHEN SYSDATE &lt; VOLUN_ACT_RECRU_BEGIN THEN '모집예정'
 		WHEN SYSDATE &lt; VOLUN_ACT_RECRU_END + 1 THEN '모집중'
@@ -133,12 +134,7 @@
 		WHERE VOLUN_ACT_ORGAN_NO = #{volunActOrganNo}
 
 		<if test="actType != null and actType != ''">
-			AND (
-			(#{actType} = 'environment' AND VOLUN_ACT_ACT_TYPE = 1)
-			OR
-			(#{actType} = 'medical' AND VOLUN_ACT_ACT_TYPE = 2)
-			OR (#{actType} = 'education' AND VOLUN_ACT_ACT_TYPE = 3)
-			)
+			AND VOLUN_ACT_ACT_TYPE = #{actType}
 		</if>
 
 		<if test="recruitStatus != null and recruitStatus != ''">
