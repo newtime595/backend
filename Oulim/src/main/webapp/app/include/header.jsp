@@ -28,7 +28,7 @@
 							<a href="">봉사활동</a>
 						</div>
 						<div>
-							<a href="">어울림터</a>
+							<a href="${pageContext.request.contextPath}/community/list.commu">어울림터</a>
 						</div>
 						
 						<c:if test="${sessionScope.userType== 1}">

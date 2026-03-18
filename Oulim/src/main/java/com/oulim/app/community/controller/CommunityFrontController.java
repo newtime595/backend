@@ -49,6 +49,8 @@ public class CommunityFrontController extends HttpServlet {
 		}
 		case "/community/post.commu"->{
 			System.out.println("봉사후기 등록");
+			result = new CommunityWriteController().execute(request, response);
+			System.out.println("봉사후기 등록 페이지 이동 완료");
 		}
 		
 		case "/community/rePost.commu" ->{
@@ -57,6 +59,8 @@ public class CommunityFrontController extends HttpServlet {
 		
 		case "/community/detail.commu" ->{
 			System.out.println("봉사후기 상세보기");
+			result = new CommunityReadOkController().execute(request, response);
+			System.out.println("봉사후기 상세보기 처리 완료");
 		}
 		case "/community/like.commu"->{
 			System.out.println("봉사후기 추천");
@@ -68,6 +72,8 @@ public class CommunityFrontController extends HttpServlet {
 		
 		case "/community/postOK.commu" ->{
 			System.out.println("후기 등록 성공");
+			result = new CommunityWriteOKController().execute(request, response);
+			System.out.println("봉사후기 등록 완료");
 		}
 		
 		case "/community/postDelete.commu" ->{

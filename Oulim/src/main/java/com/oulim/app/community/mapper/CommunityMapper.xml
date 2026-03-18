@@ -32,7 +32,7 @@
 			SELECT SEQ_TBL_COMMUNITY_POST.nextval FROM DUAL
 		</selectKey>
 		INSERT INTO TBL_COMMUNITY_POST (post_no, User_No, post_title, post_content, post_date, post_view_count, user_nickname)
-		VALUES(#{postNo}, #{userNo}, #{postTitle}, #{postContent}, #{postDate}, 0, #{userNickname})
+		VALUES(#{postNo}, #{userNo}, #{postTitle}, #{postContent}, sysdate, 0, #{userNickname})
 	</insert>
 	
 	<!-- 게시글 수정 -->

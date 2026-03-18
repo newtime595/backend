@@ -1,5 +1,7 @@
 package com.oulim.app.community.dto;
 
+import java.util.List;
+
 public class CommunityPostJoinDTO {
 	private int postNo;
 	private int userNo;
@@ -9,6 +11,7 @@ public class CommunityPostJoinDTO {
 	private int postViewCount;
 	private String userNickname;
 	private int likeCount;
+	private List<PostImageDTO> images;
 	public int getPostNo() {
 		return postNo;
 	}
@@ -56,6 +59,13 @@ public class CommunityPostJoinDTO {
 	}
 	public void setLikeCount(int likeCount) {
 		this.likeCount = likeCount;
+	}
+	
+	public List<PostImageDTO> getImages() {
+		return images;
+	}
+	public void setImages(List<PostImageDTO> images) {
+		this.images = images;
 	}
 	@Override
 	public String toString() {

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="ko">
   <head>
@@ -10,7 +12,7 @@
     <!-- base css 필수 삽입-->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/reset.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/variable.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/typography.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/Typography.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/layout.css" />
     <!-- 컨포넌트 css 선택-->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/pagination.css" />

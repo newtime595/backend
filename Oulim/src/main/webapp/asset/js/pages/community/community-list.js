@@ -29,15 +29,17 @@ postBtn.addEventListener("click", (e) =>{
             alert("로그인이 필요합니다.")
 
             // TODO : 로그인 페이지로 이동
+			location.href = `${contextPath}/user/login.usr`
             return;
         }
         
         if(userType !== USER_TYPE.USER ){
             alert("기업 회원 및 관리자는 사용할 수 없습니다.");
+			window.location.href = `${contextPath}`
             return;
         }
 
-        //location.href="/Oulim/front/html/community/community-post.html";
+        location.href=`${contextPath}/community/post.commu`;
 });
 
 searchBtn.addEventListener("click", () =>{

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kkomi">
+	<!-- 꼬미 조회 -->
+	<select id="selectKkomi" parameterType="int" resultType="KkomiDTO">
+		SELECT tk.kkomi_no, tk.kkomi_lev, tk.kkomi_Exp
+		FROM
+		tbl_kkomi tk
+		WHERE #{userNo} = tk.user_no
+	</select>
+	
+	<!-- 꼬미 종합 데이터 조회 -->
+	<select id="selectKkomiJoin" parameterType="int" resultType="KkomiJoinDTO">
+		SELECT tk.kkomi_no, tk.kkomi_lev, tk.kkomi_Exp,
+		tc.total_Amount, NVL(RANK() OVER(ORDER BY tr.Rank_Point DESC) as Ranking, 0)
+		FROM tbl_kkomi tk
+		JOIN tbl_ranking tr on (tk.user_no = tr.user_no)
+		JOIN tbl_currenct tc on (tk.user_no = tc.user_no)
+		WHERE tk.user_no = #{userNo} and tr.rank_season_info = TO_NUMBER(TO_CHAR(sysdate,'YYYYMM'))		
+	</select>
+
+	<!-- 꼬미 도력 쌓기 -->
+	<update id="upsertKkomi" parameterType="KkomiDTO">
+		<![CDATA[
+		MERGE INTO	TBL_KKOMI tk USING (
+		SELECT #{User_No} AS user_no FROM DUAL
+		) src ON (tk.user_no = src.user_no)
+		WHEN NOT MATCHED THEN
+			INSERT (User_No, kkomi_Id, kkomi_Lev, kkomi_exp)
+			VALUES (src.User_No, 1, #{kkomiLev}, #{kkomiExp})
+		WHEN MATCHED THEN
+			UPDATE SET tk.kkomi_Lev = #{kkomiLev}, tk.kkomi_Exp = #{kkomiExp}
+			WHERE NVL(tk.kkomi_Lev,1) <= #{kkomiLev} and NVL(tk.kkomi_Exp,0) <= #{kkomiExp} ;
+		]]>
+	</update>
+
+	<!-- 상위권 포함 랭킹 조회 -->
+	<select id="selectTopRanking" parameterType="int" resultType="RankingJoinDTO">
+	<![CDATA[
+	SELECT * FROM
+		(SELECT tr.user_no, tr.Rank_point as rankPoint, RANK() OVER(ORDER BY tr.Rank_Point DESC) AS ranking, 
+		tu.user_Nickname, tk.kkomi_Lev
+			FROM TBL_RANKING tr
+			JOIN TBL_USER tu ON tr.user_no = tu.user_no
+			JOIN TBL_KKOMI tk ON tr.user_no = tk.user_no
+			WHERE tr.rank_season_info = TO_NUMBER(TO_CHAR(sysdate,'YYYYMM'))) r
+		WHERE r.ranking <= 10 or r.user_no = #{userNo}
+		ORDER BY R.ranking;
+	]]>
+	</select>
+
+	<!-- 내 랭킹 조회 -->
+	<select id="selectMyRanking" parameterType="int" resultType="RankingJoinDTO">
+		SELECT
+		tr.user_no, tr.Rank_point as rankPoint,	RANK() OVER(ORDER BY tr.Rank_Point DESC) AS ranking, 
+		tnu.user_Nickname,	tk.kkomi_Lev
+		FROM TBL_RANKING tr
+		JOIN TBL_NORMAL_USER tnu ON tr.user_no = tnu.user_no
+		JOIN TBL_KKOMI tk ON tr.user_no = tk.user_no
+		WHERE tr.rank_season_info = TO_NUMBER(TO_CHAR(sysdate,'YYYYMM'))
+		AND tr.user_no = #{userNo}
+	</select>
+
+	<!-- 랭킹 삽입 -->
+	<update id="upsertRanking" parameterType="RankingDTO">
+		MERGE INTO TBL_RANKING tr USING(
+			SELECT #{userNo} as user_no, TO_NUMBER(TO_CHAR(sysdate,'YYYYMM')) as curr_season FROM DUAL) src
+			ON (src.user_no = tr.user_no and src.curr_season = tr.Rank_Season_Info)
+		WHEN MATCHED THEN
+			UPDATE SET tr.rank_Point = tr.rank_Point + #{rankPoint}
+		WHEN NOT MATCHED THEN
+			INSERT (user_no, rank_point, rank_season_info)
+			VALUES (src.user_no, #{rankPoint}, src.curr_season);
+	</update>
+	
+</mapper>

@@ -20,6 +20,7 @@ public class VolunActivityDTO {
 //	  Volun_Act_Postnum VARCHAR2(6) NOT NULL,
 //	  Volun_Act_Recru_Max_Count NUMBER(2) NOT NULL,
 //	  Volun_Act_Detail VARCHAR2(4000),
+	
 	private int volunActNo;
 	private String volunActTitle;
 	private String volunActRecruBegin;
