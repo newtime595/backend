@@ -65,6 +65,7 @@
 		<mapper resource="com/oulim/app/volunteer/mapper/VolunteerManagementMapper.xml"/>
 		<mapper resource="com/oulim/app/volunteer/mapper/VolunteerMapper.xml"/>
 		<mapper resource="com/oulim/app/community/mapper/CommunityMapper.xml"/>
+		<mapper resource="com/oulim/app/community/mapper/CommunityFileMapper.xml"/>
 		<mapper resource="com/oulim/app/admin/mapper/AdminMapper.xml"/>
 	</mappers>
 </configuration>
