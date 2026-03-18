@@ -46,7 +46,9 @@
 		<!-- MyPage DTO  -->	
 		<typeAlias type="com.oulim.app.mypage.dto.MyPageJoinDTO" alias="MyPageJoinDTO"></typeAlias>
 		
-		
+		<!-- Admin DTO -->
+		<typeAlias type="com.oulim.app.admin.dto.AdminDTO" alias="AdminDTO"></typeAlias>
+		<typeAlias type="com.oulim.app.admin.dto.AdminSearchDTO" alias="AdminSearchDTO"></typeAlias>
 	</typeAliases>
 
 	<environments default="oracle">
@@ -73,6 +75,7 @@
 		<mapper resource="com/oulim/app/volunteer/mapper/VolunteerMapper.xml"/>	 
 		<mapper resource="com/oulim/app/volunteer/mapper/VolunteerMapper.xml"/>
 		<mapper resource="com/oulim/app/mypage/mapper/MyPageMapper.xml"/>
+		<mapper resource="com/oulim/app/admin/mapper/AdminMapper.xml"/>
 	</mappers>
 </configuration>
 
