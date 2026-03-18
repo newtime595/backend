@@ -4,16 +4,16 @@ import java.util.Arrays;
 
 public class OrganCertDTO {
 	
-	private int organCertNum;
+	private int organCertNo;
 	private int userNo;
 	private int organNo;
 	private byte[] organCertFile;
 	
 	public int getOrganCertNum() {
-		return organCertNum;
+		return organCertNo;
 	}
-	public void setOrganCertNum(int organCertNum) {
-		this.organCertNum = organCertNum;
+	public void setOrganCertNum(int organCertNo) {
+		this.organCertNo = organCertNo;
 	}
 	public int getUserNo() {
 		return userNo;
@@ -36,7 +36,7 @@ public class OrganCertDTO {
 	
 	@Override
 	public String toString() {
-		return "OrganCertDTO [organCertNum=" + organCertNum + ", userNo=" + userNo + ", organNo=" + organNo
+		return "OrganCertDTO [organCertNum=" + organCertNo + ", userNo=" + userNo + ", organNo=" + organNo
 				+ ", organCertFile=" + Arrays.toString(organCertFile) + "]";
 	}
 	

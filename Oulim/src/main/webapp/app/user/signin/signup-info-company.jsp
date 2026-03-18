@@ -40,8 +40,14 @@
 	<jsp:include page="/app/include/header.jsp" />
 	<div class="l-main">
 		<div class="l-container">
-			<form
-				action="${pageContext.request.contextPath}/app/user/signin/signup-complete-company.html">
+			<form action="${pageContext.request.contextPath}/user/organJoinSecondOk.usr"
+      method="post">
+				<input type="hidden" name="organName" value="${organName}">
+				<input type="hidden" name="userName" value="${userName}">
+				<input type="hidden" name="userBirth" value="${userBirth}">
+				<input type="hidden" name="organCertNum" value="${organCertNum}">
+				<input type="hidden" name="userEmail" value="${userEmail}">
+				
 				<div class="p-signup-info-company">
 					<div class="l-signup-info-company-layout">
 						<div>
@@ -54,7 +60,7 @@
 							<h6>아이디</h6>
 							<div class="l-signup-info-company-input-layout">
 								<div>
-									<input type="text" name="" id="company-user-id" class="c-input"
+									<input type="text" name="userId" id="company-user-id" class="c-input"
 										placeholder="아이디 입력" />
 									<p id="is-company-user-id-error" class="is-error-text"></p>
 								</div>
@@ -68,7 +74,7 @@
 						<div class="c-signup-info-company-input-number">
 							<h6>비밀번호</h6>
 							<div class="l-toggle-layout">
-								<input type="password" name="" id="company-user-password"
+								<input type="password" name="userPw" id="company-user-password"
 									class="c-input" />
 								<button type="button" id="c-password-btn-toggle">
 									<img
@@ -81,7 +87,7 @@
 						<div class="c-signup-info-company-input-number">
 							<h6>비밀번호확인</h6>
 							<div class="l-toggle-layout-2">
-								<input type="password" name="" id="company-user-password-check"
+								<input type="password" name="userPwChk" id="company-user-password-check"
 									class="c-input" />
 								<button type="button" id="c-password-btn-toggle-2">
 									<img
@@ -93,7 +99,7 @@
 								class="is-error-text"></p>
 						</div>
 						<div class="c-signup-info-company-nextbtn">
-							<button class="c-button c-button--primary c-button--md"
+							<button type="submit" class="c-button c-button--primary c-button--md"
 								id="is-company-signup-btn">회원가입</button>
 						</div>
 					</div>

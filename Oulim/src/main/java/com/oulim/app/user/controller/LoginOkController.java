@@ -39,7 +39,7 @@ public class LoginOkController implements Execute{
 			session.setAttribute("userNo", loginUser.getUserNo());
 			session.setAttribute("userNickname", loginUser.getUserNickname());
 			session.setAttribute("userType", loginUser.getUserType());
-
+			
 			System.out.println("userNo : " + loginUser.getUserNo());
 			System.out.println("userNickname : " + loginUser.getUserNickname());
 			System.out.println("userType : " + loginUser.getUserType());

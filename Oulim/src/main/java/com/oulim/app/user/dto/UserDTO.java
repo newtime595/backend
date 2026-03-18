@@ -14,7 +14,7 @@ public class UserDTO {
     private Date userLastLogin;
     private String userNickname;
     private String organName;
-    private String organNo;
+    private int organNo;
 	private String userPhoneNum;
     private String userAddress;
     private String userAddressDetail;
@@ -86,10 +86,10 @@ public class UserDTO {
 	public void setOrganName(String organName) {
 		this.organName = organName;
 	}
-    public String getOrganNo() {
+    public int getOrganNo() {
 		return organNo;
 	}
-	public void setOrganNo(String organNo) {
+	public void setOrganNo(int organNo) {
 		this.organNo = organNo;
 	}
 

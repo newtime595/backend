@@ -29,7 +29,7 @@
 	href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
 <script defer
 	src="${pageContext.request.contextPath}/asset/js/pages/user/signin/signup-verify-company.js"></script>
-</head>
+</head> 
 
 <body>
 	<jsp:include page="/app/include/header.jsp" />
@@ -37,7 +37,8 @@
 		<div class="l-container">
 			<div class="p-signup-verify-company-main">
 				<form
-					action="${pageContext.request.contextPath}/front/html/user/signin/signup-info-company.html">
+					action="${pageContext.request.contextPath}/user/organJoinFirstOk.usr"
+					method="post">
 					<div class="l-signup-verify-company-layout">
 						<div>
 							<h2>회원가입</h2>
@@ -51,26 +52,32 @@
 
 						<div class="c-signup-verify-company-input">
 							<h6>기관명</h6>
-							<input type="text" name="" id="company-name" class="c-input"
-								placeholder="소속회사" />
+							<input type="text" name="organName" id="company-name"
+								class="c-input" placeholder="소속회사" />
 							<p id="is-company-name-error" class="is-error-text"></p>
 						</div>
 						<div class="c-signup-verify-company-input">
 							<h6>이름</h6>
-							<input type="text" name="" id="company-user-name" class="c-input"
-								placeholder="이름 입력해주세요" />
+							<input type="text" name="userName" id="company-user-name"
+								class="c-input" placeholder="이름 입력해주세요" />
 							<p id="is-company-user-name-error" class="is-error-text"></p>
 						</div>
 						<div class="c-signup-verify-company-input">
 							<h6>생년월일</h6>
-							<input type="text" name="" id="company-birth" class="c-input"
-								placeholder="생년월일을 입력해주세요" />
+							<input type="date" name="userBirth" id="company-birth"
+								class="c-input" placeholder="생년월일을 입력해주세요" />
 							<p id="is-company-birth-error" class="is-error-text"></p>
 						</div>
 						<div class="c-signup-verify-company-input">
+							<h6>사업자 등록번호</h6>
+							<input type="text" name="organCertNum" id="company-cert-num"
+								class="c-input" placeholder="사업자 등록 번호를 입력해주세요" />
+							<p id="is-company-user-name-error" class="is-error-text"></p>
+						</div>
+						<div class="c-signup-verify-company-input">
 							<h6>이메일</h6>
-							<input type="text" name="" id="company-email" class="c-input"
-								placeholder="이메일을 입력해주세요" />
+							<input type="text" name="userEmail" id="company-email"
+								class="c-input" placeholder="이메일을 입력해주세요" />
 							<p id="is-company-email-error" class="is-error-text"></p>
 						</div>
 						<div class="c-signup-verify-company-input-number">
@@ -92,12 +99,11 @@
 							<div>
 								<input type="text" name="" id="company-file-name-1"
 									class="c-siginup-verify-company-filename" placeholder="사본 등록"
-									readonly /> <input type="file" name=""
-									id="company-file-1" class="c-siginup-verify-company-file" />
+									readonly /> <input type="file" name="" id="company-file-1"
+									class="c-siginup-verify-company-file" />
 								<div class="c-signup-company-btn">
 									<button class="c-button c-button--secondary c-button--md"
-										type="button" id="company-file-btn-1">
-										첨부파일</button>
+										type="button" id="company-file-btn-1">첨부파일</button>
 								</div>
 							</div>
 						</div>
@@ -106,17 +112,17 @@
 							<div>
 								<input type="text" name="" id="company-file-name-2"
 									class="c-siginup-verify-company-filename" placeholder="사본 등록"
-									readonly /> <input type="file" name=""
-									id="company-file-2" class="c-siginup-verify-company-file" />
+									readonly /> <input type="file" name="" id="company-file-2"
+									class="c-siginup-verify-company-file" />
 								<div class="c-signup-company-btn">
 									<button class="c-button c-button--secondary c-button--md"
-										type="button" id="company-file-btn-2">
-										첨부파일</button>
+										type="button" id="company-file-btn-2">첨부파일</button>
 								</div>
 							</div>
 						</div>
 						<div class="c-signup-verify-company-nextbtn">
-							<button class="c-button c-button--primary c-button--md"
+							<button type="submit"
+								class="c-button c-button--primary c-button--md"
 								id="is-company-next-btn">다 음</button>
 						</div>
 					</div>
