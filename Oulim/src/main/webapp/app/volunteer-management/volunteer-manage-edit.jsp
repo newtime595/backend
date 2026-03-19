@@ -43,7 +43,7 @@
 				<div class="p-volunteer-manage-edit_header">
 					<h1 class="p-volunteer-manage-edit_title">봉사수정</h1>
 				</div>
-
+			
 				<div class="l-volunteer-manage-edit_form">
 					<div class="l-volunteer-manage-edit_form-grid">
 
@@ -84,6 +84,7 @@
 							<label class="l-volunteer-manage-edit_form-label">봉사자연령</label>
 							<div class="l-volunteer-manage-edit_form-field">
 								<select id="volunActAgeGroup" name="volunActAgeGroup" class="c-select">
+									<option value="0" <c:if test="${volunActivity.volunActAgeGroup == 0}">selected</c:if>>전체</option>
 									<option value="1" <c:if test="${volunActivity.volunActAgeGroup == 1}">selected</c:if>>청소년</option>
 									<option value="2" <c:if test="${volunActivity.volunActAgeGroup == 2}">selected</c:if>>청년</option>
 									<option value="3" <c:if test="${volunActivity.volunActAgeGroup == 3}">selected</c:if>>직장인</option>
@@ -109,9 +110,13 @@
 							<label class="l-volunteer-manage-edit_form-label">활동분야</label>
 							<div class="l-volunteer-manage-edit_form-field">
 								<select id="volunActActType" name="volunActActType" class="c-select">
-									<option value="1" <c:if test="${volunActivity.volunActActType == 1}">selected</c:if>>환경</option>
-									<option value="2" <c:if test="${volunActivity.volunActActType == 2}">selected</c:if>>의료</option>
-									<option value="3" <c:if test="${volunActivity.volunActActType == 3}">selected</c:if>>교육</option>
+									<option value="">선택</option>
+									<option value="1" <c:if test="${volunteer.volunActActType == 1}">selected</c:if>>환경</option>
+									<option value="2" <c:if test="${volunteer.volunActActType == 2}">selected</c:if>>의료</option>
+									<option value="3" <c:if test="${volunteer.volunActActType == 3}">selected</c:if>>교육</option>
+									<option value="4" <c:if test="${volunteer.volunActActType == 4}">selected</c:if>>생활 편의</option>
+									<option value="5" <c:if test="${volunteer.volunActActType == 5}">selected</c:if>>문화·체육·예술</option>
+									<option value="6" <c:if test="${volunteer.volunActActType == 6}">selected</c:if>>기타</option>
 								</select>
 							</div>
 						</div>
@@ -178,9 +183,8 @@
 					<button type="submit" id="editButton" class="c-button c-button--primary c-button--md">
 						수정
 					</button>
-					<button type="button" id="cancelButton" class="c-button c-button--secondary c-button--md"
-						onclick="location.href='${pageContext.request.contextPath}/volunteer-manage/detail.vm?volunActNo=${volunActivity.volunActNo}'">
-						취소
+					<button type="button" id="cancelButton" class="c-button c-button--secondary c-button--md">
+					    취소
 					</button>
 				</div>
 			</form>

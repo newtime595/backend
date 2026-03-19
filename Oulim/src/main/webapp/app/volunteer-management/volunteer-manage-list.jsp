@@ -52,12 +52,12 @@
 										<label class="c-volunAct-list-search-label">활동분야</label>
 										<select class="c-select" name="actType">
 											<option value="">모두</option>
-											<option value="1">환경</option>
-											<option value="2">의료</option>
-											<option value="3">교육</option>
-											<option value="4">생활·편의</option>
-											<option value="5">문화·체육·예술</option>
-											<option value="6">기타</option>
+											<option value="1" ${actType == '1' ? 'selected' : ''}>환경</option>
+											<option value="2" ${actType == '2' ? 'selected' : ''}>의료</option>
+											<option value="3" ${actType == '3' ? 'selected' : ''}>교육</option>
+											<option value="4" ${actType == '4' ? 'selected' : ''}>생활·편의</option>
+											<option value="5" ${actType == '5' ? 'selected' : ''}>문화·체육·예술</option>
+											<option value="6" ${actType == '6' ? 'selected' : ''}>기타</option>
 										</select>
 									</div>
 						
@@ -65,16 +65,16 @@
 										<label class="c-volunAct-list-search-label">모집상태</label>
 										<select class="c-select" name="recruitStatus">
 											<option value="">선택</option>
-											<option value="recruit">모집중</option>
-											<option value="before-recruit">모집 예정</option>
-											<option value="recruit-end">모집 마감</option>
+											<option value="recruit" <c:if test="${recruitStatus == 'recruit'}">selected</c:if>>모집중</option>
+											<option value="before-recruit" <c:if test="${recruitStatus == 'before-recruit'}">selected</c:if>>모집 예정</option>
+											<option value="recruit-end" <c:if test="${recruitStatus == 'recruit-end'}">selected</c:if>>모집 마감</option>
 										</select>
 									</div>
 								</div>
 						
 								<div class="l-volunAct-list-search-keyword">
 								<label class="c-volunAct-list-search-label">제 목</label>
-									<input class="c-input" type="text" name="keyword" placeholder="관련 제목 검색" />
+									<input class="c-input" type="text" name="keyword" value="${keyword}" placeholder="관련 제목 검색" />
 								</div>
 						
 								<div class="l-volunAct-list-search-submit">
@@ -138,7 +138,37 @@
 				</div>
 
 				<!-- 페이지네이션  c-pagination-->
-				<nav class="c-pagination"></nav>
+				<nav class="c-pagination">
+					<c:if test="${lastPage > 1}">
+						<c:if test="${page > 1}">
+							<a class="c-pagination__link"
+							   href="${pageContext.request.contextPath}/volunteer-manage/list.vm?page=${page - 1}&actType=${actType}&recruitStatus=${recruitStatus}&keyword=${keyword}">
+								‹
+							</a>
+						</c:if>
+				
+						<c:forEach var="i" begin="1" end="${lastPage}">
+							<c:choose>
+								<c:when test="${i == page}">
+									<a class="c-pagination__link is-active">${i}</a>
+								</c:when>
+								<c:otherwise>
+									<a class="c-pagination__link"
+									   href="${pageContext.request.contextPath}/volunteer-manage/list.vm?page=${i}&actType=${actType}&recruitStatus=${recruitStatus}&keyword=${keyword}">
+										${i}
+									</a>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+				
+						<c:if test="${page < lastPage}">
+							<a class="c-pagination__link"
+							   href="${pageContext.request.contextPath}/volunteer-manage/list.vm?page=${page + 1}&actType=${actType}&recruitStatus=${recruitStatus}&keyword=${keyword}">
+								›
+							</a>
+						</c:if>
+					</c:if>
+				</nav>
 			</div>
 		</section>
 	</main>

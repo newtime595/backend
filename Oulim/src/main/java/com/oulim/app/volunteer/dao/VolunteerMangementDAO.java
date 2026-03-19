@@ -1,6 +1,7 @@
 package com.oulim.app.volunteer.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -17,7 +18,7 @@ public class VolunteerMangementDAO {
 		sqlSession = MyBatisConfig.getSqlSessionFactory().openSession(true);
 	}
 
-	// 봉사활동 조회
+	// 봉사활동 조회 사용X
 	public List<VolunActivityDTO> selectVolManageList(VolunActivityDTO volunActivityDTO) {
 		return sqlSession.selectList("VolunteerManagement.volManageSelect", volunActivityDTO);
 	}
@@ -32,7 +33,7 @@ public class VolunteerMangementDAO {
 		return sqlSession.selectOne("VolunteerManagement.volManageDetail", volunActNo);
 	}
 
-	// 봉사 지원자 조회
+	// 봉사 지원자 조회 사용X
 	public List<VolunApplyDTO> applyVolSelect(int volunActNo) {
 		return sqlSession.selectList("VolunteerManagement.applyVolSelect", volunActNo);
 	}
@@ -56,5 +57,32 @@ public class VolunteerMangementDAO {
 	public void updateCurrency(PointJoinDTO pointjoinDTO ) {
 		sqlSession.update("VolunteerManagement.updateCurrency", pointjoinDTO);
 	}
+	
+	// 포인트 로그 추가
+	public void insertPointLog(PointJoinDTO pointJoinDTO) {
+		sqlSession.insert("VolunteerManagement.insertPointLog", pointJoinDTO);
+	}
 
+	// 봉사자 상태 변경
+	public int updateAttendanceStatus(VolunApplyDTO volunApplyDTO) {
+		return sqlSession.update("VolunteerManagement.updateAttendanceStatus", volunApplyDTO);
+	}
+	//-------------------------
+	// 봉사자 전체 카운트
+	public int selectApplyCount(int volunActNo) {
+		return sqlSession.selectOne("VolunteerManagement.selectVolunteerCount", volunActNo);
+	}
+	// 봉사자 페이징
+	public List<VolunApplyDTO> applyVolSelectPage(Map<String, Integer> pageMap) {
+		return sqlSession.selectList("VolunteerManagement.selectVolunteerPage", pageMap);
+	}
+	
+	// 봉사 관리 조회 페이징 
+	public List<VolunActivityDTO> selectVolManagePage(Map<String, Object> pageMap) {
+		return sqlSession.selectList("VolunteerManagement.volManageSelectPage", pageMap);
+	}
+	// 봉사 관리 전체 카운트
+	public int selectVolManageCount(VolunActivityDTO volunActivityDTO) {
+		return sqlSession.selectOne("VolunteerManagement.volManageSelectCount", volunActivityDTO);
+	}
 }

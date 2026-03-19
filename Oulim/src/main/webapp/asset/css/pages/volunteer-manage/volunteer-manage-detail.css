@@ -84,4 +84,13 @@ button:disabled{
 	margin:10px;
 }
 
+.c-list__header span, .c-list__row span{
+	text-align:center !important;
+	justify-content:center !important;
+}
+
+
+.c-list--5col .c-list__header, .c-list--5col .c-list__row{
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr !important;
+}
 

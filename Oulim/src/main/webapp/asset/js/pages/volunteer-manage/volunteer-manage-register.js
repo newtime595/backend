@@ -1,179 +1,160 @@
-const volunteerStartDate = document.querySelector("#volunteerStartDate");   // 봉사시작
-const volunteerEndDate = document.querySelector("#volunteerEndDate");       // 봉사종료
-const recruitStartDate = document.querySelector("#recruitStartDate");       // 모집시작
-const recruitEndDate = document.querySelector("#recruitEndDate");           // 모집종료
-const volunteerStartTime = document.querySelector("#volunteerStartTime");   // 봉사시작시간
-const volunteerEndTime = document.querySelector("#volunteerEndTime");       // 봉사종료시간
-const volunteerTarget = document.querySelector("#volunteerTarget");         // 봉사대상
-const volunteerLocation = document.querySelector("#volunteerLocation");     // 봉사장소
-const volunteerPoint = document.querySelector("#volunteerPoint");           // 획득포인트
-const volunteerTitle = document.querySelector("#volunteerTitle");           // 봉사제목
-const volunteerAge = document.querySelector("#volunteerAge");               // 연령대 선택
-const volunteerCapacity = document.querySelector("#volunteerCapacity");     // 일자당 모집인원 선택
-const volunteerCategory = document.querySelector("#volunteerCategory");     // 활동분야
-const volunteerDetail = document.querySelector("#volunteerDetail");         // 봉사상세내용
-const registerButton = document.querySelector("#registerButton");           // 작성버튼
-const cancelButton = document.querySelector("#cancelButton");               // 취소버튼
+const form = document.querySelector("#registerForm");
 
-const requiredFields = [
-    volunteerStartDate,
-    volunteerEndDate,
-    volunteerStartTime,
-    volunteerEndTime,
-    recruitStartDate,
-    recruitEndDate,
-    volunteerAge,
-    volunteerCapacity,
-    volunteerCategory,
-    volunteerTarget,
-    volunteerLocation,
-    volunteerPoint,
-    volunteerTitle,
-    volunteerDetail
-];
+const volunActRecruBegin = document.querySelector("#volunActRecruBegin");
+const volunActRecruEnd = document.querySelector("#volunActRecruEnd");
+const volunActProcBegin = document.querySelector("#volunActProcBegin");
+const volunActProcEnd = document.querySelector("#volunActProcEnd");
+const volunActBeginTime = document.querySelector("#volunActBeginTime");
+const volunActEndTime = document.querySelector("#volunActEndTime");
+const volunActAgeGroup = document.querySelector("#volunActAgeGroup");
+const volunActActType = document.querySelector("#volunActActType");
+const volunActAddress = document.querySelector("#volunActAddress");
+const volunActPoint = document.querySelector("#volunActPoint");
+const volunActTitle = document.querySelector("#volunActTitle");
+const volunActDetail = document.querySelector("#volunActDetail");
+const registerButton = document.querySelector("#registerButton");
 
-// 필수값 검사
 function isEmpty(field) {
-    return !field.value || !field.value.trim();
+	return !field.value || !field.value.trim();
 }
 
-// 날짜 범위 검사 함수
-function validateDateRange(startInput, endInput) {
-    const startValue = startInput.value;
-    const endValue = endInput.value;
-
-    if (!startValue || !endValue) {
-        return true;
-    }
-    return startValue <= endValue;
+function parseDate(value) {
+	return new Date(value + "T00:00:00");
 }
 
-// 시간 범위 검사 함수
-function validateTimeRange(startInput, endInput) {
-    const startValue = startInput.value;
-    const endValue = endInput.value;
-
-    if (!startValue || !endValue) {
-        return true;
-    }
-
-    return startValue <= endValue;
+function diffDays(start, end) {
+	const ms = end.getTime() - start.getTime();
+	return Math.floor(ms / (1000 * 60 * 60 * 24));
 }
 
-// 오류 추가 함수
-function showError(input){
-    input.classList.add("is-error");
-}
-
-// 오류 삭제 함수
-function clearError(input){
-    input.classList.remove("is-error");
-}
-
-// 전체 오류 제거
-function clearAllErrors() {
-    requiredFields.forEach(field => {
-        if (field) clearError(field);
-    });
-}
-
-// 포인트 입력칸 숫자만 입력 가능
-// 포인트 상한정해야함
-volunteerPoint.addEventListener("input", (e) => {
-  e.target.value = e.target.value.replace(/[^0-9]/g, "");
-});
-
-// 입력하면 바로 오류 제거
-requiredFields.forEach(field => {
-    field.addEventListener("input", () => {
-        clearError(field);
-    });
-
-    field.addEventListener("change", () => {
-        clearError(field);
-    });
+// 숫자만 입력
+[volunActPoint, volunActBeginTime, volunActEndTime].forEach((input) => {
+	input.addEventListener("input", (e) => {
+		e.target.value = e.target.value.replace(/[^0-9]/g, "");
+	});
 });
 
 registerButton.addEventListener("click", (e) => {
-    e.preventDefault();
+	e.preventDefault();
 
-    let isValid = true;
-    let firstErrorField = null;
+	if (isEmpty(volunActRecruBegin)) {
+		alert("모집 시작일을 입력해주세요.");
+		volunActRecruBegin.focus();
+		return;
+	}
 
-    clearAllErrors();
+	if (isEmpty(volunActRecruEnd)) {
+		alert("모집 종료일을 입력해주세요.");
+		volunActRecruEnd.focus();
+		return;
+	}
 
-    // 필수값 검사
-    requiredFields.forEach(field => {
-        if (isEmpty(field)) {
-            showError(field);
-            if (!firstErrorField) {
-                firstErrorField = field;
-            }
-            isValid = false;
-        }
-    });
+	if (isEmpty(volunActProcBegin)) {
+		alert("봉사 시작일을 입력해주세요.");
+		volunActProcBegin.focus();
+		return;
+	}
 
-    // 시간 검사
-    if (!validateTimeRange(volunteerStartTime, volunteerEndTime)) {
-        showError(volunteerStartTime);
-        showError(volunteerEndTime);
-        alert("봉사 시간을 다시 설정해주세요.");
+	if (isEmpty(volunActProcEnd)) {
+		alert("봉사 종료일을 입력해주세요.");
+		volunActProcEnd.focus();
+		return;
+	}
 
-        if (!firstErrorField) {
-            firstErrorField = volunteerStartTime;
-        }
-        isValid = false;
-    }
+	if (isEmpty(volunActBeginTime)) {
+		alert("봉사 시작 시간을 입력해주세요.");
+		volunActBeginTime.focus();
+		return;
+	}
 
-    // 날짜 검사 시작일 > 종료일
-    if (!validateDateRange(volunteerStartDate, volunteerEndDate)) {
-        showError(volunteerStartDate);
-        showError(volunteerEndDate);
-        alert("기간을 다시 설정해주세요.");
-        if (!firstErrorField) {
-            firstErrorField = volunteerStartDate;
-        }
-        isValid = false;
-    }
+	if (isEmpty(volunActEndTime)) {
+		alert("봉사 종료 시간을 입력해주세요.");
+		volunActEndTime.focus();
+		return;
+	}
 
-    // 날짜 검사 모집 시작일 > 모집 종료일
-    if (!validateDateRange(recruitStartDate, recruitEndDate)) {
-        showError(recruitStartDate);
-        showError(recruitEndDate);
-        alert("기간을 다시 설정해주세요.");
-        if (!firstErrorField) {
-            firstErrorField = recruitStartDate;
-        }
-        isValid = false;
-    }
+	if (isEmpty(volunActAgeGroup)) {
+		alert("봉사자 연령을 선택해주세요.");
+		volunActAgeGroup.focus();
+		return;
+	}
 
-    // 날짜 검사 모집 종료일 > 봉사 시작일
-    if (recruitEndDate.value &&
-        volunteerStartDate.value &&
-        recruitEndDate.value > volunteerStartDate.value) {
-        showError(recruitStartDate);
-        showError(recruitEndDate);
-        showError(volunteerStartDate);
-        alert("기간을 다시 설정해주세요.");
+	if (isEmpty(volunActActType)) {
+		alert("활동분야를 선택해주세요.");
+		volunActActType.focus();
+		return;
+	}
 
-        if (!firstErrorField) {
-            firstErrorField = recruitEndDate;
-        }
-        isValid = false;
-    }
+	if (isEmpty(volunActAddress)) {
+		alert("봉사 장소를 입력해주세요.");
+		volunActAddress.focus();
+		return;
+	}
 
-    if (!isValid) {
-        firstErrorField.focus();
-        return;
-    }
+	if (isEmpty(volunActPoint)) {
+		alert("포인트를 입력해주세요.");
+		volunActPoint.focus();
+		return;
+	}
 
-    alert("봉사 등록이 완료되었습니다.");
-    location.href = "/Oulim/front/html/volunteer-management/volunteer-manage-list.html";
-});
+	if (isEmpty(volunActTitle)) {
+		alert("봉사 제목을 입력해주세요.");
+		volunActTitle.focus();
+		return;
+	}
 
-// 취소버튼 클릭시
-cancelButton.addEventListener("click", () => {
-  if (confirm("작성 중인 내용이 사라집니다. 취소하시겠습니까?")) {
-    location.href = "/Oulim/front/html/volunteer-management/volunteer-manage-list.html";
-  }
+	if (isEmpty(volunActDetail)) {
+		alert("봉사 상세 내용을 입력해주세요.");
+		volunActDetail.focus();
+		return;
+	}
+
+	const recruBeginDate = parseDate(volunActRecruBegin.value);
+	const recruEndDate = parseDate(volunActRecruEnd.value);
+	const procBeginDate = parseDate(volunActProcBegin.value);
+	const procEndDate = parseDate(volunActProcEnd.value);
+
+	if (recruBeginDate > recruEndDate) {
+		alert("모집기간을 다시 설정해주세요.");
+		volunActRecruBegin.focus();
+		return;
+	}
+
+	if (procBeginDate > procEndDate) {
+		alert("봉사기간을 다시 설정해주세요.");
+		volunActProcBegin.focus();
+		return;
+	}
+
+	if (diffDays(recruBeginDate, recruEndDate) > 30) {
+		alert("모집 기간은 시작일로부터 최대 30일까지 가능합니다.");
+		volunActRecruBegin.focus();
+		return;
+	}
+
+	if (diffDays(procBeginDate, procEndDate) > 7) {
+		alert("봉사 기간은 시작일로부터 최대 7일까지 가능합니다.");
+		volunActProcBegin.focus();
+		return;
+	}
+
+	if (recruEndDate >= procBeginDate) {
+		alert("모집 기간에 봉사기간이 포함될 수 없습니다.");
+		volunActRecruEnd.focus();
+		return;
+	}
+
+	if (Number(volunActBeginTime.value) >= Number(volunActEndTime.value)) {
+		alert("봉사 시간을 다시 설정해주세요.");
+		volunActBeginTime.focus();
+		return;
+	}
+
+	if (Number(volunActPoint.value) <= 0) {
+		alert("포인트를 입력해주세요.");
+		volunActPoint.focus();
+		return;
+	}
+
+	form.submit();
 });

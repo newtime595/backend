@@ -17,23 +17,24 @@ public class VolunAttendanceController implements Execute {
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Result result = new Result();
-	    PointJoinDTO pointJoinDTO = new PointJoinDTO();
+		PointJoinDTO pointJoinDTO = new PointJoinDTO();
+		VolunManageServicePoint volunManageServicePoint = new VolunManageServicePoint();
+		
+		String[] userNos = request.getParameterValues("attendanceUser");
+		int changeAmount = Integer.parseInt(request.getParameter("changeAmount"));
+		int volunActNo = Integer.parseInt(request.getParameter("volunActNo"));
+		int attendanceStatus = Integer.parseInt(request.getParameter("attendanceStatus"));
+		
+		
+		pointJoinDTO.setChangeAmount(changeAmount);
 
-	    String[] userNos = request.getParameterValues("attendanceUser");
-	    int changeAmount = Integer.parseInt(request.getParameter("changeAmount"));
+		if (userNos != null && userNos.length > 0) {
+			volunManageServicePoint.attendanceProcess(pointJoinDTO, userNos, volunActNo, attendanceStatus);
+		}
 
-	    VolunManageServicePoint volunManageServicePoint = new VolunManageServicePoint();
+		result.setRedirect(true);
+		result.setPath(request.getContextPath() + "/volunteer-manage/detail.vm?volunActNo=" + volunActNo);
 
-	    pointJoinDTO.setChangeAmount(changeAmount);
-
-	    if (userNos != null && userNos.length > 0) {
-	        volunManageServicePoint.attendanceProcess(pointJoinDTO, userNos);
-	    }
-
-	    result.setRedirect(true);
-	    result.setPath(request.getContextPath() + "/volunteer-manage/list.vm");
-
-	    return result;
+		return result;
 	}
-
 }

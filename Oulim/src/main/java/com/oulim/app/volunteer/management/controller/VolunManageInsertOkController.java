@@ -9,43 +9,76 @@ import javax.servlet.http.HttpSession;
 
 import com.oulim.app.common.controller.Execute;
 import com.oulim.app.common.controller.Result;
-import com.oulim.app.volunteer.dao.VolunteerMangementDAO;
 import com.oulim.app.volunteer.dto.VolunActivityDTO;
+import com.oulim.app.volunteer.management.service.VolunManageInsertService;
 
-public class VolunManageInsertOkController implements Execute{
+public class VolunManageInsertOkController implements Execute {
 
 	@Override
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("봉사 등록 처리 컨트롤러 이동 완료");
-		VolunteerMangementDAO volunteerMangementDAO = new VolunteerMangementDAO();
-		VolunActivityDTO volunActivityDTO = new VolunActivityDTO();
 		Result result = new Result();
 		HttpSession session = request.getSession();
-		
-//		Integer organNo = (Integer) session.getAttribute("organNo");
-		Integer organNo=1;	//테스트
-		
-		volunActivityDTO.setVolunActTitle(request.getParameter("volunActTitle"));
-		volunActivityDTO.setVolunActRecruBegin(request.getParameter("volunActRecruBegin"));
-		volunActivityDTO.setVolunActRecruEnd(request.getParameter("volunActRecruEnd"));
-		volunActivityDTO.setVolunActProcBegin(request.getParameter("volunActProcBegin"));
-		volunActivityDTO.setVolunActProcEnd(request.getParameter("volunActProcEnd"));
-		volunActivityDTO.setVolunActPoint(Integer.parseInt(request.getParameter("volunActPoint")));
-		volunActivityDTO.setVolunActBeginTime(Integer.parseInt(request.getParameter("volunActBeginTime")));
-		volunActivityDTO.setVolunActEndTime(Integer.parseInt(request.getParameter("volunActEndTime")));
-		volunActivityDTO.setVolunActActType(Integer.parseInt(request.getParameter("volunActActType")));
-		volunActivityDTO.setVolunActAgeGroup(Integer.parseInt(request.getParameter("volunActAgeGroup")));
-		volunActivityDTO.setVolunActOrganNo(organNo);
-		volunActivityDTO.setVolunActAddress(request.getParameter("volunActAddress"));
-		volunActivityDTO.setVolunActRecruMaxCount(Integer.parseInt(request.getParameter("volunActRecruMaxCount")));
-		volunActivityDTO.setVolunActDetail(request.getParameter("volunActDetail"));
+		VolunManageInsertService service = new VolunManageInsertService();
+		Integer organNo = 1; // 테스트
+		// Integer organNo = (Integer) session.getAttribute("organNo");
 
-		volunteerMangementDAO.volActivityInsert(volunActivityDTO);
-		result.setPath(request.getContextPath() + "/volunteer-manage/list.vm");
-		result.setRedirect(true);
+		VolunActivityDTO dto = new VolunActivityDTO();
+		dto.setVolunActTitle(request.getParameter("volunActTitle"));
+		dto.setVolunActRecruBegin(request.getParameter("volunActRecruBegin"));
+		dto.setVolunActRecruEnd(request.getParameter("volunActRecruEnd"));
+		dto.setVolunActProcBegin(request.getParameter("volunActProcBegin"));
+		dto.setVolunActProcEnd(request.getParameter("volunActProcEnd"));
+		dto.setVolunActAddress(request.getParameter("volunActAddress"));
+		dto.setVolunActDetail(request.getParameter("volunActDetail"));
+		dto.setVolunActOrganNo(organNo);
+
+		String point = request.getParameter("volunActPoint");
+		String beginTime = request.getParameter("volunActBeginTime");
+		String endTime = request.getParameter("volunActEndTime");
+		String actType = request.getParameter("volunActActType");
+		String ageGroup = request.getParameter("volunActAgeGroup");
+		String maxCount = request.getParameter("volunActRecruMaxCount");
+
+		try {
+			if (point != null && !point.trim().isEmpty()) {
+				dto.setVolunActPoint(Integer.parseInt(point));
+			}
+			if (beginTime != null && !beginTime.trim().isEmpty()) {
+				dto.setVolunActBeginTime(Integer.parseInt(beginTime));
+			}
+			if (endTime != null && !endTime.trim().isEmpty()) {
+				dto.setVolunActEndTime(Integer.parseInt(endTime));
+			}
+			if (actType != null && !actType.trim().isEmpty()) {
+				dto.setVolunActActType(Integer.parseInt(actType));
+			}
+			if (ageGroup != null && !ageGroup.trim().isEmpty()) {
+				dto.setVolunActAgeGroup(Integer.parseInt(ageGroup));
+			}
+			if (maxCount != null && !maxCount.trim().isEmpty()) {
+				dto.setVolunActRecruMaxCount(Integer.parseInt(maxCount));
+			}
+		} catch (NumberFormatException e) {
+			request.setAttribute("errorMessage", "숫자 항목은 숫자만 입력해주세요.");
+			request.setAttribute("volunteer", dto);
+			result.setRedirect(false);
+			result.setPath("/app/volunteer-manage/volunteer-manage-register.jsp");
+			return result;
+		}
 		
+		try {
+			service.insertVolunteer(dto);
+
+			result.setRedirect(true);
+			result.setPath(request.getContextPath() + "/volunteer-manage/list.vm");
+		} catch (IllegalArgumentException e) {
+			request.setAttribute("errorMessage", e.getMessage());
+			request.setAttribute("volunteer", dto);
+			result.setRedirect(false);
+			result.setPath("/app/volunteer-manage/volunteer-manage-register.jsp");
+		}
+
 		return result;
 	}
-
 }

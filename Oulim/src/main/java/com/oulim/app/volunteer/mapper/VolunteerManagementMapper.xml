@@ -1,8 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="VolunteerManagement">
+	
+	
+	<!--봉사자 총인원 -->
+	<select id="selectVolunteerCount" parameterType="int" resultType="int">
+		SELECT COUNT(*)
+		FROM TBL_VOLUN_APPLY
+		WHERE VOLUN_ACT_NO = #{volunActNo}
+	</select>	
+
+	<!--페이징 처리 퀴리문 -->
+	<select id="selectVolunteerPage" parameterType="map" resultType="VolunApplyDTO">
+		<![CDATA[
+		SELECT *
+		FROM (
+			SELECT ROWNUM AS rn, T.*
+			FROM (
+				SELECT
+					A.VOLUN_ACT_NO AS volunActNo,
+					A.USER_NO AS userNo,
+					U.USER_NAME AS userName,
+					TO_CHAR(U.USER_BIRTH, 'YYYY.MM.DD') AS userBirth,
+					FLOOR(MONTHS_BETWEEN(SYSDATE, U.USER_BIRTH) / 12) AS userAge,
+					TO_CHAR(A.VOLUNACT_APPLYDATE, 'YYYY.MM.DD') AS volunActApplyDate,
+					A.VOLUNACT_APPLYSTATUS AS volunActApplyStatus,
+					A.VOLUNACT_ATTENDANCE AS volunActAttendance
+				FROM TBL_VOLUN_APPLY A
+				JOIN TBL_USER U
+					ON A.USER_NO = U.USER_NO
+				WHERE A.VOLUN_ACT_NO = #{volunActNo}
+				ORDER BY A.VOLUNACT_APPLYDATE DESC
+			) T
+			WHERE ROWNUM <= #{endRow}
+		)
+		WHERE rn >= #{startRow}
+		]]>
+	</select>
+
 	<!--포인트 지급-->
-	<update id="updateCurrency" parameterType="PointJoinDTO" >
+	<update id="updateCurrency" parameterType="PointJoinDTO">
 		MERGE INTO TBL_CURRENCY c
 		USING (
 			SELECT
@@ -20,6 +57,35 @@
 		WHEN NOT MATCHED THEN
 			INSERT (Currency_ID, User_No, Total_Amount)
 			VALUES (src.Currency_ID, src.User_No, src.Change_Amount)
+	</update>
+
+	<!-- 포인트 로그 저장 -->
+	<insert id="insertPointLog" parameterType="PointJoinDTO">
+		INSERT INTO TBL_LOG_POINT (
+			LOG_NO,
+			USER_NO,
+			CURRENCY_ID,
+			CHANGE_AMOUNT,
+			LOG_REASON,
+			LOG_DATE
+		) VALUES (
+			SEQ_TBL_LOG_POINT.NEXTVAL,
+			#{userNo},
+			#{currencyId},
+			#{changeAmount},
+			#{logReason},
+			SYSDATE
+		)
+	</insert>
+	
+	<!-- 봉사자 상태 변경 -->
+	<update id="updateAttendanceStatus" parameterType="VolunApplyDTO">
+		UPDATE TBL_VOLUN_APPLY
+		SET VOLUNACT_APPLYSTATUS = 0,
+	    VOLUNACT_ATTENDANCE = #{volunActAttendance}
+		WHERE VOLUN_ACT_NO = #{volunActNo}
+	 	AND USER_NO = #{userNo}
+	 	AND VOLUNACT_APPLYSTATUS = 1
 	</update>
 	
 	<!--봉사 삭제  -->
@@ -56,7 +122,8 @@
 			A.VOLUN_ACT_NO AS volunActNo,
 			A.USER_NO AS userNo,
 			U.USER_NAME AS userName,
-			U.USER_BIRTH AS userBirth,
+			TO_CHAR(U.USER_BIRTH, 'YYYY.MM.DD') AS userBirth,
+			FLOOR(MONTHS_BETWEEN(SYSDATE, U.USER_BIRTH) / 12) AS userAge,
 			TO_CHAR(A.VOLUNACT_APPLYDATE, 'YYYY.MM.DD') AS volunActApplyDate,
 			A.VOLUNACT_APPLYSTATUS AS volunActApplyStatus,
 			A.VOLUNACT_ATTENDANCE AS volunActAttendance
@@ -175,30 +242,75 @@
 
 		ORDER BY VOLUN_ACT_RECRU_END DESC
 	</select>
-
-	<select id="volManageSelectAll" parameterType="VolunActivityDTO"
-		resultType="int">
-		SELECT COUNT(VOLUN_ACT_NO)
-		FROM TBL_VOLUN_ACTIVITY
-		WHERE
-		VOLUN_ACT_ORGAN_NO = #{volunActOrganNo}
-
-		<if test="volunActActType != 0">
-			AND VOLUN_ACT_ACT_TYPE = #{volunActActType}
+	<!--페이징 추가 검색 조건-->
+	<select id="volManageSelectPage" parameterType="map" resultType="VolunActivityDTO">
+		<![CDATA[
+		SELECT *
+		FROM (
+			SELECT ROWNUM AS rn, T.*
+			FROM (
+				SELECT
+					VOLUN_ACT_NO,
+					VOLUN_ACT_TITLE,
+					VOLUN_ACT_ACT_TYPE,
+					TO_CHAR(VOLUN_ACT_RECRU_BEGIN, 'YYYY-MM-DD') AS VOLUN_ACT_RECRU_BEGIN,
+					TO_CHAR(VOLUN_ACT_RECRU_END, 'YYYY-MM-DD') AS VOLUN_ACT_RECRU_END,
+					CASE
+						WHEN SYSDATE < VOLUN_ACT_RECRU_BEGIN THEN '모집예정'
+						WHEN SYSDATE < VOLUN_ACT_RECRU_END + 1 THEN '모집중'
+						ELSE '모집마감'
+					END AS RECRU_STATUS
+				FROM TBL_VOLUN_ACTIVITY
+				WHERE VOLUN_ACT_ORGAN_NO = #{volunActOrganNo}
+		]]>
+		
+		<if test="actType != null and actType != ''">
+			AND VOLUN_ACT_ACT_TYPE = #{actType}
 		</if>
-
+	
+		<if test="recruitStatus != null and recruitStatus != ''">
+			AND (
+				(#{recruitStatus} = 'before-recruit' AND SYSDATE &lt; VOLUN_ACT_RECRU_BEGIN)
+				OR (#{recruitStatus} = 'recruit' AND SYSDATE &gt;= VOLUN_ACT_RECRU_BEGIN AND SYSDATE &lt; VOLUN_ACT_RECRU_END + 1)
+				OR (#{recruitStatus} = 'recruit-end' AND SYSDATE &gt;= VOLUN_ACT_RECRU_END + 1)
+			)
+		</if>
+	
 		<if test="keyword != null and keyword != ''">
 			AND VOLUN_ACT_TITLE LIKE '%' || #{keyword} || '%'
 		</if>
-
+	
+		<![CDATA[
+				ORDER BY VOLUN_ACT_RECRU_END DESC
+			) T
+			WHERE ROWNUM <= #{endRow}
+		)
+		WHERE rn >= #{startRow}
+		]]>
+	</select>
+	
+	<!--검색 전체 조회 검색-->
+	<select id="volManageSelectCount" parameterType="VolunActivityDTO" resultType="int">
+		SELECT COUNT(VOLUN_ACT_NO)
+		FROM TBL_VOLUN_ACTIVITY
+		WHERE VOLUN_ACT_ORGAN_NO = #{volunActOrganNo}
+	
+		<if test="actType != null and actType != ''">
+			AND VOLUN_ACT_ACT_TYPE = #{actType}
+		</if>
+	
 		<if test="recruitStatus != null and recruitStatus != ''">
 			AND (
-			(#{recruitStatus} = '모집예정' AND SYSDATE &lt; VOLUN_ACT_RECRU_BEGIN)
-			OR (#{recruitStatus} = '모집중' AND SYSDATE &gt;= VOLUN_ACT_RECRU_BEGIN
-			AND SYSDATE &lt; VOLUN_ACT_RECRU_END + 1)
-			OR (#{recruitStatus} = '모집완료' AND SYSDATE &gt;= VOLUN_ACT_RECRU_END +
-			1)
+				(#{recruitStatus} = 'before-recruit' AND SYSDATE &lt; VOLUN_ACT_RECRU_BEGIN)
+				OR (#{recruitStatus} = 'recruit' AND SYSDATE &gt;= VOLUN_ACT_RECRU_BEGIN AND SYSDATE &lt; VOLUN_ACT_RECRU_END + 1)
+				OR (#{recruitStatus} = 'recruit-end' AND SYSDATE &gt;= VOLUN_ACT_RECRU_END + 1)
 			)
 		</if>
+	
+		<if test="keyword != null and keyword != ''">
+			AND VOLUN_ACT_TITLE LIKE '%' || #{keyword} || '%'
+		</if>
 	</select>
+	
+	
 </mapper>

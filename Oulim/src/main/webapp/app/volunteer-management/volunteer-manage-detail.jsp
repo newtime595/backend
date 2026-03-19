@@ -27,9 +27,8 @@
 	href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
-<%-- <script defer
-	src="${pageContext.request.contextPath}/asset/js/pages/volunteer-manage/volunteer-manage-detail.js"></script>  --%>
-<script defer src="${pageContext.request.contextPath}/asset/js/pages/main/include.js"></script>
+
+<%-- <script defer src="${pageContext.request.contextPath}/asset/js/pages/volunteer-manage/volunteer-manage-detail.js"></script> --%>
 </head>
 
 <body>
@@ -41,7 +40,9 @@
 			<div class="p-volunteer-manage-detail_header">
 				<h1 class="p-volunteer-manage-detail_title">봉사 상세</h1>
 				<div class="c-button-add">
-            		<button class="edit-btn c-button c-button--primary c-button--md">출석 처리</button>
+            		<button type="button" id="attendanceToggleBtn" class="edit-btn c-button c-button--primary c-button--md">
+						출석 처리
+					</button>
           		</div>
 				<div class="c-button-group">
 					<button class="edit-btn c-button c-button--primary c-button--md" type="button"
@@ -125,7 +126,7 @@
 					</div>
 				</div>
 			</div>
-			
+			<div id="detailSection">
 			<!-- 글내용 영역 추가 -->
 			<div class="c-detail-card">
 				<div class="c-detail-card__info">
@@ -139,6 +140,12 @@
 					</div>
 				</div>
 			</div>
+			</div>
+			<!-- 봉사자 리스트 출력  -->
+		<div id="attendanceSection" style="display: none;">
+		<form action="${pageContext.request.contextPath}/volunteer-manage/attendance.vm" method="post">
+			<input type="hidden" name="volunActNo" value="${volunDetail.volunActNo}">
+			<input type="hidden" name="changeAmount" value="${volunDetail.volunActPoint}">
 		
 		<div class="c-list c-list--5col">
 			<div class="c-list__header">
@@ -161,9 +168,15 @@
 										data-volun-act-no="${apply.volunActNo}">
 								</span>
 								<span class="c-list__col">${apply.userName}</span>
-								<span class="c-list__col">${apply.userBirth}</span>
+								<span class="c-list__col">${apply.userAge}</span>
 								<span class="c-list__col">${apply.volunActApplyDate}</span>
-								<span class="c-list__col">-</span>
+								<span class="c-list__col">
+									<c:choose>
+										<c:when test="${apply.volunActAttendance == 1}">출석</c:when>
+										<c:when test="${apply.volunActAttendance == 2}">결석</c:when>
+										<c:otherwise>미처리</c:otherwise>
+									</c:choose>
+								</span>
 							</div>
 						</c:forEach>
 					</c:when>
@@ -181,19 +194,42 @@
 			</div>
 		</div>
 					<div class="b-btn-layout">
-							<button class="c-button c-button--primary c-button--md">출석</button>
-							<button class="c-button c-button--secondary c-button--md">결석</button>
+							<button type="submit" name="attendanceStatus" value="1" class="c-button c-button--primary c-button--md">출석</button>
+							<button type="submit" name="attendanceStatus" value="2" class="c-button c-button--secondary c-button--md">결석</button>
 					</div>
-
-			<!-- 페이지네이션  c-pagination-->
+			</form>
+			</div>
+			<!-- 페이지네이션 -->
 			<nav class="c-pagination">
-				<!-- <a class="c-pagination__link is-disabled">‹</a> <a
-					class="c-pagination__link is-active">1</a> <a
-					class="c-pagination__link">2</a> <a class="c-pagination__link">3</a>
-				<a class="c-pagination__link">4</a> <a class="c-pagination__link">5</a>
-				<a class="c-pagination__link">6</a> <a class="c-pagination__link">7</a>
-				<a class="c-pagination__link">8</a> <a class="c-pagination__link">9</a>
-				<a class="c-pagination__link">10</a> <a class="c-pagination__link">›</a> -->
+				<c:if test="${lastPage > 1}">
+					<c:if test="${page > 1}">
+						<a class="c-pagination__link"
+						   href="${pageContext.request.contextPath}/volunteer-manage/detail.vm?volunActNo=${volunDetail.volunActNo}&page=${page - 1}">
+							‹
+						</a>
+					</c:if>
+			
+					<c:forEach var="i" begin="1" end="${lastPage}">
+						<c:choose>
+							<c:when test="${i == page}">
+								<a class="c-pagination__link is-active">${i}</a>
+							</c:when>
+							<c:otherwise>
+								<a class="c-pagination__link"
+								   href="${pageContext.request.contextPath}/volunteer-manage/detail.vm?volunActNo=${volunDetail.volunActNo}&page=${i}">
+									${i}
+								</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+			
+					<c:if test="${page < lastPage}">
+						<a class="c-pagination__link"
+						   href="${pageContext.request.contextPath}/volunteer-manage/detail.vm?volunActNo=${volunDetail.volunActNo}&page=${page + 1}">
+							›
+						</a>
+					</c:if>
+				</c:if>
 			</nav>
 
 			<div class="c-button--volunteer-manage-detail">
