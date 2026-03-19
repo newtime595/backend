@@ -31,7 +31,7 @@ String path = request.getContextPath();
 	<link rel="stylesheet" href="/Oulim/asset/css/pages/main/footer.css" />
   </head>
   <body>
-  	<jsp:include page="/app/include/header-login.jsp" />
+  	<jsp:include page="/app/include/header.jsp" />
     <div class="l-main">
       <div class="l-container">
         <div class="p-volunAct-list-main">

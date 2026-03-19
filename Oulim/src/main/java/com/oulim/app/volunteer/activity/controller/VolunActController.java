@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.oulim.app.common.controller.Execute;
 import com.oulim.app.common.controller.Result;
 import com.oulim.app.volunteer.dao.VolunteerActivityDAO;
-import com.oulim.app.volunteer.dto.VolunteerActivityDTO;
+import com.oulim.app.volunteer.dto.VolunActivityDTO;
 
 public class VolunActController implements Execute{
 
@@ -39,9 +39,9 @@ public class VolunActController implements Execute{
         param.put("volunDate", volunDate);
         param.put("searchType", searchType);
         param.put("keyword", keyword);
-0
+
         // 봉사활동 목록 조회
-        List<VolunteerActivityDTO> list = volunteerDAO.selectVolunteerList(param);
+        List<VolunActivityDTO> list = volunteerDAO.selectVolunteerList(param);
 
         // JSP로 데이터 전달
 		request.setAttribute("volunteerList", list);

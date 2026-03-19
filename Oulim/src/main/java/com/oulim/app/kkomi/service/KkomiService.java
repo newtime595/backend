@@ -14,4 +14,6 @@ public class KkomiService {
 			kkomiLevExpMap.put(i, (i - 1) * (int)Math.pow(2, (i - 1))*EXP_BASE);
 		}
 	}
+	
+	
 }

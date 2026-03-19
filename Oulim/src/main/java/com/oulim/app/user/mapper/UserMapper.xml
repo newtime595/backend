@@ -204,4 +204,20 @@
 		WHERE user_no = #{userNo}
 	</select>
 
+
+	<!-- 보유 재화 조회 -->
+	<select id="getCurrency" parameterType="int">
+		SELECT currency_id, user_no, total_amount FROM TBL_CURRENCY where user_no = #{userNo}
+	</select>
+	
+	<!-- 보유 재화 변경 -->
+	<update id="upsertCurrency" parameterType="CurrencyDTO">
+	MERGE INTO TBL_CURRENCY tc USING(
+		SELECT #{userNo} AS User_No, #{currencyId} as currency_id FROM DUAL) src on tc.user_no = src.user_no and tc.currency_id = src.currency_id 
+		WHEN NOT MATCHED THEN
+			INSERT (currency_id, user_no, total_amount)
+			VALUES (#{currencyId}, #{userNo}, #{totalAmount})
+		WHEN MATCHED THEN
+			Update set total_amount = #{totalAmount} 
+	</update>
 </mapper>

@@ -226,4 +226,10 @@ WHERE user_no = #{userNo}
 </update>
 
 
+
+<!-- 10. 포인트 이력 삽입 -->
+<insert id="pointLogInsert" parameterType="LogPointDTO">
+	INSERT INTO TBL_LOG_POINT(Log_No, User_No, Currency_ID, Change_Amount, Log_Reason, Log_Date)
+	VALUES (SEQ_TBL_LOG_POINT.nextval, #{userNo}, #{currencyId}, #{changeAmount}, #{logReason}, sysdate)
+</insert>
 </mapper>

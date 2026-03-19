@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oulim.app.common.controller.Result;
+
 /**
  * Servlet implementation class KkomiFrontController
  */
@@ -37,9 +39,22 @@ public class KkomiFrontController extends HttpServlet {
 	}
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		String target = request.getRequestURI().substring(request.getContextPath().length());
+		Result result = null;
+		switch(target) {
+		case "kkomi/info.kko" ->{
+			System.out.println("꼬미 정보 조회");
+			result = new KkomiInfoController().execute(request, response);
+		}
+		}
 		
-		
+		if(result != null && result.getPath() != null) {
+			if(result.isRedirect()) {
+				response.sendRedirect(result.getPath());
+			}else {
+				request.getRequestDispatcher(result.getPath()).forward(request,response);
+			}
+		}
 	}
 	
 }

@@ -40,9 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
     remain.textContent = mockData.remainPoint
   }
 
-  const feedBtn = document.querySelector(".js-feed")
-  const missionBtn = document.querySelector(".js-mission")
-  const storageBtn = document.querySelector(".js-storage")
+  const feedBtn = document.querySelector(".js-feed");
+  const missionBtn = document.querySelector(".js-mission");
+  const storageBtn = document.querySelector(".js-storage");
 
   feedBtn?.addEventListener("click", () => {
     alert("도력을 흡수합니다!")
