@@ -25,10 +25,11 @@ String path = request.getContextPath();
     <link rel="stylesheet" href="/Oulim/asset/css/component/select.css" />
 
     <!-- css -->
-    <link rel="stylesheet" href="/Oulim/asset/css/pages/volunteer-activity/volunAct-list.css" />
-    
-        <link rel="stylesheet" href="/Oulim/asset/css/pages/main/header-login.css"/>
-	<link rel="stylesheet" href="/Oulim/asset/css/pages/main/footer.css" />
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/volunteer-activity/volunAct-list.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css"/>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
+
   </head>
   <body>
   	<jsp:include page="/app/include/header.jsp" />
@@ -43,22 +44,25 @@ String path = request.getContextPath();
             <div class="l-volunAct-list-search-grid">
               <div class="l-volunAct-list-search-item">
                 <label class="c-volunAct-list-search-label">활동분야</label>
-                <select class="c-select">
-                  <option>선택</option>
-                  <option value="environment">환경</option>
-                  <option value="medical">의료</option>
-                  <option value="education">교육</option>
-                </select>
+				<select name="actType" class="c-select">
+				    <option value="">전체</option>
+				    <option value="1">환경</option>
+				    <option value="2">의료</option>
+				    <option value="3">교육</option>
+				    <option value="4">생활·편의</option>
+				    <option value="5">문화·체육·예술</option>
+				    <option value="6">기타</option>
+				</select>
               </div>
 
               <div class="l-volunAct-list-search-item">
-                <label class="c-volunAct-list-search-label">모집상태</label>
-                <select class="c-select">
-                  <option>선택</option>
-                  <option value="recruit">모집중</option>
-                  <option value="before-recruit">모집 예정</option>
-                  <option value="recurit-end">모집 마감</option>
-                </select>
+                <label class="c-volunAct-list-search-label" name="recruitStatus">모집상태</label>
+				<select name="recruitStatus" class="c-select">
+				    <option value="">선택</option>
+				    <option value="1">모집중</option>
+				    <option value="2">모집 예정</option>
+				    <option value="3">모집 마감</option>
+				</select>
               </div>
 
               <div class="l-volunAct-list-search-item">
@@ -70,17 +74,17 @@ String path = request.getContextPath();
                 <label class="c-volunAct-list-search-label">
                   참여 가능 연령
                 </label>
-                <select class="c-select">
-                  <option>선택</option>
-                  <option value="teenager">청소년 (14~19세)</option>
-                  <option value="youth">청년 (20~29세)</option>
-                  <option value="officeWorker">직장인 (30~세)</option>
-                </select>
+				<select name="ageGroup" class="c-select">
+				    <option value="">전체</option>
+				    <option value="1">청소년 (14~19)</option>
+				    <option value="2">청년 (20~30)</option>
+				    <option value="3">직장인 (30+)</option>
+				</select>
               </div>
             </div>
 
             <div class="l-volunAct-list-search-keyword">
-              <select class="c-select">
+              <select class="c-select" name="searchType">
                 <option value="title">제목</option>
                 <option value="author">작성자</option>
               </select>
@@ -96,42 +100,29 @@ String path = request.getContextPath();
           </div>
           <div class="l-volunAct-list-card-listA">
             <!-- 봉사목록 카드 리스트 영역 -->
-            <ul class="l-volunAct-card-list">
-              <li class="l-volunAct-card-element">
-                <!-- 카드 detail-card -->
-                <div class="c-detail-card">
-                  <a href="/Oulim/front/html/volunteer-activity/volunAct-detail.html" >
-                    <div class="c-detail-card__header">
-                      <span class="c-badge c-badge--primary"> 모집중 </span>
-                      <span class="c-badge c-badge--orange"> 독거노인 </span>
-                    </div>
-                    <h2 class="c-detail-card__title">
-                      주민과 함께하는 제설작업 봉사
-                    </h2>
-                    <div class="c-detail-card__info">
-                      <div class="c-detail-card__row">
-                        <span class="c-detail-card__label"> 봉사장소 </span>
-                        <span class="c-detail-card__value">
-                          서울특별시 도봉구
-                        </span>
-                      </div>
-                      <div class="c-detail-card__row">
-                        <span class="c-detail-card__label"> 봉사기간 </span>
-                        <span class="c-detail-card__value">
-                          26.02.03 ~ 26.02.06
-                        </span>
-                      </div>
-                      <div class="c-detail-card__row">
-                        <span class="c-detail-card__label"> 포인트 </span>
-                        <span class="c-detail-card__value"> 2000p </span>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </li>
-
-              <!-- detail card element 1개 영역 -->
-            </ul>
+			<ul class="l-volunAct-card-list">
+			
+			    <!-- 데이터 없을 때 -->
+			    <c:if test="${empty volunteerList}">
+			        <li>등록된 봉사활동이 없습니다.</li>
+			    </c:if>
+			
+			    <!-- 데이터 있을 때 -->
+			    <c:forEach var="item" items="${volunteerList}">
+			        <li class="l-volunAct-card-element">
+			            <div class="c-detail-card">
+			                <a href="${pageContext.request.contextPath}/volunteer-activity/detail.va?volunActNo=${item.volunActNo}">
+			                    <div class="card">
+			                        <div class="title">${item.volunActTitle}</div>
+			                        <div class="status">${item.recruStatus}</div>
+			                        <div class="info"> ${item.volunActAddress}</div>
+			                        <div class="info"> ${item.volunActPoint} point</div>
+			                    </div>
+			                </a>
+			            </div>
+			        </li>
+			    </c:forEach>
+			</ul>
             <!-- 봉사목록 카드 리스트 영역 종료-->
           </div>
 

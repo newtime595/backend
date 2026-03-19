@@ -3,27 +3,30 @@
 <mapper namespace="volunAct">
 
 <select id="selectVolunteerList"
-        parameterType="map"
+        parameterType="VolunActivityDTO"
         resultType="VolunActivityDTO">
-
-    SELECT
-        Volun_Act_No, <!-- 봉사번호 -->
-        Volun_Act_Title, <!-- 봉사제목 -->
-        Volun_Act_Recru_Begin, <!-- 모집시작 -->
-        Volun_Act_Recru_End, <!-- 모집종료 -->
-        Volun_Act_Proc_Begin, <!-- 봉사시작 -->
-        Volun_Act_Proc_End, <!-- 봉사 종료일 -->
-        Volun_Act_Point,  <!-- 봉사포인트 -->
-        Volun_Act_Act_Type,  <!-- 활동분야 -->
-        Volun_Act_Age_Group, <!-- 참여가능연령 -->
-        Volun_Act_Address <!-- 봉사주소 -->
-		CASE
-		<![CDATA[
-		WHEN SYSDATE < Volun_Act_Recru_Begin THEN '모집예정'  
-		WHEN SYSDATE BETWEEN Volun_Act_Recru_Begin AND Volun_Act_Recru_End THEN '모집중'
-		WHEN SYSDATE > Volun_Act_Recru_End THEN '모집완료'END AS RECRU_STATUS
-		]]>
-		FROM TBL_VOLUN_ACTIVITY
+	
+	SELECT
+	    Volun_Act_No, <!-- 봉사번호 -->
+	    Volun_Act_Title, <!-- 봉사제목 -->
+	    Volun_Act_Recru_Begin, <!-- 모집시작 -->
+	    Volun_Act_Recru_End, <!-- 모집종료 -->
+	    Volun_Act_Proc_Begin, <!-- 봉사시작a -->
+	    Volun_Act_Proc_End, <!-- 봉사 종료일 -->
+	    Volun_Act_Point,  <!-- 봉사포인트 -->
+	    Volun_Act_Act_Type,  <!-- 활동분야 -->
+	    Volun_Act_Age_Group, <!-- 참여가능연령 -->
+	    Volun_Act_Address, <!--봉사주소s-->
+	
+	    <![CDATA[
+	    CASE
+	        WHEN SYSDATE < Volun_Act_Recru_Begin THEN '모집예정'
+	        WHEN SYSDATE BETWEEN Volun_Act_Recru_Begin AND Volun_Act_Recru_End THEN '모집중'
+	        WHEN SYSDATE > Volun_Act_Recru_End THEN '모집완료'
+	    END AS RECRU_STATUS
+	    ]]>
+	
+	FROM TBL_VOLUN_ACTIVITY
 
 
     <where>
@@ -92,7 +95,7 @@
 
         <!-- 제목 검색 -->
         <if test="searchType == 'title' and keyword != null and keyword != ''">
-            AND Volun_Act_Title LIKE '%' || #{keyword} || '%'
+			AND Volun_Act_Title LIKE CONCAT('%', #{keyword}, '%')
         </if>
 
         <!-- 포인트 검색 -->
@@ -106,7 +109,7 @@
     ORDER BY Volun_Act_No DESC
 
 </select>
-
+<!-- 
 <select id="selectVolunDetail" parameterType="int"
         resultType="VolunActivityDTO">
 
@@ -135,5 +138,5 @@
     WHERE V.Volun_Act_No = #{volunActNo}
 
 </select>
-
+ -->
 </mapper>

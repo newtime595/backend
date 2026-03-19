@@ -70,9 +70,6 @@
 		<mapper resource="com/oulim/app/community/mapper/CommunityMapper.xml"/>
 		<mapper resource="com/oulim/app/community/mapper/CommunityFileMapper.xml"/> 
  		<mapper resource="com/oulim/app/kkomi/mapper/KkomiMapper.xml"/> 
-		<mapper resource="com/oulim/app/volunteer/mapper/VolunteerMapper.xml"/>	
-		<mapper resource="com/oulim/app/volunteer/mapper/VolunteerMapper.xml"/>
-		<mapper resource="com/oulim/app/volunteer/mapper/VolunteerMapper.xml"/>	 
 		<mapper resource="com/oulim/app/volunteer/mapper/VolunteerMapper.xml"/>
 		<mapper resource="com/oulim/app/mypage/mapper/MyPageMapper.xml"/>
 		<mapper resource="com/oulim/app/admin/mapper/AdminMapper.xml"/>
