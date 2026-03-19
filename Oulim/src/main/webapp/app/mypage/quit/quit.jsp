@@ -41,11 +41,11 @@
             <ul class="list1">
               <li>나의 정보</li>
               <br>
-              <a href="${pageContext.request.contextPath}/front/html/mypage/profile/profile.html">
+              <a href="${pageContext.request.contextPath}/mypage/checkOk.mp">
                 <li>- 내 정보 보기</li>
               </a>
               <br>
-              <a href="${pageContext.request.contextPath}/front/html/mypage/profile/profile-edit.html">
+              <a href="${pageContext.request.contextPath}/mypage/userEdit.mp">
                 <li>- 내 정보 수정</li>
               </a>
               <br>
@@ -54,30 +54,30 @@
             <ul class="list2">
               <li>봉사조회</li>
               <br>
-              <a href="${pageContext.request.contextPath}/front/html/mypage/volunteer-history/coming-volunteer.html">
+              <a href="${pageContext.request.contextPath}/mypage/comingVolun.mp">
                 <li>- 예정된 봉사 이력 조회</li>
               </a>
               <br>
-              <a href="${pageContext.request.contextPath}/front/html/mypage/volunteer-history/finish-volunteer.html">
+              <a href="${pageContext.request.contextPath}/mypage/finishVolun.mp">
                 <li>- 완료된 봉사 이력 조회</li>
               </a>
 
             </ul>
 
             <ul class="list3">
-              <a href="${pageContext.request.contextPath}/front/html/mypage/point-history/point-history.html">
+              <a href="${pageContext.request.contextPath}/mypage/point.mp">
                 <li>포인트 조회</li>
               </a>
             </ul>
 
             <ul class="list4">
-              <a href="${pageContext.request.contextPath}/front/html/mypage/community-history/myposts.html">
+              <a href="${pageContext.request.contextPath}/mypage/myPost.mp">
                 <li>작성글 조회</li>
               </a>
             </ul>
 
             <ul class="list5">
-              <a href="${pageContext.request.contextPath}/front/html/mypage/quit/quit.html">
+              <a href="${pageContext.request.contextPath}/mypage/quit.mp">
                 <li>회원 탈퇴</li>
               </a>
             </ul>
@@ -138,14 +138,14 @@
 
 
         <!-- 비밀번호 -->
-        <form>
+        <form action="${pageContext.request.contextPath}/mypage/quitOk.mp" method="post">
 
           <div class="main-pw">
 
             <h5>비밀번호 입력</h5>
 
             <div class="pw-input">
-              <input type="password" class="c-input" name="password" placeholder="비밀번호 입력" />
+              <input type="password" class="c-input" name="userPw" placeholder="비밀번호 입력" />
             </div>
 
           </div>

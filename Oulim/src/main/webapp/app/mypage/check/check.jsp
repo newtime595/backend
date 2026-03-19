@@ -40,29 +40,29 @@
               <div class="p-mypage-check--menu-group">
                 <li>나의 정보</li>
                 <br />
-                <a href="${pageContext.request.contextPath}/front/html/mypage/check/check.html"><li>- 내 정보 보기</li></a>
+                <a href="${pageContext.request.contextPath}/mypage/check.mp"><li>- 내 정보 보기</li></a>
                 <br />
-                <a href="${pageContext.request.contextPath}/front/html/mypage/check/check.html"><li>- 내 정보 수정</li></a>
+                <a href="${pageContext.request.contextPath}/mypage/check.mp"><li>- 내 정보 수정</li></a>
               </div>
 
               <div class="p-mypage-check--menu-group">
                 <li>봉사조회</li>
                 <br />
-                <a href="${pageContext.request.contextPath}/front/html/mypage/check/check.html"><li>- 예정된 봉사 이력 조회</li></a>
+                <a href="${pageContext.request.contextPath}/mypage/check.mp"><li>- 예정된 봉사 이력 조회</li></a>
                 <br />
-                <a href="${pageContext.request.contextPath}/front/html/mypage/check/check.html"><li>- 완료된 봉사 이력 조회</li></a>
+                <a href="${pageContext.request.contextPath}/mypage/check.mp"><li>- 완료된 봉사 이력 조회</li></a>
               </div>
 
               <div class="p-mypage-check--menu-group">
-                <li>포인트 조회</li>
+                <a href="${pageContext.request.contextPath}/mypage/check.mp"><li>포인트 조회</li></a>
               </div>
 
               <div class="p-mypage-check--menu-group">
-                <li>작성글 조회</li>
+                <a href="${pageContext.request.contextPath}/mypage/check.mp"><li>작성글 조회</li></a>
               </div>
 
               <div class="p-mypage-check--menu-group">
-                <li>회원 탈퇴</li>
+                <a href="${pageContext.request.contextPath}/mypage/check.mp"><li>회원 탈퇴</li></a>
               </div>
 
             </ul>

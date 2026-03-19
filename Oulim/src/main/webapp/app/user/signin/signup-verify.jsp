@@ -43,6 +43,7 @@
 				<form
 					action="${pageContext.request.contextPath}/user/normalJoinFirstOk.usr"
 					method="post">
+					<input type="hidden" id="company-email-verified" name="emailVerified" value="false" />
 					<div class="l-signup-verify-layout">
 						<div>
 							<h2>회원가입</h2>
@@ -69,33 +70,37 @@
 
 						<div class="c-signup-verify-input">
 							<h6>이메일</h6>
-							<div class="l-signup-verify-layout-btn">
-								<input type="text" name="userEmail" id="user-email"
-									class="c-input" placeholder="이메일을 입력해주세요" />
+							<div class="l-signup-info-input-layout">
+								<div class="c-signup-verify-input">
+									<input type="text" name="userEmail" id="company-email"
+										class="c-input" placeholder="이메일을 입력해주세요" />
+									<p id="is-company-email-error" class="is-error-text"></p>
+								</div>
 								<div class="c-signup-btn">
 									<button type="button"
 										class="c-button c-button--secondary c-button--md"
-										id="email-check-btn">중복확인</button>
+										id="company-email-check-btn">인증발송</button>
 								</div>
 							</div>
-							<p id="is-user-email-error" class="is-error-text"></p>
 						</div>
-						
 						<div class="c-signup-verify-input-number">
-							<h6>인증번호</h6>
+							<h6>이메일 인증번호</h6>
 							<div class="l-signup-verify-number-layout">
 								<div>
-									<input type="text" name="" id="" class="c-input"
+									<input type="text" name="emailAuthCode"
+										id="company-email-auth-code" class="c-input"
 										placeholder="인증번호입력" />
-									<div class="c-signup-verify-numbertime">3:00</div>
+									<div class="c-signup-verify-numbertime"
+										id="company-email-timer">3:00</div>
 								</div>
 								<div class="c-signup-btn">
 									<button class="c-button c-button--secondary c-button--md"
-										type="button">인증확인</button>
+										type="button" id="company-email-auth-confirm-btn">인증확인</button>
 								</div>
 							</div>
+							<p id="is-company-email-auth-error" class="is-error-text"></p>
 						</div>
-						
+
 						<div class="c-signup-verify-input">
 							<h6>휴대전화</h6>
 							<div class="l-signup-verify-layout-btn">

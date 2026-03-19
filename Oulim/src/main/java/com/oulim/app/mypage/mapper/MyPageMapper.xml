@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mypage">
 <!-- 1. 마이페이지 진입 -->
-<select id="enterMyPage" parameterType="int" resultType="string">
-	SELECT user_pw FROM tbl_user WHERE user_no = #{userNo}
+<select id="enterMyPage" parameterType="int" resultType="int">
+	SELECT count(*) FROM tbl_user WHERE user_no = #{userNo}
 </select>
 
 
@@ -27,18 +27,18 @@
 <![CDATA[
 	SELECT
     N.user_nickname AS userNickname,
-    COUNT(A.VOLUN_ACT_NO) AS volunActNo,
+    COUNT(A.VOLUN_ACT_NO) AS volunActNo, 
     NVL(SUM(V.VOLUN_ACT_END_TIME - V.VOLUN_ACT_BEGIN_TIME), 0) AS totalVolunTime,
     NVL(R.RANK_POINT, 0) AS rankPoint,
     NVL(C.TOTAL_AMOUNT, 0) AS totalAmount
 FROM TBL_USER N
-JOIN TBL_VOLUN_APPLY A
+LEFT JOIN TBL_VOLUN_APPLY A
     ON N.USER_NO = A.USER_NO
-JOIN TBL_VOLUN_ACTIVITY V
+LEFT JOIN TBL_VOLUN_ACTIVITY V
     ON A.VOLUN_ACT_NO = V.VOLUN_ACT_NO
-JOIN TBL_RANKING R
+LEFT JOIN TBL_RANKING R
     ON N.USER_NO = R.USER_NO
-JOIN TBL_CURRENCY C
+LEFT JOIN TBL_CURRENCY C
     ON N.USER_NO = C.USER_NO
 WHERE N.USER_NO = #{userNo}
 GROUP BY
@@ -54,22 +54,18 @@ GROUP BY
 <select id="miniPoint" parameterType="int" resultType="MyPageJoinDTO">
 
 <![CDATA[
-SELECT
-    LOG_REASON,
-    TO_CHAR(LOG_DATE, 'YYYY.MM.DD'),
-    CHANGEPOINT
-FROM TBL_LOG_POINT
-WHERE USER_NO = #{userNo}
-  AND CHANGEPOINT > 0
+SELECT LOG_REASON, TO_CHAR(LOG_DATE, 'YYYY.MM.DD') AS logDate, CHANGE_amount
+FROM TBL_LOG_POINT 
+WHERE USER_NO = #{userNo} AND CHANGE_AMOUNT > 0 
 ORDER BY LOG_NO DESC
 ]]>
 
 </select>
-
+<!-- 예정봉사 조회 미니 -->
 <select id="miniComVol" parameterType="int" resultType="MyPageJoinDTO">
 
 <![CDATA[
-SELECT tva.volun_act_title, TO_CHAR( tva.Volun_Act_Recru_Begin ,'yyyy-mm-dd') || ' ~ ' || TO_CHAR( tva.Volun_Act_Recru_End,'yyyy-mm-dd')
+SELECT tva.volun_act_title AS volunActTitle, TO_CHAR( tva.Volun_Act_Proc_Begin ,'yyyy-mm-dd') AS comVolunActProcBegin, TO_CHAR( tva.Volun_Act_Proc_End,'yyyy-mm-dd') AS comVolunActProcEnd 
 FROM TBL_VOLUN_ACTIVITY tva
 JOIN TBL_VOLUN_APPLY apl
 ON tva.volun_act_no = apl.volun_act_no
@@ -81,7 +77,7 @@ ORDER BY tva.volun_act_no DESC
 
 <select id="miniFinVol" parameterType="int" resultType="MyPageJoinDTO">
 <![CDATA[
-SELECT tva.volun_act_title, TO_CHAR( tva.Volun_Act_Proc_Begin ,'yyyy-mm-dd') || ' ~ ' || TO_CHAR( tva.Volun_Act_Proc_End,'yyyy-mm-dd')
+SELECT tva.volun_act_title AS volunActTitle, TO_CHAR( tva.Volun_Act_Recru_Begin ,'yyyy-mm-dd') AS finVolunActProcBegin, TO_CHAR( tva.Volun_Act_Recru_End,'yyyy-mm-dd') AS finVolunActProcEnd
 FROM TBL_VOLUN_ACTIVITY tva
 JOIN TBL_VOLUN_APPLY apl
 ON tva.volun_act_no = apl.volun_act_no
@@ -204,10 +200,10 @@ ORDER BY LOG_NO DESC
 <select id="mypost" parameterType="int" resultType="MyPageJoinDTO">
 
 <![CDATA[
-SELECT tcp.postNo, tcp.postTitle, tcp.postDate, tpl.postLikeNo 
+SELECT tcp.post_No AS postNo, tcp.post_title AS postTitle, tcp.post_Date AS postDate, tpl.post_Like_No AS postLikeNo 
 FROM tbl_community_post tcp 
-JOIN tbl_post_like tpl 
-ON tcp.userno = #{userNo}
+LEFT JOIN tbl_post_like tpl 
+ON tcp.user_no = #{userNo}
 ]]>
 
 </select>
@@ -219,7 +215,7 @@ ON tcp.userno = #{userNo}
 <update id="quit" parameterType="int">
 
 UPDATE tbl_user SET
-user_status = 0;
+user_status = 0
 WHERE user_no = #{userNo}
 
 

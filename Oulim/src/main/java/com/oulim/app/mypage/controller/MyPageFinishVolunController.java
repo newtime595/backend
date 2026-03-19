@@ -29,14 +29,14 @@ public class MyPageFinishVolunController implements Execute {
 		
 		List<MyPageJoinDTO> finishVolun = mypageDAO.finishVolun(userNo);
 		
-		if(finishVolun != null) {
+//		if(finishVolun != null) {
 			path = "/app/mypage/volunteer-history/finish-volunteer.jsp";
 			result.setPath(path);
 			result.setRedirect(false);
-		}
+//		}
 		
 
-		return null;
+		return result;
 	}
 
 }

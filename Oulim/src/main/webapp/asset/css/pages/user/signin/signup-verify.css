@@ -71,7 +71,6 @@
     margin-bottom: 50px;
 }
 
-
 /* 에러 */
 
 .is-error-text{
@@ -88,3 +87,12 @@
 .is-success-text {
   color: #51AF01 !important;
 }
+
+
+.l-signup-info-input-layout{
+	display: flex;
+	gap:10px;
+}
+
+
+

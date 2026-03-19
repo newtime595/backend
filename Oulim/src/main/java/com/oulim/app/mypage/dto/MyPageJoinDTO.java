@@ -10,9 +10,13 @@ public class MyPageJoinDTO {
 	private int totalVolunTime;
 	private int rankPoint;
 	private int totalAmount;
-	private String volunActTitle;
-	private String volunActProcBegin;
-	private String volunActProcEnd;
+	private String volunActTitle; 
+//	private String comVolTitle;
+//	private String finVolTitle;
+	private String comVolunActProcBegin;
+	private String comVolunActProcEnd;
+	private String finVolunActProcBegin;
+	private String finVolunActProcEnd;
 	private int userStatus;
 	private int userNo;
 	private String userAddress;
@@ -34,6 +38,31 @@ public class MyPageJoinDTO {
 	private int changeAmount;
 	
 	
+	
+	public String getComVolunActProcBegin() {
+		return comVolunActProcBegin;
+	}
+	public void setComVolunActProcBegin(String comVolunActProcBegin) {
+		this.comVolunActProcBegin = comVolunActProcBegin;
+	}
+	public String getComVolunActProcEnd() {
+		return comVolunActProcEnd;
+	}
+	public void setComVolunActProcEnd(String comVolunActProcEnd) {
+		this.comVolunActProcEnd = comVolunActProcEnd;
+	}
+	public String getFinVolunActProcBegin() {
+		return finVolunActProcBegin;
+	}
+	public void setFinVolunActProcBegin(String finVolunActProcBegin) {
+		this.finVolunActProcBegin = finVolunActProcBegin;
+	}
+	public String getFinVolunActProcEnd() {
+		return finVolunActProcEnd;
+	}
+	public void setFinVolunActProcEnd(String finVolunActProcEnd) {
+		this.finVolunActProcEnd = finVolunActProcEnd;
+	}
 	public int getVolunActNo() {
 		return volunActNo;
 	}
@@ -75,18 +104,6 @@ public class MyPageJoinDTO {
 	}
 	public void setVolunActTitle(String volunActTitle) {
 		this.volunActTitle = volunActTitle;
-	}
-	public String getVolunActProcBegin() {
-		return volunActProcBegin;
-	}
-	public void setVolunActProcBegin(String volunActProcBegin) {
-		this.volunActProcBegin = volunActProcBegin;
-	}
-	public String getVolunActProcEnd() {
-		return volunActProcEnd;
-	}
-	public void setVolunActProcEnd(String volunActProcEnd) {
-		this.volunActProcEnd = volunActProcEnd;
 	}
 	public int getUserStatus() {
 		return userStatus;
@@ -207,13 +224,14 @@ public class MyPageJoinDTO {
 		return "MyPageJoinDTO [volunActNo=" + volunActNo + ", volunActEndTime=" + volunActEndTime
 				+ ", volunActBeginTime=" + volunActBeginTime + ", totalVolunTime=" + totalVolunTime + ", rankPoint="
 				+ rankPoint + ", totalAmount=" + totalAmount + ", volunActTitle=" + volunActTitle
-				+ ", volunActProcBegin=" + volunActProcBegin + ", volunActProcEnd=" + volunActProcEnd + ", userStatus="
-				+ userStatus + ", userNo=" + userNo + ", userAddress=" + userAddress + ", userAddressDetail="
-				+ userAddressDetail + ", userPostnum=" + userPostnum + ", userNickname=" + userNickname + ", userPw="
-				+ userPw + ", userEmail=" + userEmail + ", userPhoneNum=" + userPhoneNum + ", organName=" + organName
-				+ ", organNo=" + organNo + ", organCertNum=" + organCertNum + ", postTitle=" + postTitle + ", postDate="
-				+ postDate + ", postLikeNo=" + postLikeNo + ", postNo=" + postNo + ", logReason=" + logReason
-				+ ", logDate=" + logDate + ", changeAmount=" + changeAmount + "]";
+				+ ", comVolunActProcBegin=" + comVolunActProcBegin + ", comVolunActProcEnd=" + comVolunActProcEnd
+				+ ", finVolunActProcBegin=" + finVolunActProcBegin + ", finVolunActProcEnd=" + finVolunActProcEnd
+				+ ", userStatus=" + userStatus + ", userNo=" + userNo + ", userAddress=" + userAddress
+				+ ", userAddressDetail=" + userAddressDetail + ", userPostnum=" + userPostnum + ", userNickname="
+				+ userNickname + ", userPw=" + userPw + ", userEmail=" + userEmail + ", userPhoneNum=" + userPhoneNum
+				+ ", organName=" + organName + ", organNo=" + organNo + ", organCertNum=" + organCertNum
+				+ ", postTitle=" + postTitle + ", postDate=" + postDate + ", postLikeNo=" + postLikeNo + ", postNo="
+				+ postNo + ", logReason=" + logReason + ", logDate=" + logDate + ", changeAmount=" + changeAmount + "]";
 	}
 
 	

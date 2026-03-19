@@ -49,11 +49,11 @@
               <div class="p-point-history--menu-group">
                 <li>나의 정보</li>
                 <br>
-                <a href="${pageContext.request.contextPath}/front/html/mypage/profile/profile.html">
+                <a href="${pageContext.request.contextPath}/mypage/checkOk.mp">
                   <li>- 내 정보 보기</li>
                 </a>
                 <br>
-                <a href="${pageContext.request.contextPath}/front/html/mypage/profile/profile-edit.html">
+                <a href="${pageContext.request.contextPath}/mypage/userEdit.mp">
                   <li>- 내 정보 수정</li>
                 </a>
               </div>
@@ -61,27 +61,27 @@
               <div class="p-point-history--menu-group">
                 <li>봉사조회</li>
                 <br>
-                <a href="${pageContext.request.contextPath}/front/html/mypage/volunteer-history/coming-volunteer.html">
+                <a href="${pageContext.request.contextPath}/mypage/comingVolun.mp">
                   <li>- 예정된 봉사 이력 조회</li>
                 </a>
                 <br>
-                <a href="${pageContext.request.contextPath}/front/html/mypage/volunteer-history/finish-volunteer.html">
+                <a href="${pageContext.request.contextPath}/mypage/finishVolun.mp">
                   <li>- 완료된 봉사 이력 조회</li>
                 </a>
               </div>
 
               <div class="p-point-history--menu-group">
-                <a href="${pageContext.request.contextPath}/front/html/mypage/point-history/point-history.html"><li>포인트 조회</li></a>
+                <a href="${pageContext.request.contextPath}/mypage/point.mp"><li>포인트 조회</li></a>
               </div>
 
               <div class="p-point-history--menu-group">
-                <a href="${pageContext.request.contextPath}/front/html/mypage/community-history/myposts.html">
+                <a href="${pageContext.request.contextPath}/mypage/myPost.mp">
                   <li>작성글 조회</li>
                 </a>
               </div>
 
               <div class="p-point-history--menu-group">
-                <a href="${pageContext.request.contextPath}/front/html/mypage/quit/quit.html">
+                <a href="${pageContext.request.contextPath}/mypage/quit.mp">
                   <li>회원 탈퇴</li>
                 </a>
               </div>

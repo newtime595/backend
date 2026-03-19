@@ -1,6 +1,7 @@
 package com.oulim.app.mypage.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,13 +22,14 @@ public class MyPageCheckOkController implements Execute{
 		Result result = new Result();
 		
 		MyPageJoinDAO mypageDAO = new MyPageJoinDAO();
+		MyPageJoinDTO mypageJoinDTO = new MyPageJoinDTO();
 		HttpSession session = request.getSession();
 		String path = null;
 		
 		Integer userNo = (Integer) session.getAttribute("userNo");
 		
 		String userPw = request.getParameter("userPw");
-		String userPw2 = (String)mypageDAO.enterMyPage1(userNo);
+//		String userPw2 = (String)mypageDAO.enterMyPage1(userNo);
 		
 		System.out.println(userNo);
 		
@@ -40,15 +42,59 @@ public class MyPageCheckOkController implements Execute{
 		
 		
 		
-		if(userPw == userPw2) {
+		if(mypageDAO.enterMyPage(userNo)) {
 			
-			result.setPath(request.getContextPath() + "/app/mypage/profile/profile.jsp");
-			result.setRedirect(true);
+			MyPageJoinDTO summaryInfo = mypageDAO.summaryInfo(userNo);
+			
+			
+			MyPageJoinDTO finVolunInfo = mypageDAO.miniFinVol(userNo);
+			List<MyPageJoinDTO> pointInfo = mypageDAO.miniPoint(userNo);
+			MyPageJoinDTO comVolunInfo = mypageDAO.miniComVol(userNo);
+			System.out.println("예정 봉사 " + comVolunInfo.getVolunActTitle());
+			System.out.println("완료 봉사 " + finVolunInfo.getVolunActTitle());
+			System.out.println("예정 봉사 기간" + comVolunInfo.getComVolunActProcBegin());
+			System.out.println("완료 봉사 기간 : " + finVolunInfo.getFinVolunActProcEnd());
+			System.out.println("포인트 정보 : " + pointInfo);
+			
+			System.out.println(pointInfo);
+			
+			request.setAttribute("miniPoint", pointInfo);
+			
+			request.setAttribute("totalVolunTime", summaryInfo.getTotalVolunTime());
+			request.setAttribute("rankPoint", summaryInfo.getRankPoint());
+			request.setAttribute("totalAmount", summaryInfo.getTotalAmount());
+			request.setAttribute("volunActNo", summaryInfo.getVolunActNo());
+
+			request.setAttribute("comVolunActTitle", comVolunInfo.getVolunActTitle());
+			request.setAttribute("comVolunActProcEnd", comVolunInfo.getComVolunActProcBegin());
+			request.setAttribute("comVolunActProcBegin", comVolunInfo.getComVolunActProcEnd());
+			
+			request.setAttribute("finVolunActTitle", finVolunInfo.getVolunActTitle());
+			request.setAttribute("finVolunActProcEnd", finVolunInfo.getFinVolunActProcEnd());
+			request.setAttribute("finVolunActProcBegin", finVolunInfo.getFinVolunActProcBegin());
+			
+			
+			System.out.println("조건문 통과");
+			
+			result.setPath("/app/mypage/profile/profile.jsp");
+			result.setRedirect(false);
+			
+			
+			
+			System.out.println("쿼리문 실행 성공");
+			System.out.println(summaryInfo);
+			System.out.println(summaryInfo.getTotalVolunTime());
+			
+			
+			
+			
 			return result;
 			
 		}
 		
-		
+		path = "/app/mypage/check/check.jsp"; // 일단 내 페이지로 > 테스트용
+		result.setPath(path);
+		result.setRedirect(true);
 		return result;
 		
 		

@@ -19,6 +19,7 @@ public class MyPageMyPostController implements Execute {
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		
 		Result result = new Result();
 
 		MyPageJoinDAO mypageDAO = new MyPageJoinDAO();
@@ -26,16 +27,19 @@ public class MyPageMyPostController implements Execute {
 		String path = null;
 
 		Integer userNo = (Integer) session.getAttribute("userNo");
-
+		
+		System.out.println("작성글 조회 쿼리 실행 전");
+		
 		List<MyPageJoinDTO> mypost = mypageDAO.viewMyPost(userNo);
 
-		if (mypost != null) {
+		System.out.println("작성 글 조회 쿼리 실행");
+//		if (mypost != null) {
 			path = "/app/mypage/community-history/myposts.jsp";
 			result.setPath(path);
 			result.setRedirect(false);
-		}
+//		}
 
-		return null;
+		return result;
 	}
 
 }
