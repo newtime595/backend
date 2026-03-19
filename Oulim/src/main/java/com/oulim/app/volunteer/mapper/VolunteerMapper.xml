@@ -46,7 +46,7 @@
             1~5 값이 들어오면 해당 봉사유형만 조회
         -->
         <if test="actType != null and actType != 0">
-            AND Volun_Act_Act_Type = #{actType}
+            AND Volun_Act_Act_Type = #{volunActType}
         </if>
 
 
@@ -55,7 +55,7 @@
             0은 전체이므로 조건을 적용하지 않음
         -->
         <if test="ageGroup != null and ageGroup != 0">
-            AND Volun_Act_Age_Group = #{ageGroup}
+            AND Volun_Act_Age_Group = #{volunAgeGroup}
         </if>
 
 

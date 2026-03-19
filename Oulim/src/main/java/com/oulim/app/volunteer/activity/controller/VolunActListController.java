@@ -28,24 +28,23 @@ public class VolunActListController implements Execute {
 		dto.setActType(request.getParameter("actType"));
 		dto.setRecruitStatus(request.getParameter("recruitStatus"));
 		dto.setKeyword(request.getParameter("keyword"));
-		VolunActivityDTO dto = new VolunActivityDTO();
 
 		// actType
 		String actType = request.getParameter("actType");
 		if(actType != null && !actType.equals("")) {
-		    dto.setActType(Integer.parseInt(actType));
+		    dto.setVolunActActType((Integer.parseInt(actType)));                     ;
 		}
 
 		// ageGroup
 		String ageGroup = request.getParameter("ageGroup");
 		if(ageGroup != null && !ageGroup.equals("")) {
-		    dto.setAgeGroup(Integer.parseInt(ageGroup));
+		    dto.setVolunActAgeGroup((Integer.parseInt(ageGroup)));
 		}
 
 		// recruitStatus
 		String recruitStatus = request.getParameter("recruitStatus");
 		if(recruitStatus != null && !recruitStatus.equals("")) {
-		    dto.setRecruitStatus(Integer.parseInt(recruitStatus));
+		    dto.setRecruitStatus(recruitStatus);
 		}
 
 		// keyword

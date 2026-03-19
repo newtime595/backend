@@ -42,6 +42,7 @@ public class VolunActivityDTO {
 	private String recruitStatus;   // 검색용 상태값
 	private String actType;         // 검색용 활동분야 문자열
 	private String keyword;         // 검색어
+	private String searchType;		// 검색 조건
 	
 
 	public int getVolunActNo() {
@@ -169,8 +170,14 @@ public class VolunActivityDTO {
 	}
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}	
+	
+	public String getSearchType() {
+		return searchType;
 	}
-
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
 	@Override
 	public String toString() {
 		return "VolunActivityDTO [volunActNo=" + volunActNo + ", volunActTitle=" + volunActTitle
