@@ -29,6 +29,12 @@ public class MyPageFinishVolunController implements Execute {
 		
 		List<MyPageJoinDTO> finishVolun = mypageDAO.finishVolun(userNo);
 		
+	      if(request.getSession().getAttribute("userNo") == null) {
+	          result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
+	          result.setRedirect(true);
+	          return result;
+	       }
+		
 //		if(finishVolun != null) {
 			path = "/app/mypage/volunteer-history/finish-volunteer.jsp";
 			result.setPath(path);

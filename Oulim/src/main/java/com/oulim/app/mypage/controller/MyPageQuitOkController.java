@@ -29,6 +29,12 @@ public class MyPageQuitOkController implements Execute {
 
 		String userPw = request.getParameter("userPw");
 //		String userPw2 = (String)mypageDAO.enterMyPage1(userNo);
+		
+	      if(request.getSession().getAttribute("userNo") == null) {
+	          result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
+	          result.setRedirect(true);
+	          return result;
+	       }
 
 		System.out.println(userNo);
 

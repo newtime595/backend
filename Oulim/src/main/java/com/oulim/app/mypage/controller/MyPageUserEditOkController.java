@@ -27,6 +27,12 @@ public class MyPageUserEditOkController implements Execute {
 
 		Integer userNo = (Integer) session.getAttribute("userNo");
 		
+	      if(request.getSession().getAttribute("userNo") == null) {
+	          result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
+	          result.setRedirect(true);
+	          return result;
+	       }
+		
 		mypageDTO.setUserNickname(request.getParameter("userNickName"));
 		mypageDTO.setUserEmail(request.getParameter("userNickName"));
 		mypageDTO.setUserPhoneNum(request.getParameter("userPhoneNum"));

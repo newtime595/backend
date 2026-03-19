@@ -25,26 +25,28 @@
 <select id="userSummaryInfo" parameterType="int" resultType="MyPageJoinDTO">
 
 <![CDATA[
-	SELECT
+SELECT
     N.user_nickname AS userNickname,
-    COUNT(A.VOLUN_ACT_NO) AS volunActNo, 
+    COUNT(A.VOLUN_ACT_NO) AS volunActNo,
     NVL(SUM(V.VOLUN_ACT_END_TIME - V.VOLUN_ACT_BEGIN_TIME), 0) AS totalVolunTime,
-    NVL(R.RANK_POINT, 0) AS rankPoint,
-    NVL(C.TOTAL_AMOUNT, 0) AS totalAmount
+
+    (SELECT NVL(MAX(RANK_POINT), 0)
+     FROM TBL_RANKING R
+     WHERE R.USER_NO = N.USER_NO) AS rankPoint,
+
+    (SELECT NVL(SUM(TOTAL_AMOUNT), 0)
+     FROM TBL_CURRENCY C
+     WHERE C.USER_NO = N.USER_NO) AS totalAmount
+
 FROM TBL_USER N
 LEFT JOIN TBL_VOLUN_APPLY A
     ON N.USER_NO = A.USER_NO
 LEFT JOIN TBL_VOLUN_ACTIVITY V
     ON A.VOLUN_ACT_NO = V.VOLUN_ACT_NO
-LEFT JOIN TBL_RANKING R
-    ON N.USER_NO = R.USER_NO
-LEFT JOIN TBL_CURRENCY C
-    ON N.USER_NO = C.USER_NO
-WHERE N.USER_NO = #{userNo}
-GROUP BY
-    N.user_nickname,
-    R.RANK_POINT,
-    C.TOTAL_AMOUNT
+
+WHERE N.USER_NO = #{userNo}  
+
+GROUP BY N.user_nickname, N.USER_NO
  ]]>
     
 </select>
@@ -197,18 +199,29 @@ ORDER BY LOG_NO DESC
 
 <!-- 8. 작성 글 조회 -->
 
-<select id="mypost" parameterType="int" resultType="MyPageJoinDTO">
-
+<select id="mypost" parameterType="map" resultType="MyPageJoinDTO">
 <![CDATA[
-SELECT tcp.post_No AS postNo, tcp.post_title AS postTitle, tcp.post_Date AS postDate, tpl.post_Like_No AS postLikeNo 
-FROM tbl_community_post tcp 
-LEFT JOIN tbl_post_like tpl 
-ON tcp.user_no = #{userNo}
+SELECT * FROM (
+    SELECT 
+        ROW_NUMBER() OVER (ORDER BY tcp.post_no DESC) AS rnum,
+        tcp.post_No AS postNo,
+        tcp.post_title AS postTitle,
+        tcp.post_Date AS postDate,
+        tpl.post_Like_No AS postLikeNo
+    FROM tbl_community_post tcp
+    LEFT JOIN tbl_post_like tpl
+        ON tcp.post_no = tpl.post_no
+    WHERE tcp.user_no = #{userNo}
+)
+WHERE rnum BETWEEN #{startRow} AND #{endRow}
 ]]>
-
 </select>
 
-
+<select id="getMyPostTotal" parameterType="int" resultType="int">
+    SELECT COUNT(*) 
+    FROM tbl_community_post
+    WHERE user_no = #{userNo}
+</select>
 
 <!-- 9. 회원탈퇴 -->
 

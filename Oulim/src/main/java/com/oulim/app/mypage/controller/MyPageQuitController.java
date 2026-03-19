@@ -27,6 +27,12 @@ public class MyPageQuitController implements Execute{
 		Integer userNo = (Integer) session.getAttribute("userNo");
 		
 		String userPw = request.getParameter("userPw");
+		
+	      if(request.getSession().getAttribute("userNo") == null) {
+	          result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
+	          result.setRedirect(true);
+	          return result;
+	       }
 
 		
 		result.setPath("/app/mypage/quit/quit.jsp");

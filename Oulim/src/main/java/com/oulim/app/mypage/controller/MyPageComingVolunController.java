@@ -29,6 +29,12 @@ public class MyPageComingVolunController implements Execute {
 		
 		List<MyPageJoinDTO> comingVolun = mypageDAO.comingVolun(userNo); // 맵으로 바꿔야함
 		
+	      if(request.getSession().getAttribute("userNo") == null) {
+	          result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
+	          result.setRedirect(true);
+	          return result;
+	       }
+		
 //		if(comingVolun != null) {
 			path = "/app/mypage/volunteer-history/coming-volunteer.jsp";
 			result.setPath(path);

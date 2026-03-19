@@ -17,6 +17,12 @@ public class MyPageCheckController implements Execute{
 		
 		Result result = new Result();
 		
+	      if(request.getSession().getAttribute("userNo") == null) {
+	          result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
+	          result.setRedirect(true);
+	          return result;
+	       }
+		
 		result.setPath("/app/mypage/check/check.jsp");
 		result.setRedirect(false);
 		

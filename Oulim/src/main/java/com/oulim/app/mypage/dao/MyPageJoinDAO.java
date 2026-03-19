@@ -1,6 +1,7 @@
 package com.oulim.app.mypage.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -94,9 +95,14 @@ public class MyPageJoinDAO {
 	
 //	6. 작성 글 조회
 	
-	public List<MyPageJoinDTO> viewMyPost(int userNo) {
-		return sqlSession.selectList("mypage.mypost", userNo);
-		
+	// 리스트 조회 (페이징)
+	public List<MyPageJoinDTO> viewMyPost(Map<String, Object> pageMap) {
+	    return sqlSession.selectList("mypage.mypost", pageMap);
+	}
+
+	// 전체 개수
+	public int getMyPostTotal(int userNo) {
+	    return sqlSession.selectOne("mypage.getMyPostTotal", userNo);
 	}
 	
 //	7. 회원탈퇴

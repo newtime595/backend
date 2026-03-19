@@ -27,6 +27,12 @@ public class MyPagePointController implements Execute{
 
 		Integer userNo = (Integer) session.getAttribute("userNo");
 		
+	      if(request.getSession().getAttribute("userNo") == null) {
+	          result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
+	          result.setRedirect(true);
+	          return result;
+	       }
+		
 		List<MyPageJoinDTO> mypage = mypageDAO.plusPoint(userNo);
 		
 		path = "/app/mypage/point-history/point-history.jsp";

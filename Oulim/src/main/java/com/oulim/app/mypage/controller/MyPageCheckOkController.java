@@ -29,24 +29,22 @@ public class MyPageCheckOkController implements Execute{
 		Integer userNo = (Integer) session.getAttribute("userNo");
 		
 		String userPw = request.getParameter("userPw");
-//		String userPw2 = (String)mypageDAO.enterMyPage1(userNo);
 		
 		System.out.println(userNo);
 		
-		if(userNo == null) {
-			path = "/app/mypage/check/check.jsp"; // 일단 내 페이지로 > 테스트용
-			result.setPath(path);
-			result.setRedirect(true);
-			return result;
-		} 
+	      if(request.getSession().getAttribute("userNo") == null) {
+	          result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
+	          result.setRedirect(true);
+	          return result;
+	       }
 		
 		
 		
 		if(mypageDAO.enterMyPage(userNo)) {
-			
+			System.out.println("비밀번호 일치 조건문 진입");
 			MyPageJoinDTO summaryInfo = mypageDAO.summaryInfo(userNo);
 			
-			
+			System.out.println("test");
 			MyPageJoinDTO finVolunInfo = mypageDAO.miniFinVol(userNo);
 			List<MyPageJoinDTO> pointInfo = mypageDAO.miniPoint(userNo);
 			MyPageJoinDTO comVolunInfo = mypageDAO.miniComVol(userNo);

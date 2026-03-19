@@ -25,6 +25,12 @@ public class MyPageOrganEditController implements Execute{
 
 		Integer userNo = (Integer) session.getAttribute("userNo");
 		
+	      if(request.getSession().getAttribute("userNo") == null) {
+	          result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
+	          result.setRedirect(true);
+	          return result;
+	       }
+		
 		mypageDAO.userAllinfo(userNo);
 		mypageDAO.organAdditionalinfo(userNo);
 		
