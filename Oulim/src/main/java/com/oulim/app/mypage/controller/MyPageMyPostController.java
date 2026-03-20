@@ -19,62 +19,73 @@ public class MyPageMyPostController implements Execute {
 
 	@Override
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
-	        throws ServletException, IOException {
+			throws ServletException, IOException {
 
-	    Result result = new Result();
-	    MyPageJoinDAO mypageDAO = new MyPageJoinDAO();
-	    HttpSession session = request.getSession();
+		Result result = new Result();
+		MyPageJoinDAO mypageDAO = new MyPageJoinDAO();
+		HttpSession session = request.getSession();
 
-	    Integer userNo = (Integer) session.getAttribute("userNo");
+		Integer userNo = (Integer) session.getAttribute("userNo");
 
-	    // 로그인 체크
-	    if (userNo == null) {
-	        result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
-	        result.setRedirect(true);
-	        return result;
-	    }
+		// 로그인 체크
+		if (userNo == null) {
+			result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
+			result.setRedirect(true);
+			return result;
+		}
 
-	    String temp = request.getParameter("page");
-	    int page = (temp == null) ? 1 : Integer.valueOf(temp);
-	    if (page < 1) page = 1;
 
-	    int rowCount = 10;
-	    int pageCount = 10;
+		String activeTab = request.getParameter("tab");
+		if (activeTab == null || (!activeTab.equals("plus") && !activeTab.equals("minus"))) {
+			activeTab = "plus";
+		}
 
-	    int startRow = (page - 1) * rowCount + 1;
-	    int endRow = startRow + rowCount - 1;
+		// 탭별 페이지
+		int plusPage = 1;
+		int minusPage = 1;
 
-	    Map<String, Object> pageMap = new HashMap<>();
-	    pageMap.put("startRow", startRow);
-	    pageMap.put("endRow", endRow);
-	    pageMap.put("userNo", userNo);
+		if ("plus".equals(activeTab)) {
+			String temp = request.getParameter("page");
+			plusPage = (temp == null) ? 1 : Integer.parseInt(temp);
+		} else {
+			String temp = request.getParameter("page");
+			minusPage = (temp == null) ? 1 : Integer.parseInt(temp);
+		}
 
-	    List<MyPageJoinDTO> mypost = mypageDAO.viewMyPost(pageMap);
-	    request.setAttribute("mypost", mypost);
+		// rowCount
+		int rowCount = 10;
 
-	    int total = mypageDAO.getMyPostTotal(userNo);
+		// 적립 포인트 조회
+		Map<String, Object> plusMap = new HashMap<>();
+		plusMap.put("startRow", (plusPage - 1) * rowCount + 1);
+		plusMap.put("endRow", plusPage * rowCount);
+		plusMap.put("userNo", userNo);
+		List<MyPageJoinDTO> plusPoint = mypageDAO.plusPoint(plusMap);
+		int plusTotal = mypageDAO.plusTotal(userNo);
+		int plusLastPage = (int) Math.ceil(plusTotal / (double) rowCount);
 
-	    int realEndPage = (int) Math.ceil(total / (double) rowCount);
-	    int endPage = (int) (Math.ceil(page / (double) pageCount) * pageCount);
-	    int startPage = endPage - (pageCount - 1);
+		// 사용 포인트 조회
+		Map<String, Object> minusMap = new HashMap<>();
+		minusMap.put("startRow", (minusPage - 1) * rowCount + 1);
+		minusMap.put("endRow", minusPage * rowCount);
+		minusMap.put("userNo", userNo);
+		List<MyPageJoinDTO> minusPoint = mypageDAO.minusPoint(minusMap);
+		int minusTotal = mypageDAO.minusTotal(userNo);
+		int minusLastPage = (int) Math.ceil(minusTotal / (double) rowCount);
 
-	    endPage = Math.min(endPage, realEndPage);
+		// JSP 전달
+		request.setAttribute("activeTab", activeTab);
+		request.setAttribute("plusPoint", plusPoint);
+		request.setAttribute("minusPoint", minusPoint);
+		request.setAttribute("plusLastPage", plusLastPage);
+		request.setAttribute("minusLastPage", minusLastPage);
+		request.setAttribute("plusPage", plusPage);
+		request.setAttribute("minusPage", minusPage);
 
-	    boolean prev = startPage > 1;
-	    boolean next = endPage < realEndPage;
+		result.setPath("/app/mypage/community-history/myposts.jsp");
+		result.setRedirect(false);
 
-	    request.setAttribute("page", page);
-	    request.setAttribute("startPage", startPage);
-	    request.setAttribute("endPage", endPage);
-	    request.setAttribute("prev", prev);
-	    request.setAttribute("next", next);
-	    request.setAttribute("total", total);
-	    
-
-	    result.setPath("/app/mypage/community-history/myposts.jsp");
-	    result.setRedirect(false);
-
-	    return result;
+		return result;
 	}
 
 }

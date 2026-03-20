@@ -65,3 +65,110 @@
   height: 50px;
   font-size: 28px;
 }
+
+/* 카드 리스트 전체 */
+.l-volunAct-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+/* 카드 하나 */
+.l-volunAct-card-element {
+  list-style: none;
+}
+
+/* 카드 박스 */
+.c-detail-card {
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 20px;
+  background: #fff;
+  transition: all 0.2s ease;
+}
+
+/* hover 효과 */
+.c-detail-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+}
+
+/* ===================== */
+/* 🔴 상단 뱃지 영역 */
+/* ===================== */
+.card-badge {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+/* 기본 뱃지 */
+.badge {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+/* 모집상태 */
+.badge-status {
+  background: #ffecec;
+  color: #ff4d4f;
+}
+
+/* 활동분야 */
+.badge-type {
+  background: #fff4e6;
+  color: #ff8c00;
+}
+
+/* 연령 */
+.badge-age {
+  background: #f0f0f0;
+  color: #666;
+}
+
+/* ===================== */
+/* 제목 */
+/* ===================== */
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+/* ===================== */
+/* 내용 영역 */
+/* ===================== */
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+/* 왼쪽 라벨 */
+.card-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #888;
+}
+
+/* 오른쪽 값 */
+.card-right {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: right;
+  color: #222;
+}
+
+/* ===================== */
+/* 링크 전체 클릭 */
+/* ===================== */
+.l-volunAct-card-element a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}

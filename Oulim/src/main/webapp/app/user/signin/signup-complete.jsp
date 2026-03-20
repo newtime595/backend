@@ -33,61 +33,26 @@
 	<jsp:include page="/app/include/header.jsp" />
 	<div class="l-main">
 		<div class="l-container">
-			<form action="/Oulim/front/html/user/login/login.html">
+			<form action="${pageContext.request.contextPath}/user/login.usr">
 				<div class="p-signup-complete">
 					<div class="l-signup-complete-layout">
-						<div>
-							<img src="${pageContext.request.contextPath}" alt="확인이미지" />
+						<div class="l-signup-complete-img">
+							<img src="${pageContext.request.contextPath}/asset/image/join/complete_check.png" alt="확인이미지" />
 						</div>
 						<div class="l-signup-complete-title">
 							<div>
 								<h3>회원가입이 완료 되었습니다.</h3>
 							</div>
 							<div>
-								<h6>확인버튼 선택 시 메인 화면으로 이동합니다.</h6>
+								<h6>로그인 버튼 선택시 로그인 화면으로 이동합니다.</h6>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="l-siginup-complete-textarea-layout">
-					<div class="c-siginup-complete-text-left">
-						<div>
-							<p>이름</p>
-						</div>
-						<div>
-							<p>생년월일</p>
-						</div>
-						<div>
-							<p>아이디</p>
-						</div>
-						<div>
-							<p>휴대전화</p>
-						</div>
-						<div>
-							<p>이메일</p>
-						</div>
-					</div>
-					<div class="c-siginup-complete-text-right">
-						<div>
-							<p>이준승</p>
-						</div>
-						<div>
-							<p>001212</p>
-						</div>
-						<div>
-							<p>wnstmdqkqh</p>
-						</div>
-						<div>
-							<p>010-1234-4567</p>
-						</div>
-						<div>
-							<p>wnstmdqk@naver.com</p>
-						</div>
-					</div>
-				</div>
+				
 				<div class="c-signup-complete">
-					<button class="c-button c-button--primary c-button--md">
-						다음</button>
+					<button type="submit" class="c-button c-button--primary c-button--md">
+						로그인</button>
 				</div>
 			</form>
 		</div>

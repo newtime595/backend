@@ -192,7 +192,11 @@
 								<span class="c-list__col">${apply.userName}</span>
 								<span class="c-list__col">${apply.userAge}</span>
 								<span class="c-list__col">${apply.volunActApplyDate}</span>
-								<span class="c-list__col">
+								<span class="c-list__col
+									<c:if test='${apply.volunActAttendance == 1}'> attendance-text attendance-text--present</c:if>
+									<c:if test='${apply.volunActAttendance == 2}'> attendance-text attendance-text--absent</c:if>
+									<c:if test='${apply.volunActAttendance != 1 && apply.volunActAttendance != 2}'> attendance-text attendance-text--pending</c:if>
+								">
 									<c:choose>
 										<c:when test="${apply.volunActAttendance == 1}">출석</c:when>
 										<c:when test="${apply.volunActAttendance == 2}">결석</c:when>

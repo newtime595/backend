@@ -4,6 +4,7 @@ const pwInput = document.getElementById("userPw");
 
 const idError = document.getElementById("userIDError");
 const pwError = document.getElementById("userPwError");
+const loginStatusEl = document.getElementById("loginStatus");
 
 form.addEventListener("submit", function (e) {
   let hasError = false;
@@ -33,7 +34,11 @@ form.addEventListener("submit", function (e) {
     }
     hasError = true;
   }
-
+  
+  if (loginStatusEl && loginStatusEl.value === "fail") {
+  	alert("아이디 또는 비밀번호가 올바르지 않습니다.");
+  }
+  
   if (hasError) {
     e.preventDefault();
     alert("입력값을 확인해주세요.");

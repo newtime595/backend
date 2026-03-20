@@ -67,12 +67,19 @@ ORDER BY LOG_NO DESC
 <select id="miniComVol" parameterType="int" resultType="MyPageJoinDTO">
 
 <![CDATA[
-SELECT tva.volun_act_title AS volunActTitle, TO_CHAR( tva.Volun_Act_Proc_Begin ,'yyyy-mm-dd') AS comVolunActProcBegin, TO_CHAR( tva.Volun_Act_Proc_End,'yyyy-mm-dd') AS comVolunActProcEnd 
-FROM TBL_VOLUN_ACTIVITY tva
-JOIN TBL_VOLUN_APPLY apl
-ON tva.volun_act_no = apl.volun_act_no
-WHERE apl.user_no = #{userNo} AND apl.VOLUNACT_APPLYSTATUS = 1
-ORDER BY tva.volun_act_no DESC
+SELECT *
+FROM (
+    SELECT tva.volun_act_title AS volunActTitle,
+           TO_CHAR(tva.Volun_Act_Proc_Begin, 'yyyy-mm-dd') AS comVolunActProcBegin,
+           TO_CHAR(tva.Volun_Act_Proc_End, 'yyyy-mm-dd') AS comVolunActProcEnd
+    FROM TBL_VOLUN_ACTIVITY tva
+    JOIN TBL_VOLUN_APPLY apl
+      ON tva.volun_act_no = apl.volun_act_no
+    WHERE apl.user_no = #{userNo}
+      AND apl.VOLUNACT_APPLYSTATUS = 1
+    ORDER BY tva.volun_act_no DESC
+)
+WHERE ROWNUM = 1
 ]]>
 
 </select>
@@ -104,6 +111,7 @@ user_address = #{userAddress},
 user_address_detail = #{userAddressDetail},
 user_postnum = #{userPostnum},
 WHERE user_no = #{userNo} AND user_type = #{userType}
+
 </update>
 
 
@@ -137,7 +145,7 @@ WHERE organ_no = #{organNo}
 <select id="comingVol" parameterType="int" resultType="MyPageJoinDTO">
 
 <![CDATA[
-SELECT tva.volun_act_title, TO_CHAR( tva.Volun_Act_Recru_Begin ,'yyyy-mm-dd') || ' ~ ' || TO_CHAR( tva.Volun_Act_Recru_End,'yyyy-mm-dd')
+SELECT tva.volun_act_title, TO_CHAR( tva.Volun_Act_Recru_Begin ,'yyyy-mm-dd') AS comingVolBegin, TO_CHAR( tva.Volun_Act_Recru_End,'yyyy-mm-dd') AS comingVolEnd
 FROM TBL_VOLUN_ACTIVITY tva
 JOIN TBL_VOLUN_APPLY apl
 ON tva.volun_act_no = apl.volun_act_no
@@ -155,7 +163,7 @@ ORDER BY tva.volun_act_no DESC
 <select id="finishVol" parameterType="int" resultType="MyPageJoinDTO">
 
 <![CDATA[
-SELECT tva.volun_act_title, TO_CHAR( tva.Volun_Act_Recru_Begin ,'yyyy-mm-dd') || ' ~ ' || TO_CHAR( tva.Volun_Act_Recru_End,'yyyy-mm-dd')
+SELECT tva.volun_act_title, TO_CHAR( tva.Volun_Act_Recru_Begin ,'yyyy-mm-dd') AS finishVolBegin, TO_CHAR( tva.Volun_Act_Recru_End,'yyyy-mm-dd') AS finishVolBegin
 FROM TBL_VOLUN_ACTIVITY tva
 JOIN TBL_VOLUN_APPLY apl
 ON tva.volun_act_no = apl.volun_act_no
@@ -169,32 +177,53 @@ ORDER BY tva.volun_act_no DESC
 
 <!-- 6. 포인트 사용 내역 조회 -->
 
-<select id="minusPoint" parameterType="int" resultType="MyPageJoinDTO">
-
+<select id="minusPoint" parameterType="map" resultType="MyPageJoinDTO">
 <![CDATA[
-SELECT log_reason, TO_CHAR(LOG_DATE, 'YYYY.MM.DD'), change_amount 
-FROM TBL_LOG_POINT
-WHERE USER_no = #{userNo} AND CHANGE_AMOUNT < 0
-ORDER BY LOG_NO DESC
+SELECT * FROM (
+    SELECT 
+        ROW_NUMBER() OVER (ORDER BY LOG_NO DESC) AS rnum,
+        log_reason AS logReason,
+        TO_CHAR(LOG_DATE, 'YYYY.MM.DD') AS logDate,
+        change_amount AS changeAmount
+    FROM TBL_LOG_POINT
+    WHERE USER_NO = #{userNo} AND CHANGE_AMOUNT < 0
+)
+WHERE rnum BETWEEN #{startRow} AND #{endRow}
 ]]>
-
 </select>
 
 
 
 <!-- 7. 포인트 적립 내역 조회 -->
 
-<select id="plusPoint" parameterType="int" resultType="MyPageJoinDTO">
-
+<select id="plusPoint" parameterType="map" resultType="MyPageJoinDTO">
 <![CDATA[
-SELECT log_reason, TO_CHAR(LOG_DATE, 'YYYY.MM.DD'), change_amount 
-FROM TBL_LOG_POINT
-WHERE USER_no = #{userNo} AND CHANGE_AMOUNT > 0
-ORDER BY LOG_NO DESC
+SELECT * FROM (
+    SELECT 
+        ROW_NUMBER() OVER (ORDER BY LOG_NO DESC) AS rnum,
+        log_reason AS logReason,
+        TO_CHAR(LOG_DATE, 'YYYY.MM.DD') AS logDate,
+        change_amount AS changeAmount
+    FROM TBL_LOG_POINT
+    WHERE USER_NO = #{userNo} AND CHANGE_AMOUNT > 0
+)
+WHERE rnum BETWEEN #{startRow} AND #{endRow}
 ]]>
-
 </select>
 
+<select id="plusTotal" parameterType="int" resultType="int">
+<![CDATA[ 
+SELECT COUNT(*) FROM TBL_LOG_POINT
+WHERE USER_NO = #{userNo} AND CHANGE_AMOUNT > 0
+]]>
+</select>
+
+<select id="minusTotal" parameterType="int" resultType="int">
+<![CDATA[
+SELECT COUNT(*) FROM TBL_LOG_POINT
+WHERE USER_NO = #{userNo} AND CHANGE_AMOUNT < 0
+]]>
+</select>
 
 
 <!-- 8. 작성 글 조회 -->
@@ -206,7 +235,7 @@ SELECT * FROM (
         ROW_NUMBER() OVER (ORDER BY tcp.post_no DESC) AS rnum,
         tcp.post_No AS postNo,
         tcp.post_title AS postTitle,
-        tcp.post_Date AS postDate,
+        TO_CHAR(tcp.post_Date, 'yyyy-mm-dd') AS postDate,
         tpl.post_Like_No AS postLikeNo
     FROM tbl_community_post tcp
     LEFT JOIN tbl_post_like tpl
@@ -218,9 +247,12 @@ WHERE rnum BETWEEN #{startRow} AND #{endRow}
 </select>
 
 <select id="getMyPostTotal" parameterType="int" resultType="int">
+
+
     SELECT COUNT(*) 
     FROM tbl_community_post
     WHERE user_no = #{userNo}
+
 </select>
 
 <!-- 9. 회원탈퇴 -->

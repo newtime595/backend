@@ -37,7 +37,7 @@
 				<div class="p-signup-complete-company">
 					<div class="l-signup-complete-company-layout">
 						<div>
-							<img src="" alt="확인이미지" />
+							<img src="${pageContext.request.contextPath}/asset/image/join/wait_check.png" alt="확인이미지" />
 						</div>
 						<div class="l-signup-complete-company-title">
 							<div>
@@ -58,9 +58,6 @@
 							<p>이름</p>
 						</div>
 						<div>
-							<p>생년월일</p>
-						</div>
-						<div>
 							<p>아이디</p>
 						</div>
 						<div>
@@ -73,9 +70,6 @@
 						</div>
 						<div>
 							<p>홍김마리아</p>
-						</div>
-						<div>
-							<p>977973</p>
 						</div>
 						<div>
 							<p>gtwk1234</p>

@@ -28,8 +28,8 @@
 	href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
-<script defer
-	src="${pageContext.request.contextPath}/asset/js/pages/user/signin/signup-verify.js"></script>
+<%-- <script defer
+	src="${pageContext.request.contextPath}/asset/js/pages/user/signin/signup-verify.js"></script> --%>
 <script>
 	const contextPath = "${pageContext.request.contextPath}";
 </script>

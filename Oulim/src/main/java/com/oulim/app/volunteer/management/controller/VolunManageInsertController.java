@@ -19,8 +19,8 @@ public class VolunManageInsertController implements Execute {
 		Result result = new Result();
 		HttpSession session = request.getSession();
 
-//		Integer organNo = (Integer) session.getAttribute("organNo");
-		Integer organNo=1;	//테스트
+		Integer organNo = (Integer) session.getAttribute("organNo");
+
 		String path = null;
 
 		if (organNo == null) {

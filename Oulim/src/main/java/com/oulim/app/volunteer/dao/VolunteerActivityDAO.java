@@ -18,4 +18,8 @@ public class VolunteerActivityDAO {
     public List<VolunActivityDTO> selectVolActList(VolunActivityDTO dto) {
         return sqlSession.selectList("volunAct.selectVolunteerList", dto);
     }
+    
+    public int selectCount(VolunActivityDTO dto) {
+        return sqlSession.selectOne("volunAct.selectVolunteerCount", dto);
+    }
 }
