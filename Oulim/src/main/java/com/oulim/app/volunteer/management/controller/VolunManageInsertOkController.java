@@ -21,9 +21,8 @@ public class VolunManageInsertOkController implements Execute {
 		Result result = new Result();
 		HttpSession session = request.getSession();
 
-		Integer organNo = 1; // 테스트
-		// Integer organNo = (Integer) session.getAttribute("organNo");
-
+		Integer organNo = (Integer) session.getAttribute("organNo");
+		String organName = (String) session.getAttribute("organName");
 		VolunActivityDTO volunActivityDTO = new VolunActivityDTO();
 
 		volunActivityDTO.setVolunActTitle(request.getParameter("volunActTitle"));
@@ -36,7 +35,7 @@ public class VolunManageInsertOkController implements Execute {
 		volunActivityDTO.setVolunActDetail(request.getParameter("volunActDetail"));
 		volunActivityDTO.setVolunActPostnum(request.getParameter("volunActPostnum"));
 		volunActivityDTO.setVolunActOrganNo(organNo);
-
+		volunActivityDTO.setVolunActOrginName(organName);
 		String point = request.getParameter("volunActPoint");
 		String beginTime = request.getParameter("volunActBeginTime");
 		String endTime = request.getParameter("volunActEndTime");

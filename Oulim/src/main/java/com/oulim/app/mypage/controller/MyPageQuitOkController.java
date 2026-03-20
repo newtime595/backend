@@ -1,6 +1,8 @@
 package com.oulim.app.mypage.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -29,12 +31,16 @@ public class MyPageQuitOkController implements Execute {
 
 		String userPw = request.getParameter("userPw");
 //		String userPw2 = (String)mypageDAO.enterMyPage1(userNo);
-		
-	      if(request.getSession().getAttribute("userNo") == null) {
-	          result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
-	          result.setRedirect(true);
-	          return result;
-	       }
+
+		Map<String, Object> userMap = new HashMap<>();
+		userMap.put("userNo", userNo);
+		userMap.put("userPw", userPw);
+
+		if (request.getSession().getAttribute("userNo") == null) {
+			result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
+			result.setRedirect(true);
+			return result;
+		}
 
 		System.out.println(userNo);
 
@@ -48,7 +54,7 @@ public class MyPageQuitOkController implements Execute {
 
 		if (session != null) {
 
-			if (mypageDAO.enterMyPage(userNo)) {
+			if (mypageDAO.enterMyPage(userMap)) {
 				System.out.println("비밀번호 일치 조건문 진입 성공");
 				path = "/app/mypage/check/check.jsp"; // 테스트 일단 내 페이지로
 				mypageDAO.quit(userNo);
@@ -56,7 +62,6 @@ public class MyPageQuitOkController implements Execute {
 
 				session.invalidate(); // 세션 전체 삭제
 			}
-
 
 			result.setPath(path);
 			result.setRedirect(false);

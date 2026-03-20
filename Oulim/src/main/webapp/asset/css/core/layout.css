@@ -4,6 +4,8 @@ Layout
 
 .l-main{
   min-height: calc(100vh - 160px);
+    padding: 70px 0;
+  
 }
 
 /* =========================
@@ -14,6 +16,6 @@ Container
   width:100%;
   max-width:1080px;
   margin:0 auto;
-  padding:0 16px;
+  padding: 0 16px;
 
 }

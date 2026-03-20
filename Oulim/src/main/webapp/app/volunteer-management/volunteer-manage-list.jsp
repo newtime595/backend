@@ -108,9 +108,12 @@
 												</a>
 											</span>																		
 											<span class="c-list__col">
+											<a href="${pageContext.request.contextPath}/volunteer-manage/detail.vm?volunActNo=${volunteer.volunActNo}">
 												${volunteer.volunActRecruBegin} ~ ${volunteer.volunActRecruEnd}
+											</a>
 											</span>
 											<span class="c-list__col">
+											<a href="${pageContext.request.contextPath}/volunteer-manage/detail.vm?volunActNo=${volunteer.volunActNo}">
 											    <c:choose>
 											        <c:when test="${volunteer.volunActActType == 1}">환경</c:when>
 											        <c:when test="${volunteer.volunActActType == 2}">의료</c:when>
@@ -120,8 +123,10 @@
 											        <c:when test="${volunteer.volunActActType == 6}">기타</c:when>
 											        <c:otherwise>-</c:otherwise>
 											    </c:choose>
+											    </a>
 											</span>
-											<span class="c-list__col">${volunteer.recruStatus}</span>
+											<a href="${pageContext.request.contextPath}/volunteer-manage/detail.vm?volunActNo=${volunteer.volunActNo}">
+											<span class="c-list__col">${volunteer.recruStatus}</span></a>
 										</div>
 									</c:forEach>
 								</c:when>

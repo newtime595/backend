@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oulim.app.common.controller.Execute;
 import com.oulim.app.common.controller.Result;
@@ -23,16 +24,16 @@ public class VolunMangetListController implements Execute {
 
 		VolunteerMangementDAO volunteerManagementDAO = new VolunteerMangementDAO();
 		VolunActivityDTO volunActivityDTO = new VolunActivityDTO();
+		HttpSession session = request.getSession();
 		Result result = new Result();
 
-//		if (session.getAttribute("userNo") == null || session.getAttribute("organNo") == null) {
-//		    result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
-//		    result.setRedirect(true);
-//		    return result;
-//		}
-		// Integer organNo = (Integer) request.getSession().getAttribute("organNo");
-		Integer organNo = 1; // 테스트용
-
+		if (session.getAttribute("userNo") == null || session.getAttribute("organNo") == null) {
+		    result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
+		    result.setRedirect(true);
+		    return result;
+		}
+		
+		Integer organNo = (Integer) request.getSession().getAttribute("organNo");
 		String actType = request.getParameter("actType");
 		String recruitStatus = request.getParameter("recruitStatus");
 		String keyword = request.getParameter("keyword");

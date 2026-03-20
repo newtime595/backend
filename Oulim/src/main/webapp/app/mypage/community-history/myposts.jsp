@@ -131,7 +131,7 @@
 
 											<div class="c-list__actions">
 												<a
-													href="${pageContext.request.contextPath}/community/edit.cm?postNo=${post.postNo}">
+													href="${pageContext.request.contextPath}/community/repost.commu?postNo=${post.postNo}">
 													<button class="c-button c-button--primary c-button--sm">
 														수정</button>
 												</a>
@@ -146,35 +146,42 @@
 
 					</div>
 
-<c:if test="${total > 0}">
-					<div class="p-mypage-posts--pagination">
+					<c:if test="${showPagination}">
+						<div class="p-mypage-posts--pagination">
+							<nav class="c-pagination">
 
-						<nav class="c-pagination">
+								<!-- 이전 페이지 방향키 -->
+								<c:if test="${hasPrevPage}">
+									<a class="c-pagination__link"
+										href="${pageContext.request.contextPath}/mypage/myPost.mp?page=${page - 1}">‹</a>
+								</c:if>
 
-							<!-- 이전 -->
-							<c:if test="${prev}">
-								<a class="c-pagination__link"
-									href="${pageContext.request.contextPath}/mypage/myPost.mp?page=${startPage - 1}">
-									‹ </a>
-							</c:if>
+								<!-- 이전 블록 -->
+								<c:if test="${prev}">
+									<a class="c-pagination__link"
+										href="${pageContext.request.contextPath}/mypage/myPost.mp?page=${startPage - 1}">«</a>
+								</c:if>
 
-							<!-- 페이지 번호 -->
-							<c:forEach var="i" begin="${startPage}" end="${endPage}">
-								<a class="c-pagination__link ${i == page ? 'is-active' : ''}"
-									href="${pageContext.request.contextPath}/mypage/myPost.mp?page=${i}">
-									${i} </a>
-							</c:forEach>
+								<!-- 페이지 번호 -->
+								<c:forEach var="i" begin="${startPage}" end="${endPage}">
+									<a class="c-pagination__link ${i == page ? 'is-active' : ''}"
+										href="${pageContext.request.contextPath}/mypage/myPost.mp?page=${i}">${i}</a>
+								</c:forEach>
 
-							<!-- 다음 -->
-							<c:if test="${next}">
-								<a class="c-pagination__link"
-									href="${pageContext.request.contextPath}/mypage/myPost.mp?page=${endPage + 1}">
-									› </a>
-							</c:if>
+								<!-- 다음 블록 -->
+								<c:if test="${next}">
+									<a class="c-pagination__link"
+										href="${pageContext.request.contextPath}/mypage/myPost.mp?page=${endPage + 1}">»</a>
+								</c:if>
 
-						</nav>
+								<!-- 다음 페이지 방향키 -->
+								<c:if test="${hasNextPage}">
+									<a class="c-pagination__link"
+										href="${pageContext.request.contextPath}/mypage/myPost.mp?page=${page + 1}">›</a>
+								</c:if>
 
-					</div>
+							</nav>
+						</div>
 					</c:if>
 
 				</div>

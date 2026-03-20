@@ -21,30 +21,35 @@ public class VolunActivityDTO {
 //	  Volun_Act_Recru_Max_Count NUMBER(2) NOT NULL,
 //	  Volun_Act_Detail VARCHAR2(4000),
 	
-	private int volunActNo;
-	private String volunActTitle;
-	private String volunActRecruBegin;
-	private String volunActRecruEnd;
-	private String volunActProcBegin;
-	private String volunActProcEnd;
-	private int volunActPoint;
-	private int volunActBeginTime;
-	private int volunActEndTime;
-	private int volunActActType;
-	private int volunActAgeGroup;
-	private int volunActOrganNo;
-	private String volunActAddress;
-	private String volunActAddressDetail;
-	private String volunActPostnum;
-	private int volunActRecruMaxCount;
-	private String volunActDetail;
+	private int volunActNo;		//봉사봉사번호
+	private String volunActTitle; 	// 봉사 타이틀	
+	private String volunActRecruBegin;	//모집시작일
+	private String volunActRecruEnd;	//모집 종료일
+	private String volunActProcBegin;	// 봉사시작일
+	private String volunActProcEnd;	// 봉사 종료일
+	private int volunActPoint;		// 포인트
+	private int volunActBeginTime; 	// 봉사 시작 시간
+	private int volunActEndTime;	// 봉사 종료 시간
+	private int volunActActType;	// 활동분야
+	private int volunActAgeGroup;	// 활동가능연령
+	private int volunActOrganNo;	// 기업번호
+	private String volunActAddress; // 봉사 주소
+	private String volunActAddressDetail;	//상세주소
+	private String volunActPostnum;	// 우편번호
+	private int volunActRecruMaxCount; // 최대모집인원수
+	private String volunActDetail;	// 상세내용
 	private String recruStatus;     // DB 계산 결과용 상태값(모집중,모집예정,마감)
 	private String recruitStatus;   // 검색용 상태값
 	private String actType;         // 검색용 활동분야 문자열
 	private String keyword;         // 검색어
 	private String searchType;		// 검색 조건
-	
-
+	private String VolunActOrginName;// 기관 명
+	private String Organization;	// 주체단체
+	private String orgName;			// 주체단체이름
+	private String actTypeName; // 활동분야
+	private String ageGroupName; // 활동가능연령대
+	private int startRow;
+	private int endRow;
 	public int getVolunActNo() {
 		return volunActNo;
 	}
@@ -170,13 +175,54 @@ public class VolunActivityDTO {
 	}
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
-	}	
-	
+	}
 	public String getSearchType() {
 		return searchType;
 	}
 	public void setSearchType(String searchType) {
 		this.searchType = searchType;
+	}
+	public String getVolunActOrginName() {
+		return VolunActOrginName;
+	}
+	public void setVolunActOrginName(String volunActOrginName) {
+		VolunActOrginName = volunActOrginName;
+	}
+	public String getOrganization() {
+		return Organization;
+	}
+	public void setOrganization(String organization) {
+		Organization = organization;
+	}
+	public String getOrgName() {
+		return orgName;
+	}
+	public void setOrgName(String orgName) {
+		this.orgName = orgName;
+	}
+	public String getActTypeName() {
+		return actTypeName;
+	}
+	public void setActTypeName(String actTypeName) {
+		this.actTypeName = actTypeName;
+	}
+	public String getAgeGroupName() {
+		return ageGroupName;
+	}
+	public void setAgeGroupName(String ageGroupName) {
+		this.ageGroupName = ageGroupName;
+	}
+	public int getStartRow() {
+		return startRow;
+	}
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+	public int getEndRow() {
+		return endRow;
+	}
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
 	}
 	@Override
 	public String toString() {
@@ -189,10 +235,10 @@ public class VolunActivityDTO {
 				+ ", volunActAddressDetail=" + volunActAddressDetail + ", volunActPostnum=" + volunActPostnum
 				+ ", volunActRecruMaxCount=" + volunActRecruMaxCount + ", volunActDetail=" + volunActDetail
 				+ ", recruStatus=" + recruStatus + ", recruitStatus=" + recruitStatus + ", actType=" + actType
-				+ ", keyword=" + keyword + ", searchType="  + "]";
+				+ ", keyword=" + keyword + ", searchType=" + searchType + ", VolunActOrginName=" + VolunActOrginName
+				+ ", Organization=" + Organization + ", orgName=" + orgName + ", actTypeName=" + actTypeName
+				+ ", ageGroupName=" + ageGroupName + ", startRow=" + startRow + ", endRow=" + endRow + "]";
 	}
-	
-
 	
 	
 	

@@ -1,64 +1,128 @@
 .p-community-list-main {
-  display: flex;
-  justify-content: center;
-  width: 1080px;
-  flex-wrap: wrap;
-  margin: auto;
+	display: flex;
+	justify-content: center;
+	width: 1080px;
+	flex-wrap: wrap;
+	margin: auto;
 }
 
 .c-community-list-title {
-  display: flex;
-  width: 100%;
-  height: auto;
-  justify-content: center;
+	display: flex;
+	width: 100%;
+	height: auto;
+	justify-content: center;
+	margin-top: 80px;
 }
 
 .l-community-list-search-group {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  align-items: center;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	align-items: center;
+	margin: 50px 0;
 }
 
 .l-community-search-box {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 60%;
-  justify-content: flex-end;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	width: 60%;
+	justify-content: flex-end;
 }
 
 .c-community-search {
-  width: 130px;
-  height: 40px;
-  padding: 0 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+	width: 130px;
+	height: 40px;
+	padding: 0 10px;
+	border: 1px solid #ccc;
+	border-radius: 6px;
 }
 
 .l-community-search-box .c-input {
-  flex: 1;
-  min-width: 0;
+	flex: 1;
+	min-width: 0;
 }
 
-.l-community-list-pagination{
-  display: flex;
-  justify-content: center;
+.l-community-list-pagination {
+	display: flex;
+	justify-content: center;
 }
 
-.c-list__row a{
-  display: flex;
-  width: 100%;
-  text-decoration: none;
-  color: inherit;
+.c-list__row a {
+	display: flex;
+	width: 100%;
+	text-decoration: none;
+	color: inherit;
 }
 
-.c-select-size-controler .c-select{
-  width: 130px;
-  height: 40px;
+.c-select-size-controler .c-select {
+	width: 130px;
+	height: 40px;
 }
 
-.c-community-list-search-btn-container .c-button{
-  width: 50px;
-  height: 50px;
+.c-community-list-search-btn-container .c-button {
+	width: 50px;
+	height: 50px;
+}
+/*테이블쪽  */
+
+/* =========================
+   List Base
+========================= */
+.c-list {
+	width: 100%;
+	border-top: 1px solid #e5e7eb;
+}
+
+/* header */
+.c-list__header {
+	display: grid;
+	padding: 14px 16px;
+	font-size: 14px;
+	font-weight: 600;
+	background: #f9fafb;
+	text-align: center;
+	align-content: center;
+	justify-content: center;
+}
+
+/* body */
+.c-list__body {
+	width: 100%;
+}
+
+/* row */
+.c-list__row {
+	display: grid;
+	padding: 16px;
+	border-bottom: 1px solid #eee;
+	align-items: center;
+	transition: background .15s ease;
+}
+
+.c-list__row:hover {
+	background: var(--color-secondary);
+}
+
+/* column */
+.c-list__col {
+	display: flex;
+	align-items: center;
+	text-align: center;
+	font-size: 14px;
+}
+
+/* actions */
+.c-list__actions {
+	display: flex;
+	gap: 8px;
+}
+
+/* =========================
+   Column Layout
+========================= */
+
+/* 5 column */
+.c-list--5col .c-list__header, .c-list--5col .c-list__row {
+	grid-template-columns: 0.5fr 2fr 0.5fr 0.8fr 0.3fr;
 }

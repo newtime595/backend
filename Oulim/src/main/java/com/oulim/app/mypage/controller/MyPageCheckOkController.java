@@ -1,7 +1,9 @@
 package com.oulim.app.mypage.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -38,9 +40,12 @@ public class MyPageCheckOkController implements Execute{
 	          return result;
 	       }
 		
-		
-		
-		if(mypageDAO.enterMyPage(userNo)) {
+	      Map<String, Object> userMap = new HashMap<>();
+	      userMap.put("userNo", userNo);
+	      userMap.put("userPw", userPw);
+	      
+	      
+		if(mypageDAO.enterMyPage(userMap)) {
 			System.out.println("비밀번호 일치 조건문 진입");
 			MyPageJoinDTO summaryInfo = mypageDAO.summaryInfo(userNo);
 			
@@ -55,7 +60,9 @@ public class MyPageCheckOkController implements Execute{
 			System.out.println("포인트 정보 : " + pointInfo);
 			
 			System.out.println(pointInfo);
-			
+			System.out.println("fin" + finVolunInfo.toString());
+			System.out.println("com" + comVolunInfo.toString());
+			System.out.println("sum" + summaryInfo.toString());
 			request.setAttribute("miniPoint", pointInfo);
 			
 			request.setAttribute("totalVolunTime", summaryInfo.getTotalVolunTime());
@@ -64,8 +71,8 @@ public class MyPageCheckOkController implements Execute{
 			request.setAttribute("volunActNo", summaryInfo.getVolunActNo());
 
 			request.setAttribute("comVolunActTitle", comVolunInfo.getVolunActTitle());
-			request.setAttribute("comVolunActProcEnd", comVolunInfo.getComVolunActProcBegin());
-			request.setAttribute("comVolunActProcBegin", comVolunInfo.getComVolunActProcEnd());
+			request.setAttribute("comVolunActProcEnd", comVolunInfo.getComVolunActProcEnd());
+			request.setAttribute("comVolunActProcBegin", comVolunInfo.getComVolunActProcBegin());
 			
 			request.setAttribute("finVolunActTitle", finVolunInfo.getVolunActTitle());
 			request.setAttribute("finVolunActProcEnd", finVolunInfo.getFinVolunActProcEnd());
@@ -89,10 +96,14 @@ public class MyPageCheckOkController implements Execute{
 			return result;
 			
 		}
+		else {
+			System.out.println("실패!");
+		}
 		
 		path = "/app/mypage/check/check.jsp"; // 일단 내 페이지로 > 테스트용
 		result.setPath(path);
-		result.setRedirect(true);
+		result.setRedirect(false);
+		
 		return result;
 		
 		

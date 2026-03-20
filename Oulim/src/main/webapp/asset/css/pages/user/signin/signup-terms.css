@@ -1,8 +1,8 @@
-/* 일반 일때 나오는 약관 */
+
 #is-general-terms{
     display: block;
 }
-/* 기업 일때 나오는 약관 */
+
 #is-business-terms{
     display: none;
 }
@@ -15,15 +15,57 @@
 
 .l-signup-choice{
     display: flex;
-    text-align: center;
     justify-content: center;
-    margin-bottom: 20px;
+    gap: 24px;
+    margin-bottom: 30px;
 }
+
+
+.is-general,
+.is-business{
+    width: 150px;
+    height: 130px; 
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;   
+    align-items: center;       
+
+    border-radius: 8px;
+    background-color: var(--color-background); 
+    border: 1px solid #ddd;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+
+.is-general:hover,
+.is-business:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+}
+
+
 .l-signup-choice img{
-    width: 100px;
-    height: 100px;
-    border-radius: var(--radius-md);
-    background-color: var(--color-background-sub);
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+
+.is-general h6,
+.is-business h6{
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+.is-selected{
+    border: 2px solid #8cc63f;
+    background-color: #f7fde9;
 }
 
 .l-signup-main{
@@ -51,7 +93,8 @@
     /* overflow-y: scroll; */
     overflow-y: auto;
     margin-bottom: 20px;
-    background-color: var(--color-text-detail);
+    border-radius: 4px;
+    background-color: var(--color-background);
 }
 
 .c-signup-btn{

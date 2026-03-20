@@ -1,7 +1,9 @@
 package com.oulim.app.community.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.servlet.ServletException;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.oulim.app.common.controller.Execute;
 import com.oulim.app.common.controller.Result;
+import com.oulim.app.common.util.DefineType;
 import com.oulim.app.community.dao.CommunityDAO;
 import com.oulim.app.community.dao.CommunityFileDAO;
 import com.oulim.app.community.dto.CommunityCommentDTO;
@@ -54,10 +57,40 @@ public class CommunityReadOkController implements Execute{
 	      System.out.println("===========");
 	      
 	    postJoinDTO.setImages(imageList);	 
-	      			
-	    // 댓글 가져오기
-	    List<CommunityCommentDTO> commentList = commuDAO.selectCommentList(null);
+	    int totalComment = commuDAO.getTotalComment(postNo);
+	    int page = 1;
 	    
+		int startRow = (page - 1) * DefineType.ROWCOUNT_PER_PAGE + 1;
+		int endRow = startRow + DefineType.ROWCOUNT_PER_PAGE - 1;
+		Map<String, Integer> rowMap = new HashMap<>();
+		rowMap.put("postNo", postNo);
+		rowMap.put("startRow", startRow);
+		rowMap.put("endRow", endRow);
+	    // 댓글 가져오기
+	    List<CommunityCommentDTO> commentList = commuDAO.selectCommentList(rowMap);
+	    request.setAttribute("commentList", commentList);
+	    
+	    int realEndPage = (int)Math.ceil(totalComment / (double)DefineType.ROWCOUNT_PER_PAGE);
+	    if(realEndPage == 0) {
+	    	realEndPage = 1;
+	    }		int endPage = (int) (Math.ceil(page / (double) DefineType.MAX_PAGE_COUNT) * DefineType.MAX_PAGE_COUNT);
+	    
+	    int startPage = endPage - (DefineType.MAX_PAGE_COUNT - 1);
+		if(startPage < 1) {
+			startPage = 1;
+		}
+		
+		endPage = Math.min(endPage,  realEndPage);
+		
+		boolean prev = startPage > 1;
+		boolean next = endPage < realEndPage;
+		
+		request.setAttribute("page", page);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("prev", prev);
+		request.setAttribute("next", next);
+		
 	    Integer loginUserNo = (Integer) request.getSession().getAttribute("userNo");
 	    System.out.println("로그인 유저 번호");
 	    
@@ -67,6 +100,7 @@ public class CommunityReadOkController implements Execute{
 	    
 	   	if(!Objects.equals(writeUserNo, loginUserNo)) {
 	   		commuDAO.updateViewCount(postNo);	   		
+	   		postJoinDTO.setPostViewCount(postJoinDTO.getPostViewCount() + 1);
 	   	}
 	   	
 	   	request.setAttribute("post", postJoinDTO);

@@ -47,7 +47,7 @@
             <ul class="list1">
               <li>나의 정보</li>
               <br>
-              <a href="${pageContext.request.contextPath}/mypage/checkOk.mpl">
+              <a href="${pageContext.request.contextPath}/mypage/checkOk.mp">
                 <li>- 내 정보 보기</li>
               </a>
               <br>
