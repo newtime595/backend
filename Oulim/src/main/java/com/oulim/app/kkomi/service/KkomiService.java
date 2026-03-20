@@ -92,6 +92,7 @@ public class KkomiService {
 			kkomiDTO.setKkomiNo(DefineType.KKOMI_ID);
 			kkomiDTO.setKkomiExp(calculatedExp);
 			kkomiDTO.setKkomiLev(calcLvToExp(calculatedExp));
+			
 			System.out.println(kkomiDTO.toString());
 			if(!kkomiDAO.upsertKkomi(kkomiDTO)) {
 				throw new RuntimeException("꼬미 정보 갱신 실패");

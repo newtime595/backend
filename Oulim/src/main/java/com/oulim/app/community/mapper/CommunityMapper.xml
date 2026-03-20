@@ -120,8 +120,8 @@
 					SELECT tcc.comment_no, tcc.user_no, tcc.user_nickname, tcc.comment_content, tcc.post_date
 					FROM tbl_community_comment tcc
 					WHERE tcc.post_no = #{postNo}
-					ORDER BY tcc.post_date desc ) subquery
-				) WHERE rnum between #{startRow} and #{endRow}
+					ORDER BY tcc.post_date desc, tcc.comment_no desc ) subquery
+				) WHERE rnum between #{startRow} and #{endRow}				
 		]]>
 	</select>
 	
