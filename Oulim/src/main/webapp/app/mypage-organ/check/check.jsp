@@ -21,13 +21,13 @@
 	href="${pageContext.request.contextPath}/asset/css/component/button.css" />
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/asset/css/pages/mypage-organ/check/check.css">
+	href="${pageContext.request.contextPath}/asset/css/pages/mypage-organ/check/check.css" />
 
 <script defer
 	src="${pageContext.request.contextPath}/asset/js/pages/main/include.js"></script>
-
 <script defer
 	src="${pageContext.request.contextPath}/asset/js/pages/mypage-organ/check/check.js"></script>
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css" />
 <link rel="stylesheet"
@@ -39,38 +39,28 @@
 	<jsp:include page="/app/include/header.jsp" />
 
 	<main class="l-main">
-
 		<div class="l-mypage">
 
 			<div class="l-mypage--aside">
 				<aside>
 					<div class="p-mypage-check--menu">
 						<ul>
-							<h2>마이페이지</h2>
+							<li><h2>마이페이지</h2></li>
 
-							<div class="p-mypage-check--menu-group">
+							<li class="p-mypage-check--menu-group">
+								<a href="${pageContext.request.contextPath}/mypage/check.mp">내 정보 보기</a>
+							</li>
 
-
-
-								<br /> <a href="/Oulim/front/html/mypage/check/check.html"><li>내
-										정보 보기</li></a>
-							</div>
-
-
-
-							<div class="p-mypage-check--menu-group">
-								<li>회원 탈퇴</li>
-							</div>
-
+							<li class="p-mypage-check--menu-group">
+								<a href="#">회원 탈퇴</a>
+							</li>
 						</ul>
 					</div>
 				</aside>
 			</div>
 
 			<div class="l-mypage--content">
-
 				<div class="p-mypage-check--header">
-
 					<div class="p-mypage-check--title">
 						<h1>마이페이지</h1>
 					</div>
@@ -78,11 +68,9 @@
 					<div class="p-mypage-check--desc">
 						<h5>마이페이지는 비밀번호 확인 후 이용가능합니다</h5>
 					</div>
-
 				</div>
 
-				<form action="${pageContext.request.contextPath}/mypage/check.mp" method="post">
-
+				<form action="${pageContext.request.contextPath}/mypage/checkOk.mp" method="post">
 					<div class="p-mypage-check--form">
 
 						<div class="p-mypage-check--label">
@@ -90,36 +78,32 @@
 						</div>
 
 						<div class="p-mypage-check--input">
-							<input type="password" class="c-input" name="password"
+							<input type="password" id="password" class="c-input" name="userPw"
 								placeholder="비밀번호 입력" />
 							<button type="button" id="c-password-btn-toggle">
-								<img src="/Oulim/asset/image/user/password-off.png" alt="eye"
-									id="c-password-toggle-img" />
+								<img src="${pageContext.request.contextPath}/asset/image/user/password-off.png"
+									alt="eye" id="c-password-toggle-img" />
 							</button>
 						</div>
 
 					</div>
 
 					<div class="c-button-group">
-						<button id="accept"
+						<button type="submit" id="accept"
 							class="c-button c-button--primary c-button--md"
 							style="width: 120px">확인</button>
 
-						<button id="cancel"
+						<button type="button" id="cancel"
 							class="c-button c-button--secondary c-button--md"
 							style="width: 120px">취소</button>
 					</div>
-
 				</form>
-
 			</div>
 
 		</div>
-
 	</main>
 
 	<jsp:include page="/app/include/footer.jsp" />
 
 </body>
-
 </html>

@@ -62,7 +62,6 @@
 						</ul>
 
 
-
 						<ul class="list5">
 							<a href="/Oulim/front/html/mypage/quit/quit.html">
 								<li>회원 탈퇴</li>

@@ -52,26 +52,19 @@
 						<h2>마이페이지</h2>
 
 						<ul class="list1">
-
-
 							<br>
-							<a href="/Oulim/front/html/mypage/profile/profile-edit.html">
+							<a href="${pageContext.request.contextPath}/mypage-organ/check.mp">
 								<li>내 정보 보기</li>
 							</a>
-
 						</ul>
-
-
 						<ul class="list5">
-							<a href="/Oulim/front/html/mypage/quit/quit.html">
+							<a href="${pageContext.request.contextPath}/mypage/check.mp">
 								<li>회원 탈퇴</li>
 							</a>
 						</ul>
-
 					</div>
 				</aside>
 			</div>
-
 
 			<!-- content -->
 			<div class="main-2">
@@ -79,9 +72,7 @@
 				<div class="main-text-box">
 					<h1>기업 정보 수정</h1>
 				</div>
-
-				<form>
-
+				<form action="${pageContext.request.contextPath}/mypage/organEditOk.mp" method="post">
 					<div class="main-pw">
 
 						<div class="i-nickname">
