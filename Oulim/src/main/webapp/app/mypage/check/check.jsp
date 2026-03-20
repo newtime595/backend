@@ -100,11 +100,11 @@
           </div>
 
           <div class="c-button-group">
-            <button id="accept" class="c-button c-button--primary c-button--md" style="width:120px">
+            <button type="submit" id="accept" class="c-button c-button--primary c-button--md" style="width:120px">
               확인
             </button>
 
-            <button id="cancel" class="c-button c-button--secondary c-button--md" style="width:120px">
+            <button type="button" id="cancel" class="c-button c-button--secondary c-button--md" style="width:120px">
               취소
             </button>
           </div>

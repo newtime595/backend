@@ -9,25 +9,29 @@ import javax.servlet.http.HttpServletResponse;
 import com.oulim.app.common.controller.Execute;
 import com.oulim.app.common.controller.Result;
 
-public class MyPageCheckController implements Execute{
+public class MyPageCheckController implements Execute {
 
 	@Override
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		Result result = new Result();
-		
-	      if(request.getSession().getAttribute("userNo") == null) {
-	          result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
-	          result.setRedirect(true);
-	          return result;
-	       }
-		
-		result.setPath("/app/mypage/check/check.jsp");
+
+		if (request.getSession().getAttribute("userNo") == null) {
+			result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
+			result.setRedirect(true);
+			return result;
+		}
+
+		Integer userType = (Integer) request.getSession().getAttribute("userType");
+
+		if (userType != null && userType == 2) {
+			result.setPath("/app/mypage-organ/check/check.jsp");
+		} else {
+			result.setPath("/app/mypage/check/check.jsp");
+		}
+
 		result.setRedirect(false);
-		
-		
 		return result;
 	}
-
 }
