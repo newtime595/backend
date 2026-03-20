@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="ko">
 
@@ -135,51 +136,42 @@
 
 				</div>
 
-				 <c:if test="${empty comingVolun}">
-					<li>등록된 봉사활동이 없습니다.</li>
-				</c:if>
+				<div class="main-section3">
+					<c:if test="${empty comingVol}">
+						<li>등록된 봉사활동이 없습니다.</li>
+					</c:if>
 
-				<c:forEach var="item" items="${comingVolun}">
-					<a
-						href="${pageContext.request.contextPath}/volunteer-activity/detail.va/volunAct-detail.va?volunActNo=${item.volunActNo}">
-						<div class="c-card">
-
-							<div class="c-card__header">
-								<span class="c-badge c-badge--primary">모집중</span>
+					<c:forEach var="item" items="${comingVol}">
+						<a
+							href="${pageContext.request.contextPath}/volunteer-activity/detail.va/volunAct-detail.va?volunActNo=${item.volunActNo}">
+							<div class="c-card">
+								<div class="c-card__header">
+									<span class="c-badge c-badge--primary">모집중</span>
+								</div>
+								<h3 class="c-card__title">${item.volunActTitle}</h3>
+								<div class="c-card__footer">
+									<span>${item.comVolunActProcBegin} ~
+										${item.comVolunActProcEnd}</span>
+								</div>
 							</div>
+						</a>
+					</c:forEach>
+				</div>
+				<div>
+					<nav class="c-pagination">
+						<c:if test="${page > 1}">
+							<a class="c-pagination__link" href="?page=${page-1}">‹</a>
+						</c:if>
+						<c:forEach var="i" begin="1" end="${lastPage}">
+							<a class="c-pagination__link ${i==page?'is-active':''}"
+								href="?page=${i}">${i}</a>
+						</c:forEach>
+						<c:if test="${page < lastPage}">
+							<a class="c-pagination__link" href="?page=${page+1}">›</a>
+						</c:if>
+					</nav>
 
-							<h3 class="c-card__title">${item.volunActTitle}</h3>
-
-
-							<div class="c-card__footer">
-								<span>${item.comVolunActProcBegin} ~ ${item.comVolunActProcEnd}</span>
-							</div>
-						</div>
-					</a>
-				</c:forEach> 
-
-
-
-			<div class="page">
-
-				<nav class="c-pagination">
-
-					<a class="c-pagination__link is-disabled">‹</a> <a
-						class="c-pagination__link is-active">1</a> <a
-						class="c-pagination__link">2</a> <a class="c-pagination__link">3</a>
-					<a class="c-pagination__link">4</a> <a class="c-pagination__link">5</a>
-					<a class="c-pagination__link">6</a> <a class="c-pagination__link">7</a>
-					<a class="c-pagination__link">8</a> <a class="c-pagination__link">9</a>
-					<a class="c-pagination__link">10</a> <a class="c-pagination__link">›</a>
-
-				</nav>
-
-			</div>
-
-		</div>
-
-
-
+				</div>
 	</main>
 
 	<jsp:include page="/app/include/footer.jsp" />
