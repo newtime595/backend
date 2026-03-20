@@ -43,8 +43,7 @@ public class VolunActivityDTO {
 	private String actType;         // 검색용 활동분야 문자열
 	private String keyword;         // 검색어
 	private String searchType;		// 검색 조건
-	
-
+	private String VolunActOrginName;// 기관 명
 	public int getVolunActNo() {
 		return volunActNo;
 	}
@@ -170,13 +169,18 @@ public class VolunActivityDTO {
 	}
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
-	}	
-	
+	}
 	public String getSearchType() {
 		return searchType;
 	}
 	public void setSearchType(String searchType) {
 		this.searchType = searchType;
+	}
+	public String getVolunActOrginName() {
+		return VolunActOrginName;
+	}
+	public void setVolunActOrginName(String volunActOrginName) {
+		VolunActOrginName = volunActOrginName;
 	}
 	@Override
 	public String toString() {
@@ -189,11 +193,9 @@ public class VolunActivityDTO {
 				+ ", volunActAddressDetail=" + volunActAddressDetail + ", volunActPostnum=" + volunActPostnum
 				+ ", volunActRecruMaxCount=" + volunActRecruMaxCount + ", volunActDetail=" + volunActDetail
 				+ ", recruStatus=" + recruStatus + ", recruitStatus=" + recruitStatus + ", actType=" + actType
-				+ ", keyword=" + keyword + ", searchType="  + "]";
+				+ ", keyword=" + keyword + ", searchType=" + searchType + ", VolunActOrginName=" + VolunActOrginName
+				+ "]";
 	}
-	
-
-	
 	
 	
 }

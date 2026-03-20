@@ -7,7 +7,7 @@
 			<c:choose>
 				<c:when test="${empty sessionScope.userNo}">
 					<div class="l-header-right">
-						<a herf="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/asset/image/logo/logo.png" alt="logo" class="logoimgs" /></a>
+						<a href="/"><img src="${pageContext.request.contextPath}/asset/image/logo/logo.png" alt="logo" class="logoimgs" /></a>
 						<div>
 							<a href="">봉사활동</a>
 						</div>
@@ -16,16 +16,16 @@
 						</div>
 					</div>
 					<div class="l-header-left">
-						<div class="c-button c-button--secondary c-button--md">
-							<a href="${pageContext.request.contextPath}/user/login.usr">로그인/회원가입</a>
+						<div >
+							<a class="c-button c-button--secondary c-button--md" href="${pageContext.request.contextPath}/user/login.usr">로그인/회원가입</a>
 						</div>
 					</div>
 				</c:when>
 				<c:otherwise>
 					<div class="l-header-right">
-						<a herf=""><img src="${pageContext.request.contextPath}/asset/image/logo/logo.png" alt="logo" class="logoimgs" /></a>
+						<a href="/"><img src="${pageContext.request.contextPath}/asset/image/logo/logo.png" alt="logo" class="logoimgs" /></a>
 						<div>
-							<a href="">봉사활동</a>
+							<a href="${pageContext.request.contextPath}/volunteer-activity/list.va">봉사활동</a>
 						</div>
 						<div>
 							<a href="${pageContext.request.contextPath}/community/list.commu">어울림터</a>
@@ -46,13 +46,13 @@
 					</div>
 					<div class="l-header-left">
 						<div>
-							<h4>${sessionScope.userNickname}님</h4>
+							<h4>${sessionScope.userType == 1 ? sessionScope.userNickname : sessionScope.organName} 님</h4>
 						</div>
-						<div class="c-button c-button--secondary c-button--md">
-							<a href="${pageContext.request.contextPath}/mypage/check.mp">마이페이지</a>
+						<div>
+						<a class="c-button c-button--secondary c-button--md" href="${pageContext.request.contextPath}/mypage/check.mp">마이페이지</a>
 						</div>
-						<div class="c-button c-button--secondary c-button--md">
-							<a href="${pageContext.request.contextPath}/user/logout.usr">로그아웃</a>
+						<div>
+						<a class="c-button c-button--secondary c-button--md" href="${pageContext.request.contextPath}/user/logout.usr">로그아웃</a>
 						</div>
 						
 					</div>

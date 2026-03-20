@@ -152,7 +152,9 @@
 		SELECT
 		user_no,
 		user_nickname,
-		user_type
+		user_type,
+		organ_name,
+		organ_no
 		FROM tbl_user
 		WHERE user_id = #{userId}
 		AND user_pw = #{userPw}

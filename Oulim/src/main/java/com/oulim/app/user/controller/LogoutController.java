@@ -26,8 +26,8 @@ public class LogoutController implements Execute {
 
 		Result result = new Result();
 		result.setRedirect(true);
-		result.setPath(referer != null ? referer : "/"); // 이전 페이지로 이동
-
+//		result.setPath(referer != null ? referer : "/"); // 이전 페이지로 이동
+		result.setPath("/"); // 이전 페이지로 이동
 		return result;
 	}
 }
