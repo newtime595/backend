@@ -47,16 +47,13 @@
       <div class="l-container">
         <!-- 팀원들 작성 영역 이 안에서 작업하기!!퍼블 작업진행 -->
         <div class="p-community-detail">
-          <div class=""><b>${post.postTitle}</b></div>
+          <div class=""><h2>${post.postTitle}</h2></div>
           <div class="l-community-detail-author-group">
             작성자 | <span id="author">${post.userNickname}</span> 작성일 |
             <span id="date">${post.postDate}</span> 조회수 | <span id="view">${post.postViewCount }</span>
           </div>
         </div>
         <div class="l-community-detail-main">
-          <div>
-            <h4>상세내용</h4>
-          </div>
           <!-- 추후 이미지를 출력할 div -->
           <div class="l-community-detail-image">
            <c:forEach var="img" items="${post.images}">
@@ -78,17 +75,17 @@
             	</div>
             </div>
           
+       	<div id="commentList">
           <c:if test="${not empty commentList}">
 	          <c:forEach var="comment" items="${commentList}">
-       			<div class="commentList">
 		    	      <div class="comment-item">
 		    	        <div id="comment-author">${comment.userNickname}</div>
 		    	        <div class="comment-content">${comment.commentContent}</div>
 		    	        <div class="comment-date">${comment.postDate}</div>    	        
 			          </div>
-			      </div>
 	          </c:forEach>
           </c:if>
+      </div>
           <div class="l-community-comment-writebox">
              <textarea              
 	              class="c-comment-textarea"
@@ -109,7 +106,8 @@
               <c:choose>
               	<c:when test="${prev}">
               		<a href="#" 
-              		class="c-pagination__link">&lt;</a>
+              		class="c-pagination__link"
+              		data-page="${startPage - 1}">&lt;</a>
               	</c:when>
               	<c:otherwise>
               		<a href="#" 
@@ -121,7 +119,7 @@
     			<c:choose>          
     				<c:when test="${!(i == page)}">
 	              		<a href="#"
-	              			 class="c-pagination__link">
+	              			 class="c-pagination__link" data-page="${i}">
 	               			<c:out value="${i}"/>
 	               		</a>
 	               	</c:when>
@@ -135,7 +133,8 @@
               <c:choose>
               	<c:when test="${next}">
               		<a href="#"
-              	 	class="c-pagination__link">&gt;</a>
+              	 	class="c-pagination__link"
+              	 	data-page="${endPage + 1}">&gt;</a>
               	</c:when>
               	<c:otherwise>
               		<a href="#"

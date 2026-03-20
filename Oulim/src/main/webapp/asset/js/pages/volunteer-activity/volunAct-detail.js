@@ -1,4 +1,4 @@
-// 신청 버튼 
+/*// 신청 버튼 
 const volunActApplyBtn = document.querySelector(".l-volunAct-apply .c-button");
 
 // 날짜에 따른 신청 버튼 status 변경
@@ -74,4 +74,63 @@ volunActApplyBtn.addEventListener("click", (e) => {
 returnBtn.addEventListener("click", (e) => {
   console.log("목록으로 돌아가기 버튼 클릭")
   location.href = "/Oulim/front/html/volunteer-activity/volunAct-list.html";
+});
+*/
+//
+window.addEventListener("DOMContentLoaded", function () {
+    const messageElement = document.getElementById("message");
+    if (!messageElement) return;
+
+    const message = messageElement.value;
+
+    if (message === "applySuccess") {
+        alert("봉사 신청이 완료되었습니다.");
+    } else if (message === "cancelSuccess") {
+        alert("봉사 신청이 철회되었습니다.");
+    }
+});
+
+
+// 지도
+window.addEventListener("DOMContentLoaded", function () {
+    const mapContainer = document.getElementById("map");
+    const addressElement = document.getElementById("volunteerLocation");
+
+    if (!mapContainer || !addressElement) return;
+
+    const address = addressElement.textContent.trim();
+
+    if (!address) {
+        console.error("주소값이 없습니다.");
+        return;
+    }
+
+    if (typeof kakao === "undefined") {
+        console.error("kakao SDK가 로드되지 않았습니다.");
+        return;
+    }
+
+    kakao.maps.load(function () {
+        const map = new kakao.maps.Map(mapContainer, {
+            center: new kakao.maps.LatLng(37.5665, 126.9780),
+            level: 3
+        });
+
+        const geocoder = new kakao.maps.services.Geocoder();
+
+        geocoder.addressSearch(address, function (result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+                const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                new kakao.maps.Marker({
+                    map: map,
+                    position: coords
+                });
+
+                map.setCenter(coords);
+            } else {
+                console.error("주소 검색 실패:", address);
+            }
+        });
+    });
 });

@@ -97,12 +97,15 @@ document.addEventListener("DOMContentLoaded", ()=>{
 	});
 
 	document.addEventListener("click", async(e) =>{
-		const pageLink = e.target.closest("#commentPagination a[data-page]");
+//		const pageLink = e.target.closest("#commentPagination a[data-page]");
+		const pageLink = e.target.closest("#commentPagination a");
+		console.log(pageLink);
 		if(!pageLink) return;
+		
 		e.preventDefault();
-		
-		
+				
 		const page = Number(pageLink.dataset.page);
+		console.log(page);
 		await loadComments(page);
 	});
 	
@@ -127,6 +130,7 @@ async function loadComments(page){
 
 function renderComments(commentList) {
   const commentWrap = document.querySelector("#commentList");
+  const paginationWrap = document.querySelector("#commentPagination");
 
   if (!commentList || commentList.length === 0) {
     commentWrap.innerHTML = "";
@@ -135,6 +139,8 @@ function renderComments(commentList) {
 	  paginationWrap.style.display = "none";
 	  return;
   }
+  console.log(commentList.length);
+  
   paginationWrap.style.display = "flex";
 
   commentWrap.innerHTML = commentList.map(comment => `

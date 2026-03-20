@@ -137,4 +137,76 @@
 
 </select>
 
+<!--봉사활동 상세  -->
+<select id="selectVolunDetail" parameterType="int"
+        resultType="VolunActivityDTO">
+    SELECT 
+        V.Volun_Act_No              AS volunActNo,
+        V.Volun_Act_Title           AS volunActTitle,
+        TO_CHAR(V.Volun_Act_Recru_Begin, 'YYYY-MM-DD') AS volunActRecruBegin,
+        TO_CHAR(V.Volun_Act_Recru_End, 'YYYY-MM-DD')   AS volunActRecruEnd,
+        TO_CHAR(V.Volun_Act_Proc_Begin, 'YYYY-MM-DD')  AS volunActProcBegin,
+        TO_CHAR(V.Volun_Act_Proc_End, 'YYYY-MM-DD')    AS volunActProcEnd,
+        V.Volun_Act_Point           AS volunActPoint,
+        V.Volun_Act_Begin_Time      AS volunActBeginTime,
+        V.Volun_Act_End_Time        AS volunActEndTime,
+        V.Volun_Act_Act_Type        AS volunActActType,
+        V.Volun_Act_Age_Group       AS volunActAgeGroup,
+        V.Volun_Act_Organ_No        AS volunActOrganNo,
+        V.Volun_Act_Recru_Max_Count AS volunActRecruMaxCount,
+        V.Volun_Act_Address         AS volunActAddress,
+        V.Volun_Act_Address_Detail  AS volunActAddressDetail,
+        V.Volun_Act_Detail          AS volunActDetail,
+        O.Organ_Name                AS orgName,
+        CASE 
+            WHEN SYSDATE <![CDATA[ < ]]> V.Volun_Act_Recru_Begin THEN '모집예정'
+            WHEN SYSDATE <![CDATA[ > ]]> V.Volun_Act_Recru_End THEN '마감'
+            ELSE '모집중'
+        END AS recruStatus
+    FROM TBL_VOLUN_ACTIVITY V
+    JOIN TBL_ORGAN O
+      ON V.Volun_Act_Organ_No = O.Organ_No
+    WHERE V.Volun_Act_No = #{volunActNo}
+</select>
+
+<!--봉사 신청  -->
+<insert id="applyVolunteer" parameterType="VolunApplyDTO">
+    MERGE INTO TBL_VOLUN_APPLY A
+    USING (
+        SELECT
+            #{volunActNo} AS VOLUN_ACT_NO,
+            #{userNo} AS USER_NO
+        FROM DUAL
+    ) B
+    ON (
+        A.VOLUN_ACT_NO = B.VOLUN_ACT_NO
+        AND A.USER_NO = B.USER_NO
+    )
+    WHEN MATCHED THEN
+        UPDATE SET
+            A.VOLUNACT_APPLYSTATUS = 1,
+            A.VOLUNACT_APPLYDATE = SYSDATE
+    WHEN NOT MATCHED THEN
+        INSERT (
+            VOLUN_ACT_NO,
+            USER_NO,
+            VOLUNACT_APPLYDATE,
+            VOLUNACT_APPLYSTATUS,
+            VOLUNACT_ATTENDANCE
+        )
+        VALUES (
+            #{volunActNo},
+            #{userNo},
+            SYSDATE,
+            1,
+            0
+        )
+</insert>
+<!--철회  -->
+<update id="cancelVolunteer" parameterType="VolunApplyDTO">
+    UPDATE TBL_VOLUN_APPLY
+    SET VOLUNACT_APPLYSTATUS = 0
+    WHERE VOLUN_ACT_NO = #{volunActNo}
+      AND USER_NO = #{userNo}
+</update>
 </mapper>

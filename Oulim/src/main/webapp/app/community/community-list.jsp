@@ -40,7 +40,7 @@
   </head>
   
   <body>
-    <!-- Header 자동 삽입 -->
+     <!-- Header 자동 삽입 -->
   	<jsp:include page="/app/include/header.jsp" />
 
     <main class="l-main">
