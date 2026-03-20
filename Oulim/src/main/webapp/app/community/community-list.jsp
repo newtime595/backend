@@ -124,6 +124,8 @@
             class="l-community-list-pagination"
             style="width: 900px; margin: 50px"
           >
+          <c:if test="${not empty postList}">
+          
             <!-- 페이지네이션  c-pagination-->
             <nav class="c-pagination">
               <c:choose>
@@ -163,6 +165,7 @@
               	</c:otherwise>
               </c:choose>
             </nav>
+            </c:if>
           </div>
           
         </div>

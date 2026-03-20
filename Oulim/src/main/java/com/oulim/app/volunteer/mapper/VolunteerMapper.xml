@@ -5,109 +5,94 @@
 <select id="selectVolunteerList"
         parameterType="VolunActivityDTO"
         resultType="VolunActivityDTO">
-	
-	SELECT
-	    Volun_Act_No, <!-- 봉사번호 -->
-	    Volun_Act_Title, <!-- 봉사제목 -->
-	    Volun_Act_Recru_Begin, <!-- 모집시작 -->
-	    Volun_Act_Recru_End, <!-- 모집종료 -->
-	    Volun_Act_Proc_Begin, <!-- 봉사시작a -->
-	    Volun_Act_Proc_End, <!-- 봉사 종료일 -->
-	    Volun_Act_Point,  <!-- 봉사포인트 -->
-	    Volun_Act_Act_Type,  <!-- 활동분야 -->
-	    Volun_Act_Age_Group, <!-- 참여가능연령 -->
-	    Volun_Act_Address, <!--봉사주소s-->
-	
-	    <![CDATA[
-	    CASE
-	        WHEN SYSDATE < Volun_Act_Recru_Begin THEN '모집예정'
-	        WHEN SYSDATE BETWEEN Volun_Act_Recru_Begin AND Volun_Act_Recru_End THEN '모집중'
-	        WHEN SYSDATE > Volun_Act_Recru_End THEN '모집완료'
-	    END AS RECRU_STATUS
-	    ]]>
-	
-	FROM TBL_VOLUN_ACTIVITY
 
+    SELECT
+        VA.Volun_Act_No,
+        VA.Volun_Act_Title,
+        VA.Volun_Act_Recru_Begin,
+        VA.Volun_Act_Recru_End,
+        VA.Volun_Act_Proc_Begin,
+        VA.Volun_Act_Proc_End,
+        VA.Volun_Act_Point,
+        VA.Volun_Act_Address,
+
+        /* 활동분야 이름 변환 */
+        CASE VA.Volun_Act_Act_Type
+            WHEN 1 THEN '환경'
+            WHEN 2 THEN '의료'
+            WHEN 3 THEN '교육'
+            WHEN 4 THEN '생활·편의'
+            WHEN 5 THEN '문화·체육·예술'
+            ELSE '기타'
+        END AS actTypeName,
+
+        /* 연령 변환 */
+        CASE VA.Volun_Act_Age_Group
+            WHEN 1 THEN '청소년(14~19)'
+            WHEN 2 THEN '청년(20~30)'
+            WHEN 3 THEN '직장인(30+)'
+        END AS ageGroupName,
+
+        /* 모집 상태 */
+        <![CDATA[
+        CASE
+            WHEN SYSDATE < VA.Volun_Act_Recru_Begin THEN '모집예정'
+            WHEN SYSDATE BETWEEN VA.Volun_Act_Recru_Begin AND VA.Volun_Act_Recru_End THEN '모집중'
+            ELSE '모집마감'
+        END AS recruitStatusName
+        ]]>
+
+    FROM TBL_VOLUN_ACTIVITY VA
+    LEFT JOIN TBL_ORGAN O ON VA.ORGAN_NO = O.ORGAN_NO
 
     <where>
 
-        <!--
-            기본 조건
-            현재 날짜가 모집 종료일보다 작은 경우만 조회
-            즉 모집이 끝나지 않은 봉사활동만 목록에 표시
-        -->
-        <![CDATA[
-        Volun_Act_Recru_End >= SYSDATE
-        ]]>
-
-        <!--
-            활동 분야 검색
-            0은 전체이므로 조건을 적용하지 않음
-            1~5 값이 들어오면 해당 봉사유형만 조회
-        -->
+        <!-- 활동분야 -->
         <if test="volunActActType != null and volunActActType != 0">
-            AND Volun_Act_Act_Type = #{volunActActType}
+            AND VA.Volun_Act_Act_Type = #{volunActActType}
         </if>
 
-
-        <!--
-            참여 가능 연령 검색
-            0은 전체이므로 조건을 적용하지 않음
-        -->
+        <!-- 연령 -->
         <if test="volunActAgeGroup != null and volunActAgeGroup != 0">
-            AND Volun_Act_Age_Group = #{volunActAgeGroup}
+            AND VA.Volun_Act_Age_Group = #{volunActAgeGroup}
         </if>
 
-
-        <!--
-            모집 상태 검색
-            OPEN : 모집중
-            CLOSE : 모집마감
-        -->
-        <if test="recruitStatus != null and recruitStatus == 'OPEN'">
-            AND Volun_Act_Recru_End >= SYSDATE
-        </if>
-
-        <if test="recruitStatus != null and recruitStatus == 'CLOSE'">
-			<![CDATA[
-			AND Volun_Act_Recru_End < SYSDATE
-			]]>
-        </if>
-
-
-        <!--
-            봉사 기간 검색
-            사용자가 선택한 날짜가
-            봉사 시작일 ~ 봉사 종료일 사이에 있는 활동 조회
-        -->
-<!--         <if test="volunDate != null and volunDate != ''">
-        	<![CDATA[
-            AND Volun_Act_Proc_Begin <= #{volunDate}
-            AND Volun_Act_Proc_End >= #{volunDate}
+        <!-- 모집 상태 -->
+        <if test="recruitStatus == '1'">
+            <![CDATA[
+            AND SYSDATE BETWEEN VA.Volun_Act_Recru_Begin AND VA.Volun_Act_Recru_End
             ]]>
         </if>
- -->
 
-        <!--
-            키워드 검색
-            제목 또는 포인트 기준으로 검색 가능
-        -->
-
-        <!-- 제목 검색 -->
-        <if test="searchType == 'title' and keyword != null and keyword != ''">
-			AND Volun_Act_Title LIKE CONCAT('%', #{keyword}, '%')
+        <if test="recruitStatus == '2'">
+            <![CDATA[
+            AND SYSDATE < VA.Volun_Act_Recru_Begin
+            ]]>
         </if>
 
-        <!-- 포인트 검색 -->
+        <if test="recruitStatus == '3'">
+            <![CDATA[
+            AND SYSDATE > VA.Volun_Act_Recru_End
+            ]]>
+        </if>
+
+        <!-- 기관 검색 -->
+        <if test="organization != null and organization != ''">
+            AND O.ORGAN_NAME LIKE CONCAT('%', #{organization}, '%')
+        </if>
+
+        <!-- 키워드 -->
+        <if test="searchType == 'title' and keyword != null and keyword != ''">
+            AND VA.Volun_Act_Title LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+
         <if test="searchType == 'point' and keyword != null and keyword != ''">
-            AND Volun_Act_Point = #{keyword}
+            AND VA.Volun_Act_Point = #{keyword}
         </if>
 
     </where>
 
-    <!-- 최신 등록 순 정렬 -->
-ORDER BY Volun_Act_No DESC
-OFFSET #{offset} ROWS FETCH NEXT #{size} ROWS ONLY
+    ORDER BY VA.Volun_Act_No DESC
 
 </select>
 <select id="selectVolunteerCount"
@@ -118,49 +103,40 @@ OFFSET #{offset} ROWS FETCH NEXT #{size} ROWS ONLY
     FROM TBL_VOLUN_ACTIVITY
 
     <where>
-
         <![CDATA[
         Volun_Act_Recru_End >= SYSDATE
         ]]>
 
-        <if test="volunActActType != null">
+        <if test="volunActActType != null and volunActActType != 0">
             AND Volun_Act_Act_Type = #{volunActActType}
         </if>
 
-        <if test="volunActAgeGroup != null">
+        <if test="volunActAgeGroup != null and volunActAgeGroup != 0">
             AND Volun_Act_Age_Group = #{volunActAgeGroup}
         </if>
 
-        <if test="recruitStatus == '1'">
-            <![CDATA[
-            AND SYSDATE BETWEEN Volun_Act_Recru_Begin AND Volun_Act_Recru_End
-            ]]>
+        <if test="recruitStatus != null and recruitStatus == 'OPEN'">
+            AND Volun_Act_Recru_End >= SYSDATE
         </if>
 
-        <if test="recruitStatus == '2'">
+        <if test="recruitStatus != null and recruitStatus == 'CLOSE'">
             <![CDATA[
-            AND SYSDATE < Volun_Act_Recru_Begin
+            AND Volun_Act_Recru_End < SYSDATE
             ]]>
-        </if>
-
-        <if test="recruitStatus == '3'">
-            <![CDATA[
-            AND SYSDATE > Volun_Act_Recru_End
-            ]]>
-        </if>
-
-        <if test="organization != null and organization != ''">
-            AND Volun_Act_Org_Name LIKE '%' || #{organization} || '%'
         </if>
 
         <if test="searchType == 'title' and keyword != null and keyword != ''">
-            AND Volun_Act_Title LIKE '%' || #{keyword} || '%'
+            AND Volun_Act_Title LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+
+        <if test="searchType == 'point' and keyword != null and keyword != ''">
+            AND Volun_Act_Point = #{keyword}
         </if>
 
     </where>
 
 </select>
-
+<!-- 
 <select id="selectVolunDetail" parameterType="int"
         resultType="VolunActivityDTO">
 
@@ -189,4 +165,5 @@ OFFSET #{offset} ROWS FETCH NEXT #{size} ROWS ONLY
     WHERE V.Volun_Act_No = #{volunActNo}
 
 </select>
+ -->
 </mapper>

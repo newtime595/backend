@@ -1,6 +1,8 @@
-.p-volunAct-list-main{
-    
+.l-container > h2{
+  text-align: center;
+  margin-bottom: 52px;
 }
+
 .l-volunAct-title{
   display: flex;
   width: 100%;
@@ -9,10 +11,15 @@
 }
 
 .l-volunAct-list-pagination{
-    display: flex;
-    justify-content: center;
+  display:flex;
+  justify-content:center;
+  margin-top:40px;
 }
-
+.c-pagination{
+  display:flex;
+  justify-content:center;
+  margin:0 auto;
+}
 .l-volunAct-list-search-option-group{
   width: 100%;
   padding: 40px 48px 32px;
@@ -95,7 +102,7 @@
 }
 
 /* ===================== */
-/* 🔴 상단 뱃지 영역 */
+/* 상단 뱃지 영역 */
 /* ===================== */
 .card-badge {
   display: flex;
@@ -171,4 +178,11 @@
   text-decoration: none;
   color: inherit;
   display: block;
+  
+  
+ .c-pagination__link.is-active{
+  background:var(--color-primary);
+  color:#fff;
+  font-weight:600;
+}
 }

@@ -71,16 +71,24 @@
 
         <div class="l-community-comment">
           <div class="l-community-comment-recommend-btn-group">
-            <div class="c-comment-title"><b>댓글</b></div>
-            <div class="l-recommend-btn-group">
-              <button id="recommendBtn" class="c-button c-button--primary c-button--sm">추천</button>
-              <div class="c-recommend">추천수 | ${post.likeCount}</div>
+            	<div class="c-comment-title"><b>댓글</b></div>
+            	<div class="l-recommend-btn-group">
+            	  <button id="recommendBtn" class="c-button c-button--primary c-button--sm">추천</button>
+             	 <div class="c-recommend">추천수 | ${post.likeCount}</div>
+            	</div>
             </div>
-          </div>
-          <div class="comment-item">
-            작성자<span id="comment-author"></span><br />
-            <div class="comment-content">댓글내용</div>
-          </div>
+          
+          <c:if test="${not empty commentList}">
+	          <c:forEach var="comment" items="${commentList}">
+       			<div class="commentList">
+		    	      <div class="comment-item">
+		    	        <div id="comment-author">${comment.userNickname}</div>
+		    	        <div class="comment-content">${comment.commentContent}</div>
+		    	        <div class="comment-date">${comment.postDate}</div>    	        
+			          </div>
+			      </div>
+	          </c:forEach>
+          </c:if>
           <div class="l-community-comment-writebox">
              <textarea              
 	              class="c-comment-textarea"
@@ -91,7 +99,54 @@
             	<button id="commentPostBtn" class="c-button c-button--primary c-button--lg">댓글 작성</button>
            	 </div>
           </div>
+          
+          <div
+            class="l-community-list-pagination"
+            style="width: 900px; margin: 50px"
+          >
+          <c:if test="${not empty commentList}">
+            <nav class="c-pagination" id="commentPagination">
+              <c:choose>
+              	<c:when test="${prev}">
+              		<a href="#" 
+              		class="c-pagination__link">&lt;</a>
+              	</c:when>
+              	<c:otherwise>
+              		<a href="#" 
+              		class="c-pagination__link is-disabled" onclick="return false;">&lt;</a>
+              	</c:otherwise>
+              </c:choose>
+              <c:set var="realStartPage" value="${startPage < 1 ? 1 : startPage }"/>
+              <c:forEach var="i" begin="${realStartPage}" end="${endPage}">
+    			<c:choose>          
+    				<c:when test="${!(i == page)}">
+	              		<a href="#"
+	              			 class="c-pagination__link">
+	               			<c:out value="${i}"/>
+	               		</a>
+	               	</c:when>
+	               	<c:otherwise>
+	               		<a href="#" class="c-pagination__link is-active">
+	               			<c:out value="${i}"/>
+	               		</a>
+	               	</c:otherwise>
+	            </c:choose>	            
+              </c:forEach>
+              <c:choose>
+              	<c:when test="${next}">
+              		<a href="#"
+              	 	class="c-pagination__link">&gt;</a>
+              	</c:when>
+              	<c:otherwise>
+              		<a href="#"
+              	 	class="c-pagination__link is-disabled" onclick="return false;">&gt;</a>
+              	</c:otherwise>
+              </c:choose>
+            </nav>
+            </c:if>
+            </div>
         </div>
+        
         <div class="l-return-button">
           <button class="c-button c-button--primary c-button--lg">목록으로 돌아가기</button>
         </div>

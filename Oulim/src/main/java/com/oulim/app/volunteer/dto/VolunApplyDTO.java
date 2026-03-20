@@ -22,6 +22,7 @@ public class VolunApplyDTO {
 	public int getVolunActNo() {
 		return volunActNo;
 	}
+	
 	public void setVolunActNo(int volunActNo) {
 		this.volunActNo = volunActNo;
 	}

@@ -92,6 +92,11 @@ public class CommunityFrontController extends HttpServlet {
 			result = new CommunityDeleteOkController().execute(request, response);
 			System.out.println("후기 삭제 완료");
 		}
+		case "/community/comment.commu" -> {
+			System.out.println("댓글 갱신");
+			result = new CommunityCommentListOkController().execute(request, response);
+			System.out.println("댓글 갱신 완료");
+		}
 		}
 		
 		if(result != null && result.getPath() != null) {

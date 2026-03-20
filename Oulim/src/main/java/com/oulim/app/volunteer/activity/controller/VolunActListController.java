@@ -21,7 +21,7 @@ public class VolunActListController implements Execute {
         VolunteerActivityDAO dao = new VolunteerActivityDAO();
         VolunActivityDTO dto = new VolunActivityDTO();
 
-        // ===== 파라미터수집 =====
+        // ===================== 파라미터수집 ======================
         String actType = request.getParameter("actType");
         String ageGroup = request.getParameter("ageGroup");
         String recruitStatus = request.getParameter("recruitStatus");
@@ -51,32 +51,52 @@ public class VolunActListController implements Execute {
 
         if (organization != null && !organization.trim().isEmpty()) {
             dto.setOrganization(organization);
+            
         }
+        
+        
+        
 
-        // ===== 페이징 =====
-        int page = 1;
-        int size = 5;
+     // ======================== 페이징 ====================
+        int page = request.getParameter("page") == null ? 1 : Integer.parseInt(request.getParameter("page"));
+        int size = 10;
 
-        if (request.getParameter("page") != null) {
-            page = Integer.parseInt(request.getParameter("page"));
-        }
-
-        int offset = (page - 1) * size;
-
-        dto.setPage(page);
-        dto.setSize(size);
-        dto.setOffset(offset);
-
-        // ===== 조회 =====
-        List<VolunActivityDTO> list = dao.selectVolActList(dto);
+        // 전체 데이터 개수
         int totalCount = dao.selectCount(dto);
 
-        int totalPage = (int)Math.ceil((double)totalCount / size);
+        // 전체 페이지 수
+        int totalPage = (int)Math.ceil((double) totalCount / size);
+
+        // 시작 / 끝 페이지 (블록 기준)
+        int pageBlock = 5;
+        int startPage = ((page - 1) / pageBlock) * pageBlock + 1;
+        int endPage = startPage + pageBlock - 1;
+
+        if (endPage > totalPage) {
+            endPage = totalPage;
+        }
+
+        // ROWNUM용
+        int startRow = (page - 1) * size;
+        int endRow = page * size;
+
+        dto.setStartRow(startRow);
+        dto.setEndRow(endRow);
+        
+        System.out.println("totalCount = " + totalCount);
+        System.out.println("totalPage = " + totalPage);
+        System.out.println("page = " + page);
+        System.out.println("startRow = " + startRow);
+        System.out.println("endRow = " + endRow);
+        // ===== 조회 =====
+        List<VolunActivityDTO> list = dao.selectVolActList(dto);
 
         // ===== 전달 =====
         request.setAttribute("volunteerList", list);
         request.setAttribute("search", dto);
         request.setAttribute("page", page);
+        request.setAttribute("startPage", startPage);
+        request.setAttribute("endPage", endPage);
         request.setAttribute("totalPage", totalPage);
 
         Result result = new Result();
