@@ -64,8 +64,8 @@ public class MyPageCheckOkController implements Execute{
 			request.setAttribute("volunActNo", summaryInfo.getVolunActNo());
 
 			request.setAttribute("comVolunActTitle", comVolunInfo.getVolunActTitle());
-			request.setAttribute("comVolunActProcEnd", comVolunInfo.getComVolunActProcBegin());
-			request.setAttribute("comVolunActProcBegin", comVolunInfo.getComVolunActProcEnd());
+			request.setAttribute("comVolunActProcEnd", comVolunInfo.getComVolunActProcEnd());
+			request.setAttribute("comVolunActProcBegin", comVolunInfo.getComVolunActProcBegin());
 			
 			request.setAttribute("finVolunActTitle", finVolunInfo.getVolunActTitle());
 			request.setAttribute("finVolunActProcEnd", finVolunInfo.getFinVolunActProcEnd());
