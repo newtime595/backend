@@ -48,49 +48,8 @@ public class VolunActivityDTO {
 	private String orgName;			// 주체단체이름
 	private String actTypeName; // 활동분야
 	private String ageGroupName; // 활동가능연령대
-
-	
-	public String getOrgName() {
-		return orgName;
-	}
-	public void setOrgName(String orgName) {
-		this.orgName = orgName;
-	}
-	public String getActTypeName() {
-		return actTypeName;
-	}
-	public void setActTypeName(String actTypeName) {
-		this.actTypeName = actTypeName;
-	}
-	public String getAgeGroupName() {
-		return ageGroupName;
-	}
-	public void setAgeGroupName(String ageGroupName) {
-		this.ageGroupName = ageGroupName;
-	}
-	private int StartRow;
-    private int EndRow;
-	
-
-	public int getStartRow() {
-		return StartRow;
-	}
-	public void setStartRow(int startRow) {
-		StartRow = startRow;
-	}
-	public int getEndRow() {
-		return EndRow;
-	}
-	public void setEndRow(int endRow) {
-		EndRow = endRow;
-	}
-	public String getOrganization() {
-		return Organization;
-	}
-	public void setOrganization(String organization) {
-		this.Organization = organization;
-	}
-	
+	private int startRow;
+	private int endRow;
 	public int getVolunActNo() {
 		return volunActNo;
 	}
@@ -229,6 +188,42 @@ public class VolunActivityDTO {
 	public void setVolunActOrginName(String volunActOrginName) {
 		VolunActOrginName = volunActOrginName;
 	}
+	public String getOrganization() {
+		return Organization;
+	}
+	public void setOrganization(String organization) {
+		Organization = organization;
+	}
+	public String getOrgName() {
+		return orgName;
+	}
+	public void setOrgName(String orgName) {
+		this.orgName = orgName;
+	}
+	public String getActTypeName() {
+		return actTypeName;
+	}
+	public void setActTypeName(String actTypeName) {
+		this.actTypeName = actTypeName;
+	}
+	public String getAgeGroupName() {
+		return ageGroupName;
+	}
+	public void setAgeGroupName(String ageGroupName) {
+		this.ageGroupName = ageGroupName;
+	}
+	public int getStartRow() {
+		return startRow;
+	}
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+	public int getEndRow() {
+		return endRow;
+	}
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
+	}
 	@Override
 	public String toString() {
 		return "VolunActivityDTO [volunActNo=" + volunActNo + ", volunActTitle=" + volunActTitle
@@ -241,8 +236,10 @@ public class VolunActivityDTO {
 				+ ", volunActRecruMaxCount=" + volunActRecruMaxCount + ", volunActDetail=" + volunActDetail
 				+ ", recruStatus=" + recruStatus + ", recruitStatus=" + recruitStatus + ", actType=" + actType
 				+ ", keyword=" + keyword + ", searchType=" + searchType + ", VolunActOrginName=" + VolunActOrginName
-				+ "]";
+				+ ", Organization=" + Organization + ", orgName=" + orgName + ", actTypeName=" + actTypeName
+				+ ", ageGroupName=" + ageGroupName + ", startRow=" + startRow + ", endRow=" + endRow + "]";
 	}
+	
 	
 	
 }

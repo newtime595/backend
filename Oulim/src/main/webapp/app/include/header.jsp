@@ -9,7 +9,7 @@
 					<div class="l-header-right">
 						<a href="/"><img src="${pageContext.request.contextPath}/asset/image/logo/logo.png" alt="logo" class="logoimgs" /></a>
 						<div>
-							<a href="">봉사활동</a>
+							<a href="${pageContext.request.contextPath}/volunteer-activity/list.va">봉사활동</a>
 						</div>
 						<div>
 							<a href="${pageContext.request.contextPath}/community/list.commu">어울림터</a>

@@ -14,95 +14,66 @@ import com.oulim.app.volunteer.dto.VolunActivityDTO;
 
 public class VolunActListController implements Execute {
 
-    @Override
-    public Result execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+	private int parseIntSafe(String param) {
+		if (param == null || param.trim().equals("") || param.trim().equals("0")) {
+			return 0;
+		}
+		return Integer.parseInt(param.trim());
+	}
 
-        VolunteerActivityDAO dao = new VolunteerActivityDAO();
-        VolunActivityDTO dto = new VolunActivityDTO();
+	@Override
+	public Result execute(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        // ===================== 파라미터수집 ======================
-        String actType = request.getParameter("actType");
-        String ageGroup = request.getParameter("ageGroup");
-        String recruitStatus = request.getParameter("recruitStatus");
-        String keyword = request.getParameter("keyword");
-        String searchType = request.getParameter("searchType");
-        String organization = request.getParameter("organization");
+		VolunteerActivityDAO dao = new VolunteerActivityDAO();
+		VolunActivityDTO dto = new VolunActivityDTO();
 
-        if (actType != null && !actType.isEmpty()) {
-            dto.setVolunActActType(Integer.parseInt(actType));
-        }
+		String actType = request.getParameter("volunActActType");
+		String ageGroup = request.getParameter("volunActAgeGroup");
+		String recruitStatus = request.getParameter("recruitStatus");
+		String keyword = request.getParameter("keyword");
+		String searchType = request.getParameter("searchType");
+		String organization = request.getParameter("organization");
 
-        if (ageGroup != null && !ageGroup.isEmpty()) {
-            dto.setVolunActAgeGroup(Integer.parseInt(ageGroup));
-        }
+		dto.setVolunActActType(parseIntSafe(actType));
+		dto.setVolunActAgeGroup(parseIntSafe(ageGroup));
+		dto.setRecruitStatus(recruitStatus == null ? "0" : recruitStatus.trim());
+		dto.setKeyword(keyword == null ? "" : keyword.trim());
+		dto.setSearchType(searchType == null ? "title" : searchType.trim());
+		dto.setOrganization(organization == null ? "" : organization.trim());
 
-        if (recruitStatus != null && !recruitStatus.isEmpty()) {
-            dto.setRecruitStatus(recruitStatus);
-        }
+		int page = parseIntSafe(request.getParameter("page"));
+		if (page == 0)
+			page = 1;
 
-        if (keyword != null && !keyword.trim().isEmpty()) {
-            dto.setKeyword(keyword);
-        }
+		int size = 10;
 
-        if (searchType != null && !searchType.isEmpty()) {
-            dto.setSearchType(searchType);
-        }
+		int totalCount = dao.selectCount(dto);
+		int totalPage = (int) Math.ceil((double) totalCount / size);
 
-        if (organization != null && !organization.trim().isEmpty()) {
-            dto.setOrganization(organization);
-            
-        }
-        
-        
-        
+		int pageBlock = 5;
+		int startPage = ((page - 1) / pageBlock) * pageBlock + 1;
+		int endPage = Math.min(startPage + pageBlock - 1, totalPage);
 
-     // ======================== 페이징 ====================
-        int page = request.getParameter("page") == null ? 1 : Integer.parseInt(request.getParameter("page"));
-        int size = 10;
+		int startRow = (page - 1) * size;
+		int endRow = page * size;
 
-        // 전체 데이터 개수
-        int totalCount = dao.selectCount(dto);
+		dto.setStartRow(startRow);
+		dto.setEndRow(endRow);
 
-        // 전체 페이지 수
-        int totalPage = (int)Math.ceil((double) totalCount / size);
+		List<VolunActivityDTO> list = dao.selectVolActList(dto);
 
-        // 시작 / 끝 페이지 (블록 기준)
-        int pageBlock = 5;
-        int startPage = ((page - 1) / pageBlock) * pageBlock + 1;
-        int endPage = startPage + pageBlock - 1;
+		request.setAttribute("volunteerList", list);
+		request.setAttribute("search", dto);
+		request.setAttribute("page", page);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("totalPage", totalPage);
 
-        if (endPage > totalPage) {
-            endPage = totalPage;
-        }
+		Result result = new Result();
+		result.setPath("/app/volunteer-activity/volunAct-list.jsp");
+		result.setRedirect(false);
 
-        // ROWNUM용
-        int startRow = (page - 1) * size;
-        int endRow = page * size;
-
-        dto.setStartRow(startRow);
-        dto.setEndRow(endRow);
-        
-        System.out.println("totalCount = " + totalCount);
-        System.out.println("totalPage = " + totalPage);
-        System.out.println("page = " + page);
-        System.out.println("startRow = " + startRow);
-        System.out.println("endRow = " + endRow);
-        // ===== 조회 =====
-        List<VolunActivityDTO> list = dao.selectVolActList(dto);
-
-        // ===== 전달 =====
-        request.setAttribute("volunteerList", list);
-        request.setAttribute("search", dto);
-        request.setAttribute("page", page);
-        request.setAttribute("startPage", startPage);
-        request.setAttribute("endPage", endPage);
-        request.setAttribute("totalPage", totalPage);
-
-        Result result = new Result();
-        result.setPath("/app/volunteer-activity/volunAct-list.jsp");
-        result.setRedirect(false);
-
-        return result;
-    }
+		return result;
+	}
 }

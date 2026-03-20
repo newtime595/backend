@@ -19,8 +19,8 @@ public class VolunActDetailController implements Execute{
 		Result result = new Result();
 		VolunteerActivityDAO dao = new VolunteerActivityDAO();
 		
-		int volunActNo=1;//테스트
-//		int volunActNo = Integer.parseInt(request.getParameter("volunActNo"));
+
+		int volunActNo = Integer.parseInt(request.getParameter("volunActNo"));
 		VolunActivityDTO volunActivityDTO = dao.selectDetail(volunActNo);
 
 		request.setAttribute("volunActivity", volunActivityDTO);
