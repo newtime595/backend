@@ -21,7 +21,7 @@ public class VolunteerActivityDAO {
     }
     
     public int selectCount(VolunActivityDTO dto) {
-        return sqlSession.selectOne("volunAct.selectVolunteerCount", dto);
+        return sqlSession.selectOne("volunAct.selectCount", dto);
     }
     
     //상세 페이지 정보

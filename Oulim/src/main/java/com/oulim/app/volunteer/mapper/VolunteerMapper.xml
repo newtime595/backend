@@ -51,23 +51,23 @@
             <where>
 
                 <if test="volunActActType != null and volunActActType != 0">
-                    VA.Volun_Act_Act_Type = #{volunActActType}
-                </if>
+				    VA.Volun_Act_Act_Type = #{volunActActType}
+				</if>
 
                 <if test="volunActAgeGroup != null and volunActAgeGroup != 0">
                     AND VA.Volun_Act_Age_Group = #{volunActAgeGroup}
                 </if>
 
                 <!-- 모집 상태 -->
-                <if test="recruitStatus == '1'">
+                <if test='recruitStatus != null and recruitStatus.equals("1")'>
                     AND SYSDATE BETWEEN VA.Volun_Act_Recru_Begin AND VA.Volun_Act_Recru_End
                 </if>
 
-                <if test="recruitStatus == '2'">
+                <if test='recruitStatus != null and recruitStatus.equals("2")'>
                     AND SYSDATE &lt; VA.Volun_Act_Recru_Begin
                 </if>
 
-                <if test="recruitStatus == '3'">
+                <if test='recruitStatus != null and recruitStatus.equals("3")'>
                     AND SYSDATE &gt; VA.Volun_Act_Recru_End
                 </if>
 
@@ -95,53 +95,53 @@
 </select>
 
 
-<select id="selectVolunteerCount"
+<select id="selectCount"
         parameterType="VolunActivityDTO"
         resultType="int">
 
     SELECT COUNT(*)
-
     FROM TBL_VOLUN_ACTIVITY VA
-    LEFT JOIN TBL_ORGAN O 
-    ON VA.Volun_Act_Organ_No = O.Organ_No
+    LEFT JOIN TBL_ORGAN O
+        ON VA.Volun_Act_Organ_No = O.ORGAN_NO
 
     <where>
-        1 = 1
 
-        <if test="volunActActType != 0">
-            AND VA.Volun_Act_Act_Type = #{volunActActType}
+        <if test="volunActActType != null and volunActActType != 0">
+            VA.Volun_Act_Act_Type = #{volunActActType}
         </if>
 
-        <if test="volunActAgeGroup != 0">
+        <if test="volunActAgeGroup != null and volunActAgeGroup != 0">
             AND VA.Volun_Act_Age_Group = #{volunActAgeGroup}
         </if>
 
-        <if test="recruitStatus == '1'">
-            <![CDATA[
+        <!-- 모집 상태 (중요 ⭐) -->
+        <if test='"1".equals(recruitStatus)'>
             AND SYSDATE BETWEEN VA.Volun_Act_Recru_Begin AND VA.Volun_Act_Recru_End
-            ]]>
         </if>
 
-        <if test="recruitStatus == '2'">
-            <![CDATA[
-            AND SYSDATE < VA.Volun_Act_Recru_Begin
-            ]]>
+        <if test='"2".equals(recruitStatus)'>
+            AND SYSDATE &lt; VA.Volun_Act_Recru_Begin
         </if>
 
-        <if test="recruitStatus == '3'">
-            <![CDATA[
-            AND SYSDATE > VA.Volun_Act_Recru_End
-            ]]>
+        <if test='"3".equals(recruitStatus)'>
+            AND SYSDATE &gt; VA.Volun_Act_Recru_End
         </if>
 
         <if test="organization != null and organization != ''">
-            AND O.Organ_Name LIKE CONCAT('%', #{organization}, '%')
+            AND O.ORGAN_NAME LIKE '%' || #{organization} || '%'
+        </if>
+
+        <if test='"title".equals(searchType) and keyword != null and keyword != ""'>
+            AND VA.Volun_Act_Title LIKE '%' || #{keyword} || '%'
+        </if>
+
+        <if test='"point".equals(searchType) and keyword != null and keyword != ""'>
+            AND VA.Volun_Act_Point = #{keyword}
         </if>
 
     </where>
 
 </select>
-
 <!--봉사활동 상세  -->
 <select id="selectVolunDetail" parameterType="int"
         resultType="VolunActivityDTO">
