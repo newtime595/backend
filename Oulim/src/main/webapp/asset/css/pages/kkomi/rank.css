@@ -143,3 +143,104 @@ font-weight:600;
 
 }
 
+.c-my-rank-card {
+  width: min(100%, 520px);
+  margin: 40px auto 20px;
+  padding: 20px 24px;
+  background: #fff;
+  border: 1px solid #e9efe3;
+  border-radius: 20px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+}
+
+.c-my-rank-card__badge {
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 6px 14px;
+  background: #eef9d7;
+  color: #4f8a10;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 999px;
+}
+
+.c-my-rank-card__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.c-my-rank-card__left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.c-my-rank-card__img {
+  width: 84px;
+  height: 84px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.c-my-rank-card__user {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.c-my-rank-card__name {
+  font-size: 22px;
+  font-weight: 800;
+  color: #222;
+  line-height: 1.2;
+}
+
+.c-my-rank-card__score {
+  font-size: 18px;
+  font-weight: 700;
+  color: #6cc400;
+  line-height: 1.2;
+}
+
+.c-my-rank-card__rank {
+  flex-shrink: 0;
+  min-width: 88px;
+  padding: 14px 16px;
+  background: #f7fbe8;
+  border-radius: 16px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 800;
+  color: #4f8a10;
+}
+
+@media (max-width: 640px) {
+  .c-my-rank-card {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .c-my-rank-card__content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .c-my-rank-card__left {
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+  }
+
+  .c-my-rank-card__user {
+    align-items: center;
+  }
+
+  .c-my-rank-card__rank {
+    width: 100%;
+    font-size: 24px;
+  }
+}

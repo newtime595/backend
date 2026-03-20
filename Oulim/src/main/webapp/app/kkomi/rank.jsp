@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -45,6 +45,8 @@
     <div class="l-container">
       <section class="p-rank">
         <h2 class="p-rank__title">도력 랭킹</h2>
+        <jsp:useBean id="now" class="java.util.Date" />
+		<h4><fmt:formatDate value="${now}" pattern="yyyy년 MM월"/></h4>
         <p class="p-rank__desc">가장 많은 선행을 베푼 수행자들을 확인해보세요!</p>
 
         <div class="p-rank__top3 js-rank-top3">
@@ -53,6 +55,10 @@
 
         <ul class="c-rank-list js-rank-list">
         </ul>
+        
+        <div class="p-rank__my">
+        </div>
+        
         <button class="c-button c-button--secondary c-button--md" onclick="location.href=${pageContext.request.contextPath}/kkomi/info.kko">
           수련소로 돌아가기
         </button>

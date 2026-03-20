@@ -5,138 +5,210 @@
 <select id="selectVolunteerList"
         parameterType="VolunActivityDTO"
         resultType="VolunActivityDTO">
-	
-	SELECT
-	    Volun_Act_No, <!-- 봉사번호 -->
-	    Volun_Act_Title, <!-- 봉사제목 -->
-	    Volun_Act_Recru_Begin, <!-- 모집시작 -->
-	    Volun_Act_Recru_End, <!-- 모집종료 -->
-	    Volun_Act_Proc_Begin, <!-- 봉사시작a -->
-	    Volun_Act_Proc_End, <!-- 봉사 종료일 -->
-	    Volun_Act_Point,  <!-- 봉사포인트 -->
-	    Volun_Act_Act_Type,  <!-- 활동분야 -->
-	    Volun_Act_Age_Group, <!-- 참여가능연령 -->
-	    Volun_Act_Address, <!--봉사주소s-->
-	
-	    <![CDATA[
-	    CASE
-	        WHEN SYSDATE < Volun_Act_Recru_Begin THEN '모집예정'
-	        WHEN SYSDATE BETWEEN Volun_Act_Recru_Begin AND Volun_Act_Recru_End THEN '모집중'
-	        WHEN SYSDATE > Volun_Act_Recru_End THEN '모집완료'
-	    END AS RECRU_STATUS
-	    ]]>
-	
-	FROM TBL_VOLUN_ACTIVITY
 
+    SELECT
+        VA.Volun_Act_No,
+        VA.Volun_Act_Title,
+        VA.Volun_Act_Recru_Begin,
+        VA.Volun_Act_Recru_End,
+        VA.Volun_Act_Proc_Begin,
+        VA.Volun_Act_Proc_End,
+        VA.Volun_Act_Point,
+        VA.Volun_Act_Address,
+
+        /* 활동분야 이름 변환 */
+        CASE VA.Volun_Act_Act_Type
+            WHEN 1 THEN '환경'
+            WHEN 2 THEN '의료'
+            WHEN 3 THEN '교육'
+            WHEN 4 THEN '생활·편의'
+            WHEN 5 THEN '문화·체육·예술'
+            ELSE '기타'
+        END AS actTypeName,
+
+        /* 연령 변환 */
+        CASE VA.Volun_Act_Age_Group
+            WHEN 1 THEN '청소년(14~19)'
+            WHEN 2 THEN '청년(20~30)'
+            WHEN 3 THEN '직장인(30+)'
+        END AS ageGroupName,
+
+        /* 모집 상태 */
+        <![CDATA[
+        CASE
+            WHEN SYSDATE < VA.Volun_Act_Recru_Begin THEN '모집예정'
+            WHEN SYSDATE BETWEEN VA.Volun_Act_Recru_Begin AND VA.Volun_Act_Recru_End THEN '모집중'
+            ELSE '모집마감'
+        END AS recruitStatusName
+        ]]>
+
+    FROM TBL_VOLUN_ACTIVITY VA
+    LEFT JOIN TBL_ORGAN O ON VA.ORGAN_NO = O.ORGAN_NO
 
     <where>
 
-        <!--
-            기본 조건
-            현재 날짜가 모집 종료일보다 작은 경우만 조회
-            즉 모집이 끝나지 않은 봉사활동만 목록에 표시
-        -->
+        <!-- 활동분야 -->
+        <if test="volunActActType != null and volunActActType != 0">
+            AND VA.Volun_Act_Act_Type = #{volunActActType}
+        </if>
+
+        <!-- 연령 -->
+        <if test="volunActAgeGroup != null and volunActAgeGroup != 0">
+            AND VA.Volun_Act_Age_Group = #{volunActAgeGroup}
+        </if>
+
+        <!-- 모집 상태 -->
+        <if test="recruitStatus == '1'">
+            <![CDATA[
+            AND SYSDATE BETWEEN VA.Volun_Act_Recru_Begin AND VA.Volun_Act_Recru_End
+            ]]>
+        </if>
+
+        <if test="recruitStatus == '2'">
+            <![CDATA[
+            AND SYSDATE < VA.Volun_Act_Recru_Begin
+            ]]>
+        </if>
+
+        <if test="recruitStatus == '3'">
+            <![CDATA[
+            AND SYSDATE > VA.Volun_Act_Recru_End
+            ]]>
+        </if>
+
+        <!-- 기관 검색 -->
+        <if test="organization != null and organization != ''">
+            AND O.ORGAN_NAME LIKE CONCAT('%', #{organization}, '%')
+        </if>
+
+        <!-- 키워드 -->
+        <if test="searchType == 'title' and keyword != null and keyword != ''">
+            AND VA.Volun_Act_Title LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+
+        <if test="searchType == 'point' and keyword != null and keyword != ''">
+            AND VA.Volun_Act_Point = #{keyword}
+        </if>
+
+    </where>
+
+    ORDER BY VA.Volun_Act_No DESC
+
+</select>
+<select id="selectVolunteerCount"
+        parameterType="VolunActivityDTO"
+        resultType="int">
+
+    SELECT COUNT(*)
+    FROM TBL_VOLUN_ACTIVITY
+
+    <where>
         <![CDATA[
         Volun_Act_Recru_End >= SYSDATE
         ]]>
 
-        <!--
-            활동 분야 검색
-            0은 전체이므로 조건을 적용하지 않음
-            1~5 값이 들어오면 해당 봉사유형만 조회
-        -->
-        <if test="actType != null and actType != 0">
-            AND Volun_Act_Act_Type = #{volunActType}
+        <if test="volunActActType != null and volunActActType != 0">
+            AND Volun_Act_Act_Type = #{volunActActType}
         </if>
 
-
-        <!--
-            참여 가능 연령 검색
-            0은 전체이므로 조건을 적용하지 않음
-        -->
-        <if test="ageGroup != null and ageGroup != 0">
-            AND Volun_Act_Age_Group = #{volunAgeGroup}
+        <if test="volunActAgeGroup != null and volunActAgeGroup != 0">
+            AND Volun_Act_Age_Group = #{volunActAgeGroup}
         </if>
 
-
-        <!--
-            모집 상태 검색
-            OPEN : 모집중
-            CLOSE : 모집마감
-        -->
         <if test="recruitStatus != null and recruitStatus == 'OPEN'">
             AND Volun_Act_Recru_End >= SYSDATE
         </if>
 
         <if test="recruitStatus != null and recruitStatus == 'CLOSE'">
-			<![CDATA[
-			AND Volun_Act_Recru_End < SYSDATE
-			]]>
-        </if>
-
-
-        <!--
-            봉사 기간 검색
-            사용자가 선택한 날짜가
-            봉사 시작일 ~ 봉사 종료일 사이에 있는 활동 조회
-        -->
-        <if test="volunDate != null and volunDate != ''">
-        	<![CDATA[
-            AND Volun_Act_Proc_Begin <= #{volunDate}
-            AND Volun_Act_Proc_End >= #{volunDate}
+            <![CDATA[
+            AND Volun_Act_Recru_End < SYSDATE
             ]]>
         </if>
 
-
-        <!--
-            키워드 검색
-            제목 또는 포인트 기준으로 검색 가능
-        -->
-
-        <!-- 제목 검색 -->
         <if test="searchType == 'title' and keyword != null and keyword != ''">
-			AND Volun_Act_Title LIKE CONCAT('%', #{keyword}, '%')
+            AND Volun_Act_Title LIKE CONCAT('%', #{keyword}, '%')
         </if>
 
-        <!-- 포인트 검색 -->
         <if test="searchType == 'point' and keyword != null and keyword != ''">
             AND Volun_Act_Point = #{keyword}
         </if>
 
     </where>
 
-    <!-- 최신 등록 순 정렬 -->
-    ORDER BY Volun_Act_No DESC
-
 </select>
-<!-- 
+
+
+<!--봉사활동 상세  -->
 <select id="selectVolunDetail" parameterType="int"
         resultType="VolunActivityDTO">
-
     SELECT 
         V.Volun_Act_No              AS volunActNo,
         V.Volun_Act_Title           AS volunActTitle,
-        V.Volun_Act_Recru_Begin     AS volunActRecruBegin,
-        V.Volun_Act_Recru_End       AS volunActRecruEnd,
-        V.Volun_Act_Proc_Begin      AS volunActProcBegin,
-        V.Volun_Act_Proc_End        AS volunActProcEnd,
+        TO_CHAR(V.Volun_Act_Recru_Begin, 'YYYY-MM-DD') AS volunActRecruBegin,
+        TO_CHAR(V.Volun_Act_Recru_End, 'YYYY-MM-DD')   AS volunActRecruEnd,
+        TO_CHAR(V.Volun_Act_Proc_Begin, 'YYYY-MM-DD')  AS volunActProcBegin,
+        TO_CHAR(V.Volun_Act_Proc_End, 'YYYY-MM-DD')    AS volunActProcEnd,
         V.Volun_Act_Point           AS volunActPoint,
+        V.Volun_Act_Begin_Time      AS volunActBeginTime,
+        V.Volun_Act_End_Time        AS volunActEndTime,
+        V.Volun_Act_Act_Type        AS volunActActType,
+        V.Volun_Act_Age_Group       AS volunActAgeGroup,
+        V.Volun_Act_Organ_No        AS volunActOrganNo,
         V.Volun_Act_Recru_Max_Count AS volunActRecruMaxCount,
         V.Volun_Act_Address         AS volunActAddress,
         V.Volun_Act_Address_Detail  AS volunActAddressDetail,
         V.Volun_Act_Detail          AS volunActDetail,
-
-        /* 모집 상태 */
+        O.Organ_Name                AS orgName,
         CASE 
-        <![CDATA[
-            WHEN SYSDATE < V.Volun_Act_Recru_Begin THEN '모집예정'
-            WHEN SYSDATE > V.Volun_Act_Recru_End THEN '마감'
+            WHEN SYSDATE <![CDATA[ < ]]> V.Volun_Act_Recru_Begin THEN '모집예정'
+            WHEN SYSDATE <![CDATA[ > ]]> V.Volun_Act_Recru_End THEN '마감'
             ELSE '모집중'
         END AS recruStatus
-		]]>
     FROM TBL_VOLUN_ACTIVITY V
+    JOIN TBL_ORGAN O
+      ON V.Volun_Act_Organ_No = O.Organ_No
     WHERE V.Volun_Act_No = #{volunActNo}
-
 </select>
- -->
+
+<!--봉사 신청  -->
+<insert id="applyVolunteer" parameterType="VolunApplyDTO">
+    MERGE INTO TBL_VOLUN_APPLY A
+    USING (
+        SELECT
+            #{volunActNo} AS VOLUN_ACT_NO,
+            #{userNo} AS USER_NO
+        FROM DUAL
+    ) B
+    ON (
+        A.VOLUN_ACT_NO = B.VOLUN_ACT_NO
+        AND A.USER_NO = B.USER_NO
+    )
+    WHEN MATCHED THEN
+        UPDATE SET
+            A.VOLUNACT_APPLYSTATUS = 1,
+            A.VOLUNACT_APPLYDATE = SYSDATE
+    WHEN NOT MATCHED THEN
+        INSERT (
+            VOLUN_ACT_NO,
+            USER_NO,
+            VOLUNACT_APPLYDATE,
+            VOLUNACT_APPLYSTATUS,
+            VOLUNACT_ATTENDANCE
+        )
+        VALUES (
+            #{volunActNo},
+            #{userNo},
+            SYSDATE,
+            1,
+            0
+        )
+</insert>
+<!--철회  -->
+<update id="cancelVolunteer" parameterType="VolunApplyDTO">
+    UPDATE TBL_VOLUN_APPLY
+    SET VOLUNACT_APPLYSTATUS = 0
+    WHERE VOLUN_ACT_NO = #{volunActNo}
+      AND USER_NO = #{userNo}
+</update>
+
 </mapper>

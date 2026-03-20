@@ -96,5 +96,92 @@ document.addEventListener("DOMContentLoaded", ()=>{
 		location.href = `${contextPath}/community/list.commu`;;
 	});
 
-
+	document.addEventListener("click", async(e) =>{
+//		const pageLink = e.target.closest("#commentPagination a[data-page]");
+		const pageLink = e.target.closest("#commentPagination a");
+		console.log(pageLink);
+		if(!pageLink) return;
+		
+		e.preventDefault();
+				
+		const page = Number(pageLink.dataset.page);
+		console.log(page);
+		await loadComments(page);
+	});
+	
 })
+
+
+async function loadComments(page){
+	try{
+		const res = await fetch(`${contextPath}/community/comment.commu?postNo=${postNo}&page=${page}`,{
+			headers: {
+			  "X-Requested-With": "fetch"
+			}
+		});
+		
+		const data = await res.json();
+		renderComments(data.commentList);
+		renderCommentPagination(data.page, data.startPage, data.endPage, data.prev, data.next);
+	}catch(err){
+		console.error("댓글 페이지 조회 실패", err);
+	}
+}
+
+function renderComments(commentList) {
+  const commentWrap = document.querySelector("#commentList");
+  const paginationWrap = document.querySelector("#commentPagination");
+
+  if (!commentList || commentList.length === 0) {
+    commentWrap.innerHTML = "";
+	
+	//pagination 숨김
+	  paginationWrap.style.display = "none";
+	  return;
+  }
+  console.log(commentList.length);
+  
+  paginationWrap.style.display = "flex";
+
+  commentWrap.innerHTML = commentList.map(comment => `
+    <div class="comment-item">
+      <div class="comment-author">${comment.userNickname}</div>
+      <div class="comment-content">${comment.commentContent}</div>
+      <div class="comment-date">${comment.postDate}</div>
+    </div>
+  `).join("");
+}
+
+function renderCommentPagination(page, startPage, endPage, prev, next) {
+  const pagingWrap = document.querySelector("#commentPagination");
+  let html = "";
+
+  if (startPage === 1 && endPage === 1) {
+    pagingWrap.style.display = "none";
+    return;
+  }
+
+  if (prev) {
+    html += `<a href="#" class="c-pagination__link" data-page="${startPage - 1}">&lt;</a>`;
+  } else {
+    html += `<a href="#" class="c-pagination__link is-disabled" onclick="return false;">&lt;</a>`;
+  }
+
+  for (let i = startPage; i <= endPage; i++) {
+    html += `
+      <a href="#"
+         class="c-pagination__link ${i === page ? "is-active" : ""}"
+         data-page="${i}">
+         ${i}
+      </a>
+    `;
+  }
+
+  if (next) {
+    html += `<a href="#" class="c-pagination__link" data-page="${endPage + 1}">&gt;</a>`;
+  } else {
+    html += `<a href="#" class="c-pagination__link is-disabled" onclick="return false;">&gt;</a>`;
+  }
+
+  pagingWrap.innerHTML = html;
+}

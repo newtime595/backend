@@ -1,7 +1,9 @@
 package com.oulim.app.mypage.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,34 +15,65 @@ import com.oulim.app.common.controller.Result;
 import com.oulim.app.mypage.dao.MyPageJoinDAO;
 import com.oulim.app.mypage.dto.MyPageJoinDTO;
 
-public class MyPagePointController implements Execute{
+public class MyPagePointController implements Execute {
 
-	@Override
-	public Result execute(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-		Result result = new Result();
+    @Override
+    public Result execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-		MyPageJoinDAO mypageDAO = new MyPageJoinDAO();
-		HttpSession session = request.getSession();
-		String path = null;
+        Result result = new Result();
+        HttpSession session = request.getSession();
+        Integer userNo = (Integer) session.getAttribute("userNo");
 
-		Integer userNo = (Integer) session.getAttribute("userNo");
-		
-	      if(request.getSession().getAttribute("userNo") == null) {
-	          result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
-	          result.setRedirect(true);
-	          return result;
-	       }
-		
-		List<MyPageJoinDTO> mypage = mypageDAO.plusPoint(userNo);
-		
-		path = "/app/mypage/point-history/point-history.jsp";
-		
-		result.setPath(path);
-		result.setRedirect(false);
-		
-		return result;
-	}
+        if (userNo == null) {
+            result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
+            result.setRedirect(true);
+            return result;
+        }
 
+        String tab = request.getParameter("tab");
+        if (tab == null) tab = "plus"; // 기본은 적립 포인트
+
+        String tempPage = request.getParameter("page");
+        int page = (tempPage == null) ? 1 : Integer.parseInt(tempPage);
+
+        int rowCount = 10;
+
+        MyPageJoinDAO dao = new MyPageJoinDAO();
+
+        // 적립 포인트
+        int plusTotal = dao.plusTotal(userNo);
+        int plusLastPage = (int) Math.ceil(plusTotal / (double) rowCount);
+        int plusPage = "plus".equals(tab) ? page : 1;
+
+        Map<String, Object> plusMap = new HashMap<>();
+        plusMap.put("startRow", (plusPage - 1) * rowCount + 1);
+        plusMap.put("endRow", plusPage * rowCount);
+        plusMap.put("userNo", userNo);
+        List<MyPageJoinDTO> plusPoint = dao.plusPoint(plusMap);
+
+        // 사용 포인트
+        int minusTotal = dao.minusTotal(userNo);
+        int minusLastPage = (int) Math.ceil(minusTotal / (double) rowCount);
+        int minusPage = "minus".equals(tab) ? page : 1;
+
+        Map<String, Object> minusMap = new HashMap<>();
+        minusMap.put("startRow", (minusPage - 1) * rowCount + 1);
+        minusMap.put("endRow", minusPage * rowCount);
+        minusMap.put("userNo", userNo);
+        List<MyPageJoinDTO> minusPoint = dao.minusPoint(minusMap);
+
+        // JSP 전달
+        request.setAttribute("activeTab", tab);
+        request.setAttribute("plusPage", plusPage);
+        request.setAttribute("plusLastPage", plusLastPage);
+        request.setAttribute("minusPage", minusPage);
+        request.setAttribute("minusLastPage", minusLastPage);
+        request.setAttribute("plusPoint", plusPoint);
+        request.setAttribute("minusPoint", minusPoint);
+
+        result.setPath("/app/mypage/point-history/point-history.jsp");
+        result.setRedirect(false);
+        return result;
+    }
 }

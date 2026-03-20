@@ -109,3 +109,8 @@
 .mainImage img{
 	width: 500px;
 }
+
+.l-community-list-pagination{
+  display: flex;
+  justify-content: center;
+}
