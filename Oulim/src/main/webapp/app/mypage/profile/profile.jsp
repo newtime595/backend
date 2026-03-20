@@ -122,7 +122,7 @@
 
 				<div class="main-section2">
 					<a
-						href="${pageContext.request.contextPath}/app/mypage/comingVolun.mp">
+						href="${pageContext.request.contextPath}/mypage/comingVolun.mp">
 						<div class="c-card">
 							<h5>나의 예정된 봉사</h5>
 							<hr />
@@ -136,7 +136,7 @@
 							</div>
 						</div>
 					</a> <a
-						href="${pageContext.request.contextPath}/app/mypage/finishVolun.mp">
+						href="${pageContext.request.contextPath}/mypage/finishVolun.mp">
 						<div class="c-card">
 							<h5>나의 완료된 봉사</h5>
 							<hr />
@@ -154,12 +154,12 @@
 
 
 
+						<a href="${pageContext.request.contextPath}/mypage/point.mp">
 				<div class="c-card">
 					<h5>나의포인트</h5>
 					<hr />
 					<br>
 					<div class="main-section3">
-						<a href="${pageContext.request.contextPath}/app/mypage/point.mp">
 							<c:choose>
 
 								<c:when test="${not empty miniPoint}">
@@ -177,8 +177,8 @@
 
 							</c:choose>
 					</div>
-					</a>
 				</div>
+					</a>
 
 
 			</div>

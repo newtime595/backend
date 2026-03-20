@@ -121,3 +121,20 @@ button:disabled{
 	height:400px;
 	border: 2px solid;
 }
+
+/*출석결석색상  */
+.attendance-text {
+	font-weight: 600;
+}
+
+.attendance-text--present {
+	color: #2563eb; /* 파란색 */
+}
+
+.attendance-text--absent {
+	color: #dc2626; /* 빨간색 */
+}
+
+.attendance-text--pending {
+	color: #666666; /* 회색 */
+}

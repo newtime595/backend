@@ -1,0 +1,80 @@
+header {
+    background-color: black;
+}
+
+footer {
+    background-color: black;
+}
+
+.main-container {
+    height: 900px;
+    display: flex;
+    justify-content: center;
+    margin: 100px;
+}
+
+.main-aside {
+    width: 250px;
+    background-color: #F0F0F0;
+}
+
+.main-aside-list {
+    text-align: center;
+    padding: 100px 30px;
+}
+
+.list1,
+.list2,
+.list3,
+.list4,
+.list5 {
+    margin: 60px auto;
+    text-align: left;
+}
+
+.main-2 {
+    width: 700px;
+}
+
+.main-text-box {
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 50px;
+}
+
+.m2-text-box-1 {
+    margin-top: 25px;
+    margin-bottom: 30px;
+}
+
+.term {
+    margin-left: 20px;
+}
+
+fieldset {
+    overflow-y: auto;
+    height: 200px;
+    padding: 20px;
+}
+
+.chk-box {
+    margin: 15px 20px;
+}
+
+.main-pw {
+    margin: 15px auto;
+    width: 450px;
+}
+
+.pw-input {
+    margin-top: 10px;
+}
+
+.c-button-group {
+    display: flex;
+    justify-content: center;
+}
+
+.c-button-group > button {
+    margin: 10px 5px;
+}

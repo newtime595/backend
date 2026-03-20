@@ -34,7 +34,7 @@ public class MyPageOrganEditController implements Execute{
 		mypageDAO.userAllinfo(userNo);
 		mypageDAO.organAdditionalinfo(userNo);
 		
-		path = "/app/mypage/profile/profile-edit.jsp";
+		path = "/app/mypage-organ/profile-edit.jsp";
 		
 		result.setPath(path);
 		result.setRedirect(false);

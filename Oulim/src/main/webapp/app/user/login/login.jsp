@@ -37,6 +37,7 @@
 	<div class="l-main">
 		<div class="l-container">
 			<form action="${pageContext.request.contextPath}/user/loginOk.usr" method="post" id="loginForm">
+			<input type="hidden" id="loginStatus" value="${param.login}">
 				<div class="p-login">
 					<div class="l-login-layout">
 						<div>

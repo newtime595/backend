@@ -24,6 +24,8 @@ public class MyPageUserEditController implements Execute{
 		String path = null;
 
 		Integer userNo = (Integer) session.getAttribute("userNo");
+		Integer userType = (Integer) session.getAttribute("userType");
+		
 		
 	      if(request.getSession().getAttribute("userNo") == null) {
 	          result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
@@ -31,8 +33,11 @@ public class MyPageUserEditController implements Execute{
 	          return result;
 	       }
 		
+	     if(userType != 1) {
+	    	 mypageDAO.organAdditionalinfo(userNo);
+	     }
+	      
 		mypageDAO.userAllinfo(userNo);
-		mypageDAO.organAdditionalinfo(userNo);
 		
 		path = "/app/mypage/profile/profile-edit.jsp";
 		

@@ -17,64 +17,68 @@ import com.oulim.app.mypage.dto.MyPageJoinDTO;
 
 public class MyPageMyPostController implements Execute {
 
-	@Override
-	public Result execute(HttpServletRequest request, HttpServletResponse response)
-	        throws ServletException, IOException {
+    @Override
+    public Result execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-	    Result result = new Result();
-	    MyPageJoinDAO mypageDAO = new MyPageJoinDAO();
-	    HttpSession session = request.getSession();
+        Result result = new Result();
+        MyPageJoinDAO mypageDAO = new MyPageJoinDAO();
+        HttpSession session = request.getSession();
 
-	    Integer userNo = (Integer) session.getAttribute("userNo");
+        Integer userNo = (Integer) session.getAttribute("userNo");
 
-	    // 로그인 체크
-	    if (userNo == null) {
-	        result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
-	        result.setRedirect(true);
-	        return result;
-	    }
+        if (userNo == null) {
+            result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
+            result.setRedirect(true);
+            return result;
+        }
 
-	    String temp = request.getParameter("page");
-	    int page = (temp == null) ? 1 : Integer.valueOf(temp);
-	    if (page < 1) page = 1;
+        // 현재 페이지
+        String temp = request.getParameter("page");
+        int page = (temp == null) ? 1 : Integer.parseInt(temp);
 
-	    int rowCount = 10;
-	    int pageCount = 10;
+        int rowCount = 10; // 한 페이지 게시글 수
+        int startRow = (page - 1) * rowCount + 1;
+        int endRow = page * rowCount;
 
-	    int startRow = (page - 1) * rowCount + 1;
-	    int endRow = startRow + rowCount - 1;
+        Map<String, Object> map = new HashMap<>();
+        map.put("startRow", startRow);
+        map.put("endRow", endRow);
+        map.put("userNo", userNo);
 
-	    Map<String, Object> pageMap = new HashMap<>();
-	    pageMap.put("startRow", startRow);
-	    pageMap.put("endRow", endRow);
-	    pageMap.put("userNo", userNo);
+        List<MyPageJoinDTO> mypost = mypageDAO.viewMyPost(map);
+        int total = mypageDAO.getMyPostTotal(userNo);
 
-	    List<MyPageJoinDTO> mypost = mypageDAO.viewMyPost(pageMap);
-	    request.setAttribute("mypost", mypost);
+        boolean showPagination = total > rowCount; // 10개 이하이면 숨김
 
-	    int total = mypageDAO.getMyPostTotal(userNo);
+        // 페이지 블록 단위
+        int pageCount = 5; 
+        int startPage = ((page - 1) / pageCount) * pageCount + 1;
+        int endPage = startPage + pageCount - 1;
 
-	    int realEndPage = (int) Math.ceil(total / (double) rowCount);
-	    int endPage = (int) (Math.ceil(page / (double) pageCount) * pageCount);
-	    int startPage = endPage - (pageCount - 1);
+        int realEndPage = (int)Math.ceil(total / (double)rowCount);
+        if (endPage > realEndPage) endPage = realEndPage;
 
-	    endPage = Math.min(endPage, realEndPage);
+        boolean prev = startPage > 1;  // 이전 블록
+        boolean next = endPage < realEndPage; // 다음 블록
 
-	    boolean prev = startPage > 1;
-	    boolean next = endPage < realEndPage;
+        boolean hasPrevPage = page > 1; // 이전 페이지
+        boolean hasNextPage = page < realEndPage; // 다음 페이지
 
-	    request.setAttribute("page", page);
-	    request.setAttribute("startPage", startPage);
-	    request.setAttribute("endPage", endPage);
-	    request.setAttribute("prev", prev);
-	    request.setAttribute("next", next);
-	    request.setAttribute("total", total);
-	    
+        // JSP 전달
+        request.setAttribute("mypost", mypost);
+        request.setAttribute("total", total);
+        request.setAttribute("page", page);
+        request.setAttribute("startPage", startPage);
+        request.setAttribute("endPage", endPage);
+        request.setAttribute("prev", prev);
+        request.setAttribute("next", next);
+        request.setAttribute("showPagination", showPagination);
+        request.setAttribute("hasPrevPage", hasPrevPage);
+        request.setAttribute("hasNextPage", hasNextPage);
 
-	    result.setPath("/app/mypage/community-history/myposts.jsp");
-	    result.setRedirect(false);
-
-	    return result;
-	}
-
+        result.setPath("/app/mypage/community-history/myposts.jsp");
+        result.setRedirect(false);
+        return result;
+    }
 }

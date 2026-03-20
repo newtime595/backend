@@ -115,9 +115,6 @@
               주민과 함께하는 제설작업 봉사 모집
             </h3>
 
-            <p class="c-card__desc">
-              지역 주민들과 함께하는 봉사 활동입니다.
-            </p>
 
             <div class="c-card__footer">
               <span>2026.02.03 ~ 2026.02.06</span>
@@ -136,9 +133,6 @@
               주민과 함께하는 제설작업 봉사 모집
             </h3>
 
-            <p class="c-card__desc">
-              지역 주민들과 함께하는 봉사 활동입니다.
-            </p>
 
             <div class="c-card__footer">
               <span>2026.02.03 ~ 2026.02.06</span>
@@ -157,9 +151,6 @@
               주민과 함께하는 제설작업 봉사 모집
             </h3>
 
-            <p class="c-card__desc">
-              지역 주민들과 함께하는 봉사 활동입니다.
-            </p>
 
             <div class="c-card__footer">
               <span>2026.02.03 ~ 2026.02.06</span>

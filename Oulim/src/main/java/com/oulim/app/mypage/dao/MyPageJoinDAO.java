@@ -18,8 +18,8 @@ public class MyPageJoinDAO {
 	
 //	1. 마이페이지 진입
 	
-	public boolean enterMyPage(int userNo) {
-		return (Integer)(sqlSession.selectOne("mypage.enterMyPage", userNo)) == 1;
+	public boolean enterMyPage(Map<String, Object> userMap) {
+		return (Integer)(sqlSession.selectOne("mypage.enterMyPage", userMap)) == 1;
 	}
 	
 	
@@ -70,8 +70,12 @@ public class MyPageJoinDAO {
 	
 //	4. 예정된 봉사 목록 조회
 	
-	public List<MyPageJoinDTO> comingVolun(int userNo) {
-		return sqlSession.selectList("mypage.comingVol", userNo);
+	public List<MyPageJoinDTO> comingVolunPage(Map<String, Object> map) {
+	    return sqlSession.selectList("mypage.comingVolunPage", map);
+	}
+
+	public int comingVolunTotal(int userNo) {
+	    return sqlSession.selectOne("mypage.comingVolunTotal", userNo);
 	}
 	
 //	5. 완료된 봉사 목록 조회
@@ -80,16 +84,25 @@ public class MyPageJoinDAO {
 		return sqlSession.selectList("mypage.finishVol", userNo);
 	}
 	
+	
 //	6. 적립된 포인트 내역 조회
-	public List<MyPageJoinDTO> plusPoint(int userNo) {
-		return sqlSession.selectList("mypage.plusPoint", userNo);
+	public List<MyPageJoinDTO> plusPoint(Map<String, Object> pageMap) {
+		return sqlSession.selectList("mypage.plusPoint", pageMap);
 	}
 	
 	
 //	7. 사용한 포인트 내역 조회
 
-	public List<MyPageJoinDTO> minusPoint(int userNo) {
-		return sqlSession.selectList("mypage.minusPoint", userNo);
+	public List<MyPageJoinDTO> minusPoint(Map<String, Object> pageMap) {
+		return sqlSession.selectList("mypage.minusPoint", pageMap);
+	}
+	
+	public int plusTotal(int userNo) {
+		return sqlSession.selectOne("mypage.plusTotal", userNo);
+	}
+	
+	public int minusTotal(int userNo) {
+		return sqlSession.selectOne("mypage.minusTotal", userNo);
 	}
 	
 	
@@ -110,7 +123,7 @@ public class MyPageJoinDAO {
 	public void quit(int userNo) {
 		sqlSession.update("mypage.quit", userNo);
 	}
-	
+
 	
 	
 	

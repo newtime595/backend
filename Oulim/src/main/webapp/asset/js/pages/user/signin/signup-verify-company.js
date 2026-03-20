@@ -24,6 +24,7 @@ const companyEmailError = document.getElementById("is-company-email-error");
 const companyEmailAuthError = document.getElementById("is-company-email-auth-error");
 const companyNextBtn = document.getElementById("is-company-next-btn");
 const companyForm = document.querySelector("form");
+const form = document.querySelector("form");
 
 let emailTimerInterval;
 
@@ -271,3 +272,21 @@ fileInput1.addEventListener("change", function () {
     fileName1.value = fileInput1.files[0].name;
   }
 });
+
+form.addEventListener("submit", function (e) {
+  const fileInput = document.getElementById("company-file-1");
+  const file = fileInput.files[0];
+ 
+  if (!file) {
+    alert("파일을 첨부해주세요.");
+    e.preventDefault();
+    return;
+  }
+
+  if (file.type !== "application/pdf") {
+    alert("PDF 파일만 업로드 가능합니다.");
+    e.preventDefault();
+    return;
+  }
+});
+

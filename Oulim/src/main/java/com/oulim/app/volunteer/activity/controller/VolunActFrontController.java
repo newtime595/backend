@@ -49,13 +49,30 @@ public class VolunActFrontController extends HttpServlet {
  			result = new VolunActListController().execute(request, response);
  			System.out.println("봉사 조회 리스트 완료");
  			break;
-//작업전
-// 		case "/volunteer-activity/detail.va":
-// 			System.out.println("봉사 상세 요청");
-// 			result = new VolunActDetailController().execute(request, response);
-// 			System.out.println("봉사 상세 완료");
-// 			break;
-//
+
+ 		case "/volunteer-activity/detail.va":
+ 			System.out.println("봉사 상세 요청");
+ 			result = new VolunActDetailController().execute(request, response);
+ 			System.out.println("봉사 상세 완료");
+ 			break;
+ 			
+ 		case "/volunteer-activity/apply.va":
+ 		    System.out.println("봉사 신청 요청");
+ 		    result = new VolunActApplyController().execute(request, response);
+ 		    System.out.println("봉사 신청 완료");
+ 		    break;
+
+ 		case "/volunteer-activity/cancel.va":
+ 		    System.out.println("봉사 철회 요청");
+ 		    result = new VolunActCancelController().execute(request, response);
+ 		    System.out.println("봉사 철회 완료");
+ 		    break;
+ 		
+ 			
+ 	
+ 			
+ 			
+
 // 		default:
 // 			System.out.println("잘못된 경로: " + target);
 // 			break;

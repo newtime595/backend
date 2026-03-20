@@ -49,12 +49,12 @@
 						</div>
 						<div class="l-signup-choice">
 							<div class="is-general">
-								<img src="" alt="일반" />
-								<h6>일반</h6>
+								<img src="${pageContext.request.contextPath}/asset/image/join/normal.png" alt="일반" />
+								<div><h6>일반</h6></div>
 							</div>
 							<div class="is-business">
-								<img src="" alt="기업" />
-								<h6>기업</h6>
+								<img src="${pageContext.request.contextPath}/asset/image/join/organ.png" alt="기업" />
+								<div><h6>기업</h6></div>
 							</div>
 						</div>
 						<div id="is-general-terms">

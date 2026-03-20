@@ -93,18 +93,18 @@
             </div>
 
             <div class="p-mypage-check--input">
-              <input type="password" class="c-input" name="password" placeholder="비밀번호 입력" />
+              <input type="password" class="c-input" name="userPw" placeholder="비밀번호 입력" />
              <button type="button" id="c-password-btn-toggle"><img src="${pageContext.request.contextPath}/asset/image/user/password-off.png" alt="eye" id="c-password-toggle-img" /></button>
             </div>
 
           </div>
 
           <div class="c-button-group">
-            <button id="accept" class="c-button c-button--primary c-button--md" style="width:120px">
+            <button type="submit" id="accept" class="c-button c-button--primary c-button--md" style="width:120px">
               확인
             </button>
 
-            <button id="cancel" class="c-button c-button--secondary c-button--md" style="width:120px">
+            <button type="button" id="cancel" class="c-button c-button--secondary c-button--md" style="width:120px">
               취소
             </button>
           </div>

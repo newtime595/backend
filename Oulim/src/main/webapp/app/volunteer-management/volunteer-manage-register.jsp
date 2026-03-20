@@ -128,7 +128,7 @@
 						<label class="l-volunteer-manage-register_form-label">모집기관</label>
 						<div class="l-volunteer-manage-register_form-field">
 							<input type="text" id="organizationName" class="c-input"
-								placeholder="등록된 기관명 노출 예정" readonly />
+								value="${sessionScope.organName}" readonly />
 						</div>
 					</div>
 

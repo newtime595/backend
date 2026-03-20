@@ -28,7 +28,7 @@ public class MyPageJoinDTO {
 	private String userPhoneNum;
 	private String organName;
 	private int organNo;
-	private int organCertNum;
+	private String organCertNum;
 	private String postTitle;
 	private String postDate;
 	private int postLikeNo;
@@ -165,10 +165,10 @@ public class MyPageJoinDTO {
 	public void setOrganNo(int organNo) {
 		this.organNo = organNo;
 	}
-	public int getOrganCertNum() {
+	public String getOrganCertNum() {
 		return organCertNum;
 	}
-	public void setOrganCertNum(int organCertNum) {
+	public void setOrganCertNum(String organCertNum) {
 		this.organCertNum = organCertNum;
 	}
 	public String getPostTitle() {
