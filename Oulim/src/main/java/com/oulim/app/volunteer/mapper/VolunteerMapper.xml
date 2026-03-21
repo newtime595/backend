@@ -114,7 +114,7 @@
             AND VA.Volun_Act_Age_Group = #{volunActAgeGroup}
         </if>
 
-        <!-- 모집 상태 (중요 ⭐) -->
+        <!-- 모집 상태 (중요 ) -->
         <if test='"1".equals(recruitStatus)'>
             AND SYSDATE BETWEEN VA.Volun_Act_Recru_Begin AND VA.Volun_Act_Recru_End
         </if>

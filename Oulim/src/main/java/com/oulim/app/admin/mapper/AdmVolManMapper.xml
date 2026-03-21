@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdmVolMan">
+<!-- 봉사활동 정보 조회 -->
+<select id="selectAdminVolunList"
+        parameterType="VolunActivityDTO"
+        resultType="VolunActivityDTO">
+
+    SELECT * FROM (
+        SELECT ROWNUM RN, A.*
+        FROM (
+            SELECT
+                VA.Volun_Act_No          AS volunActNo,
+                O.Organ_Name             AS orgName,
+		        TO_CHAR(VA.Volun_Act_Proc_Begin, 'YYYY-MM-DD')  AS volunActProcBegin,
+		        TO_CHAR(VA.Volun_Act_Proc_End, 'YYYY-MM-DD')    AS volunActProcEnd,
+                VA.Volun_Act_Point       AS point,
+
+                /* 진행 상태 */
+                CASE
+                    WHEN SYSDATE &lt; VA.Volun_Act_Proc_Begin THEN '진행예정'
+                    WHEN SYSDATE BETWEEN VA.Volun_Act_Proc_Begin AND VA.Volun_Act_Proc_End THEN '진행중'
+                    ELSE '종료'
+                END AS status
+
+            FROM TBL_VOLUN_ACTIVITY VA
+            LEFT JOIN TBL_ORGAN O
+                ON VA.Volun_Act_Organ_No = O.Organ_No
+
+            <where>
+                1 = 1
+
+                <!-- 검색 조건 -->
+                <if test="searchType == 'no' and keyword != null and keyword != ''">
+                    AND VA.Volun_Act_No = #{keyword}
+                </if>
+
+                <if test="searchType == 'org' and keyword != null and keyword != ''">
+                    AND O.Organ_Name LIKE '%' || #{keyword} || '%'
+                </if>
+
+            </where>
+
+            ORDER BY VA.Volun_Act_No DESC
+
+        ) A
+        WHERE ROWNUM &lt;= #{endRow}
+    )
+    WHERE RN &gt;= #{startRow}
+
+</select>
+<!-- 총개수 페이지 처리용 -->
+<select id="selectAdminVolunCount"
+        parameterType="VolunActivityDTO"
+        resultType="int">
+
+    SELECT COUNT(*)
+    FROM TBL_VOLUN_ACTIVITY VA
+    LEFT JOIN TBL_ORGAN O
+        ON VA.Volun_Act_Organ_No = O.Organ_No
+
+    <where>
+        1 = 1
+
+        <if test="searchType == 'no' and keyword != null and keyword != ''">
+            AND VA.Volun_Act_No = #{keyword}
+        </if>
+
+        <if test="searchType == 'org' and keyword != null and keyword != ''">
+            AND O.Organ_Name LIKE '%' || #{keyword} || '%'
+        </if>
+
+    </where>
+
+</select>
+
+</mapper>
