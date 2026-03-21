@@ -78,10 +78,15 @@ public class MyPageJoinDAO {
 	    return sqlSession.selectOne("mypage.comingVolunTotal", userNo);
 	}
 	
+	
 //	5. 완료된 봉사 목록 조회
 	
-	public List<MyPageJoinDTO> finishVolun(int userNo) {
-		return sqlSession.selectList("mypage.finishVol", userNo);
+	public List<MyPageJoinDTO> finishVolunPage(Map<String, Object> map) {
+		return sqlSession.selectList("mypage.finishVolunPage", map);
+	}
+	
+	public int finishVolunTotal(int userNo) {
+	    return sqlSession.selectOne("mypage.finishVolunTotal", userNo);
 	}
 	
 	

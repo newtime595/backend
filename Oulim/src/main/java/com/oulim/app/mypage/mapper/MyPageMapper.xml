@@ -68,6 +68,8 @@ ORDER BY LOG_NO DESC
 ]]>
 
 	</select>
+	
+	
 	<!-- 예정봉사 조회 미니 -->
 	<select id="miniComVol" parameterType="int"
 		resultType="MyPageJoinDTO">
@@ -89,16 +91,24 @@ WHERE ROWNUM = 1
 ]]>
 
 	</select>
+	
 
 	<select id="miniFinVol" parameterType="int"
 		resultType="MyPageJoinDTO">
 <![CDATA[
-SELECT tva.volun_act_title AS volunActTitle, TO_CHAR( tva.Volun_Act_Recru_Begin ,'yyyy-mm-dd') AS finVolunActProcBegin, TO_CHAR( tva.Volun_Act_Recru_End,'yyyy-mm-dd') AS finVolunActProcEnd
-FROM TBL_VOLUN_ACTIVITY tva
-JOIN TBL_VOLUN_APPLY apl
-ON tva.volun_act_no = apl.volun_act_no
-WHERE apl.user_no = #{userNo} AND apl.VOLUNACT_APPLYSTATUS = 2
-ORDER BY tva.volun_act_no DESC
+SELECT *
+FROM (
+    SELECT tva.volun_act_title AS volunActTitle,
+           TO_CHAR(tva.Volun_Act_Proc_Begin, 'yyyy-mm-dd') AS finVolunActProcBegin,
+           TO_CHAR(tva.Volun_Act_Proc_End, 'yyyy-mm-dd') AS finVolunActProcEnd
+    FROM TBL_VOLUN_ACTIVITY tva
+    JOIN TBL_VOLUN_APPLY apl
+      ON tva.volun_act_no = apl.volun_act_no
+    WHERE apl.user_no = #{userNo}
+      AND apl.VOLUNACT_APPLYSTATUS = 2
+    ORDER BY tva.volun_act_no DESC
+)
+WHERE ROWNUM = 1
 ]]>
 	</select>
 
@@ -156,15 +166,18 @@ SELECT * FROM (
         ROW_NUMBER() OVER (ORDER BY tva.volun_act_no DESC) AS rnum,
         tva.volun_act_no AS volunActNo,
         tva.volun_act_title AS volunActTitle,
-        TO_CHAR(tva.Volun_Act_Recru_Begin,'yyyy-mm-dd') AS comVolunActProcBegin,
-        TO_CHAR(tva.Volun_Act_Recru_End,'yyyy-mm-dd') AS comVolunActProcEnd
+        TO_CHAR(tva.Volun_Act_Proc_Begin,'yyyy-mm-dd') AS comVolunActProcBegin,
+        TO_CHAR(tva.Volun_Act_Proc_End,'yyyy-mm-dd') AS comVolunActProcEnd
     FROM TBL_VOLUN_ACTIVITY tva
     JOIN TBL_VOLUN_APPLY apl
         ON tva.volun_act_no = apl.volun_act_no
-    WHERE apl.user_no = #{userNo} 
-      AND apl.VOLUNACT_APPLYSTATUS = 1
+    WHERE apl.user_no = #{userNo}
+  AND apl.VOLUNACT_APPLYSTATUS = 1
+  AND tva.Volun_Act_Proc_Begin >= TRUNC(SYSDATE)
+      ORDER BY comVolunActProcEnd
 )
 WHERE rnum BETWEEN #{startRow} AND #{endRow}
+
 ]]>
 	</select>
 	
@@ -183,17 +196,30 @@ WHERE apl.user_no = #{userNo}
 
 	<!-- 5. 완료한 봉사 목록 조회 -->
 
-	<select id="finishVol" parameterType="int" resultType="list">
-
+	<select id="finishVolunPage" parameterType="map" resultType="MyPageJoinDTO">
 <![CDATA[
-SELECT tva.volun_act_title AS volunActTitle, TO_CHAR( tva.Volun_Act_Recru_Begin ,'yyyy-mm-dd') AS finishVolBegin, TO_CHAR( tva.Volun_Act_Recru_End,'yyyy-mm-dd') AS finishVolBegin
+SELECT * FROM (
+    SELECT
+        ROW_NUMBER() OVER (ORDER BY Volun_Act_Date DESC) AS rnum,
+    	Log_No AS volunActNo,
+        Volun_Act_Title AS volunActTitle,
+        TO_CHAR(Volun_Act_Date, 'yyyy-mm-dd') AS finVolunActProcEnd
+    FROM TBL_VOLUN_HISTORY
+    WHERE User_No = #{userNo}
+)
+WHERE rnum BETWEEN #{startRow} AND #{endRow}
+]]>
+	</select>
+	
+		<select id="finishVolunTotal" parameterType="int" resultType="int">
+<![CDATA[
+SELECT COUNT(*) 
 FROM TBL_VOLUN_ACTIVITY tva
 JOIN TBL_VOLUN_APPLY apl
-ON tva.volun_act_no = apl.volun_act_no
-WHERE apl.user_no = #{userNo} AND apl.VOLUNACT_APPLYSTATUS = 2
-ORDER BY tva.volun_act_no DESC
+    ON tva.volun_act_no = apl.volun_act_no
+WHERE apl.user_no = #{userNo} 
+  AND apl.VOLUNACT_APPLYSTATUS = 2
 ]]>
-
 	</select>
 
 

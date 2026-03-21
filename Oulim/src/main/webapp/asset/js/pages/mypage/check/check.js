@@ -1,7 +1,7 @@
 const accept = document.getElementById("accept");
 const cancel = document.getElementById("cancel");
 
-const password = document.getElementsByName("password")[0];
+const password = document.getElementById("userPw");
 
 
 accept.addEventListener('click', () => {
@@ -24,13 +24,14 @@ cancel.addEventListener("click", () => {
 const pwBtn = document.getElementById("c-password-btn-toggle");
 const pwToggleIcon = document.getElementById("c-password-toggle-img");
 
-pwBtn.addEventListener("click", () => {
+pwBtn.addEventListener("click", (e) => {
+	e.preventDefault();
   if (password.type === "password") {
     password.type = "text";
-    pwToggleIcon.src = "/Oulim/asset/image/user/password-on.png";
+    pwToggleIcon.src = contextPath + "/asset/image/user/password-on.png";
   } else {
     password.type = "password";
-    pwToggleIcon.src = "/Oulim/asset/image/user/password-off.png";
+    pwToggleIcon.src = contextPath + "/asset/image/user/password-off.png";
   }
 });
 

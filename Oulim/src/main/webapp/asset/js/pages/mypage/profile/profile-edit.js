@@ -28,57 +28,58 @@ const verifyError = document.getElementsByClassName("c-form-field is-error")[2];
 const accept = document.getElementById("accept");
 const cancel = document.getElementById("cancel");
 
+
 exist1.addEventListener("click", () => { // 닉네임 검사
 
 
-    if (nickname.value.trim() === "") {
-        alert("비었음");
-    } else if (nickname.value.trim() === "wnstmd") {
+   if (nickname.value.trim() === "") {
+      alert("비었음");
+   } else if (nickname.value.trim() === "wnstmd") {
 
-        nicknameContainer.style.display = "none";
-        nicknameError.style.display = "block";
-    };
+      nicknameContainer.style.display = "none";
+      nicknameError.style.display = "block";
+   };
 
 });
 
 exist2.addEventListener("click", () => { // 이메일 검사
 
-    if (email.value.trim() === "") {
-        alert("비었음");
-    } else if (email.value.trim() === "wnstmd@naver.com") {
-        emailContainer.style.display = "none";
-        emailError.style.display = "block";
-    };
+   if (email.value.trim() === "") {
+      alert("비었음");
+   } else if (email.value.trim() === "wnstmd@naver.com") {
+      emailContainer.style.display = "none";
+      emailError.style.display = "block";
+   };
 
 });
 
 verifyBtn.addEventListener("click", () => { // 인증번호 검사
 
-    if (verify.value.trim() === "") {
-        alert("인증번호가 발송되었습니다.");
-    } else if (verify.value.trim() === "1234") {
-        alert("인증성공");
-    };
+   if (verify.value.trim() === "") {
+      alert("인증번호가 발송되었습니다.");
+   } else if (verify.value.trim() === "1234") {
+      alert("인증성공");
+   };
 });
 
 addrBtn.addEventListener("click", () => { // 주소 입력 api
 
-    alert("주소 입력 성공");
+   alert("주소 입력 성공");
 
 });
 
 
 accept.addEventListener("click", () => {
 
-    alert("수정 완료");
+   alert("수정 완료");
 
-    
+
 
 });
 
 cancel.addEventListener("click", () => {
-    // location("../");
-    alert("취소");
+   // location("../");
+   alert("취소");
 });
 
 const pwBtn = document.getElementById("c-password-btn-toggle");
@@ -86,22 +87,24 @@ const pwBtn2 = document.getElementById("c-password-btn-toggle-2")
 const pwToggleIcon = document.getElementById("c-password-toggle-img");
 const pwToggleIcon2 = document.getElementById("c-password-toggle-2-img");
 
-pwBtn.addEventListener("click", () => {
-  if (newPassword.type === "password") {
-    newPassword.type = "text";
-    pwToggleIcon.src = "/asset/image/user/password-on.png";
-  } else {
-    newPassword.type = "password";
-    pwToggleIcon.src = "/asset/image/user/password-off.png";
-  }
+pwBtn.addEventListener("click", (e) => {
+   e.preventDefault();
+   if (newPassword.type === "password") {
+      newPassword.type = "text";
+      pwToggleIcon.src = contextPath + "/asset/image/user/password-on.png";
+   } else {
+      newPassword.type = "password";
+      pwToggleIcon.src = contextPath + "/asset/image/user/password-off.png";
+   }
 });
 
-pwBtn2.addEventListener("click", () => {
-  if (passwordChk.type === "password") {
-    passwordChk.type = "text";
-    pwToggleIcon2.src = "/asset/image/user/password-on.png";
-  } else {
-    passwordChk.type = "password";
-    pwToggleIcon2.src ="/asset/image/user/password-off.png";
-  }
+pwBtn2.addEventListener("click", (e) => {
+   e.preventDefault();
+   if (passwordChk.type === "password") {
+      passwordChk.type = "text";
+      pwToggleIcon2.src = contextPath + "/asset/image/user/password-on.png";
+   } else {
+      passwordChk.type = "password";
+      pwToggleIcon2.src = contextPath + "/asset/image/user/password-off.png";
+   }
 });

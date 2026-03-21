@@ -20,6 +20,10 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css"/>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
 
+	 <script>
+ const contextPath = "${pageContext.request.contextPath}";  
+</script>
+
   <script defer src="${pageContext.request.contextPath}/asset/js/pages/mypage/check/check.js"></script>
 </head>
 
@@ -93,7 +97,7 @@
             </div>
 
             <div class="p-mypage-check--input">
-              <input type="password" class="c-input" name="userPw" placeholder="비밀번호 입력" />
+              <input type="password" id="userPw" class="c-input" name="userPw" placeholder="비밀번호 입력" />
              <button type="button" id="c-password-btn-toggle"><img src="${pageContext.request.contextPath}/asset/image/user/password-off.png" alt="eye" id="c-password-toggle-img" /></button>
             </div>
 
