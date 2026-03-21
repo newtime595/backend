@@ -100,7 +100,7 @@
           <h1>나의 정보 수정</h1>
         </div>
 
-        <form>
+        <form action="${pageContext.request.contextPath}/mypage/userEditOk.mp" method="post">
 
           <div class="main-pw">
 
@@ -108,7 +108,7 @@
 
               <h5>닉네임</h5>
               <div class="pw-text">
-                <input id="nickname" type="text" class="c-input" name="nickname" placeholder="닉네임">
+                <input id="nickname" type="text" class="c-input" name="userNickname" value="${userNickname}">
                 <button type="button" class="c-button c-button--primary c-button--md">중복확인</button>
               </div>
             </div>
@@ -134,7 +134,7 @@
 
               <h5>이메일</h5>
               <div class="pw-text">
-                <input id="email" type="text" class="c-input" name="email" placeholder="이메일">
+                <input id="email" type="text" class="c-input" name="userEmail" value="${userEmail}">
                 <button type="button" class="c-button c-button--primary c-button--md">중복확인</button>
               </div>
             </div>
@@ -159,7 +159,7 @@
             <h5>인증번호</h5>
             <div class="pw-text">
               <input id="verify" type="text" class="c-input" name="verify" placeholder="이메일 인증번호 입력">
-              <button class="c-button c-button--primary c-button--md">인증확인</button>
+              <button type="button" class="c-button c-button--primary c-button--md">인증확인</button>
             </div>
 
             <p>
@@ -192,17 +192,13 @@
               <button type="button" id="c-password-btn-toggle-2"><img src="${pageContext.request.contextPath}/asset/image/user/password-off.png" alt="eye" id="c-password-toggle-2-img" /></button>
             </div>
 
-            <h5>주소</h5>
-            <div class="pw-text">
-              <input type="text" class="c-input" name="address" placeholder="주소 추가하기">
-              <button class="c-button c-button--primary c-button--md">주소검색</button>
-            </div>
+
 
           </div>
 
           <div class="c-button-group">
-            <button id="accept" class="c-button c-button--primary c-button--md">수정</button>
-            <button id="cancel" class="c-button c-button--secondary c-button--md">취소</button>
+            <button type="submit" id="accept" class="c-button c-button--primary c-button--md">수정</button>
+            <button type="button" id="cancel" class="c-button c-button--secondary c-button--md">취소</button>
           </div>
 
         </form>

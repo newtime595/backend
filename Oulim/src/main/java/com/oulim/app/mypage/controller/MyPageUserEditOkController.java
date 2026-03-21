@@ -26,6 +26,8 @@ public class MyPageUserEditOkController implements Execute {
 		String path = null;
 
 		Integer userNo = (Integer) session.getAttribute("userNo");
+		Integer userType = (Integer) session.getAttribute("userType");
+		
 		
 	      if(request.getSession().getAttribute("userNo") == null) {
 	          result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
@@ -33,20 +35,44 @@ public class MyPageUserEditOkController implements Execute {
 	          return result;
 	       }
 		
-		mypageDTO.setUserNickname(request.getParameter("userNickName"));
-		mypageDTO.setUserEmail(request.getParameter("userNickName"));
-		mypageDTO.setUserPhoneNum(request.getParameter("userPhoneNum"));
-		mypageDTO.setUserPw(request.getParameter("userNickName"));
-		mypageDTO.setUserAddress(request.getParameter("userNickName"));
-		mypageDTO.setUserAddressDetail(request.getParameter("userNickName"));
-		mypageDTO.setUserPostnum(request.getParameter("userPostnum"));
-		
-		mypageDAO.userEdit(mypageDTO);
-		
-		path = "/app/mypage/profile/profile.jsp";
-		
-		result.setPath(path);
-		result.setRedirect(true);
+	
+	        // 파라미터 받기
+	        String nickname = request.getParameter("userNickname");
+	        String email = request.getParameter("userEmail");
+	        String password = request.getParameter("new-password");
+	        String passwordChk = request.getParameter("new-password-check");
+	        
+
+	        // DTO 세팅
+	        mypageDTO.setUserNo(userNo);
+	        mypageDTO.setUserNickname(nickname);
+	        mypageDTO.setUserEmail(email);
+	        
+	        	if (password != null && !password.trim().isEmpty()) {
+	        		System.out.println("비밀번호 변경 조건문 통과");
+	        		mypageDTO.setUserPw(password);
+	        	}
+
+	        
+	        session.setAttribute("userNickname", nickname);
+	        
+	        
+	        // DAO 호출
+	        mypageDAO.userEdit(mypageDTO);
+
+	        // 수정 후 이동
+	        response.sendRedirect(request.getContextPath() + "/mypage/checkOk.mp");
+	    
+	      
+//		mypageDAO.userEdit(mypageDTO);
+//		
+//		System.out.println("유저 이메일 " + request.getParameter("userEmail"));
+//		System.out.println("유저 이메일" + mypageDTO.getUserEmail());
+//		
+//		path = "/app/mypage/profile/profile.jsp";
+//		
+//		result.setPath(path);
+//		result.setRedirect(true);
 		
 		return result;
 	}

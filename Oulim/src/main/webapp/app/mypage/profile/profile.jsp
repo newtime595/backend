@@ -61,8 +61,7 @@
 								<li>- 내 정보 보기</li>
 							</a>
 							<br>
-							<a
-								href="${pageContext.request.contextPath}/mypage/userEdit.mp">
+							<a href="${pageContext.request.contextPath}/mypage/userEdit.mp">
 								<li>- 내 정보 수정</li>
 							</a>
 							<br>
@@ -121,32 +120,34 @@
 				</div>
 
 				<div class="main-section2">
-					<a
-						href="${pageContext.request.contextPath}/mypage/comingVolun.mp">
+					<a href="${pageContext.request.contextPath}/mypage/comingVolun.mp">
 						<div class="c-card">
 							<h5>나의 예정된 봉사</h5>
 							<hr />
 							<br>
-							<div class="c-card__header">
-								<span class="c-badge c-badge--primary">모집중</span>
-							</div>
+							<c:if test="${not empty comVolunActTitle}">
+								<div class="c-card__header">
+									<span class="c-badge c-badge--primary">모집중</span>
+								</div>
+							</c:if>
 							<h3 class="c-card__title">${comVolunActTitle}</h3>
 							<div class="c-card__footer">
 								<span>${comVolunActProcBegin} ~ ${comVolunActProcEnd}</span>
 							</div>
 						</div>
-					</a> <a
-						href="${pageContext.request.contextPath}/mypage/finishVolun.mp">
+					</a> <a href="${pageContext.request.contextPath}/mypage/finishVolun.mp">
 						<div class="c-card">
 							<h5>나의 완료된 봉사</h5>
 							<hr />
 							<br>
-							<div class="c-card__header">
-								<span class="c-badge c-badge--primary">완료</span>
-							</div>
+							<c:if test="${not empty finVolunActTitle}">
+								<div class="c-card__header">
+									<span class="c-badge c-badge--primary">완료</span>
+								</div>
+							</c:if>
 							<h3 class="c-card__title">${finVolunActTitle}</h3>
 							<div class="c-card__footer">
-								<span>${finVolunActProcBegin} ~ ${finVolunActProcEnd}</span>
+								<span>${finVolunActProcEnd}</span>
 							</div>
 						</div>
 					</a>
@@ -154,17 +155,18 @@
 
 
 
-						<a href="${pageContext.request.contextPath}/mypage/point.mp">
-				<div class="c-card">
-					<h5>나의포인트</h5>
-					<hr />
-					<br>
-					<div class="main-section3">
+				<a href="${pageContext.request.contextPath}/mypage/point.mp">
+					<div class="c-card">
+						<h5>나의포인트</h5>
+						<hr />
+						<br>
+						<div class="main-section3">
 							<c:choose>
 
 								<c:when test="${not empty miniPoint}">
 
-									<c:forEach var="miniPoint" items="${miniPoint}" begin="0" end="3" step="1">
+									<c:forEach var="miniPoint" items="${miniPoint}" begin="0"
+										end="3" step="1">
 										<h3 class="c-card__title">${miniPoint.logReason}</h3>
 										<p class="c-card__desc">+${miniPoint.changeAmount}</p>
 										<div class="c-card__footer">
@@ -176,9 +178,9 @@
 								</c:when>
 
 							</c:choose>
+						</div>
 					</div>
-				</div>
-					</a>
+				</a>
 
 
 			</div>

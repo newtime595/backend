@@ -19,7 +19,6 @@ const passwordChk = document.getElementsByName("new-password-check")[0];
 const exist1 = document.getElementsByClassName("c-button c-button--primary c-button--md")[0];
 const exist2 = document.getElementsByClassName("c-button c-button--primary c-button--md")[2];
 const verifyBtn = document.getElementsByClassName("c-button c-button--primary c-button--md")[4];
-const addrBtn = document.getElementsByClassName("c-button c-button--primary c-button--md")[6];
 
 const nicknameError = document.getElementsByClassName("c-form-field is-error")[0];
 const emailError = document.getElementsByClassName("c-form-field is-error")[1];
@@ -62,11 +61,6 @@ verifyBtn.addEventListener("click", () => { // 인증번호 검사
    };
 });
 
-addrBtn.addEventListener("click", () => { // 주소 입력 api
-
-   alert("주소 입력 성공");
-
-});
 
 
 accept.addEventListener("click", () => {

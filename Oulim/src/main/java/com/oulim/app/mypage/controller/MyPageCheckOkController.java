@@ -53,16 +53,16 @@ public class MyPageCheckOkController implements Execute{
 			MyPageJoinDTO finVolunInfo = mypageDAO.miniFinVol(userNo);
 			List<MyPageJoinDTO> pointInfo = mypageDAO.miniPoint(userNo);
 			MyPageJoinDTO comVolunInfo = mypageDAO.miniComVol(userNo);
-			System.out.println("예정 봉사 " + comVolunInfo.getVolunActTitle());
-			System.out.println("완료 봉사 " + finVolunInfo.getVolunActTitle());
-			System.out.println("예정 봉사 기간" + comVolunInfo.getComVolunActProcBegin());
-			System.out.println("완료 봉사 기간 : " + finVolunInfo.getFinVolunActProcEnd());
-			System.out.println("포인트 정보 : " + pointInfo);
+//			System.out.println("예정 봉사 " + comVolunInfo.getVolunActTitle());
+//			System.out.println("완료 봉사 " + finVolunInfo.getVolunActTitle());
+//			System.out.println("예정 봉사 기간" + comVolunInfo.getComVolunActProcBegin());
+//			System.out.println("완료 봉사 기간 : " + finVolunInfo.getFinVolunActProcEnd());
+//			System.out.println("포인트 정보 : " + pointInfo);
 			
-			System.out.println(pointInfo);
-			System.out.println("fin" + finVolunInfo.toString());
-			System.out.println("com" + comVolunInfo.toString());
-			System.out.println("sum" + summaryInfo.toString());
+//			System.out.println(pointInfo);
+//			System.out.println("fin" + finVolunInfo.toString());
+//			System.out.println("com" + comVolunInfo.toString());
+//			System.out.println("sum" + summaryInfo.toString());
 			request.setAttribute("miniPoint", pointInfo);
 			
 			request.setAttribute("totalVolunTime", summaryInfo.getTotalVolunTime());
@@ -70,13 +70,36 @@ public class MyPageCheckOkController implements Execute{
 			request.setAttribute("totalAmount", summaryInfo.getTotalAmount());
 			request.setAttribute("volunActNo", summaryInfo.getVolunActNo());
 
-			request.setAttribute("comVolunActTitle", comVolunInfo.getVolunActTitle());
-			request.setAttribute("comVolunActProcEnd", comVolunInfo.getComVolunActProcEnd());
-			request.setAttribute("comVolunActProcBegin", comVolunInfo.getComVolunActProcBegin());
+			if (comVolunInfo != null) {
+			    System.out.println("예정 봉사 " + comVolunInfo.getVolunActTitle());
+
+			    request.setAttribute("comVolunActTitle", comVolunInfo.getVolunActTitle());
+			    request.setAttribute("comVolunActProcEnd", comVolunInfo.getComVolunActProcEnd());
+			    request.setAttribute("comVolunActProcBegin", comVolunInfo.getComVolunActProcBegin());
+			} else {
+			    System.out.println("예정 봉사 없음");
+
+			    request.setAttribute("comVolunActTitle", null);
+			    request.setAttribute("comVolunActProcEnd", null);
+			    request.setAttribute("comVolunActProcBegin", null);
+			}
 			
-			request.setAttribute("finVolunActTitle", finVolunInfo.getVolunActTitle());
-			request.setAttribute("finVolunActProcEnd", finVolunInfo.getFinVolunActProcEnd());
-			request.setAttribute("finVolunActProcBegin", finVolunInfo.getFinVolunActProcBegin());
+			
+			if (finVolunInfo != null) {
+			    System.out.println("완료 봉사 " + finVolunInfo.getVolunActTitle());
+			    System.out.println("완료 봉사 기간 : " + finVolunInfo.getFinVolunActProcEnd());
+
+			    request.setAttribute("finVolunActTitle", finVolunInfo.getVolunActTitle());
+			    request.setAttribute("finVolunActProcEnd", finVolunInfo.getFinVolunActProcEnd());
+			    request.setAttribute("finVolunActProcBegin", finVolunInfo.getFinVolunActProcBegin());
+			} else {
+			    System.out.println("완료 봉사 없음");
+
+			    request.setAttribute("finVolunActTitle", null);
+			    request.setAttribute("finVolunActProcEnd", null);
+			    request.setAttribute("finVolunActProcBegin", null);
+			}
+			
 			
 			
 			System.out.println("조건문 통과");

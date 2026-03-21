@@ -56,7 +56,7 @@ public class MyPageQuitOkController implements Execute {
 
 			if (mypageDAO.enterMyPage(userMap)) {
 				System.out.println("비밀번호 일치 조건문 진입 성공");
-				path = "/app/mypage/check/check.jsp"; // 테스트 일단 내 페이지로
+				path = "/";
 				mypageDAO.quit(userNo);
 				System.out.println("쿼리문 실행 완료");
 
