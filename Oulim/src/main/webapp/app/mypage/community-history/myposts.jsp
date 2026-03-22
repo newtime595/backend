@@ -59,7 +59,7 @@
 
 							<div class="p-mypage-posts--menu-group">
 								<li>나의 정보</li> <br> <a
-									href="${pageContext.request.contextPath}/mypage/checkOk.mp"><li>-
+									href="${pageContext.request.contextPath}/mypage/profile.mp"><li>-
 										내 정보 보기</li></a> <br> <a
 									href="${pageContext.request.contextPath}/mypage/userEdit.mp"><li>-
 										내 정보 수정</li></a>

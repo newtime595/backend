@@ -23,7 +23,6 @@ public class MyPageOrganCheckOkController implements Execute {
 		Result result = new Result();
 
 		MyPageJoinDAO mypageDAO = new MyPageJoinDAO();
-		MyPageJoinDTO mypageJoinDTO = new MyPageJoinDTO();
 		HttpSession session = request.getSession();
 		String path = null;
 
@@ -42,7 +41,18 @@ public class MyPageOrganCheckOkController implements Execute {
 		Map<String, Object> userMap = new HashMap<>();
 		userMap.put("userNo", userNo);
 		userMap.put("userPw", userPw);
-		return null;
+		
+		boolean isCorrect = mypageDAO.enterMyPage(userMap);
+
+		if (isCorrect) {
+		    result.setPath("/mypage/organEdit.mp");
+		    result.setRedirect(true);
+		} else {
+		    result.setPath("/app/mypage-organ/check/check.jsp");
+		    result.setRedirect(false);
+		}
+
+		return result;
 	}
 
 }

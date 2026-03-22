@@ -23,7 +23,10 @@ public class MyPageOrganCheckController implements Execute{
 			return result;
 		}
 		
-		return null;
+		result.setPath("/app/mypage-organ/check/check.jsp");
+	    result.setRedirect(false); // forward
+
+	    return result;
 	}
 
 }

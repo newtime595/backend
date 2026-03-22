@@ -2,11 +2,14 @@ package com.oulim.app.mypage.controller;
 
 import java.io.IOException;
 
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oulim.app.user.controller.SendEmailAuthCodeController;
+import com.oulim.app.user.controller.VerifyEmailAuthCodeController;
 import com.oulim.app.common.controller.Result;
 import com.oulim.app.common.util.DefineType;
 
@@ -52,7 +55,7 @@ public class MyPageFrontController extends HttpServlet {
 		Result result = new Result();
 
 		switch (target) {
-
+		
 		case "/mypage/check.mp":
 			System.out.println("마이페이지 진입");
 			result = new MyPageCheckController().execute(request, response);
@@ -62,7 +65,21 @@ public class MyPageFrontController extends HttpServlet {
 			System.out.println("마이페이지 진입 성공");
 			result = new MyPageCheckOkController().execute(request, response);
 			break;
-
+			
+		case "/mypage/profile.mp":
+			System.out.println("마이페이지 프로필 페이지 출력");
+			result = new MyPageProfileController().execute(request, response);
+			break;
+		case "/mypage/sendUpdateEmail.mp":
+			System.out.println("이메일 보내기");
+			result = new SendEmailAuthCodeController().execute(request, response);
+			break;
+			
+		case "/mypage/verifyEmail.mp":
+			System.out.println("이메일 보내기");
+			result = new VerifyEmailAuthCodeController().execute(request, response);
+			break;
+			
 		case "/mypage/userEdit.mp": // 일반회원 정보 수정
 			result = new MyPageUserEditController().execute(request, response);
 			break;
@@ -70,13 +87,29 @@ public class MyPageFrontController extends HttpServlet {
 		case "/mypage/userEditOk.mp": // 일반회원 정보 수정 ok
 			result = new MyPageUserEditOkController().execute(request, response);
 			break;
-
+			
 		case "/mypage/organEdit.mp": // 기업회원 정보 수정
 			result = new MyPageOrganEditController().execute(request, response);
 			break;
+			
+		case "/mypage/organcheck.mp":
+			System.out.println("기업마이페이지 진입");
+			result = new MyPageOrganCheckController().execute(request, response);
+			break;
+			
+		case "/mypage/organcheckOk.mp":
+			System.out.println("기업마이페이지 진입 성공");
+			result = new MyPageOrganCheckOkController().execute(request, response);
+			break;
+			
+		case "/mypage/updateEmail.mp":
+			System.out.println("기업회원 이메일 수정");
+			result = new MyPageUpdateEmailController().execute(request, response);
+			break;
 
-		case "/mypage/organEditOk.mp": // 기업회원 정보 수정 ok
-			result = new MyPageOrganEditOkController().execute(request, response);
+		case "/mypage/updatePw.mp":
+			System.out.println("기업회원 비밀번호 수정");
+			result = new MyPageUpdatePwController().execute(request, response);
 			break;
 
 		case "/mypage/comingVolun.mp": // 예정된 봉사 목록 조회

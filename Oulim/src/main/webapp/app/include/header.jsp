@@ -52,7 +52,7 @@
 							<c:choose>
 								<c:when test="${sessionScope.userType == 2}">
 									<a class="c-button c-button--secondary c-button--md"
-									   href="${pageContext.request.contextPath}/mypage-organ/check.mp">마이페이지</a>
+									   href="${pageContext.request.contextPath}/mypage/organcheck.mp">마이페이지</a>
 								</c:when>
 								<c:otherwise>
 									<a class="c-button c-button--secondary c-button--md"

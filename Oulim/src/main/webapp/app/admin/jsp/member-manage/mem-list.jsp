@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 
@@ -47,91 +48,40 @@
 
         <div class="c-list c-list--6col">
           <!-- header -->
-          <div class="c-list__header">
-            <span class="c-list__col">유저번호</span>
-            <span class="c-list__col">아이디</span>
-            <span class="c-list__col">닉네임</span>
-            <span class="c-list__col">회원종류</span>
-            <span class="c-list__col">이름</span>
-          </div>
+	      <form id="content-area" action="${pageContext.request.contextPath}/admin/memlist.adm" method="get">
+	        <select class="search-item" name="searchType">
+	          <option value="userNo">유저번호</option>
+	          <option value="userId">아이디</option>
+	          <option value="userNickname">닉네임</option>
+	          <option value="userType">회원종류</option>
+	          <option value="userName">이름</option>
+	        </select>
+	        <input type="text" class="c-input" name="keyword" value="${requestScope.keyword}" placeholder="검색 조건" />
+	        <button class="c-button c-button--primary c-button--md" type="submit">조회</button>
+	      </form>
+	      
           <!-- body -->
           <div class="c-list__body">
-            <div class="c-list__row">
-              <span class="c-list__col memdetail">
-                1
-              </span>
-              <span class="c-list__col memdetail">
-                아무개
-              </span>
-              <span class="c-list__col memdetail">
-                치카치카
-              </span>
-              <span class="c-list__col memdetail">
-                일반
-              </span>
-              <span class="c-list__col memdetail">
-                말순
-              </span>
-            </div>
-            <div class="c-list__row">
-              <span class="c-list__col memdetail">
-                1
-              </span>
-              <span class="c-list__col memdetail">
-                아무개
-              </span>
-              <span class="c-list__col memdetail">
-                제목입니다
-              </span>
-              <span class="c-list__col memdetail">
-                2023-01-15
-              </span>
-              <span class="c-list__col memdetail">
-                11
-              </span>
-              <span class="c-list__col memdetail">
-                1000
-              </span>
-            </div>
-            <div class="c-list__row">
-              <span class="c-list__col memdetail">
-                1
-              </span>
-              <span class="c-list__col memdetail">
-                아무개
-              </span>
-              <span class="c-list__col memdetail">
-                제목입니다
-              </span>
-              <span class="c-list__col memdetail">
-                2023-01-15
-              </span>
-              <span class="c-list__col memdetail">
-                11
-              </span>
-              <span class="c-list__col memdetail">
-                1000
-              </span>
-            </div>
-            <div class="c-list__row">
-              <span class="c-list__col memdetail">
-                1
-              </span>
-              <span class="c-list__col memdetail">
-                아무개
-              </span>
-              <span class="c-list__col memdetail">
-                제목입니다
-              </span>
-              <span class="c-list__col memdetail">
-                2023-01-15
-              </span>
-              <span class="c-list__col memdetail">
-                11
-              </span>
-              <span class="c-list__col memdetail">
-                1000
-              </span>
+ 			<c:forEach var="member" items="${memberList}">
+			    <div class="c-list__row"
+			         onclick="location.href='${pageContext.request.contextPath}/admin/memdetail.adm?userNo=${member.userNo}'"
+			         style="cursor:pointer;">
+			        <span class="c-list__col">${member.userNo}</span>
+			        <span class="c-list__col">${member.userId}</span>
+			
+			        <c:choose>
+			            <c:when test="${empty member.userNickname}">
+			                <span class="c-list__col">-</span>
+			            </c:when>
+			            <c:otherwise>
+			                <span class="c-list__col">${member.userNickname}</span>
+			            </c:otherwise>
+			        </c:choose>
+			
+			        <span class="c-list__col">${member.userTypeText}</span>
+			        <span class="c-list__col">${member.userName}</span>
+			    </div>
+			</c:forEach>
             </div>
           </div>
         </div>

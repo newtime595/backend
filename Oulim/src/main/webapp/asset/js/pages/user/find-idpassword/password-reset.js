@@ -1,7 +1,15 @@
 const password = document.getElementById("reset-password");
 const passwordCheck = document.getElementById("reset-password-check");
 
+const passwordError = document.getElementById("is-password-error");
+const passwordCheckError = document.getElementById("is-password-check-error");
+
 const resetBtn = document.getElementById("is-reset-btn");
+
+function isValidPassword(pw) {
+  const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$/;
+  return regex.test(pw);
+}
 
 resetBtn.addEventListener("click", function (e) {
   let hasError = false;
@@ -12,6 +20,7 @@ resetBtn.addEventListener("click", function (e) {
   password.classList.remove("is-error");
   passwordCheck.classList.remove("is-error");
 
+  // 1. 비밀번호 입력 체크
   if (password.value.trim() === "") {
     passwordError.textContent = "비밀번호를 입력해주세요.";
     password.classList.add("is-error");
@@ -19,6 +28,16 @@ resetBtn.addEventListener("click", function (e) {
     hasError = true;
   }
 
+  // 2. 정규식 체크
+  if (password.value.trim() !== "" && !isValidPassword(password.value)) {
+    passwordError.textContent =
+      "비밀번호는 8자 이상, 영문/숫자/특수문자를 포함해야 합니다.";
+    password.classList.add("is-error");
+    if (!hasError) password.focus();
+    hasError = true;
+  }
+
+  // 3. 확인 입력 체크
   if (passwordCheck.value.trim() === "") {
     passwordCheckError.textContent = "비밀번호 확인을 입력해주세요.";
     passwordCheck.classList.add("is-error");
@@ -26,6 +45,7 @@ resetBtn.addEventListener("click", function (e) {
     hasError = true;
   }
 
+  // 4. 일치 여부
   if (
     password.value.trim() !== "" &&
     passwordCheck.value.trim() !== "" &&
@@ -36,40 +56,9 @@ resetBtn.addEventListener("click", function (e) {
     if (!hasError) passwordCheck.focus();
     hasError = true;
   }
-  
+
   if (hasError) {
     e.preventDefault();
     alert("입력값을 확인해주세요.");
-  }
-});
-
-
-// 토글
-const userPw = document.getElementById("reset-password");
-const pwBtn = document.getElementById("c-password-btn-toggle");
-const pwToggleIcon = document.getElementById("c-password-toggle-img");
-
-pwBtn.addEventListener("click", () => {
-  if (userPw.type === "password") {
-    userPw.type = "text";
-    pwToggleIcon.src = contextPath + "/asset/image/user/password-off.png";
-  } else {
-    userPw.type = "password";
-    pwToggleIcon.src = contextPath + "/asset/image/user/password-on.png";
-  }
-});
-
-// 토글2
-const userPw2 = document.getElementById("reset-password-check");
-const pwBtn2 = document.getElementById("c-password-btn-toggle-2");
-const pwToggleIcon2 = document.getElementById("c-password-toggle-img-2");
-
-pwBtn2.addEventListener("click", () => {
-  if (userPw2.type === "password") {
-    userPw2.type = "text";
-    pwToggleIcon2.src = contextPath + "/asset/image/user/password-off.png";
-  } else {
-    userPw2.type = "password";
-    pwToggleIcon2.src = contextPath + "/asset/image/user/password-on.png";
   }
 });

@@ -32,7 +32,9 @@
 	href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
-
+<script>
+  const contextPath = "${pageContext.request.contextPath}";
+</script>
 </head>
 
 <body>
@@ -59,7 +61,7 @@
 						</div>
 						<div class="c-id-find-input">
 							<h6>생년월일</h6>
-							<input type="text" name="userBirth" id="find-id-user-birth"
+							<input type="date" name="userBirth" id="find-id-user-birth"
 								class="c-input" placeholder="생년월일 입력해주세요" />
 							<p id="is-find-id-user-birth-error" class="is-error-text"></p>
 						</div>
@@ -67,18 +69,20 @@
 							<h6>이메일</h6>
 							<input type="text" name="userEmail" id="find-id-user-email"
 								class="c-input" placeholder="이메일 입력해주세요" />
+								<button type="button" id="find-id-email-btn" name="find-id-email-btn" class="c-button c-button--secondary c-button--md">
+										인증전송</button>
 							<p id="is-find-id-user-email-error" class="is-error-text"></p>
 						</div>
 						<div class="c-id-find-input-number">
 							<h6>인증번호</h6>
 							<div class="l-id-find-number-layout">
 								<div>
-									<input type="text" name="" id="" class="c-input"
+									<input type="text" name="verify" id="find-id-verify" class="c-input"
 										placeholder="인증번호입력" />
-									<div class="c-id-find-numbertime">3:00</div>
+									<div class="c-id-find-numbertime" id="find-id-timer">3:00</div>
 								</div>
 								<div class="">
-									<button class="c-button c-button--secondary c-button--md">
+									<button type="button" id="find-id-verify-btn" class="c-button c-button--secondary c-button--md">
 										인증확인</button>
 								</div>
 							</div>

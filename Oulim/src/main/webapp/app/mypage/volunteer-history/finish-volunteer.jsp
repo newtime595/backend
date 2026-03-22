@@ -60,7 +60,7 @@
 						<ul class="list1">
 							<li>나의 정보</li>
 							<br>
-							<a href="${pageContext.request.contextPath}/mypage/checkOk.mp">
+							<a href="${pageContext.request.contextPath}/mypage/profile.mp">
 								<li>- 내 정보 보기</li>
 							</a>
 							<br>
@@ -124,8 +124,6 @@
 					</c:if>
 
 					<c:forEach var="item" items="${finishVol}">
-						<a
-							href="${pageContext.request.contextPath}/volunteer-activity/detail.va/volunAct-detail.va?volunActNo=${item.volunActNo}">
 							<div class="c-card">
 								<div class="c-card__header">
 									<span class="c-badge c-badge--primary">완료</span>
@@ -136,10 +134,11 @@
 										${item.finVolunActProcEnd}</span>
 								</div>
 							</div>
-						</a>
 					</c:forEach>
 				</div>
 				<div>
+				<nav class="c-pagination">
+						<c:if test="${lastPage > 1}">
 					<nav class="c-pagination">
 						<c:if test="${page > 1}">
 							<a class="c-pagination__link" href="?page=${page-1}">‹</a>
@@ -151,6 +150,8 @@
 						<c:if test="${page < lastPage}">
 							<a class="c-pagination__link" href="?page=${page+1}">›</a>
 						</c:if>
+					</nav>
+					</c:if>
 					</nav>
 
 				</div>

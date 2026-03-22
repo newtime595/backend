@@ -12,7 +12,7 @@ import com.oulim.app.common.controller.Result;
 import com.oulim.app.mypage.dao.MyPageJoinDAO;
 import com.oulim.app.mypage.dto.MyPageJoinDTO;
 
-public class MyPageOrganEditController implements Execute {
+public class MyPageUpdatePwController implements Execute {
 
 	@Override
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
@@ -23,18 +23,32 @@ public class MyPageOrganEditController implements Execute {
 		HttpSession session = request.getSession();
 
 		Integer userNo = (Integer) session.getAttribute("userNo");
-
+		String newPw = request.getParameter("new-pw");
+		String newPwCheck = request.getParameter("new-pw-check");
+		
+		System.out.println("newPw: " + newPw);
+		System.out.println("newPwCheck: " + newPwCheck);
+		
 		if (userNo == null) {
 			result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
 			result.setRedirect(true);
 			return result;
 		}
 
-		MyPageJoinDTO mypageInfo = mypageDAO.organMyPageInfo(userNo);
-		request.setAttribute("mypageInfo", mypageInfo);
+		if (newPw == null || newPw.trim().isEmpty() || !newPw.equals(newPwCheck)) {
+			result.setPath(request.getContextPath() + "/mypage/organEdit.mp");
+			result.setRedirect(true);
+			return result;
+		}
 
-		result.setPath("/app/mypage-organ/profile/profile-edit.jsp");
-		result.setRedirect(false);
+		MyPageJoinDTO myPageJoinDTO = new MyPageJoinDTO();
+		myPageJoinDTO.setUserNo(userNo);
+		myPageJoinDTO.setUserPw(newPw);
+
+		mypageDAO.updatePw(myPageJoinDTO);
+
+		result.setPath(request.getContextPath() + "/mypage/organEdit.mp");
+		result.setRedirect(true);
 
 		return result;
 	}

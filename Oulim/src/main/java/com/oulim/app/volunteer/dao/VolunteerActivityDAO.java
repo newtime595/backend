@@ -1,6 +1,7 @@
 package com.oulim.app.volunteer.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -43,5 +44,10 @@ public class VolunteerActivityDAO {
     public List<VolunActivityDTO> selectMainVolActList(){
     	return sqlSession.selectList("volunAct.selectVolunMain");
     }
+    
+    // 봉사 신청  여부 
+    public int selectApplyCount(Map<String, Object> map) {
+		return sqlSession.selectOne("volunAct.selectApplyCount",map );
+	}
     
 }

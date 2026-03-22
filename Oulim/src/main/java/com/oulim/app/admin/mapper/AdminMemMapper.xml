@@ -26,6 +26,7 @@
                     END AS userTypeText
                 FROM TBL_USER
                 <where>
+                   USER_STATUS = 1
                     <if test="keyword != null and keyword != ''">
                         <choose>
                             <when test="searchType == 'userNo'">
@@ -91,6 +92,7 @@
         SELECT COUNT(USER_NO)
         FROM TBL_USER
         <where>
+        USER_STATUS = 1
             <if test="keyword != null and keyword != ''">
                 <choose>
                     <when test="searchType == 'userNo'">
@@ -135,6 +137,39 @@
             ON U.USER_NO = C.USER_NO
         WHERE U.USER_NO = #{value}
     </select>
+    
+    
+	<!-- 유저상세 부분  -->
+	<update id="update" parameterType="com.oulim.app.admin.dto.AdminMemDetailDTO">
+		UPDATE TBL_USER
+			SET USER_NICKNAME = #{userNickname}, 
+			USER_ADDRESS = #{userAddress}, 
+			USER_ADDRESS_DETAIL = #{userAddressDetail}
+		WHERE USER_NO = #{userNo}
+	</update>
+
+	<update id="delete" parameterType="int">
+		UPDATE TBL_USER
+		SET USER_STATUS = 0
+		WHERE USER_NO = #{value}
+	</update>
+	
+	<!-- 유저 포인트 부분 -->
+	<select id="selectPointList"
+	        parameterType="int"
+	        resultType="LogPointDTO">
+	    SELECT
+	        LOG_NO AS logNo,
+	        USER_NO AS userNo,
+	        CHANGE_AMOUNT AS changeAmount,
+	        LOG_REASON AS logReason,
+	        LOG_DATE AS logDate
+	    FROM TBL_LOG_POINT
+	    WHERE USER_NO = #{value}
+	    ORDER BY LOG_DATE DESC, LOG_NO DESC
+	</select>
+
+
 
 
 

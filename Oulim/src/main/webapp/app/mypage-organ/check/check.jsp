@@ -48,11 +48,11 @@
 							<li><h2>마이페이지</h2></li>
 
 							<li class="p-mypage-check--menu-group">
-								<a href="${pageContext.request.contextPath}/mypage/check.mp">내 정보 보기</a>
+								<a href="${pageContext.request.contextPath}/mypage/organcheck.mp">내 정보 보기</a>
 							</li>
 
 							<li class="p-mypage-check--menu-group">
-								<a href="#">회원 탈퇴</a>
+								<a href="${pageContext.request.contextPath}/mypage/organcheck.mp">회원 탈퇴</a>
 							</li>
 						</ul>
 					</div>
@@ -70,7 +70,7 @@
 					</div>
 				</div>
 
-				<form action="${pageContext.request.contextPath}/mypage/checkOk.mp" method="post">
+				<form action="${pageContext.request.contextPath}/mypage/organcheckOk.mp" method="post">
 					<div class="p-mypage-check--form">
 
 						<div class="p-mypage-check--label">
@@ -80,9 +80,9 @@
 						<div class="p-mypage-check--input">
 							<input type="password" id="password" class="c-input" name="userPw"
 								placeholder="비밀번호 입력" />
-							<button type="button" id="c-password-btn-toggle">
 								<img src="${pageContext.request.contextPath}/asset/image/user/password-off.png"
 									alt="eye" id="c-password-toggle-img" />
+							<button type="button" id="c-password-btn-toggle">			
 							</button>
 						</div>
 

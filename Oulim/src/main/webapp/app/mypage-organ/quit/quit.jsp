@@ -14,7 +14,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/asset/css/core/variable.css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/asset/css/core/typography.css" />
+	href="${pageContext.request.contextPath}/asset/css/core/Typography.css" />
 
 <!-- component css -->
 <link rel="stylesheet"
@@ -25,52 +25,45 @@
 	href="${pageContext.request.contextPath}/asset/css/component/checkbox.css">
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/asset/css/pages/mypage-organ/quit/quit.css" />
+	href="${pageContext.request.contextPath}/asset/css/pages/mypage/quit/quit.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
-<script defer
-	src="${pageContext.request.contextPath}/asset/js/pages/main/include.js"></script>
 
 <script defer
-	src="${pageContext.request.contextPath}/asset/js/pages/mypage-organ/quit/quit.js"></script>
+	src="${pageContext.request.contextPath}/asset/js/pages/mypage/quit/quit.js"></script>
 </head>
 
 <body>
-
 	<jsp:include page="/app/include/header.jsp" />
-
 	<main class="l-main">
 
 		<div class="main-container">
 
 			<!-- aside -->
-			<div class="main-aside">
-				<aside>
-					<div class="main-aside-list">
+     <div class="main-aside">
+        <aside>
+          <div class="main-aside-list">
 
-						<h2>마이페이지</h2>
+            <h2>마이페이지</h2>
 
-						<ul class="list1">
-
-							<br>
-							<a href="/Oulim/front/html/mypage/profile/profile-edit.html">
-								<li>내 정보 보기</li>
-							</a>
-
-						</ul>
+            <ul class="list1">
+              <a href="${pageContext.request.contextPath}/mypage/organEdit.mp">
+                <li>내 정보 보기</li>
+              </a>
+            </ul>
 
 
-						<ul class="list5">
-							<a href="/Oulim/front/html/mypage/quit/quit.html">
-								<li>회원 탈퇴</li>
-							</a>
-						</ul>
+            <ul class="list5">
+              <a href="${pageContext.request.contextPath}/mypage/quit.mp">
+                <li>회원 탈퇴</li>
+              </a>
+            </ul>
 
-					</div>
-				</aside>
-			</div>
+          </div>
+        </aside>
+      </div>
 
 
 			<!-- content -->
@@ -117,14 +110,15 @@
 
 
 				<!-- 비밀번호 -->
-				<form>
+				<form action="${pageContext.request.contextPath}/mypage/quitOk.mp"
+					method="post">
 
 					<div class="main-pw">
 
 						<h5>비밀번호 입력</h5>
 
 						<div class="pw-input">
-							<input type="password" class="c-input" name="password"
+							<input type="password" class="c-input" name="userPw"
 								placeholder="비밀번호 입력" />
 						</div>
 

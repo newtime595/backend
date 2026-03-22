@@ -18,47 +18,35 @@ public class AdminMemPointListDTO {
 		private int totalAmount;
 		private int changeAmount;
 		private String logReason;
-/**
- * @return the totalAmount
- */
-private int getTotalAmount() {
-	return totalAmount;
-}
-/**
- * @param totalAmount the totalAmount to set
- */
-private void setTotalAmount(int totalAmount) {
-	this.totalAmount = totalAmount;
-}
-/**
- * @return the changeAmount
- */
-private int getChangeAmount() {
-	return changeAmount;
-}
-/**
- * @param changeAmount the changeAmount to set
- */
-private void setChangeAmount(int changeAmount) {
-	this.changeAmount = changeAmount;
-}
-/**
- * @return the logReason
- */
-private String getLogReason() {
-	return logReason;
-}
-/**
- * @param logReason the logReason to set
- */
-private void setLogReason(String logReason) {
-	this.logReason = logReason;
-}
+		
+		
+		
+		
+		public int getTotalAmount() {
+			return totalAmount;
+		}
+		public void setTotalAmount(int totalAmount) {
+			this.totalAmount = totalAmount;
+		}
+		public int getChangeAmount() {
+			return changeAmount;
+		}
+		public void setChangeAmount(int changeAmount) {
+			this.changeAmount = changeAmount;
+		}
+		public String getLogReason() {
+			return logReason;
+		}
+		public void setLogReason(String logReason) {
+			this.logReason = logReason;
+		}
+		@Override
+		public String toString() {
+			return "AdminMemPointListDTO [totalAmount=" + totalAmount + ", changeAmount=" + changeAmount
+					+ ", logReason=" + logReason + "]";
+		}
 
-@Override
-public String toString() {
-	return "AdminMemEditDTO [totalAmount=" + totalAmount + ", changeAmount=" + changeAmount + ", logReason=" + logReason
-			+ "]";
-}
+		
+		
 	
 }

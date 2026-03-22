@@ -30,7 +30,11 @@
 	href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
 <script defer
 	src="${pageContext.request.contextPath}/asset/js/pages/user/find-idpassword/password-find.js"></script>
+<script>
+  const contextPath = "${pageContext.request.contextPath}";
+</script>
 </head>
+
 
 <body>
 	<jsp:include page="/app/include/header.jsp" />
@@ -72,7 +76,7 @@
 						</div>
 						<div class="c-password-find-input">
 							<h6>생년월일</h6>
-							<input type="text" name="userBirth" id="find-user-birth"
+							<input type="date" name="userBirth" id="find-user-birth"
 								class="c-input" placeholder="생년월일 입력해주세요" />
 							<p id="is-find-user-birth-error" class="is-error-text"></p>
 						</div>
@@ -80,18 +84,20 @@
 							<h6>이메일</h6>
 							<input type="text" name="userEmail" id="find-user-email"
 								class="c-input" placeholder="이메일 입력해주세요" />
+								<button type="button" id="find-pw-email-btn" name="find-pw-email-btn" class="c-button c-button--secondary c-button--md">
+										인증전송</button>
 							<p id="is-find-user-email-error" class="is-error-text"></p>
 						</div>
 						<div class="c-password-find-input-number">
 							<h6>인증번호</h6>
 							<div class="l-password-find-number-layout">
 								<div>
-									<input type="text" name="" id="" class="c-input"
+									<input type="text" name="verify" id="find-pw-verify" class="c-input"
 										placeholder="인증번호입력" />
-									<div class="c-password-find-numbertime">3:00</div>
+									<div class="c-password-find-numbertime" id="find-pw-timer">3:00</div>
 								</div>
 								<div class="">
-									<button class="c-button c-button--secondary c-button--md">
+									<button type="button" id="find-pw-verify-btn" class="c-button c-button--secondary c-button--md">
 										인증확인</button>
 								</div>
 							</div>

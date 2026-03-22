@@ -25,7 +25,8 @@ public class MyPageQuitController implements Execute{
 		HttpSession session = request.getSession();
 		
 		Integer userNo = (Integer) session.getAttribute("userNo");
-		
+		Integer userType = (Integer) session.getAttribute("userType");
+		System.out.println("유저 타입 " + userType);
 		String userPw = request.getParameter("userPw");
 		
 	      if(request.getSession().getAttribute("userNo") == null) {
@@ -34,6 +35,12 @@ public class MyPageQuitController implements Execute{
 	          return result;
 	       }
 
+		if (userType != 1) {
+			System.out.println("기업 마이페이지 진입 조건 통과");
+			result.setPath("/app/mypage-organ/quit/quit.jsp");
+			result.setRedirect(false);
+			return result;
+		}
 		
 		result.setPath("/app/mypage/quit/quit.jsp");
 		result.setRedirect(false);

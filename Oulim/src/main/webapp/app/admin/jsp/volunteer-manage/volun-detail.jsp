@@ -93,7 +93,7 @@
 						
 						        <!-- 나이 -->
 						        <div class="c-list__col">
-						            ${v.userAge}세
+						            ${v.userAge}
 						        </div>
 						
 						        <!-- 신청일 -->

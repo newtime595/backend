@@ -89,6 +89,9 @@ public class UserFrontController extends HttpServlet {
 			
 		} else if(target.equals("/user/verifyEmailAuthCode.usr")) {
 			execute = new VerifyEmailAuthCodeController();
+			
+		} else if(target.equals("/user/sendFindEmailAuthCode.usr")) {
+			execute = new SendFindEmailAuthCodeController();
 		}
 		
 		if (execute != null) {

@@ -26,8 +26,10 @@
 </head>
 
 <body>
+
 	<main class="l-main">
 	<jsp:include page="/app/admin/jsp/aside.jsp"/>
+
 
     <!-- 메인 컨텐츠 -->
 

@@ -1,93 +1,176 @@
-// 1. 닉네임 중복확인
-// 2. 이메일 중복확인
-// 3. 인증 완료 > 필드 에러 출력 
-// 4. 비밀번호 조건 검사 > 일정 자리수 이상, 정규식 검사
-// 5. 주소검색 > api 사용
-// 6. 저장 > 수정이 완료되었습니다
-// 수정된 값이 없으면 그냥 현재 상태 유지
+const emailForm = document.getElementById("emailUpdateForm");
+const emailInput = document.getElementById("email");
+const verifyInput = document.getElementById("verify");
+const emailBtn = document.getElementById("emailBtn");
 
-const nickname = document.getElementById("nickname");
-const nicknameContainer = document.getElementsByClassName("i-nickname")[0];
-const email = document.getElementById("email");
-const emailContainer = document.getElementsByClassName("i-email")[0];
-const verify = document.getElementById("verify");
-const newPassword = document.getElementsByName("new-password")[0];
-const passwordChk = document.getElementsByName("new-password-check")[0];
-
-
-const exist2 = document.getElementById("emailBtn");
-const verifyBtn = document.getElementById("verifyBtn");
-const addrBtn = document.getElementById("addrBtn");
-
-const nicknameError = document.getElementsByClassName("c-form-field is-error")[0];
-const emailError = document.getElementsByClassName("c-form-field is-error")[1];
-const verifyError = document.getElementsByClassName("c-form-field is-error")[2];
-
-const accept = document.getElementById("accept");
-const cancel = document.getElementById("cancel");
-
-
-exist2.addEventListener("click", () => { // 이메일 검사
-
-    if (email.value.trim() === "") {
-        alert("비었음");
-    } else if (email.value.trim() === "wnstmd@naver.com") {
-        emailContainer.style.display = "none";
-        emailError.style.display = "block";
-    } else {
-        alert("인증번호가 발송되었습니다.");
-    };
-
-});
-
-verifyBtn.addEventListener("click", () => { // 인증번호 검사
-
-    if (verify.value.trim() === "") {
-        alert("값을 입력해주세요.");
-    } else if (verify.value.trim() === "1234") {
-        alert("인증성공");
-    };
-});
-
-addrBtn.addEventListener("click", () => { // 주소 입력 api
-
-    alert("주소 입력 성공");
-
-});
-
-
-accept.addEventListener("click", () => {
-
-    alert("수정 완료");
-
-});
-
-
-cancel.addEventListener("click", () => {
-    alert("취소");
-});
+const pwForm = document.querySelector('form[action$="/mypage/updatePw.mp"]');
+const newPasswordInput = document.getElementsByName("new-pw")[0];
+const newPasswordCheckInput = document.getElementsByName("new-pw-check")[0];
 
 const pwBtn = document.getElementById("c-password-btn-toggle");
-const pwBtn2 = document.getElementById("c-password-btn-toggle-2")
+const pwBtn2 = document.getElementById("c-password-btn-toggle-2");
 const pwToggleIcon = document.getElementById("c-password-toggle-img");
 const pwToggleIcon2 = document.getElementById("c-password-toggle-2-img");
 
-pwBtn.addEventListener("click", () => {
-  if (newPassword.type === "password") {
-    newPassword.type = "text";
-    pwToggleIcon.src = "/Oulim/asset/image/user/password-on.png";
-  } else {
-    newPassword.type = "password";
-    pwToggleIcon.src = "/Oulim/asset/image/user/password-off.png";
-  }
-});
+function getValue(element) {
+  return element ? element.value.trim() : "";
+}
 
-pwBtn2.addEventListener("click", () => {
-  if (passwordChk.type === "password") {
-    passwordChk.type = "text";
-    pwToggleIcon2.src = "/Oulim/asset/image/user/password-on.png";
-  } else {
-    passwordChk.type = "password";
-    pwToggleIcon2.src = "/Oulim/asset/image/user/password-off.png";
-  }
-});
+function isValidEmail(email) {
+  const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+  return emailRegex.test(email);
+}
+
+function isValidPassword(password) {
+  const passwordRegex =
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[\]{};:'",.<>/?\\|`~]).{8,20}$/;
+  return passwordRegex.test(password);
+}
+
+
+if (emailBtn) {
+  emailBtn.addEventListener("click", function () {
+    const userEmail = getValue(emailInput);
+
+    if (userEmail === "") {
+      alert("이메일을 입력해주세요.");
+      emailInput.focus();
+      return;
+    }
+
+    if (!isValidEmail(userEmail)) {
+      alert("올바른 이메일 형식을 입력해주세요.");
+      emailInput.focus();
+      return;
+    }
+
+    console.log("요청 주소:", contextPath + "/mypage/sendUpdateEmail.mp");
+
+    fetch(contextPath + "/mypage/sendUpdateEmail.mp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+      },
+      body: "userEmail=" + encodeURIComponent(userEmail)
+    })
+      .then(response => {
+        console.log("response status:", response.status);
+        return response.text();
+      })
+      .then(result => {
+        console.log("result:", result);
+        result = result.trim();
+
+        if (result === "success") {
+          alert("인증번호를 이메일로 발송했습니다.");
+        } else if (result === "duplicate") {
+          alert("이미 사용 중인 이메일입니다.");
+        } else if (result === "empty") {
+          alert("이메일을 입력해주세요.");
+        } else if (result === "fail") {
+          alert("메일 발송에 실패했습니다.");
+        } else {
+          alert("인증메일 발송에 실패했습니다.");
+        }
+      })
+      .catch(error => {
+        console.error("메일 발송 오류:", error);
+        alert("요청 처리 중 오류가 발생했습니다.");
+      });
+  });
+}
+
+
+if (emailForm) {
+  emailForm.addEventListener("submit", function (e) {
+    const userEmail = getValue(emailInput);
+    const verifyCode = getValue(verifyInput);
+
+    if (userEmail === "") {
+      e.preventDefault();
+      alert("이메일을 입력해주세요.");
+      emailInput.focus();
+      return;
+    }
+
+    if (!isValidEmail(userEmail)) {
+      e.preventDefault();
+      alert("올바른 이메일 형식을 입력해주세요.");
+      emailInput.focus();
+      return;
+    }
+
+    if (verifyCode === "") {
+      e.preventDefault();
+      alert("인증번호를 입력해주세요.");
+      verifyInput.focus();
+      return;
+    }
+  });
+}
+
+if (pwBtn && newPasswordInput && pwToggleIcon) {
+  pwBtn.addEventListener("click", function () {
+    if (newPasswordInput.type === "password") {
+      newPasswordInput.type = "text";
+      pwToggleIcon.src = contextPath + "/asset/image/user/password-on.png";
+    } else {
+      newPasswordInput.type = "password";
+      pwToggleIcon.src = contextPath + "/asset/image/user/password-off.png";
+    }
+  });
+}
+
+if (pwBtn2 && newPasswordCheckInput && pwToggleIcon2) {
+  pwBtn2.addEventListener("click", function () {
+    if (newPasswordCheckInput.type === "password") {
+      newPasswordCheckInput.type = "text";
+      pwToggleIcon2.src = contextPath + "/asset/image/user/password-on.png";
+    } else {
+      newPasswordCheckInput.type = "password";
+      pwToggleIcon2.src = contextPath + "/asset/image/user/password-off.png";
+    }
+  });
+}
+
+if (pwForm) {
+  pwForm.addEventListener("submit", function (e) {
+    const newPw = getValue(newPasswordInput);
+    const newPwCheck = getValue(newPasswordCheckInput);
+
+    if (newPw === "" && newPwCheck === "") {
+      e.preventDefault();
+      alert("새 비밀번호를 입력해주세요.");
+      newPasswordInput.focus();
+      return;
+    }
+
+    if (newPw === "") {
+      e.preventDefault();
+      alert("새 비밀번호를 입력해주세요.");
+      newPasswordInput.focus();
+      return;
+    }
+
+    if (newPwCheck === "") {
+      e.preventDefault();
+      alert("비밀번호 확인을 입력해주세요.");
+      newPasswordCheckInput.focus();
+      return;
+    }
+
+    if (!isValidPassword(newPw)) {
+      e.preventDefault();
+      alert("비밀번호는 8~20자이며 영문, 숫자, 특수문자를 모두 포함해야 합니다.");
+      newPasswordInput.focus();
+      return;
+    }
+
+    if (newPw !== newPwCheck) {
+      e.preventDefault();
+      alert("비밀번호가 일치하지 않습니다.");
+      newPasswordCheckInput.focus();
+      return;
+    }
+  });
+}

@@ -58,13 +58,13 @@ public class MyPageJoinDAO {
 	public void userEdit(MyPageJoinDTO myPageDTO) {
 		sqlSession.update("mypage.userEdit", myPageDTO);
 	}
-	
-	public void organEdit(MyPageJoinDTO myPageDTO) {
-		sqlSession.update("mypage.organUserEdit", myPageDTO);
+//	기업 이메일 변경
+	public void updateEmail(MyPageJoinDTO myPageDTO) {
+	    sqlSession.update("mypage.organUpdateEmail", myPageDTO);
 	}
-	
-	public void organAdditionalEdit(int organNo) {
-		sqlSession.update("mypage.organUserEdit2", organNo);
+//	기업 비밀번호 변경
+	public void updatePw(MyPageJoinDTO myPageDTO) {
+	    sqlSession.update("mypage.organUpdatePw", myPageDTO);
 	}
 	
 	
@@ -130,9 +130,12 @@ public class MyPageJoinDAO {
 	}
 
 	
+//	기업 마이페이지 정보 가져오기
+	public MyPageJoinDTO organMyPageInfo(int userNo) {
+	    return sqlSession.selectOne("mypage.organMyPageInfo", userNo);
+	}
 	
-	
-	
+
 	
 	
 	

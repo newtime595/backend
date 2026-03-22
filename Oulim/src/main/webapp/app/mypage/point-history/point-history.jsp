@@ -63,7 +63,7 @@
 
 							<div class="p-point-history--menu-group">
 								<li>나의 정보</li> <br> <a
-									href="${pageContext.request.contextPath}/mypage/checkOk.mp">
+									href="${pageContext.request.contextPath}/mypage/profile.mp">
 									<li>- 내 정보 보기</li>
 								</a> <br> <a
 									href="${pageContext.request.contextPath}/mypage/userEdit.mp">

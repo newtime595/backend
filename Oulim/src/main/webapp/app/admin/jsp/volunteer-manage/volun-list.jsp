@@ -134,6 +134,7 @@
 		      <c:choose>
 		        <c:when test="${not empty volunList}">
 			      <c:forEach var="v" items="${volunList}">
+			      <a>
 			        <div class="c-list__row">
 						<div class="c-list__col">${v.volunActNo}</div>
 						<div class="c-list__col">${v.volunActTitle}</div>
@@ -142,6 +143,7 @@
 						<div class="c-list__col">${v.volunActProcEnd}</div>
 						<div class="c-list__col">${v.recruStatus}</div>
 			        </div>
+			      </a>
 			      </c:forEach>
 		        </c:when>
 		        <c:otherwise>
