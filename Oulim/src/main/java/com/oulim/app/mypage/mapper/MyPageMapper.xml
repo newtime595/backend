@@ -16,6 +16,18 @@
 		FROM tbl_user
 		WHERE user_no = #{userNo}
 	</select>
+	
+	   <!-- 기업 마이페이지 정보 가져오기 -->
+   <select id="organMyPageInfo" parameterType="int" resultType="MyPageJoinDTO">
+    SELECT
+        u.user_email,
+        o.organ_name,
+        o.organ_cert_num
+    FROM tbl_user u
+    JOIN tbl_organ o
+      ON u.organ_no = o.organ_no
+    WHERE u.user_no = #{userNo}
+   </select>
 
 	<select id="organAdditionalInfo" parameterType="int"
 		resultType="MyPageJoinDTO">
@@ -91,69 +103,56 @@ WHERE ROWNUM = 1
 ]]>
 
 	</select>
-	
 
-	<select id="miniFinVol" parameterType="int"
-		resultType="MyPageJoinDTO">
+<!-- 완료한 봉사 미니 -->	
+
+<select id="miniFinVol" parameterType="int" resultType="MyPageJoinDTO">
 <![CDATA[
 SELECT *
 FROM (
-    SELECT tva.volun_act_title AS volunActTitle,
-           TO_CHAR(tva.Volun_Act_Proc_Begin, 'yyyy-mm-dd') AS finVolunActProcBegin,
-           TO_CHAR(tva.Volun_Act_Proc_End, 'yyyy-mm-dd') AS finVolunActProcEnd
-    FROM TBL_VOLUN_ACTIVITY tva
-    JOIN TBL_VOLUN_APPLY apl
-      ON tva.volun_act_no = apl.volun_act_no
-    WHERE apl.user_no = #{userNo}
-      AND apl.VOLUNACT_APPLYSTATUS = 2
-    ORDER BY tva.volun_act_no DESC
+    SELECT 
+        Volun_Act_Title AS volunActTitle,
+        TO_CHAR(Volun_Act_Date, 'yyyy-mm-dd') AS finVolunActProcEnd
+    FROM TBL_VOLUN_HISTORY
+    WHERE User_No = #{userNo}
+    ORDER BY Volun_Act_Date DESC
 )
 WHERE ROWNUM = 1
 ]]>
-	</select>
+</select>
 
 
 	<!-- 3. 내 정보 수정(일반) -->
 
+<update id="userEdit" parameterType="MyPageJoinDTO">
+UPDATE tbl_user
+SET
+    user_nickname = #{userNickname},
+    user_email = #{userEmail}
+    
+    <if test="userPw != null and userPw != ''">
+        , user_pw = #{userPw}
+    </if>
+
+WHERE user_no = #{userNo}
+</update>
 
 
-	<update id="userEdit" parameterType="MyPageJoinDTO">
+   <!-- 3. 내 정보 수정(기업)-->
 
-		UPDATE tbl_user SET
-		user_nickname = #{userNickname},
-		user_email = #{userEmail},
-		user_pw = #{userPw},
-		user_phone_num = #{userPhoneNum},
-		user_address = #{userAddress},
-		user_address_detail = #{userAddressDetail},
-		user_postnum = #{userPostnum},
-		WHERE user_no = #{userNo} AND user_type = #{userType}
-
-	</update>
+   <update id="organUpdateEmail" parameterType="MyPageJoinDTO">
+         UPDATE tbl_user
+          SET user_email = #{userEmail}
+       WHERE user_no = #{userNo}
+   </update>
 
 
-	<!-- 3. 내 정보 수정(기업) 트랜잭션 처리? -->
+   <update id="organUpdatePw" parameterType="MyPageJoinDTO">
+      UPDATE tbl_user
+       SET user_pw = #{userPw}
+       WHERE user_no = #{userNo}
+   </update>
 
-	<update id="organUserEdit" parameterType="MyPageJoinDTO">
-
-		UPDATE tbl_user SET
-		user_email = #{userEmail},
-		user_pw = #{userPw},
-		user_address = #{userAddress},
-		user_address_detail = #{userAddressDetail},
-		user_postnum = #{userPostNum},
-		user_phone_num = #{userPhoneNum}
-		WHERE user_no = #{userNo} AND user_type = #{userType}
-
-	</update>
-
-
-	<update id="organUserEdit2" parameterType="int">
-		UPDATE tbl_organ SET
-		organ_name = #{organName},
-		ORGAN_CERT_NUM = #{organCertNum}
-		WHERE organ_no = #{organNo}
-	</update>
 
 
 

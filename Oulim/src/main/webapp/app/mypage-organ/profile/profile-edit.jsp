@@ -52,8 +52,7 @@
 
 						<ul class="list1">
 							<br>
-							<a
-								href="${pageContext.request.contextPath}/mypage-organ/check.mp">
+							<a href="${pageContext.request.contextPath}/mypage/organEdit.mp">
 								<li>내 정보 보기</li>
 							</a>
 						</ul>

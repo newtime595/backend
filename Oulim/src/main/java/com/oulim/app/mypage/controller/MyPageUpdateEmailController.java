@@ -58,7 +58,7 @@ public class MyPageUpdateEmailController implements Execute {
 		}
 
 		long now = System.currentTimeMillis();
-		if (now - emailAuthTime > 1000 * 60 * 5) { // 5분
+		if (now - emailAuthTime > 1000 * 60 * 3) { 
 			session.removeAttribute("emailAuthCode");
 			session.removeAttribute("emailAuthEmail");
 			session.removeAttribute("emailAuthTime");
