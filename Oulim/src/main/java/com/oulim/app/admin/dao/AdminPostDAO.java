@@ -39,9 +39,9 @@ public class AdminPostDAO {
 	
 	
 	// 게시글 상세 조회
-	public CommunityPostJoinDTO selectPostDetail(int postNo) {
+	public CommunityPostJoinDTO selectPost(int postNo) {
 		System.out.println("게시글 상세 조회 - selectPostDetail");
-		return sqlSession.selectOne("community.selectPost", postNo);
+		return sqlSession.selectOne("adminPost.selectPost", postNo);
 	}
 
 

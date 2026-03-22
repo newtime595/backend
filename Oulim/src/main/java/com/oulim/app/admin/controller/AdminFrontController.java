@@ -111,7 +111,7 @@ public class AdminFrontController extends HttpServlet {
 			break;	
 
 		case "/admin/postdetail.adm":
-			System.out.println("게시글  요청");
+			System.out.println("게시글 상세 요청");
 			result = new AdminPostDetailController().execute(request, response);
 			break;	
 		

@@ -1,177 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminPost">
 
-<mapper namespace="adminMem">
-
-    <!-- 관리자 회원 목록 조회 + 검색 + 페이징 -->
-    <select id="selectList"
-            parameterType="com.oulim.app.admin.dto.AdminMemListDTO"
-            resultType="com.oulim.app.admin.dto.AdminMemListDTO">
-        SELECT *
-        FROM (
+		<!-- 조건 게시글 조회 -->
+	<select id="select" parameterType="AdminBoardDTO" resultType="AdminBoardDTO">
+ 	<![CDATA[
+        SELECT * FROM (
             SELECT ROWNUM AS rnum, subquery.*
             FROM (
-                SELECT
-                    USER_NO AS userNo,
-                    USER_ID AS userId,
-                    USER_NICKNAME AS userNickname,
-                    USER_NAME AS userName,
-                    USER_TYPE AS userType,
-                    CASE
-                        WHEN USER_TYPE = 1 THEN '일반'
-                        WHEN USER_TYPE = 2 THEN '기업'
-                        ELSE '기타'
-                    END AS userTypeText
-                FROM TBL_USER
+                SELECT tcp.post_no,
+                       tcp.user_no,
+                       tcp.post_title,
+                       tcp.user_nickname,
+                       tcp.post_date,
+                       (SELECT COUNT(post_like_no)
+                          FROM tbl_post_like tpl
+                         WHERE tpl.post_no = tcp.post_no) AS like_count
+                FROM tbl_community_post tcp
+    ]]>
                 <where>
-                   USER_STATUS = 1
                     <if test="keyword != null and keyword != ''">
                         <choose>
-                            <when test="searchType == 'userNo'">
-                                USER_NO = #{keyword}
+                            <when test="searchType == 'title'">
+                                tcp.post_title LIKE '%' || #{keyword} || '%'
                             </when>
-                            <when test="searchType == 'userId'">
-                                USER_ID LIKE '%' || #{keyword} || '%'
+                            <when test="searchType == 'writer'">
+                                tcp.user_nickname LIKE '%' || #{keyword} || '%'
                             </when>
-                            <when test="searchType == 'userNickname'">
-                                USER_NICKNAME LIKE '%' || #{keyword} || '%'
-                            </when>
-                            <when test="searchType == 'userType'">
-                                (
-                                    (#{keyword} = '일반' AND USER_TYPE = 1)
-                                    OR
-                                    (#{keyword} = '기업' AND USER_TYPE = 2)
-                                )
-                            </when>
-                            <when test="searchType == 'userName'">
-                                USER_NAME LIKE '%' || #{keyword} || '%'
+                            <when test="searchType == 'date'">
+                            	tcp.post_date LIKE '%' || #{keyword} || '%'
                             </when>
                         </choose>
                     </if>
                 </where>
-                ORDER BY USER_NO DESC
+    <![CDATA[
+                ORDER BY tcp.post_date DESC
             ) subquery
-        )
-        WHERE rnum BETWEEN #{startRow} AND #{endRow}
-    </select>
-	
-	<!-- 전체 회원 조회 -->
-	<select id="selectAll"
-	        parameterType="com.oulim.app.admin.dto.AdminMemListDTO"
-	        resultType="com.oulim.app.admin.dto.AdminMemListDTO">
-	    <![CDATA[
-	        SELECT *
-	        FROM (
-	            SELECT ROWNUM AS rnum, subquery.*
-	            FROM (
-	                SELECT
-	                    USER_NO AS userNo,
-	                    USER_ID AS userId,
-	                    USER_NICKNAME AS userNickname,
-	                    USER_NAME AS userName,
-	                    USER_TYPE AS userType,
-	                    CASE
-	                        WHEN USER_TYPE = 1 THEN '일반'
-	                        WHEN USER_TYPE = 2 THEN '기업'
-	                        ELSE '기타'
-	                    END AS userTypeText
-	                FROM TBL_USER
-	                ORDER BY USER_NO DESC
-	            ) subquery
-	        )
-	        WHERE rnum BETWEEN #{startRow} AND #{endRow}
-	    ]]>
+        ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+    ]]>
 	</select>
-
-    <!-- 회원 전체 개수 -->
-    <select id="selectCount"
-            parameterType="com.oulim.app.admin.dto.AdminMemListDTO"
-            resultType="int">
-        SELECT COUNT(USER_NO)
-        FROM TBL_USER
-        <where>
-        USER_STATUS = 1
-            <if test="keyword != null and keyword != ''">
-                <choose>
-                    <when test="searchType == 'userNo'">
-                        USER_NO = #{keyword}
-                    </when>
-                    <when test="searchType == 'userId'">
-                        USER_ID LIKE '%' || #{keyword} || '%'
-                    </when>
-                    <when test="searchType == 'userNickname'">
-                        USER_NICKNAME LIKE '%' || #{keyword} || '%'
-                    </when>
-                    <when test="searchType == 'userName'">
-                        USER_NAME LIKE '%' || #{keyword} || '%'
-                    </when>
-                    <when test="searchType == 'userType'">
-                        (
-                            (#{keyword} = '일반' AND USER_TYPE = 1)
-                            OR
-                            (#{keyword} = '기업' AND USER_TYPE = 2)
-                        )
-                    </when>
-                </choose>
-            </if>
-        </where>
-    </select>
-
-
-    <!-- 회원 상세 조회 -->
-    <select id="selectDetail"
-            parameterType="int"
-            resultType="com.oulim.app.admin.dto.AdminMemDetailDTO">
-        SELECT
-            U.USER_NO AS userNo,
-            U.USER_NAME AS userName,
-            U.USER_ID AS userId,
-            U.USER_NICKNAME AS userNickname,
-            U.USER_ADDRESS AS userAddress,
-            U.USER_ADDRESS_DETAIL AS userAddressDetail,
-            NVL(C.TOTAL_AMOUNT, 0) AS totalAmount
-        FROM TBL_USER U
-        LEFT JOIN TBL_CURRENCY C
-            ON U.USER_NO = C.USER_NO
-        WHERE U.USER_NO = #{value}
-    </select>
-    
-    
-	<!-- 유저상세 부분  -->
-	<update id="update" parameterType="com.oulim.app.admin.dto.AdminMemDetailDTO">
-		UPDATE TBL_USER
-			SET USER_NICKNAME = #{userNickname}, 
-			USER_ADDRESS = #{userAddress}, 
-			USER_ADDRESS_DETAIL = #{userAddressDetail}
-		WHERE USER_NO = #{userNo}
-	</update>
-
-	<update id="delete" parameterType="int">
-		UPDATE TBL_USER
-		SET USER_STATUS = 0
-		WHERE USER_NO = #{value}
-	</update>
 	
-	<!-- 유저 포인트 부분 -->
-	<select id="selectPointList"
-	        parameterType="int"
-	        resultType="LogPointDTO">
-	    SELECT
-	        LOG_NO AS logNo,
-	        USER_NO AS userNo,
-	        CHANGE_AMOUNT AS changeAmount,
-	        LOG_REASON AS logReason,
-	        LOG_DATE AS logDate
-	    FROM TBL_LOG_POINT
-	    WHERE USER_NO = #{value}
-	    ORDER BY LOG_DATE DESC, LOG_NO DESC
+	<!-- 게시글 상세 -->
+	<select id="selectPost" parameterType="int" resultType="CommunityPostJoinDTO">
+	<![CDATA[
+		SELECT tcp.post_no,tcp.user_no, tcp.post_title, tcp.user_nickname, tcp.post_date, tcp.post_content,
+		tcp.post_view_count, 
+		(select count(post_like_no) from tbl_post_like tpl where tpl.post_no = tcp.post_no) as like_count,
+		tpi.Post_Img_System_Name, tpi.Post_Img_Origin_Name
+		FROM tbl_community_post tcp
+		LEFT JOIN tbl_post_image tpi on tpi.post_no = tcp.post_no
+		where tcp.post_no = #{postNo}
+	]]>
 	</select>
-
-
-
-
-
-
+	
+	
+		<!-- 게시글 삭제 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM tbl_community_post
+		WHERE post_no = #{postNo}
+	</delete>
+	
+      
+   <!-- 전체 게시글 조회 -->
+   <select id="admin.selectAll" resultType="BoardListDTO">
+   <![CDATA[
+      SELECT * FROM (
+         SELECT ROWNUM AS rnum, subquery.*
+         FROM (
+            SELECT m.member_number, m.member_id, b.board_number, b.board_title, 
+               b.board_content, b.board_date, b.board_read_count
+            FROM tbl_member m JOIN tbl_board b
+            ON m.member_number = b.member_number
+            ORDER BY b.board_date DESC
+         ) subquery
+      ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+   ]]>
+   </select>
 </mapper>

@@ -75,6 +75,8 @@
 		<mapper resource="com/oulim/app/admin/mapper/AdminMapper.xml"/>
 		<mapper resource="com/oulim/app/admin/mapper/AdmVolManMapper.xml"/>
 		<mapper resource="com/oulim/app/admin/mapper/AdmVolManDetailMapper.xml"/>
+		<!-- <mapper resource="com/oulim/app/admin/mapper/AdminPostMapper.xml"/> -->
+		
 	</mappers>
 </configuration>
 
