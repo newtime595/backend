@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="volunAct">
+<!--봉사 신청 여부  -->
+<select id="selectApplyCount" parameterType="map" resultType="int">
+    SELECT COUNT(*)
+    FROM TBL_VOLUN_APPLY
+    WHERE VOLUN_ACT_NO = #{volunActNo}
+      AND USER_NO = #{userNo}
+      AND VOLUNACT_APPLYSTATUS = 1
+</select>
+
 
  <select id="selectVolunteerList"
           parameterType="VolunActivityDTO"
@@ -40,6 +49,7 @@
 
                 /* 연령대 */
                 CASE VA.Volun_Act_Age_Group
+                	WHEN 0 THEN '전체'
                     WHEN 1 THEN '청소년'
                     WHEN 2 THEN '청년'
                     WHEN 3 THEN '직장인'

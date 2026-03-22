@@ -88,7 +88,7 @@
 						    <c:when test="${volunActivity.volunActAgeGroup eq 1}">청소년</c:when>
 						    <c:when test="${volunActivity.volunActAgeGroup eq 2}">청년</c:when>
 						    <c:when test="${volunActivity.volunActAgeGroup eq 3}">직장인</c:when>
-						    <c:otherwise>-</c:otherwise>
+						    <c:otherwise></c:otherwise>
 						</c:choose>
                     </p>
                 </li>
@@ -136,17 +136,43 @@
     </div>
 
     <div class="btn-group">
+	    <c:choose>
+	        <c:when test="${isApplied}">
+	            <form action="${pageContext.request.contextPath}/volunteer-activity/apply.va" method="post">
+	                <input type="hidden" name="volunActNo" value="${volunActivity.volunActNo}">
+	                <button type="submit" class="c-button c-button--primary c-button--lg" disabled>신청완료</button>
+	            </form>
+	
+	            <form action="${pageContext.request.contextPath}/volunteer-activity/cancel.va" method="post">
+	                <input type="hidden" name="volunActNo" value="${volunActivity.volunActNo}">
+	                <button type="submit" class="c-button c-button--primary c-button--lg">철회</button>
+	            </form>
+	        </c:when>
+	        
+            <c:when test="${userType == 2}">
+                <form action="${pageContext.request.contextPath}/volunteer-activity/apply.va" method="post">
+                    <input type="hidden" name="volunActNo" value="${volunActivity.volunActNo}">
+                    <button type="submit" class="c-button c-button--primary c-button--lg" disabled>신청</button>
+                </form>
 
-	    <form action="${pageContext.request.contextPath}/volunteer-activity/apply.va" method="post">
-	        <input type="hidden" name="volunActNo" value="${volunActivity.volunActNo}">
-	        <button type="submit" class="btn-apply">신청</button>
-	    </form>
+                <form action="${pageContext.request.contextPath}/volunteer-activity/cancel.va" method="post">
+                    <input type="hidden" name="volunActNo" value="${volunActivity.volunActNo}">
+                    <button type="submit" class="c-button c-button--primary c-button--lg" disabled>철회</button>
+                </form>
+            </c:when>
+            
+	        <c:otherwise>
+	            <form action="${pageContext.request.contextPath}/volunteer-activity/apply.va" method="post">
+	                <input type="hidden" name="volunActNo" value="${volunActivity.volunActNo}">
+	                <button type="submit" class="c-button c-button--primary c-button--lg">신청</button>
+	            </form>
 	
-	    <form action="${pageContext.request.contextPath}/volunteer-activity/cancel.va" method="post">
-	        <input type="hidden" name="volunActNo" value="${volunActivity.volunActNo}">
-	        <button type="submit" class="btn-cancel">철회</button>
-	    </form>
-	
+	            <form action="${pageContext.request.contextPath}/volunteer-activity/cancel.va" method="post">
+	                <input type="hidden" name="volunActNo" value="${volunActivity.volunActNo}">
+	                <button type="submit" class="c-button c-button--primary c-button--lg" disabled>철회</button>
+	            </form>
+	        </c:otherwise>
+	    </c:choose>
 	</div>
 
 </div>
