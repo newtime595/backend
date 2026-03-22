@@ -13,33 +13,65 @@ resultType="int">
 </select>
 
 <select id="selectStatistic" resultType="AdminStatisticDTO">
-SELECT 
-u.total_user,
-u.NOT_APPROVED_ORGAN_USER,
-u.total_organ_user,
-o.organ_count,
-ap.uncomplete_volun_act,
-va.TOTAL_VOLUN_ACT 
-FROM
-(SELECT 
-count(*) AS total_user,
-count(CASE WHEN user_status = 2 AND user_type = 2 THEN 1 END) AS NOT_APPROVED_ORGAN_USER,
-count(CASE WHEN user_type = 2 THEN 1 END ) AS total_organ_user 
-FROM TBL_USER tu ) u, 
-(SELECT count(*) AS organ_count 
-FROM tbl_organ tbo) o,
-(SELECT count(DISTINCT tva.VOLUN_ACT_NO ) AS uncomplete_volun_act
-FROM TBL_VOLUN_APPLY tva WHERE tva.VOLUNACT_ATTENDANCE = 0) ap,
-(SELECT count(*) AS total_volun_act FROM tbl_volun_activity) va
+	SELECT 
+	u.total_user,
+	u.NOT_APPROVED_ORGAN_USER,
+	u.total_organ_user,
+	o.organ_count,
+	ap.uncomplete_volun_act,
+	va.TOTAL_VOLUN_ACT 
+	FROM
+	(SELECT 
+	count(*) AS total_user,
+	count(CASE WHEN user_status = 2 AND user_type = 2 THEN 1 END) AS NOT_APPROVED_ORGAN_USER,
+	count(CASE WHEN user_type = 2 THEN 1 END ) AS total_organ_user 
+	FROM TBL_USER tu ) u, 
+	(SELECT count(*) AS organ_count 
+	FROM tbl_organ tbo) o,
+	(SELECT count(DISTINCT tva.VOLUN_ACT_NO ) AS uncomplete_volun_act
+	FROM TBL_VOLUN_APPLY tva WHERE tva.VOLUNACT_ATTENDANCE = 0) ap,
+	(SELECT count(*) AS total_volun_act FROM tbl_volun_activity) va
 </select> 
 
-<select id="getRequireApproveMember" resultType="UserDTO">
-	select user_no, organ_name, user_id, user_email
-	from tbl_user
-	where user_type = 2 and user_status = 2
+<select id="getUnApprovedMember" resultType="UserDTO">
+	SELECT tu.user_no, tu.ORGAN_NAME, tu.user_name , tu.USER_ID , tu.USER_EMAIL 
+		 FROM tbl_user tu
+		WHERE tu.user_type = 2 AND tu.user_status = 2
 </select>
 
+<select id="getRequireApproveMember" parameterType="Map" resultType="AdminCompanyCertificationDTO">
+	SELECT  rnum, user_no,user_name, organ_name, user_id, user_email, organ_no 
+ 	FROM (
+ 	 SELECT rownum as rnum, subquery.*
+	 FROM
+		(SELECT tu.user_no, tu.ORGAN_NAME, tu.user_name , tu.USER_ID , tu.USER_EMAIL , toc.ORGAN_NO 
+		 FROM tbl_user tu
+		LEFT JOIN TBL_ORGAN_CERT toc ON toc.USER_NO = tu.user_no
+		WHERE tu.user_type = 2 AND tu.user_status = 2
+		ORDER BY tu.user_no DESC
+		) subquery
+	) where rnum between #{startRow} and #{endRow}
+</select>
 
+<select id="getTotalRequireMember" resultType="int">
+	SELECT COUNT(*) FROM TBL_USER tu
+	WHERE tu.user_type = 2 AND tu.user_status = 2
+</select>
 
+<select id="getOrganUserCertDetail" parameterType="int" resultType="AdminCompanyCertificationDTO">
+		SELECT tu.user_no, tu.ORGAN_NAME, tu.user_name , tu.USER_ID , tu.USER_EMAIL , tu.user_birth,
+		toc.ORGAN_NO, tbo.organ_cert_num, toc.organ_file_system_name, toc.organ_file_original_name
+		 FROM tbl_user tu
+		LEFT JOIN TBL_ORGAN_CERT toc ON toc.USER_NO = tu.user_no
+		JOIN TBL_ORGAN tbo on toc.organ_no = tbo.organ_no
+		WHERE tu.user_no = #{userNo}
+</select>
 
+<update id="updateUserCert" parameterType="Map">
+	Update tbl_user set user_status = 1, organ_no = #{organNo} where user_no = #{userNo}
+</update>
+
+<delete id="rejectCertification" parameterType="int">
+	DELETE FROM TBL_USER WHERE user_no = #{userNo} and user_status = 2
+</delete>
 </mapper>

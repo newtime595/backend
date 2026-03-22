@@ -51,7 +51,12 @@ public class CommunityListOkController implements Execute {
 		request.setAttribute("searchType", searchType);
 		request.setAttribute("keyword", keyword);
 		
-		int total = commuDAO.getPostTotal();
+		Map<String,Object> searchMap = new HashMap<>();
+		searchMap.put("searchType", searchType);
+		searchMap.put("keyword", keyword);
+		System.out.println("searchMap" + searchMap);
+		int total = commuDAO.getPostTotal(searchMap);
+		System.out.println("게시글 총 갯수 : " + total); 
 		int realEndPage = (int) (Math.ceil(total / (double) DefineType.ROWCOUNT_PER_PAGE));
 		int endPage = (int) (Math.ceil(page / (double) DefineType.MAX_PAGE_COUNT) * DefineType.MAX_PAGE_COUNT);
 		

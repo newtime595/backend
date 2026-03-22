@@ -50,6 +50,7 @@
 		<!-- Admin DTO -->
 		<typeAlias type="com.oulim.app.admin.dto.AdminDTO" alias="AdminDTO"></typeAlias>
 		<typeAlias type="com.oulim.app.admin.dto.AdminStatisticDTO" alias="AdminStatisticDTO"></typeAlias>
+		<typeAlias type="com.oulim.app.admin.dto.AdminCompanyCertificationDTO" alias="AdminCompanyCertificationDTO"></typeAlias>
 		
 	</typeAliases>
 
@@ -77,7 +78,7 @@
 		<mapper resource="com/oulim/app/admin/mapper/AdminMapper.xml"/>
 		<mapper resource="com/oulim/app/admin/mapper/AdmVolManMapper.xml"/>
 		<mapper resource="com/oulim/app/admin/mapper/AdmVolManDetailMapper.xml"/>
-		<!-- <mapper resource="com/oulim/app/admin/mapper/AdminPostMapper.xml"/> -->
+		
 		
 	</mappers>
 </configuration>

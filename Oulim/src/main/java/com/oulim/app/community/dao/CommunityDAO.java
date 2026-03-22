@@ -15,14 +15,19 @@ public class CommunityDAO {
 	public SqlSession sqlSession;
 
 	public CommunityDAO() {
-		// 이미지 테이블 삽입 등의 이유로 transaction 활용
 		sqlSession = MyBatisConfig.getSqlSessionFactory().openSession(true);
 	}
-
-	// 게시글 총 갯수 반환 메소드
+	
+	// 검색조건 없는 총 갯수 조회
 	public int getPostTotal() {
 		System.out.println("게시글 총 개수 조회 - getPostTotal 메소드 실행");
-		return sqlSession.selectOne("community.getTotalPost");
+		return sqlSession.selectOne("community.getTotalPostNoSearchOpt");
+	}
+
+	// 검색조건 적용하여 게시글 총 갯수 반환 메소드
+	public int getPostTotal(Map<String, Object> searchMap) {
+		System.out.println("게시글 총 개수 조회 - getPostTotal 메소드 실행");
+		return sqlSession.selectOne("community.getTotalPost",searchMap);
 	}
 
 	// 댓글 총 갯수 반환 메소드

@@ -132,7 +132,8 @@
         <div class="new-company">
           <div class="new-company-list">
             <p>신규 기업 회원 관리</p>
-            <button>바로가기</button>
+            <button class="c-button c-button--primary c-button--sm"
+            onClick="location.href='${pageContext.request.contextPath}/admin/companycertification.adm'">바로가기</button>
           </div>
           <div class="c-list c-list--4col">
             <div class="c-list__header">

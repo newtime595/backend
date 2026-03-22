@@ -80,3 +80,11 @@ body {
   justify-items: center;
   margin: 20px;
 }
+
+
+.l-community-list-pagination{
+	display:flex;
+	justify-content:center;
+	width: 900px; 
+	margin: 50px
+}

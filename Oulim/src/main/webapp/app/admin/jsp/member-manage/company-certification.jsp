@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!doctype html>
 <html lang="en">
 
@@ -37,184 +39,80 @@
           <h1>기업회원관리</h1>
         </div>
         <div id="content-area">
-          <p id="company-count">총440</p>
-          <div class="bind-button">
-            <button class="c-button c-button--secondary c-button--md">
-              선택반려
-            </button>
-            <button class="c-button c-button--primary c-button--md">
-              선택승인
-            </button>
-          </div>
+          <p id="company-count">총 처리 필요 회원 수 : ${totalCount}</p>
         </div>
 
         <div class="c-list c-list--6col">
           <!-- header -->
           <div class="c-list__header">
-            <label class="c-checkbox">
-              <input type="checkbox" />
-              <span class="c-checkbox__box"></span>
-            </label>
             <span class="c-list__col">유저번호</span>
             <span class="c-list__col">회사명</span>
             <span class="c-list__col">아이디</span>
-            <span class="c-list__col">가입일</span>
+            <span class="c-list__col">회원명</span>
             <span class="c-list__col">회사코드</span>
+            <span class="c-list__col"></span>
           </div>
           <!-- body -->
           <div class="c-list__body">
+          <c:if test="${not empty requireMemberList}">          
+          	<c:forEach var="certMember" items="${requireMemberList}">
             <div class="c-list__row">
-              <label class="c-checkbox">
-                <input type="checkbox" />
-                <span class="c-checkbox__box"></span>
-              </label>
-              <span class="c-list__col company-detail"> 1 </span>
-              <span class="c-list__col company-detail"> 현대자동차 </span>
-              <span class="c-list__col company-detail"> aaa </span>
-              <span class="c-list__col company-detail"> 2023-01-15 </span>
-              <span class="c-list__col company-detail"> 00001 </span>
+              <span class="c-list__col company-detail"> ${certMember.userNo} </span>
+              <span class="c-list__col company-detail"> ${certMember.organName} </span>
+              <span class="c-list__col company-detail"> ${certMember.userId } </span>
+              <span class="c-list__col company-detail"> ${certMember.userName}</span>
+              <span class="c-list__col company-detail"> ${certMember.organNo}</span>
+              <button class="c-button c-button--primary c-button--sm"
+               onclick="location.href = '${pageContext.request.contextPath}/admin/companydetail.adm?userNo=${certMember.userNo}'">상세보기</button>
             </div>
-            <div class="c-list__row">
-              <label class="c-checkbox">
-                <input type="checkbox" />
-                <span class="c-checkbox__box"></span>
-              </label>
-              <span class="c-list__col company-detail"> 1 </span>
-              <span class="c-list__col company-detail"> 현대자동차 </span>
-              <span class="c-list__col company-detail"> aaa </span>
-              <span class="c-list__col company-detail"> 2023-01-15 </span>
-              <span class="c-list__col company-detail"> 00001 </span>
-            </div>
-            <div class="c-list__row">
-              <label class="c-checkbox">
-                <input type="checkbox" />
-                <span class="c-checkbox__box"></span>
-              </label>
-              <span class="c-list__col company-detail"> 1 </span>
-              <span class="c-list__col company-detail"> 현대자동차 </span>
-              <span class="c-list__col company-detail"> aaa </span>
-              <span class="c-list__col company-detail"> 2023-01-15 </span>
-              <span class="c-list__col company-detail"> 00001 </span>
-            </div>
-            <div class="c-list__row">
-              <label class="c-checkbox">
-                <input type="checkbox" />
-                <span class="c-checkbox__box"></span>
-              </label>
-              <span class="c-list__col company-detail"> 1 </span>
-              <span class="c-list__col company-detail"> 현대자동차 </span>
-              <span class="c-list__col company-detail"> aaa </span>
-              <span class="c-list__col company-detail"> 2023-01-15 </span>
-              <span class="c-list__col company-detail"> 00001 </span>
-            </div>
-            <div class="c-list__row">
-              <label class="c-checkbox">
-                <input type="checkbox" />
-                <span class="c-checkbox__box"></span>
-              </label>
-              <span class="c-list__col company-detail"> 1 </span>
-              <span class="c-list__col company-detail"> 현대자동차 </span>
-              <span class="c-list__col company-detail"> aaa </span>
-              <span class="c-list__col company-detail"> 2023-01-15 </span>
-              <span class="c-list__col company-detail"> 00001 </span>
-             </div>
-            <div class="c-list__row">
-              <label class="c-checkbox">
-                <input type="checkbox" />
-                <span class="c-checkbox__box"></span>
-              </label>
-              <span class="c-list__col company-detail"> 1 </span>
-              <span class="c-list__col company-detail"> 현대자동차 </span>
-              <span class="c-list__col company-detail"> aaa </span>
-              <span class="c-list__col company-detail"> 2023-01-15 </span>
-              <span class="c-list__col company-detail"> 00001 </span>
-            </div>
-            <div class="c-list__row">
-              <label class="c-checkbox">
-                <input type="checkbox" />
-                <span class="c-checkbox__box"></span>
-              </label>
-              <span class="c-list__col company-detail"> 1 </span>
-              <span class="c-list__col company-detail"> 현대자동차 </span>
-              <span class="c-list__col company-detail"> aaa </span>
-              <span class="c-list__col company-detail"> 2023-01-15 </span>
-              <span class="c-list__col company-detail"> 00001 </span>
-            </div>
-            <div class="c-list__row">
-              <label class="c-checkbox">
-                <input type="checkbox" />
-                <span class="c-checkbox__box"></span>
-              </label>
-              <span class="c-list__col company-detail"> 1 </span>
-              <span class="c-list__col company-detail"> 현대자동차 </span>
-              <span class="c-list__col company-detail"> aaa </span>
-              <span class="c-list__col company-detail"> 2023-01-15 </span>
-              <span class="c-list__col company-detail"> 00001 </span>
-            </div>
-            <div class="c-list__row">
-              <label class="c-checkbox">
-                <input type="checkbox" />
-                <span class="c-checkbox__box"></span>
-              </label>
-              <span class="c-list__col company-detail"> 1 </span>
-              <span class="c-list__col company-detail"> 현대자동차 </span>
-              <span class="c-list__col company-detail"> aaa </span>
-              <span class="c-list__col company-detail"> 2023-01-15 </span>
-              <span class="c-list__col company-detail"> 00001 </span>
-            </div>
-            <div class="c-list__row">
-              <label class="c-checkbox">
-                <input type="checkbox" />
-                <span class="c-checkbox__box"></span>
-              </label>
-              <span class="c-list__col company-detail"> 1 </span>
-              <span class="c-list__col company-detail"> 현대자동차 </span>
-              <span class="c-list__col company-detail"> aaa </span>
-              <span class="c-list__col company-detail"> 2023-01-15 </span>
-              <span class="c-list__col company-detail"> 00001 </span>
-            </div>
-            <div class="c-list__row">
-              <label class="c-checkbox">
-                <input type="checkbox" />
-                <span class="c-checkbox__box"></span>
-              </label>
-              <span class="c-list__col company-detail"> 1 </span>
-              <span class="c-list__col company-detail"> 현대자동차 </span>
-              <span class="c-list__col company-detail"> aaa </span>
-              <span class="c-list__col company-detail"> 2023-01-15 </span>
-              <span class="c-list__col company-detail"> 00001 </span>
-            </div>
-            <div class="c-list__row">
-              <label class="c-checkbox">
-                <input type="checkbox" />
-                <span class="c-checkbox__box"></span>
-              </label>
-              <span class="c-list__col company-detail"> 1 </span>
-              <span class="c-list__col company-detail"> 현대자동차 </span>
-              <span class="c-list__col company-detail"> aaa </span>
-              <span class="c-list__col company-detail"> 2023-01-15 </span>
-              <span class="c-list__col company-detail"> 00001 </span>
-            </div>
+            </c:forEach>
+            </c:if>            
           </div>
         </div>
-        <div class="page">
-          <!-- 페이지네이션  c-pagination-->
-          <nav class="c-pagination">
-            <a class="c-pagination__link is-disabled">‹‹</a>
-            <a class="c-pagination__link is-disabled">‹</a>
-            <a class="c-pagination__link is-active">1</a>
-            <a class="c-pagination__link">2</a>
-            <a class="c-pagination__link">3</a>
-            <a class="c-pagination__link">4</a>
-            <a class="c-pagination__link">5</a>
-            <a class="c-pagination__link">6</a>
-            <a class="c-pagination__link">7</a>
-            <a class="c-pagination__link">8</a>
-            <a class="c-pagination__link">9</a>
-            <a class="c-pagination__link">10</a>
-            <a class="c-pagination__link">›</a>
-            <a class="c-pagination__link">››</a>
-          </nav>
+		<div class="l-community-list-pagination">
+          <c:if test="${not empty requireMemberList}">
+          
+            <!-- 페이지네이션  c-pagination-->
+            <nav class="c-pagination">
+              <c:choose>
+              	<c:when test="${prev}">
+              		<a href="${pageContext.request.contextPath}/admin/companycertification.adm?page=${startPage-1}" 
+              		class="c-pagination__link">&lt;</a>
+              	</c:when>
+              	<c:otherwise>
+              		<a href="${pageContext.request.contextPath}/admin/companycertification.adm?page=${startPage-1}" 
+              		class="c-pagination__link is-disabled" onclick="return false;">&lt;</a>
+              	</c:otherwise>
+              </c:choose>
+              <c:set var="realStartPage" value="${startPage < 1 ? 1 : startPage }"/>
+              <c:forEach var="i" begin="${realStartPage}" end="${endPage}">
+    			<c:choose>          
+    				<c:when test="${!(i == page)}">
+	              		<a href="${pageContext.request.contextPath}/admin/companycertification.adm?page=${i}"
+	              			 class="c-pagination__link">
+	               			<c:out value="${i}"/>
+	               		</a>
+	               	</c:when>
+	               	<c:otherwise>
+	               		<a href="#" class="c-pagination__link is-active">
+	               			<c:out value="${i}"/>
+	               		</a>
+	               	</c:otherwise>
+	            </c:choose>	            
+              </c:forEach>
+              <c:choose>
+              	<c:when test="${next}">
+              		<a href="${pageContext.request.contextPath}/admin/companycertification.adm?page=${endPage + 1}"
+              	 	class="c-pagination__link">&gt;</a>
+              	</c:when>
+              	<c:otherwise>
+              		<a href="${pageContext.request.contextPath}/admin/companycertification.adm?page=${endPage + 1}"
+              	 	class="c-pagination__link is-disabled" onclick="return false;">&gt;</a>
+              	</c:otherwise>
+              </c:choose>
+            </nav>
+            </c:if>
+          </div>
       </section>
   </main>
 

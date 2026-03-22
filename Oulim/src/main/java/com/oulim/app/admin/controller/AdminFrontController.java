@@ -130,7 +130,14 @@ public class AdminFrontController extends HttpServlet {
 			result = new AdminCompanyDetailController().execute(request, response);
 			break;	
 			
-			
+		case "/admin/compCertOk.adm":
+			System.out.println("기업 회원 승인/반려 요청");
+			result = new AdminCertificationOkController().execute(request, response);
+			break;
+		case "/admin/viewCert.adm":
+			System.out.println("파일보기/다운로드");
+			result = new AdminDownloadCertController().execute(request, response);
+			break;		
 		}
 
 		if (result != null) {

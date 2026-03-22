@@ -3,8 +3,25 @@
 
 <mapper namespace="community">
 	<!-- 개시물 총 갯수 계산 -->
-	<select id="getTotalPost" resultType="int">
-		SELECT COUNT(post_no) FROM
+	<select id="getTotalPost" parameterType="Map" resultType="int">
+		SELECT COUNT(*) FROM
+		tbl_community_post tcp
+		<where>
+			<if test="keyword != null and keyword != ''">
+				<choose>
+					<when test="searchType == 'title'">
+						post_title LIKE '%' || #{keyword} || '%'
+					</when>
+					<when test="searchType == 'writer'">
+						user_nickname LIKE '%' || #{keyword} || '%'
+					</when>
+				</choose>
+			</if>
+		</where>
+	</select>
+	
+	<select id="getTotalPostNoSearchOpt" resultType="int">
+		SELECT COUNT(*) FROM
 		tbl_community_post
 	</select>
 
@@ -48,7 +65,8 @@
 		UPDATE TBL_COMMUNITY_POST
 		SET Post_Title = #{postTitle}, POST_CONTENT = #{postContent},
 		USER_NICKNAME= #{userNickname}, POST_DATE = sysdate
-		WHERE POST_NO =	#{postNo}
+		WHERE POST_NO =
+		#{postNo}
 	</update>
 
 	<!-- 댓글 작성 -->
