@@ -65,6 +65,11 @@ public class MyPageFrontController extends HttpServlet {
 			System.out.println("마이페이지 진입 성공");
 			result = new MyPageCheckOkController().execute(request, response);
 			break;
+			
+		case "/mypage/profile.mp":
+			System.out.println("마이페이지 프로필 페이지 출력");
+			result = new MyPageProfileController().execute(request, response);
+			break;
 		case "/mypage/sendUpdateEmail.mp":
 			System.out.println("이메일 보내기");
 			result = new SendEmailAuthCodeController().execute(request, response);
@@ -83,7 +88,7 @@ public class MyPageFrontController extends HttpServlet {
 			result = new MyPageUserEditOkController().execute(request, response);
 			break;
 			
-		case "/mypage/organEdit.mp": // 일반회원 정보 수정 ok
+		case "/mypage/organEdit.mp": // 기업회원 정보 수정
 			result = new MyPageOrganEditController().execute(request, response);
 			break;
 			
