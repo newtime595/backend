@@ -197,13 +197,14 @@ emailCheckBtn.addEventListener("click", () => {
     });
 });
 
-nextBtn.addEventListener("click", function (e) {
+companyForm.addEventListener("submit", function (e) {
   let hasError = false;
 
   companyNameError.textContent = "";
   userNameError.textContent = "";
   birthError.textContent = "";
   emailError.textContent = "";
+  companyEmailAuthError.textContent = "";
 
   companyName.classList.remove("is-error");
   userName.classList.remove("is-error");
@@ -248,13 +249,25 @@ nextBtn.addEventListener("click", function (e) {
     hasError = true;
   }
 
+  if (companyEmailVerified.value !== "true") {
+    companyEmailAuthError.textContent = "이메일 인증을 완료해주세요.";
+    if (!hasError) companyEmailAuthCode.focus();
+    hasError = true;
+  }
+
+  const fileInput = document.getElementById("company-file-1");
+  const file = fileInput.files[0];
+
+  if (!file) {
+    alert("파일을 첨부해주세요.");
+    hasError = true;
+  } else if (file.type !== "application/pdf") {
+    alert("PDF 파일만 업로드 가능합니다.");
+    hasError = true;
+  }
+
   if (hasError) {
     e.preventDefault();
-    alert("입력값을 확인해주세요.");
-  }
-  
-  if (!hasError) {
-    e.target.closest("form").submit();
   }
 });
 
