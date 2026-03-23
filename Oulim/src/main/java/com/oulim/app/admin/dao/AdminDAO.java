@@ -28,10 +28,7 @@ public class AdminDAO {
 
         return adminNo; // 로그인 성공
     }
-    
-    
-    
-    
+
     
     public AdminStatisticDTO getStatistic() {
     	System.out.println("통계 조회 - getStatistic");
