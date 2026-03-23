@@ -33,7 +33,7 @@
 <div class="l-container">
 
     <div class="back-area">
-        <button type="button" class="edit-btn c-button c-button--primary c-button--md" onclick="location.href='${pageContext.request.contextPath}/volunteer-activity/list.va'"">뒤로</button>
+        <button type="button" class="edit-btn c-button c-button--primary c-button--md" onclick="location.href='${pageContext.request.contextPath}/volunteer-activity/list.va'">봉사활동목록</button>
     </div>
 
     <div class="status-area">

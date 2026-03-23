@@ -14,6 +14,7 @@ import com.oulim.app.admin.dto.AdminStatisticDTO;
 import com.oulim.app.common.controller.Execute;
 import com.oulim.app.common.controller.Result;
 import com.oulim.app.user.dto.UserDTO;
+import com.oulim.app.volunteer.dto.VolunActivityDTO;
 
 public class AdminDashboardController implements Execute{
 
@@ -28,12 +29,13 @@ public class AdminDashboardController implements Execute{
 		AdminStatisticDTO statisticDTO = adminDAO.getStatistic();
 		statisticDTO.setCurrDate(LocalDateTime.now());
 		List<UserDTO> userList = adminDAO.getUnApprovedOrganUser();
+		List<VolunActivityDTO> volunActList = adminDAO.getUncompleteVolunActList();
 		userList = userList.stream().sorted(Comparator.comparingInt(UserDTO::getUserNo).reversed()).limit(3).toList();
 		System.out.println(userList);
 		System.out.println(statisticDTO);
 		request.setAttribute("statistic", statisticDTO);
 		request.setAttribute("userList", userList);
-			
+		request.setAttribute("volunActList", volunActList);	
 		result.setPath("/app/admin/jsp/dashboard/dashboard.jsp");
 		result.setRedirect(false);
 		

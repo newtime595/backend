@@ -36,33 +36,7 @@ public class MyPageJoinDTO {
 	private String logReason;
 	private String logDate;
 	private int changeAmount;
-	
-	
-	
-	public String getComVolunActProcBegin() {
-		return comVolunActProcBegin;
-	}
-	public void setComVolunActProcBegin(String comVolunActProcBegin) {
-		this.comVolunActProcBegin = comVolunActProcBegin;
-	}
-	public String getComVolunActProcEnd() {
-		return comVolunActProcEnd;
-	}
-	public void setComVolunActProcEnd(String comVolunActProcEnd) {
-		this.comVolunActProcEnd = comVolunActProcEnd;
-	}
-	public String getFinVolunActProcBegin() {
-		return finVolunActProcBegin;
-	}
-	public void setFinVolunActProcBegin(String finVolunActProcBegin) {
-		this.finVolunActProcBegin = finVolunActProcBegin;
-	}
-	public String getFinVolunActProcEnd() {
-		return finVolunActProcEnd;
-	}
-	public void setFinVolunActProcEnd(String finVolunActProcEnd) {
-		this.finVolunActProcEnd = finVolunActProcEnd;
-	}
+	private int kkomiLev;
 	public int getVolunActNo() {
 		return volunActNo;
 	}
@@ -104,6 +78,30 @@ public class MyPageJoinDTO {
 	}
 	public void setVolunActTitle(String volunActTitle) {
 		this.volunActTitle = volunActTitle;
+	}
+	public String getComVolunActProcBegin() {
+		return comVolunActProcBegin;
+	}
+	public void setComVolunActProcBegin(String comVolunActProcBegin) {
+		this.comVolunActProcBegin = comVolunActProcBegin;
+	}
+	public String getComVolunActProcEnd() {
+		return comVolunActProcEnd;
+	}
+	public void setComVolunActProcEnd(String comVolunActProcEnd) {
+		this.comVolunActProcEnd = comVolunActProcEnd;
+	}
+	public String getFinVolunActProcBegin() {
+		return finVolunActProcBegin;
+	}
+	public void setFinVolunActProcBegin(String finVolunActProcBegin) {
+		this.finVolunActProcBegin = finVolunActProcBegin;
+	}
+	public String getFinVolunActProcEnd() {
+		return finVolunActProcEnd;
+	}
+	public void setFinVolunActProcEnd(String finVolunActProcEnd) {
+		this.finVolunActProcEnd = finVolunActProcEnd;
 	}
 	public int getUserStatus() {
 		return userStatus;
@@ -153,6 +151,12 @@ public class MyPageJoinDTO {
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
+	public String getUserPhoneNum() {
+		return userPhoneNum;
+	}
+	public void setUserPhoneNum(String userPhoneNum) {
+		this.userPhoneNum = userPhoneNum;
+	}
 	public String getOrganName() {
 		return organName;
 	}
@@ -195,12 +199,6 @@ public class MyPageJoinDTO {
 	public void setPostNo(int postNo) {
 		this.postNo = postNo;
 	}
-	public String getUserPhoneNum() {
-		return userPhoneNum;
-	}
-	public void setUserPhoneNum(String userPhoneNum) {
-		this.userPhoneNum = userPhoneNum;
-	}
 	public String getLogReason() {
 		return logReason;
 	}
@@ -219,6 +217,12 @@ public class MyPageJoinDTO {
 	public void setChangeAmount(int changeAmount) {
 		this.changeAmount = changeAmount;
 	}
+	public int getKkomiLev() {
+		return kkomiLev;
+	}
+	public void setKkomiLev(int kkomiLev) {
+		this.kkomiLev = kkomiLev;
+	}
 	@Override
 	public String toString() {
 		return "MyPageJoinDTO [volunActNo=" + volunActNo + ", volunActEndTime=" + volunActEndTime
@@ -231,9 +235,9 @@ public class MyPageJoinDTO {
 				+ userNickname + ", userPw=" + userPw + ", userEmail=" + userEmail + ", userPhoneNum=" + userPhoneNum
 				+ ", organName=" + organName + ", organNo=" + organNo + ", organCertNum=" + organCertNum
 				+ ", postTitle=" + postTitle + ", postDate=" + postDate + ", postLikeNo=" + postLikeNo + ", postNo="
-				+ postNo + ", logReason=" + logReason + ", logDate=" + logDate + ", changeAmount=" + changeAmount + "]";
+				+ postNo + ", logReason=" + logReason + ", logDate=" + logDate + ", changeAmount=" + changeAmount
+				+ ", kkomiLev=" + kkomiLev + "]";
 	}
-
 	
 	
 

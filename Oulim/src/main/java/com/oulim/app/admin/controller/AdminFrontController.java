@@ -138,6 +138,10 @@ public class AdminFrontController extends HttpServlet {
 			System.out.println("파일보기/다운로드");
 			result = new AdminDownloadCertController().execute(request, response);
 			break;		
+		case "/admin/mailSend.adm":
+			System.out.println("메일 보내기 요청");
+			result = new AdminMailSendController().execute(request, response);
+			break;
 		}
 
 		if (result != null) {

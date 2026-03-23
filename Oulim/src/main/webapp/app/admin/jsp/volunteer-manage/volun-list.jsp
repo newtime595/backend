@@ -159,7 +159,54 @@
 		</div>
 	
 	    <div class="pagination-area">
-	       </div>
+	    	<div
+            class="l-community-list-pagination"
+            style="width: 900px; margin: 50px"
+          >
+          <c:if test="${not empty volunList}">
+          
+            <!-- 페이지네이션  c-pagination-->
+            <nav class="c-pagination">
+              <c:choose>
+              	<c:when test="${prev}">
+              		<a href="${pageContext.request.contextPath}/admin/volunlist.adm?page=${startPage-1}" 
+              		class="c-pagination__link">&lt;</a>
+              	</c:when>
+              	<c:otherwise>
+              		<a href="${pageContext.request.contextPath}/admin/volunlist.adm?page=${startPage-1}" 
+              		class="c-pagination__link is-disabled" onclick="return false;">&lt;</a>
+              	</c:otherwise>
+              </c:choose>
+              <c:set var="realStartPage" value="${startPage < 1 ? 1 : startPage }"/>
+              <c:forEach var="i" begin="${realStartPage}" end="${endPage}">
+    			<c:choose>          
+    				<c:when test="${!(i == page)}">
+	              		<a href="${pageContext.request.contextPath}/admin/volunlist.adm?page=${i}&searchType=${searchType}&keyword=${keyword}"
+	              			 class="c-pagination__link">
+	               			<c:out value="${i}"/>
+	               		</a>
+	               	</c:when>
+	               	<c:otherwise>
+	               		<a href="#" class="c-pagination__link is-active">
+	               			<c:out value="${i}"/>
+	               		</a>
+	               	</c:otherwise>
+	            </c:choose>	            
+              </c:forEach>
+              <c:choose>
+              	<c:when test="${next}">
+              		<a href="${pageContext.request.contextPath}/admin/volunlist.adm?page=${endPage + 1}"
+              	 	class="c-pagination__link">&gt;</a>
+              	</c:when>
+              	<c:otherwise>
+              		<a href="${pageContext.request.contextPath}/admin/volunlist.adm?page=${endPage + 1}"
+              	 	class="c-pagination__link is-disabled" onclick="return false;">&gt;</a>
+              	</c:otherwise>
+              </c:choose>
+            </nav>
+            </c:if>
+          </div>
+	    </div>
 	  </section>
 	</main>
 </body>

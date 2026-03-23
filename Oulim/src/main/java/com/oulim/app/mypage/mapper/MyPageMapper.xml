@@ -45,23 +45,19 @@ SELECT
     N.user_nickname AS userNickname,
     COUNT(A.VOLUN_ACT_NO) AS volunActNo,
     NVL(SUM(V.VOLUN_ACT_END_TIME - V.VOLUN_ACT_BEGIN_TIME), 0) AS totalVolunTime,
-
     (SELECT NVL(MAX(RANK_POINT), 0)
      FROM TBL_RANKING R
      WHERE R.USER_NO = N.USER_NO) AS rankPoint,
-
+	(select nvl(kkomi_lev,1) from tbl_kkomi k where n.user_no =k.user_no) as kkomiLev,
     (SELECT NVL(SUM(TOTAL_AMOUNT), 0)
      FROM TBL_CURRENCY C
      WHERE C.USER_NO = N.USER_NO) AS totalAmount
-
 FROM TBL_USER N
 LEFT JOIN TBL_VOLUN_APPLY A
     ON N.USER_NO = A.USER_NO
 LEFT JOIN TBL_VOLUN_ACTIVITY V
     ON A.VOLUN_ACT_NO = V.VOLUN_ACT_NO
-
 WHERE N.USER_NO = #{userNo}  
-
 GROUP BY N.user_nickname, N.USER_NO
  ]]>
 

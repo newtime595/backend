@@ -5,12 +5,12 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.oulim.app.admin.controller.AdminCompanyCertificationController;
 import com.oulim.app.admin.dto.AdminCompanyCertificationDTO;
 import com.oulim.app.admin.dto.AdminDTO;
 import com.oulim.app.admin.dto.AdminStatisticDTO;
 import com.oulim.app.config.MyBatisConfig;
-import com.oulim.app.user.dto.UserDTO; 
+import com.oulim.app.user.dto.UserDTO;
+import com.oulim.app.volunteer.dto.VolunActivityDTO; 
 
 
 public class AdminDAO {
@@ -23,8 +23,15 @@ public class AdminDAO {
     //mybatis가 맵퍼로 보냄
     public int login(AdminDTO adminDTO) {
     	System.out.println("AdminDAO의 로그인 메소드 호출");
-        return sqlSession.selectOne("admin.login", adminDTO );
+        Integer adminNo = sqlSession.selectOne("admin.login", adminDTO);
+
+        if (adminNo == null) {
+            return 0; // 로그인 실패
+        }
+
+        return adminNo; // 로그인 성공
     }
+
     
     public AdminStatisticDTO getStatistic() {
     	System.out.println("통계 조회 - getStatistic");
@@ -58,5 +65,14 @@ public class AdminDAO {
     public boolean deleteOrganUser(int userNo) {
     	int result = sqlSession.delete("admin.rejectCertification", userNo);
     	return result > 0 ? true : false;
+    }
+    
+    public List<VolunActivityDTO> getUncompleteVolunActList(){
+    	return sqlSession.selectList("admin.uncompleteVolunList");
+    }
+    
+    public UserDTO findOrganUserList(int organNo){
+    	List<UserDTO> userList = sqlSession.selectList("admin.findOrganUser", organNo);
+    	return userList.get(0);
     }
 }

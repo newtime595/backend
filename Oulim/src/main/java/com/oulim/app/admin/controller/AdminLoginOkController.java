@@ -50,7 +50,12 @@ public class AdminLoginOkController implements Execute {
 
 	      }else {
 	        // 로그인 실패
-	        path = "/admin/login.adm?login=fail";
+	    	  request.setAttribute("loginError", "아이디 또는 비밀번호가 올바르지 않습니다.");
+	    	  
+	    	  result.setPath("/app/admin/jsp/login.jsp");
+	    	  result.setRedirect(false);
+	    	  return result;
+	    	  
 	    }
 	    // 안에 바로 설정해도 된다.
 	    result.setPath(path);

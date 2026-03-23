@@ -149,13 +149,55 @@
 			  </div>
 			</div>
 		
-		        <nav class="v-pagination-area">
-		            <a href="#" class="p-arrow">‹</a>
-		            <a href="#" class="p-link is-active">1</a>
-		            <a href="#" class="p-link">2</a>
-		            <a href="#" class="p-arrow">›</a>
-		        </nav>
-		    </div>
+<div class="pagination-area">
+	    	<div
+            class="l-community-list-pagination"
+            style="width: 900px; margin: 50px"
+          >
+          <c:if test="${not empty volunList}">
+          
+            <!-- 페이지네이션  c-pagination-->
+            <nav class="c-pagination">
+              <c:choose>
+              	<c:when test="${prev}">
+              		<a href="${pageContext.request.contextPath}/admin/volundetail.adm?page=${startPage-1}" 
+              		class="c-pagination__link">&lt;</a>
+              	</c:when>
+              	<c:otherwise>
+              		<a href="${pageContext.request.contextPath}/admin/volundetail.adm?page=${startPage-1}" 
+              		class="c-pagination__link is-disabled" onclick="return false;">&lt;</a>
+              	</c:otherwise>
+              </c:choose>
+              <c:set var="realStartPage" value="${startPage < 1 ? 1 : startPage }"/>
+              <c:forEach var="i" begin="${realStartPage}" end="${endPage}">
+    			<c:choose>          
+    				<c:when test="${!(i == page)}">
+	              		<a href="${pageContext.request.contextPath}/admin/volundetail.adm?page=${i}"
+	              			 class="c-pagination__link">
+	               			<c:out value="${i}"/>
+	               		</a>
+	               	</c:when>
+	               	<c:otherwise>
+	               		<a href="#" class="c-pagination__link is-active">
+	               			<c:out value="${i}"/>
+	               		</a>
+	               	</c:otherwise>
+	            </c:choose>	            
+              </c:forEach>
+              <c:choose>
+              	<c:when test="${next}">
+              		<a href="${pageContext.request.contextPath}/admin/volundetail.adm?page=${endPage + 1}"
+              	 	class="c-pagination__link">&gt;</a>
+              	</c:when>
+              	<c:otherwise>
+              		<a href="${pageContext.request.contextPath}/admin/volunlist.adm?page=${endPage + 1}"
+              	 	class="c-pagination__link is-disabled" onclick="return false;">&gt;</a>
+              	</c:otherwise>
+              </c:choose>
+            </nav>
+            </c:if>
+          </div>
+	    </div>
 		</section>
     </main>
 </body>

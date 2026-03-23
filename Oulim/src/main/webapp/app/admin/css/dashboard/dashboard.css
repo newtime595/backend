@@ -1,71 +1,146 @@
-@charset "UTF-8";
-
-/* 전체 레이아웃 */
-
-body {
-  min-height: 100vh;
-}
-
+/* 1. 레이아웃 기본 설정 */
 .l-main {
-  display: flex;
-  min-height: 100vh;
+    display: flex;
+    min-height: 100vh;
+    background-color:var(--color-background);
 }
-
-/* 메인위에 헤더 */
-.header {
-  padding-bottom: 30px;
-
-  border-bottom: 1px solid #ddd;
-
-  margin-bottom: 100px;
-}
-
-/* 메인 내용영역*/
 
 .l-content {
-  flex: 1;
-  background: #f0f0f0;
-  border: 1px solid black;
-
-  display: flex;
-  flex-direction: column;
-
-  width: 100%;
-  padding: 30px;
-  /* justify-content: center; */
+    flex: 1;
+    padding: 30px 50px;
+    box-sizing: border-box;
 }
 
-/* 컨텐츠 박스 */
-
-#content-area {
-  background: white;
-  padding: 20px;
-  border-radius: 5px;
-  border: 1px solid black;
+.header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #333;
 }
-/* 위에상황판 */
+
+/* 2. 오늘 날짜 스타일 */
+#content-area p {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 25px;
+    color: #222;
+}
+
+/* 3. 상단 통계 카드 (6개 일렬 배치) */
 .today {
-  display: flex;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 50px;
 }
-/* 미완료 봉사목록 헤더 */
-.notyet-head {
-  background-color: white;
-  border: 1px solid black;
-  border-radius: 5px;
-  display: flex;
-  justify-content: space-between;
+
+.today #content-area {
+    background: #fff;
+    border: 1px solid #e1e1e1;
+    border-radius: 12px;
+    padding: 25px 15px;
+    flex: 1; /* 모든 카드가 동일한 너비 유지 */
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s;
 }
-/*미완료 봉사활동 타이틀과  칸수정리 */
-/* 신규 신청기업 타이틀과 칸수 정리 */
-.c-list--4col .c-list__header,
-.c-list--4col .c-list__row {
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+
+.today #content-area p {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: #555;
+    line-height: 1.4;
+    word-break: keep-all;
 }
-/* 신규 신청기업 헤더 */
-.new-company-list {
-  background-color: white;
-  border: 1px solid black;
-  border-radius: 5px;
-  display: flex;
-  justify-content: space-between;
+
+/* 4. 섹션 타이틀 및 버튼 */
+.notyet-head, .new-company-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    margin-top: 40px;
 }
+
+.notyet-head p, .new-company-list p {
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+}
+
+/* 이미지의 선명한 초록색 버튼 */
+.c-button--primary {
+    background-color: #5bb318 !important;
+    border: none !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    padding: 8px 18px !important;
+    border-radius: 6px !important;
+    cursor: pointer;
+}
+
+/* 5. 테이블(리스트) 깨짐 방지 핵심 설정 */
+.c-list {
+    width: 100%;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* 헤더와 행의 Flex 구조 통일 */
+.c-list__header, .c-list__row {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.c-list__header {
+    background-color: #f4f6f8;
+    padding: 15px 0;
+}
+
+/* 테이블 컬럼 공통 스타일: 완전 중앙 정렬 */
+.c-list__col {
+    flex: 1;                 /* 모든 컬럼 동일 비율 */
+    display: flex;           /* Flexbox 활성화 */
+    align-items: center;     /* 수직 중앙 정렬 */
+    justify-content: center; /* 가로 중앙 정렬 */
+    text-align: center;      /* 텍스트 자체 중앙 정렬 */
+    padding: 15px 10px;      /* 상하좌우 여백 */
+    font-size: 14px;
+    color: #444;
+    min-height: 50px;        /* 행 높이 최소값 유지 */
+}
+
+/* 텍스트가 여러 줄이 되어도 중앙 정렬 유지 */
+.clicktitle {
+    display: block;
+    width: 100%;
+}
+
+/* 처리(버튼) 컬럼 정렬 */
+.c-list__actions {
+    width: 100%;             /* 부모 너비 꽉 채우기 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* (옵션) 특정 컬럼 너비만 살짝 조정하고 싶을 때 */
+.c-list--4col .c-list__col:nth-child(1) { flex: 0.6; } /* 번호는 조금 좁게 */
+.c-list--4col .c-list__col:nth-child(2) { flex: 1.4; } /* 단체명은 조금 넓게 */
+
+.c-list__row {
+    padding: 5px 0;
+}
+
+
+/* 메일 발송 버튼 스타일 */
+.c-list__actions {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+

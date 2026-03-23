@@ -77,6 +77,10 @@ pageEncoding="UTF-8"%>
               </button>
             </div>
           </div>
+			<div id="is-user-login-error" class="login-error"
+			     style="${not empty loginError ? 'display:block;' : 'display:none;'}">
+			  <span id="error-text">${loginError}</span>
+			</div>
           <!-- 로그인 버튼 -->
           <button class="c-button c-button--primary c-button--md" type="submit">
             로그인

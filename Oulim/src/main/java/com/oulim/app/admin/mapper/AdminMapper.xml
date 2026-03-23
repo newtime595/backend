@@ -74,4 +74,24 @@ resultType="int">
 <delete id="rejectCertification" parameterType="int">
 	DELETE FROM TBL_USER WHERE user_no = #{userNo} and user_status = 2
 </delete>
+
+<select id="uncompleteVolunList" resultType="VolunActivityDTO">
+		select * from
+		(select rownum as rnum ,subquery.*
+		from
+		(SELECT tva.volun_act_no as volunActNo, tbo.organ_name as orgName, tva.volun_act_proc_end as volunActProcEnd, tva.volun_act_organ_no as volunActOrganNo
+		FROM TBL_VOLUN_ACTIVITY tva 
+		JOIN tbl_organ tbo ON tva.VOLUN_ACT_ORGAN_NO = tbo.ORGAN_NO 
+		WHERE EXISTS (SELECT tva2.VOLUN_ACT_NO  FROM TBL_VOLUN_APPLY tva2 WHERE tva2.VOLUNACT_ATTENDANCE = 0 )
+		ORDER BY tva.volun_act_proc_end) subquery
+		)<![CDATA[ where rnum <= 5  
+		]]>
+</select>
+
+<select id="findOrganUser" parameterType="int" resultType="UserDTO">
+	select tu.user_No, tu.user_email
+	from tbl_user tu
+	where tu.organ_no = #{organNo} and tu.user_status=1
+	order by tu.user_last_login
+</select>
 </mapper>

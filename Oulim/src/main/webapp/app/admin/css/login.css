@@ -58,3 +58,10 @@ body {
  object-fit: cover; 
  opacity: 0.4; 
 }
+
+.login-error {
+  margin-top: 8px;
+  color: red;
+  font-size: 14px;
+  line-height: 1.4;
+}

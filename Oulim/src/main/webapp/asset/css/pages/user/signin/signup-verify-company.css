@@ -128,3 +128,7 @@
 .is-success-text {
   color: #51AF01 !important;
 }
+
+#company-email-check-btn, #company-file-btn-1{
+	width: 100px;
+}

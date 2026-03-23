@@ -53,7 +53,7 @@ public class VolunActCancelController implements Execute {
 		System.out.println("=== 철회 완료 ===");
 
 		result.setRedirect(true);
-		 result.setPath("/volunteer-activity/detail.va?volunActNo=" + volunActNo + "&message=cancelSuccess");
+		result.setPath("/volunteer-activity/detail.va?volunActNo=" + volunActNo + "&message=cancelSuccess");
 		return result;
 	}
 

@@ -69,7 +69,7 @@ public class MyPageCheckOkController implements Execute{
 			request.setAttribute("rankPoint", summaryInfo.getRankPoint());
 			request.setAttribute("totalAmount", summaryInfo.getTotalAmount());
 			request.setAttribute("volunActNo", summaryInfo.getVolunActNo());
-
+			request.setAttribute("kkomiLev", summaryInfo.getKkomiLev());
 			if (comVolunInfo != null) {
 			    System.out.println("예정 봉사 " + comVolunInfo.getVolunActTitle());
 
