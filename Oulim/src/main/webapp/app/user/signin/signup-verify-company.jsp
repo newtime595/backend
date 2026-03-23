@@ -58,25 +58,25 @@
 						<div class="c-signup-verify-company-input">
 							<h6>기관명</h6>
 							<input type="text" name="organName" id="company-name"
-								class="c-input" placeholder="소속회사" />
+								class="c-input" placeholder="소속회사" maxlength="50" />
 							<p id="is-company-name-error" class="is-error-text"></p>
 						</div>
 						<div class="c-signup-verify-company-input">
 							<h6>이름</h6>
 							<input type="text" name="userName" id="company-user-name"
-								class="c-input" placeholder="이름 입력해주세요" />
+								class="c-input" placeholder="이름 입력해주세요" maxlength="50" />
 							<p id="is-company-user-name-error" class="is-error-text"></p>
 						</div>
 						<div class="c-signup-verify-company-input">
 							<h6>생년월일</h6>
 							<input type="date" name="userBirth" id="company-birth"
-								class="c-input" placeholder="생년월일을 입력해주세요" />
+								class="c-input" placeholder="생년월일을 입력해주세요" maxlength="8"/>
 							<p id="is-company-birth-error" class="is-error-text"></p>
 						</div>
 						<div class="c-signup-verify-company-input">
 							<h6>사업자 등록번호</h6>
 							<input type="text" name="organCertNum" id="company-cert-num"
-								class="c-input" placeholder="사업자 등록 번호를 입력해주세요" />
+								class="c-input" placeholder="사업자 등록 번호( - 제외)를 입력해주세요" maxlength="20" />
 							<p id="is-company-user-name-error" class="is-error-text"></p>
 						</div>
 
@@ -85,7 +85,7 @@
 							<div class="l-signup-info-company-input-layout">
 								<div class="c-signup-verify-company-input">
 									<input type="text" name="userEmail" id="company-email"
-										class="c-input" placeholder="이메일을 입력해주세요" />
+										class="c-input" placeholder="이메일을 입력해주세요" maxlength="50"/>
 									<p id="is-company-email-error" class="is-error-text"></p>
 								</div>
 								<div class="c-signup-company-btn">
@@ -101,7 +101,7 @@
 								<div>
 									<input type="text" name="emailAuthCode"
 										id="company-email-auth-code" class="c-input"
-										placeholder="인증번호입력" />
+										placeholder="인증번호입력" maxlength="6" />
 									<div class="c-signup-verify-numbertime"
 										id="company-email-timer">3:00</div>
 								</div>

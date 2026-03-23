@@ -158,6 +158,8 @@
 
   background: #ffd84c;
 
+  width : 0;
+  transition : witdh 1s ease;
 }
 
 

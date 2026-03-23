@@ -5,6 +5,32 @@ const generalTerms = document.getElementById("is-general-terms");
 const businessTerms = document.getElementById("is-business-terms");
 const form = document.getElementById("signup-terms-form");
 const contextPath = form.dataset.contextPath;
+const general = document.querySelector(".is-general");
+const business = document.querySelector(".is-business");
+
+const userType = document.getElementById("user-type");
+
+// 일반 선택
+general.addEventListener("click", () => {
+    general.classList.add("is-selected");
+    business.classList.remove("is-selected");
+
+    generalTerms.style.display = "block";
+    businessTerms.style.display = "none";
+
+    userType.value = "1";
+});
+
+// 기업 선택
+business.addEventListener("click", () => {
+    business.classList.add("is-selected");
+    general.classList.remove("is-selected");
+
+    businessTerms.style.display = "block";
+    generalTerms.style.display = "none";
+
+    userType.value = "2";
+});
 
 generalBtn.addEventListener("click", function () {
   generalTerms.style.display = "block";

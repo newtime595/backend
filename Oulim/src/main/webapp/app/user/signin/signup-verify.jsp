@@ -58,13 +58,13 @@
 						<div class="c-signup-verify-input">
 							<h6>이름</h6>
 							<input type="text" name="userName" id="user-name" class="c-input"
-								placeholder="이름을 입력해주세요" />
+								placeholder="이름을 입력해주세요" maxlength="50" />
 							<p id="is-user-name-error" class="is-error-text"></p>
 						</div>
 						<div class="c-signup-verify-input">
 							<h6>생년월일</h6>
 							<input type="date" name="userBirth" id="user-birth"
-								class="c-input" placeholder="생년월일을 입력해주세요" />
+								class="c-input" placeholder="생년월일을 입력해주세요" maxlength="8"/>
 							<p id="is-user-birth-error" class="is-error-text"></p>
 						</div>
 
@@ -73,7 +73,7 @@
 							<div class="l-signup-info-input-layout">
 								<div class="c-signup-verify-input">
 									<input type="text" name="userEmail" id="company-email"
-										class="c-input" placeholder="이메일을 입력해주세요" />
+										class="c-input" placeholder="이메일을 입력해주세요" maxlength="50"/>
 									<p id="is-company-email-error" class="is-error-text"></p>
 								</div>
 								<div class="c-signup-btn">
@@ -89,7 +89,7 @@
 								<div>
 									<input type="text" name="emailAuthCode"
 										id="company-email-auth-code" class="c-input"
-										placeholder="인증번호입력" />
+										placeholder="인증번호입력" maxlength="50" />
 									<div class="c-signup-verify-numbertime"
 										id="company-email-timer">3:00</div>
 								</div>
@@ -105,7 +105,7 @@
 							<h6>휴대전화</h6>
 							<div class="l-signup-verify-layout-btn">
 								<input type="text" name="userPhoneNum" id="user-phone"
-									class="c-input" placeholder="휴대전화번호 입력" />
+									class="c-input" placeholder="전화번호( - 제외) 입력" maxlength="11" />
 							</div>
 							<p id="is-user-phone-error" class="is-error-text"></p>
 						</div>

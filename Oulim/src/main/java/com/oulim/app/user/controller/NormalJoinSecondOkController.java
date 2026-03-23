@@ -32,9 +32,10 @@ public class NormalJoinSecondOkController implements Execute {
         System.out.println(userDTO);
 
         userDAO.normaljoin(userDTO);
-
-        result.setPath("/app/user/signin/signup-complete.jsp");
-        result.setRedirect(false);
+        
+        request.getSession().removeAttribute("emailVerified");
+        result.setPath("/user/signupComplete.usr?joinType=normal");
+        result.setRedirect(true);
 
         return result;
 	}

@@ -68,6 +68,10 @@ public class UserFrontController extends HttpServlet {
 			System.out.println("기업회원 2차 입력 처리 요청");
 			execute = new OrganJoinSecondOkController();
 			
+		} else if(target.equals("/user/signupComplete.usr")) {
+			System.out.println("회원가입 처리 완료");
+			execute = new SignupCompleteController();
+			
 		} else if (target.equals("/user/idFindOk.usr")) {
 			System.out.println("아이디 찾기 처리 요청");
 		    execute = new IdFindController();

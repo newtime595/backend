@@ -36,6 +36,13 @@ public class CommunityCommentPostOkController implements Execute {
 		CommunityCommentDTO commentDTO = new CommunityCommentDTO();
 		int postNo = Integer.valueOf(request.getParameter("postNo"));
 		String commentText = request.getParameter("content");
+		if(commentText.getBytes("UTF-8").length > 500) {
+	    	  System.out.println("댓글 최대 글자 수 초과");
+	    	  request.setAttribute("msg", "contentSizeOver");
+	    	  result.setPath("/community/detail.commu?postNo="+postNo);
+	    	  result.setRedirect(false);
+	    	  return result;
+	      }
 		
 		commentDTO.setPostNo(postNo);
 		commentDTO.setUserNickname(userNickname);

@@ -48,7 +48,10 @@ public class OrganJoinFirstOkController implements Execute{
 		String fileOriginalName = multipartRequest.getOriginalFileName("certFile");
 
 		if (fileSystemName == null || fileOriginalName == null) {
-			throw new ServletException("PDF 파일은 필수입니다.");
+			request.getSession().setAttribute("joinError", "PDF 파일은 필수입니다.");
+		    result.setPath(request.getContextPath() + "/user/organJoinFirst.usr");
+		    result.setRedirect(true);
+		    return result;
 		}
 
 		if (!fileOriginalName.toLowerCase().endsWith(".pdf")) {
@@ -56,7 +59,10 @@ public class OrganJoinFirstOkController implements Execute{
 			if (wrongFile.exists()) {
 				wrongFile.delete();
 			}
-			throw new ServletException("PDF 파일만 업로드 가능합니다.");
+			request.getSession().setAttribute("joinError", "PDF 파일만 업로드 가능합니다.");
+			result.setPath(request.getContextPath() + "/user/organJoinFirst.usr");
+			result.setRedirect(true);
+			return result;
 		}
 
 		String newSystemName = UUID.randomUUID().toString() + ".pdf";
@@ -74,7 +80,7 @@ public class OrganJoinFirstOkController implements Execute{
 		request.setAttribute("userEmail", userEmail);
 		request.setAttribute("organFileSystemName", newSystemName);
 		request.setAttribute("organFileOriginalName", fileOriginalName);
-		
+
 		
 		result.setPath("/app/user/signin/signup-info-company.jsp");
 		result.setRedirect(false);

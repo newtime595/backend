@@ -30,6 +30,12 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css"/>
   	<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
   	<script>
+		  const msg = "${msg}";
+			
+		  if (msg === "contentSizeOver") {
+		    alert("댓글 최대 글자 수를 초과하였습니다.");
+		  } 
+		  
     	const contextPath = "${pageContext.request.contextPath}";
     	const postNo = "${post.postNo}";
     	const userNo = Number(${post.userNo});
