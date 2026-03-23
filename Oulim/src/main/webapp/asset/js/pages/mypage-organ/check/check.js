@@ -2,17 +2,28 @@ const accept = document.getElementById("accept");
 const cancel = document.getElementById("cancel");
 
 const password = document.getElementById("userPw");
+const pwBtn = document.getElementById("c-password-btn-toggle");
+const pwToggleIcon = document.getElementById("c-password-toggle-img");
 
+accept.addEventListener("click", (e) => {
+    e.preventDefault(); // 폼 제출 막기
 
-accept.addEventListener('click', () => {
+    const value = password.value.trim();
 
-    if (password.value.trim() === "") {
+    if (value === "") {
         alert("비밀번호를 입력해주세요.");
-    } else if (password.value.trim() === "1234") { // 비밀번호는 임의로 넣은 값, 나중에 DB에서 가져올 것
-        alert("로그인 성공");
-    };
+        password.focus();
+        return;
+    }
 
-    
+    if (value !== "1234") { // 나중에 서버 검증으로 바꿔야 함
+        alert("비밀번호가 일치하지 않습니다.");
+        password.value = "";
+        password.focus();
+        return;
+    }
+
+    alert("로그인 성공");
 
 });
 
@@ -21,8 +32,7 @@ cancel.addEventListener("click", () => {
     alert("취소");
 });
 
-const pwBtn = document.getElementById("c-password-btn-toggle");
-const pwToggleIcon = document.getElementById("c-password-toggle-img");
+
 
 pwBtn.addEventListener("click", (e) => {
 	e.preventDefault();

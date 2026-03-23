@@ -11,6 +11,40 @@ const pwBtn = document.getElementById("c-password-btn-toggle");
 const pwBtn2 = document.getElementById("c-password-btn-toggle-2");
 const pwToggleIcon = document.getElementById("c-password-toggle-img");
 const pwToggleIcon2 = document.getElementById("c-password-toggle-2-img");
+const statusPw = document.getElementById("updatePwStatus");
+const statusEmail = document.getElementById("updateEmailStatus");
+
+if (statusPw && statusPw.value) {
+  const status = statusPw.value;
+
+  if (status === "success") {
+    alert("비밀번호가 수정되었습니다.");
+  } else if (status === "empty") {
+    alert("새 비밀번호를 입력해주세요.");
+  } else if (status === "mismatch") {
+    alert("비밀번호가 일치하지 않습니다.");
+  }
+
+  history.replaceState(null, null, location.pathname);
+}
+
+if (statusEmail && statusEmail.value) {
+  const emailStatus = statusEmail.value;
+
+  if (emailStatus === "success") {
+    alert("이메일이 수정되었습니다.");
+  } else if (emailStatus === "empty") {
+    alert("새 이메일을 입력해주세요.");
+  } else if (emailStatus === "invalid") {
+    alert("올바른 이메일 형식을 입력해주세요.");
+  } else if (emailStatus === "verify-empty") {
+    alert("인증번호를 입력해주세요.");
+  } else if (emailStatus === "verify-fail") {
+    alert("인증번호가 올바르지 않습니다.");
+  }
+
+  history.replaceState(null, null, location.pathname);
+}
 
 function getValue(element) {
   return element ? element.value.trim() : "";

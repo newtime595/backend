@@ -122,7 +122,16 @@
   </main>
 
 <jsp:include page="/app/include/footer.jsp" />
-
 </body>
+<script>
+	const successMsg = "${sessionScope.editSuccess}";
 
+	if (successMsg && successMsg !== "null" && successMsg !== "") {
+		alert(successMsg);
+	}
+</script>
+
+<%
+session.removeAttribute("editSuccess");
+%>
 </html>
