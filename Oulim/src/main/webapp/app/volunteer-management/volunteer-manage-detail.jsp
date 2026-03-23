@@ -33,7 +33,7 @@
 <body data-message="${param.message}">
 	<jsp:include page="/app/include/header.jsp" />
 
-	<input type="hidden" name="volunActNo" value="${volunDetail.volunActNo}"> 
+	<input type="hidden" name="volunActNo" id="volunActNo" value="${volunDetail.volunActNo}"> 
 	<input type="hidden" name="volunActAgeGroup" value="${volunDetail.volunActAgeGroup}"> 
 	<main class="l-main">
 		<div class="l-container">

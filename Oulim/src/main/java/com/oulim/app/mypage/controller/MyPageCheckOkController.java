@@ -108,7 +108,7 @@ public class MyPageCheckOkController implements Execute{
 			result.setRedirect(false);
 			
 			
-			
+			request.setAttribute("userMap", userMap);
 			System.out.println("쿼리문 실행 성공");
 			System.out.println(summaryInfo);
 			System.out.println(summaryInfo.getTotalVolunTime());
