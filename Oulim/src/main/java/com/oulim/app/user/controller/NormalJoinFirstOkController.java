@@ -27,6 +27,7 @@ public class NormalJoinFirstOkController implements Execute{
 		request.setAttribute("userBirth", request.getParameter("userBirth"));
 		request.setAttribute("userEmail", request.getParameter("userEmail"));
 		request.setAttribute("userPhoneNum", request.getParameter("userPhoneNum"));
+		
 
 		result.setPath("/app/user/signin/signup-info.jsp");
 		result.setRedirect(false);

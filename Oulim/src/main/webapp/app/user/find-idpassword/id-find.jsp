@@ -57,23 +57,23 @@
 						<div class="c-id-find-input">
 							<h6>이름</h6>
 							<input type="text" name="userName" id="find-id-user-name"
-								class="c-input" placeholder="이름 입력해주세요" />
+								class="c-input" placeholder="이름 입력해주세요" maxlength="50"/>
 							<p id="is-find-id-user-name-error" class="is-error-text"></p>
 						</div>
 						<div class="c-id-find-input">
 							<h6>생년월일</h6>
 							<input type="date" name="userBirth" id="find-id-user-birth"
-								class="c-input" placeholder="생년월일 입력해주세요" />
+								class="c-input" placeholder="생년월일 입력해주세요" maxlength="8"/>
 							<p id="is-find-id-user-birth-error" class="is-error-text"></p>
 						</div>
 						<div class="c-id-find-input">
 							<h6>이메일</h6>
 							<div class="l-id-find-email-layout">
 								<input type="text" name="userEmail" id="find-id-user-email"
-									class="c-input" placeholder="이메일 입력해주세요" />
+									class="c-input" placeholder="이메일 입력해주세요" maxlength="50"/>
 
 								<button type="button" id="find-id-email-btn"
-									class="c-button c-button--secondary c-button--md">
+									class="c-button c-button--secondary c-button--md" >
 									인증전송</button>
 							</div>
 
@@ -84,7 +84,7 @@
 							<div class="l-id-find-number-layout">
 								<div>
 									<input type="text" name="verify" id="find-id-verify"
-										class="c-input" placeholder="인증번호입력" />
+										class="c-input" placeholder="인증번호입력" maxlength="6"/>
 									<div class="c-id-find-numbertime" id="find-id-timer">3:00</div>
 								</div>
 								<div class="">

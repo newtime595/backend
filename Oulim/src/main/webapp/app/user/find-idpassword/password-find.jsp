@@ -66,26 +66,26 @@
 						<div class="c-password-find-input">
 							<h6>아이디</h6>
 							<input type="text" name="userId" id="find-user-id"
-								class="c-input" placeholder="아이디 입력해주세요" />
+								class="c-input" placeholder="아이디 입력해주세요" maxlength="20"/>
 							<p id="is-find-user-id-error" class="is-error-text"></p>
 						</div>
 						<div class="c-password-find-input">
 							<h6>이름</h6>
 							<input type="text" name="userName" id="find-user-name"
-								class="c-input" placeholder="이름 입력해주세요" />
+								class="c-input" placeholder="이름 입력해주세요" maxlength="50"/>
 							<p id="is-find-user-name-error" class="is-error-text"></p>
 						</div>
 						<div class="c-password-find-input">
 							<h6>생년월일</h6>
 							<input type="date" name="userBirth" id="find-user-birth"
-								class="c-input" placeholder="생년월일 입력해주세요" />
+								class="c-input" placeholder="생년월일 입력해주세요" maxlength="8"/>
 							<p id="is-find-user-birth-error" class="is-error-text"></p>
 						</div>
 						<div class="c-password-find-input">
 							<h6>이메일</h6>
 							<div class="l-password-find-email-layout">
 								<input type="text" name="userEmail" id="find-user-email"
-									class="c-input" placeholder="이메일 입력해주세요" />
+									class="c-input" placeholder="이메일 입력해주세요" maxlength="50" />
 								<button type="button" id="find-pw-email-btn"
 									name="find-pw-email-btn"
 									class="c-button c-button--secondary c-button--md">
@@ -98,7 +98,7 @@
 							<div class="l-password-find-number-layout">
 								<div>
 									<input type="text" name="verify" id="find-pw-verify"
-										class="c-input" placeholder="인증번호입력" />
+										class="c-input" placeholder="인증번호입력" maxlength="6" />
 									<div class="c-password-find-numbertime" id="find-pw-timer">3:00</div>
 								</div>
 								<div class="">

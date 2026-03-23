@@ -33,7 +33,7 @@
 	<jsp:include page="/app/include/header.jsp" />
 	<div class="l-main">
 		<div class="l-container">
-			<form action="/Oulim/front/html/user/login/login.html">
+			<form action="${pageContext.request.contextPath}/">
 				<div class="p-signup-complete-company">
 					<div class="l-signup-complete-company-layout">
 						<div>
@@ -41,46 +41,19 @@
 						</div>
 						<div class="l-signup-complete-company-title">
 							<div>
-								<h3>회원가입이 완료 되었습니다.</h3>
+								<h2>회원가입 신청이 완료 되었습니다.</h2>
 							</div>
 							<div>
-								<h6>확인버튼 선택 시 메인 화면으로 이동합니다.</h6>
+								<h5>회원 가입 승인 완료시 로그인 가능합니다.</h5>
+								<h5>메인버튼 선택 시 메인 화면으로 이동합니다.</h5>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="l-siginup-complete-company-textarea-layout">
-					<div class="c-siginup-complete-company-text-left">
-						<div>
-							<p>기관명</p>
-						</div>
-						<div>
-							<p>이름</p>
-						</div>
-						<div>
-							<p>아이디</p>
-						</div>
-						<div>
-							<p>이메일</p>
-						</div>
-					</div>
-					<div class="c-siginup-complete-company-text-right">
-						<div>
-							<p>대한적십시자</p>
-						</div>
-						<div>
-							<p>홍김마리아</p>
-						</div>
-						<div>
-							<p>gtwk1234</p>
-						</div>
-						<div>
-							<p>kdtkdt12@naver.com</p>
-						</div>
-					</div>
-				</div>
+				
 				<div class="c-signup-complete-company">
-					<button class="c-button c-button--primary c-button--md">
+					<button class="c-button c-button--primary c-button--md"
+					onclick="/">
 						다음</button>
 				</div>
 			</form>

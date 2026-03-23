@@ -62,7 +62,7 @@
 							<div class="l-signup-info-company-input-layout">
 								<div>
 									<input type="text" name="userId" id="company-user-id" class="c-input"
-										placeholder="아이디 입력" />
+										placeholder="아이디 입력" maxlength="50"/>
 									<p id="is-company-user-id-error" class="is-error-text"></p>
 								</div>
 								<div class="c-signup-company-btn">
@@ -76,7 +76,7 @@
 							<h6>비밀번호</h6>
 							<div class="l-toggle-layout">
 								<input type="password" name="userPw" id="company-user-password"
-									class="c-input" />
+									class="c-input" maxlength="50"/>
 								<button type="button" id="c-password-btn-toggle">
 									<img
 										src="${pageContext.request.contextPath}/asset/image/user/password-off.png"
@@ -89,7 +89,7 @@
 							<h6>비밀번호확인</h6>
 							<div class="l-toggle-layout-2">
 								<input type="password" name="userPwChk" id="company-user-password-check"
-									class="c-input" />
+									class="c-input" maxlength="50"/>
 								<button type="button" id="c-password-btn-toggle-2">
 									<img
 										src="${pageContext.request.contextPath}/asset/image/user/password-off.png"
