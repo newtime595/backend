@@ -85,6 +85,6 @@ body {
 .l-community-list-pagination{
 	display:flex;
 	justify-content:center;
-	width: 900px; 
+	width: 100%; 
 	margin: 50px
 }

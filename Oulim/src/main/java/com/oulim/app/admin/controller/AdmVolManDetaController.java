@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.oulim.app.admin.dao.AdmVolunDetaDAO;
 import com.oulim.app.common.controller.Execute;
 import com.oulim.app.common.controller.Result;
+import com.oulim.app.common.util.DefineType;
 import com.oulim.app.volunteer.dao.VolunteerMangementDAO;
 import com.oulim.app.volunteer.dto.VolunActivityDTO;
 import com.oulim.app.volunteer.dto.VolunApplyDTO;
@@ -84,7 +85,6 @@ public class AdmVolManDetaController implements Execute {
         // 5. 페이징
         // =========================
         int page = 1;
-        int rowCount = 10;
 
         try {
             page = Integer.parseInt(request.getParameter("page"));
@@ -92,9 +92,23 @@ public class AdmVolManDetaController implements Execute {
             page = 1;
         }
 
-        int startRow = (page - 1) * rowCount + 1;
-        int endRow = page * rowCount;
+		int startRow = (page - 1) * DefineType.ROWCOUNT_PER_PAGE + 1;
+		int endRow = startRow + DefineType.ROWCOUNT_PER_PAGE - 1;
 
+		detail.setStartRow(startRow);
+		detail.setEndRow(endRow);
+        
+        int total = applyCount;
+
+       int realEndPage = (int) (Math.ceil(total / (double) DefineType.ROWCOUNT_PER_PAGE));
+       int endPage = (int) (Math.ceil(page / (double) DefineType.MAX_PAGE_COUNT) * DefineType.MAX_PAGE_COUNT);
+       
+       int startPage = endPage - (DefineType.MAX_PAGE_COUNT - 1);
+       
+       endPage = Math.min(endPage,  realEndPage);
+       
+       boolean prev = startPage > 1;
+       boolean next = endPage < realEndPage;
         // =========================
         // 6. 신청자 리스트
         // =========================
@@ -115,6 +129,11 @@ public class AdmVolManDetaController implements Execute {
         request.setAttribute("volunList", volunList);
         request.setAttribute("page", page);
         request.setAttribute("volunActNo", volunActNo);
+        
+        request.setAttribute("startPage", startPage);
+        request.setAttribute("endPage", endPage);
+        request.setAttribute("prev", prev);
+        request.setAttribute("next", next);
 
         // =========================
         // 8. 이동

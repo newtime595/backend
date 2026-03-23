@@ -114,15 +114,60 @@
 		<where>
 			1 = 1
 
-			<if
-				test="searchType == 'no' and keyword != null and keyword != ''">
-				AND VA.Volun_Act_No = #{keyword}
+			<if test="recruitStatus != null and recruitStatus != 'all'">
+				<choose>
+					<!-- 모집예정 -->
+					<when test="recruitStatus == 'before'">
+						AND SYSDATE &lt; VA.Volun_Act_Recru_Begin
+					</when>
+
+					<!-- 모집중 -->
+					<when test="recruitStatus == 'recruiting'">
+						AND SYSDATE BETWEEN VA.Volun_Act_Recru_Begin AND
+						VA.Volun_Act_Recru_End
+					</when>
+
+					<!-- 모집마감 -->
+					<when test="recruitStatus == 'closedRecruit'">
+						AND SYSDATE &gt; VA.Volun_Act_Recru_End
+						AND SYSDATE &lt; VA.Volun_Act_Proc_Begin
+					</when>
+
+					<!-- 진행중 -->
+					<when test="recruitStatus == 'ongoing'">
+						AND SYSDATE BETWEEN VA.Volun_Act_Proc_Begin AND VA.Volun_Act_Proc_End
+					</when>
+
+					<!-- 종료 -->
+					<when test="recruitStatus == 'done'">
+						AND SYSDATE &gt; VA.Volun_Act_Proc_End
+					</when>
+
+				</choose>
+
 			</if>
 
-			<if
-				test="searchType == 'org' and keyword != null and keyword != ''">
-				AND O.Organ_Name LIKE '%' || #{keyword} || '%'
+			<!-- 기간 검색 -->
+		    <if test="volunActProcBegin != null and volunActProcBegin != ''">
+		        AND VA.Volun_Act_Proc_End &gt;= TO_DATE(#{volunActProcBegin}, 'YYYY-MM-DD')
+		    </if>
+		
+		    <if test="volunActProcEnd != null and volunActProcEnd != ''">
+		        AND VA.Volun_Act_Proc_Begin &lt;= TO_DATE(#{volunActProcEnd}, 'YYYY-MM-DD')
+		    </if>
+
+			<!-- 통합 검색 -->
+			<if test="keyword != null and keyword != ''">
+				AND (
+				VA.Volun_Act_Title LIKE '%' || #{keyword} || '%'
+				OR O.Organ_Name LIKE '%' || #{keyword} || '%'
+
+				<if test="keyword.matches('^[0-9]+$')">
+					OR VA.Volun_Act_No = #{keyword}
+				</if>
+				)
 			</if>
+
 
 		</where>
 

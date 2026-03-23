@@ -13,14 +13,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/reset.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/variable.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/Typography.css" />
+    
     <!-- 컨포넌트 css 선택-->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/pagination.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/input.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/button.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/list.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/card.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/DetailCard.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/badge.css" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/app/admin/css/dashboard/dashboard.css" />
   <script defer src="${pageContext.request.contextPath}/app/admin/js/dashboard/dashboard.js"></script>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/app/admin/css/aside.css" />
@@ -84,7 +79,7 @@
 							<span class="c-list__col clicktitle"> ${volunAct.volunActEndTime } </span>
 							<div class="c-list__actions">
 								<a href="${pageContext.request.contextPath}/admin/mailSend.adm?organNo=${volunAct.volunActOrganNo}"
-									class="c-button c-button--secondary c-button--md">
+									class="c-button c-button--Tertiary c-button--md">
 									메일 발송</a>
 							</div>
 						</div>
