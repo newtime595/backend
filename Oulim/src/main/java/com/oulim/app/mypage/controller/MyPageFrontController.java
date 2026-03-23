@@ -76,7 +76,7 @@ public class MyPageFrontController extends HttpServlet {
 			break;
 			
 		case "/mypage/verifyEmail.mp":
-			System.out.println("이메일 보내기");
+			System.out.println("이메일 확인");
 			result = new VerifyEmailAuthCodeController().execute(request, response);
 			break;
 			

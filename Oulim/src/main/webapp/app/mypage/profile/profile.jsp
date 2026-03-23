@@ -181,13 +181,10 @@
 						</div>
 					</div>
 				</a>
-
-
 			</div>
 		</div>
 	</main>
 
 	<jsp:include page="/app/include/footer.jsp" />
 </body>
-
 </html>

@@ -74,7 +74,7 @@ public class MyPageUpdateEmailController implements Execute {
 		session.removeAttribute("emailAuthEmail");
 		session.removeAttribute("emailAuthTime");
 
-		result.setPath(request.getContextPath() + "/mypage/organEdit.mp");
+		result.setPath(request.getContextPath() + "/mypage/organEdit.mp?emailStatus=success");
 		result.setRedirect(true);
 
 		return result;

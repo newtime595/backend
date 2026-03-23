@@ -25,7 +25,7 @@ public class MyPageUpdatePwController implements Execute {
 		Integer userNo = (Integer) session.getAttribute("userNo");
 		String newPw = request.getParameter("new-pw");
 		String newPwCheck = request.getParameter("new-pw-check");
-		
+
 		System.out.println("newPw: " + newPw);
 		System.out.println("newPwCheck: " + newPwCheck);
 		
@@ -46,8 +46,8 @@ public class MyPageUpdatePwController implements Execute {
 		myPageJoinDTO.setUserPw(newPw);
 
 		mypageDAO.updatePw(myPageJoinDTO);
-
-		result.setPath(request.getContextPath() + "/mypage/organEdit.mp");
+		
+		result.setPath(request.getContextPath() + "/mypage/organEdit.mp?pwStatus=success");
 		result.setRedirect(true);
 
 		return result;
