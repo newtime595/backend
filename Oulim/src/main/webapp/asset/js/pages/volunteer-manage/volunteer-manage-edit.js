@@ -142,6 +142,19 @@ form.addEventListener("submit", function (e) {
 		e.preventDefault();
 		return;
 	}
+	if (Number(volunActPoint.value.trim()) <= 0) {
+		alert("포인트를 입력해주세요.");
+		volunActPoint.focus();
+		e.preventDefault();
+		return;
+	}
+
+	if (Number(volunActPoint.value.trim()) > 500) {
+		alert("포인트는 최대 500까지만 입력 가능합니다.");
+		volunActPoint.focus();
+		e.preventDefault();
+		return;
+	}
 
 	// 3. 시간 형식 검사 (0~23)
 	if (!isValidHour(volunActBeginTime.value.trim())) {
