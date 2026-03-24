@@ -19,10 +19,16 @@ public class AdminPostDAO {
 	// 게시글 목록 조회
 	public List<CommunityPostJoinDTO> selectList(Map<String, Object> pageMap) {
 		System.out.println("게시물 목록 조회 - selectList 메소드 실행");
-		List<CommunityPostJoinDTO> list = sqlSession.selectList("community.selectPostAll", pageMap);
+		List<CommunityPostJoinDTO> list = sqlSession.selectList("adminPost.selectList", pageMap);
 		return list;
-}
+	}
+	
+	public int getTotal(Map<String, Object> pageMap) {
+	    return sqlSession.selectOne("adminPost.getTotal", pageMap);
+	}
 
+	
+	
 	// 게시글 수정 메소드
 	public void repostPost(CommunityPostDTO communityPostDTO) {
 		System.out.println("게시글 작성 - repostPost 메소드 실행");

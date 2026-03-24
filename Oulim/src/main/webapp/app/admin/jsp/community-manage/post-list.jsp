@@ -39,7 +39,7 @@
         <div class="header">
           <h1>게시글 관리</h1>
         </div>
-      <form id="content-area" action="${pageContext.request.contextPath}/admin/postlist.adm" method="get">
+      <form id="content-area" action="${pageContext.request.contextPath}/admin/postList.adm" method="get">
         <select class="search-item" name="searchType">
           <option value="writer" ${searchType == 'writer' ? 'selected' : ''}>닉네임</option>
           <option value="title" ${searchType == 'title' ? 'selected' : ''}>게시글 제목</option>
@@ -71,14 +71,14 @@
 	          <c:forEach var="post" items="${postList}">
 	            <div class="c-list__row">
 	              <label class="c-checkbox"><input type="checkbox" class="row-check" /><span class="c-checkbox__box"></span></label>
-	              <span class="c-list__col clicktitle" data-href="${pageContext.request.contextPath}/admin/postdetail.adm?postNo=${post.postNo}">${post.postNo}</span>
-	              <span class="c-list__col clicktitle" data-href="${pageContext.request.contextPath}/admin/postdetail.adm?postNo=${post.postNo}">${post.userNickname}</span>
-	              <span class="c-list__col clicktitle" data-href="${pageContext.request.contextPath}/admin/postdetail.adm?postNo=${post.postNo}">${post.postTitle}</span>
-	              <span class="c-list__col clicktitle" data-href="${pageContext.request.contextPath}/admin/postdetail.adm?postNo=${post.postNo}">${post.postDate}</span>
+	              <span class="c-list__col clicktitle" data-href="${pageContext.request.contextPath}/admin/postDetail.adm?postNo=${post.postNo}">${post.postNo}</span>
+	              <span class="c-list__col clicktitle" data-href="${pageContext.request.contextPath}/admin/postDetail.adm?postNo=${post.postNo}">${post.userNickname}</span>
+	              <span class="c-list__col clicktitle" data-href="${pageContext.request.contextPath}/admin/postDetail.adm?postNo=${post.postNo}">${post.postTitle}</span>
+	              <span class="c-list__col clicktitle" data-href="${pageContext.request.contextPath}/admin/postDetail.adm?postNo=${post.postNo}">${post.postDate}</span>
 	              <span class="c-list__col">${post.likeCount}</span>
 	              <span class="c-list__col">${post.postViewCount}</span>
 	              <div class="c-list__actions">
-	                <form action="${pageContext.request.contextPath}/admin/postdeleteok.adm" method="post" onsubmit="return confirm('게시글을 삭제하시겠습니까?');">
+	                <form action="${pageContext.request.contextPath}/admin/postDeleteok.adm" method="post" onsubmit="return confirm('게시글을 삭제하시겠습니까?');">
 	                  <input type="hidden" name="postNo" value="${post.postNo}" />
 	                  <button class="c-button c-button--primary c-button--md" type="submit">삭제</button>
 	                </form>
@@ -91,12 +91,12 @@
         <div class="page">
           <!-- 페이지네이션  c-pagination-->
         <nav class="c-pagination">
-          <c:if test="${prev}"><a class="c-pagination__link" href="${pageContext.request.contextPath}/admin/postlist.adm?page=${startPage - 1}${queryString}">‹</a></c:if>
+          <c:if test="${prev}"><a class="c-pagination__link" href="${pageContext.request.contextPath}/admin/postList.adm?page=${startPage - 1}${queryString}">&gt;</a></c:if>
           <c:if test="${not prev}"><a class="c-pagination__link is-disabled">‹</a></c:if>
           <c:forEach var="i" begin="${startPage}" end="${endPage}">
-            <a class="c-pagination__link ${i == page ? 'is-active' : ''}" href="${pageContext.request.contextPath}/admin/postlist.adm?page=${i}${queryString}">${i}</a>
+            <a class="c-pagination__link ${i == page ? 'is-active' : ''}" href="${pageContext.request.contextPath}/admin/postList.adm?page=${i}${queryString}">${i}</a>
           </c:forEach>
-          <c:if test="${next}"><a class="c-pagination__link" href="${pageContext.request.contextPath}/admin/postlist.adm?page=${endPage + 1}${queryString}">›</a></c:if>
+          <c:if test="${next}"><a class="c-pagination__link" href="${pageContext.request.contextPath}/admin/postlist.adm?page=${endPage + 1}${queryString}">&lt;</a></c:if>
           <c:if test="${not next}"><a class="c-pagination__link is-disabled">›</a></c:if>
         </nav>
         </div>

@@ -80,17 +80,17 @@ public class AdminFrontController extends HttpServlet {
 		    result = new AdminDashboardController().execute(request, response);
 		    break;	
 		
-		case "/admin/memlist.adm":
+		case "/admin/memList.adm":
 			System.out.println("회원 목록 요청");
 			result = new AdminMemListController().execute(request, response);
 			break;	
 
-		case "/admin/memdetail.adm":
+		case "/admin/memDetail.adm":
 			System.out.println("회원 상세 요청");
-			result = new AdmVolManDetaController().execute(request, response);
+			result = new AdminMemDetailController().execute(request, response);
 			break;	
 		
-		case "/admin/memedit.adm":
+		case "/admin/memEdit.adm":
 			System.out.println("회원 수정페이지 요청");
 			result = new AdminMemEditController().execute(request, response);
 			break;	
@@ -105,17 +105,17 @@ public class AdminFrontController extends HttpServlet {
 			result = new AdmVolManDetaController().execute(request, response);
 			break;	
 			
-		case "/admin/postlist.adm":
+		case "/admin/postList.adm":
 			System.out.println("게시판 목록 요청");
 			result = new AdminPostListController().execute(request, response);
 			break;	
 
-		case "/admin/postdetail.adm":
+		case "/admin/postDetail.adm":
 			System.out.println("게시글 상세 요청");
 			result = new AdminPostDetailController().execute(request, response);
 			break;	
 
-		case "/admin/postdeleteok.adm":
+		case "/admin/postDeleteok.adm":
 			System.out.println("게시글 삭제 요청");
 			result = new AdminPostDeleteOkController().execute(request, response);
 			break;	
@@ -142,14 +142,18 @@ public class AdminFrontController extends HttpServlet {
 			System.out.println("메일 보내기 요청");
 			result = new AdminMailSendController().execute(request, response);
 			break;
+			
+		case "/admin/memUpdateOk.adm":
+			System.out.println("유저정보 편집 페이지 요청");
+			result = new AdminMemUpdateOkController().execute(request, response);
+			break;		
 		}
 
 		if (result != null) {
 			if (result.isRedirect()) {
 				response.sendRedirect(request.getContextPath() + result.getPath());
 			} else {
-				RequestDispatcher dispatcher = request.getRequestDispatcher(result.getPath());
-				dispatcher.forward(request, response);
+				request.getRequestDispatcher(result.getPath()).forward(request, response);
 			}
 		}
 	}

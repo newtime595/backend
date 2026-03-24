@@ -26,7 +26,7 @@ public class AdminPostDeleteOkController implements Execute{
 	 System.out.println(postNo);
 		adminPostDAO.deleteCommunityPost(postNo);
 		
-		result.setPath("/admin/postlist.adm");
+		result.setPath("/admin/postList.adm");
 		result.setRedirect(true);
 		
 		return result;

@@ -27,6 +27,8 @@ public class AdminMemListController implements Execute {
         String searchType = request.getParameter("searchType");
         String keyword = request.getParameter("keyword");
 
+                       
+        
  
         int page = 1;
 		try {

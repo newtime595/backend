@@ -44,6 +44,24 @@
 		        WHERE rnum BETWEEN #{startRow} AND #{endRow}
 		    ]]>
 		</select>
+		
+		<!-- 게시글 전체 확인 -->
+		<select id="getTotal" parameterType="map" resultType="int">
+		    SELECT COUNT(*)
+		    FROM tbl_community_post tcp
+		    <where>
+		        <if test="keyword != null and keyword != ''">
+		            <choose>
+		                <when test="searchType == 'title'">
+		                    tcp.post_title LIKE '%' || #{keyword} || '%'
+		                </when>
+		                <when test="searchType == 'writer'">
+		                    tcp.user_nickname LIKE '%' || #{keyword} || '%'
+		                </when>
+		            </choose>
+		        </if>
+		    </where>
+		</select>
 	
 	<!-- 게시글 상세 -->
 		<select id="selectPost"
@@ -89,20 +107,5 @@
 	</update>
 	
 	
-      
-   <!-- 전체 게시글 조회 -->
-   <select id="selectAll" resultType="BoardListDTO">
-   <![CDATA[
-      SELECT * FROM (
-         SELECT ROWNUM AS rnum, subquery.*
-         FROM (
-            SELECT m.member_number, m.member_id, b.board_number, b.board_title, 
-               b.board_content, b.board_date, b.board_read_count
-            FROM tbl_member m JOIN tbl_board b
-            ON m.member_number = b.member_number
-            ORDER BY b.board_date DESC
-         ) subquery
-      ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
-   ]]>
-   </select>
+
 </mapper>

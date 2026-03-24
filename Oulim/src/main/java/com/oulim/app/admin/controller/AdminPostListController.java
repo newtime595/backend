@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oulim.app.admin.dao.AdminPostDAO;
 import com.oulim.app.common.controller.Execute;
 import com.oulim.app.common.controller.Result;
 import com.oulim.app.community.dao.CommunityDAO;
@@ -55,10 +56,11 @@ public class AdminPostListController implements Execute{
 		
 		
 		
-		List<CommunityPostJoinDTO> postList = communityDAO.selectList(pageMap);
+		AdminPostDAO adminPostDAO = new AdminPostDAO();
 
-		int total = communityDAO.getPostTotal();
-
+		List<CommunityPostJoinDTO> postList = adminPostDAO.selectList(pageMap);
+		int total = adminPostDAO.getTotal(pageMap);
+		
 		int realEndPage = (int) Math.ceil(total / (double) rowCount);
 		int endPage = (int) (Math.ceil(page / (double) pageCount) * pageCount);
 		int startPage = endPage - (pageCount - 1);

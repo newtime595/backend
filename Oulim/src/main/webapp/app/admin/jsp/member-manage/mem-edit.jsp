@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -17,91 +18,110 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/card.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/DetailCard.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/badge.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/app/admin/css/member-manage/mem-edit.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/app/admin/css/aside.css" />
-</head>
+  	<link rel="stylesheet" href="${pageContext.request.contextPath}/app/admin/css/member-manage/mem-edit.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/app/admin/css/aside.css" />
+     <script>
+    	const contextPath = "${pageContext.request.contextPath}";
+    </script>
+	<script defer src="${pageContext.request.contextPath}/app/admin/js/member-manage/mem-edit.js"></script>
+  </head>
 
-<body>
-	<main class="l-main">
-	<jsp:include page="/app/admin/jsp/aside.jsp"/>
+  <body>
+
+    <main class="l-main">
+      <!-- 사이드바 -->
+		<jsp:include page="/app/admin/jsp/aside.jsp" />
 
       <!-- 메인 헤더 -->
       <section class="l-content">
         <div class="header">
           <h1>회원수정</h1>
         </div>
-        <div id="content-area">
-          <div id="userNumber">
-            <p>유저번호 : 1</p>
-          </div>
-          <div id="userName">
-            <p>유저 이름 : 사람</p>
-          </div>
-          <div id="userNickname">
-            <p>유저 닉네님 : 닉네임1</p>
-            <button class="c-button c-button--primary c-button--md">
-              닉네임 초기화 하기
-            </button>
-          </div>
-          <div id="myPoint">
-            <p>현재 보유 포인트 : 3000</p>
-            <input
-              type="text"
-              class="c-input"
-              placeholder="변경할 포인트 입력"
-            />
-            <button class="c-button c-button--primary c-button--md">
-              적용하기
-            </button>
-          </div>
-          <!-- ====================================수정할곳 -->
-          <div class="l-mypage--content">
-            <div class="p-point-history--header">
-              <h1>포인트 조회</h1>
-            </div>
-            <div class="p-point-history--body">
-              <div class="p-point-history--nav">
-                <nav>
-                  <div id="plus">적립 포인트</div>
-                </nav>
-                <hr />
-              </div>
-
-              <div id="a" class="p-point-history--earn-list">
-                <ul>
-                  <li>
-                    <div>
-                      <h5>포인트 적립</h5>
-                      <h5>2026-01-04</h5>
-                    </div>
-                    <div>20p</div>
-                  </li>
-                  <li>
-                    <div>
-                      <h5>포인트 적립</h5>
-                      <h5>2026-01-04</h5>
-                    </div>
-                    <div>300p</div>
-                  </li>
-                  <li>
-                    <div>
-                      <h5>포인트 적립</h5>
-                      <h5>2026-01-04</h5>
-                    </div>
-                    <div>300p</div>
-                  </li>
-                  <li>
-                    <div>
-                      <h5>포인트 적립</h5>
-                      <h5>2026-01-04</h5>
-                    </div>
-                    <div>300p</div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+        	<input type="hidden" name="userNo" value="${member.userNo}" />
+			<c:if test="${not empty member}">
+			  <form id="content-area" action="${pageContext.request.contextPath}/admin/memUpdateOk.adm" method="post">
+			    <input type="hidden" name="userNo" value="${member.userNo}" />
+			
+			    <div>
+			      <label>아이디</label>
+			      <input class="c-input" type="text" value="${member.userId}" readonly />
+			    </div>
+			
+			    <div id="userNickname">
+			      <div>
+			        <label>닉네임</label>
+			        <input class="c-input" type="text" name="userNickname"
+			               value="${empty member.userNickname ? '' : member.userNickname}" />
+			      </div>
+			      <button class="c-button c-button--secondary c-button--md side-button" type="button">중복확인</button>
+			    </div>
+			
+			    <div>
+			      <label>주소</label>
+			      <input class="c-input" type="text" name="userAddress"
+			             value="${empty member.userAddress ? '' : member.userAddress}" />
+			    </div>
+			
+			    <div>
+			      <label>상세주소</label>
+			      <input class="c-input" type="text" name="userAddressDetail"
+			             value="${empty member.userAddressDetail ? '' : member.userAddressDetail}" />
+			    </div>
+			
+			    <div id="myPoint">
+			      <div>
+			        <label>보유포인트</label>
+			        <input class="c-input" type="text"
+			               value="${member.totalAmount}P" readonly />
+			      </div>
+			      <div>
+			        <label>포인트수정</label>
+			        <input class="c-input" type="number" name="pointAmount" value="0" />
+			      </div>
+			    </div>
+			
+			    <div style="display:flex; gap:12px; margin-top:16px;">
+			      <button class="c-button c-button--primary c-button--md" type="submit">저장</button>
+			      <a class="c-button c-button--secondary c-button--md"
+			         href="${pageContext.request.contextPath}/admin/memDetail.adm?userNo=${member.userNo}">
+			        취소
+			      </a>
+			    </div>
+			  </form>
+			
+			  <hr style="margin:30px 0;">
+			
+			  <h2>포인트 사용내역</h2>
+			
+			  <div class="c-list c-list--4col">
+			    <div class="c-list__header">
+			      <span class="c-list__col">번호</span>
+			      <span class="c-list__col">내용</span>
+			      <span class="c-list__col">포인트</span>
+			      <span class="c-list__col">날짜</span>
+			    </div>
+			
+			    <div class="c-list__body">
+			      <c:if test="${empty pointList}">
+			        <div class="c-list__row">
+			          <span class="c-list__col">-</span>
+			          <span class="c-list__col">내역 없음</span>
+			          <span class="c-list__col">-</span>
+			          <span class="c-list__col">-</span>
+			        </div>
+			      </c:if>
+			
+			      <c:forEach var="point" items="${pointList}">
+			        <div class="c-list__row">
+			          <span class="c-list__col">${point.logNo}</span>
+			          <span class="c-list__col">${point.logReason}</span>
+			          <span class="c-list__col">${point.changeAmount}</span>
+			          <span class="c-list__col">${point.logDate}</span>
+			        </div>
+			      </c:forEach>
+			    </div>
+			  </div>
+			</c:if>
       </section>
     </main>
 

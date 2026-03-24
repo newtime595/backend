@@ -33,9 +33,13 @@
     <!-- 포인트 지급 -->
     <update id="plusPoint"
             parameterType="com.oulim.app.admin.dto.AdminPointDTO">
-        UPDATE TBL_CURRENCY
-        SET TOTAL_AMOUNT = TOTAL_AMOUNT + #{changeAmount}
-        WHERE USER_NO = #{userNo}
+        MERGE INTO TBL_CURRENCY tc USING(
+		SELECT #{userNo} AS User_No, 1 as currency_id FROM DUAL) src on (tc.user_no = src.user_no and tc.currency_id = src.currency_id) 
+		WHEN NOT MATCHED THEN
+			INSERT (currency_id, user_no, total_amount)
+			VALUES (1, #{userNo}, #{changeAmount})
+		WHEN MATCHED THEN
+			Update set total_amount = TOTAL_AMOUNT + #{changeAmount} 
     </update>
 
     <!-- 포인트 차감 -->
@@ -43,7 +47,7 @@
             parameterType="com.oulim.app.admin.dto.AdminPointDTO">
         UPDATE TBL_CURRENCY
         SET TOTAL_AMOUNT = TOTAL_AMOUNT - #{changeAmount}
-        WHERE USER_NO = #{userNo}
+        WHERE USER_NO = #{userNo} and currency_id = 1
     </update>
 
     <!-- 포인트 로그 저장 -->

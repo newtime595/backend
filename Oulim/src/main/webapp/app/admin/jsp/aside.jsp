@@ -14,13 +14,13 @@
         <a href="${pageContext.request.contextPath}/admin/dashboard.adm">통계</a>
       </li>
       <li class="menu-item ${activeMenu == 'member' ? 'is-active' : ''}">
-        <a href="${pageContext.request.contextPath}/admin/memlist.adm">회원관리</a>
+        <a href="${pageContext.request.contextPath}/admin/memList.adm">회원관리</a>
       </li>
       <li class="menu-item ${activeMenu == 'volunteer' ? 'is-active' : ''}">
         <a href="${pageContext.request.contextPath}/admin/volunlist.adm">봉사 활동 관리</a>
       </li>
       <li class="menu-item ${activeMenu == 'board' ? 'is-active' : ''}">
-        <a href="${pageContext.request.contextPath}/admin/postlist.adm">게시판관리</a>
+        <a href="${pageContext.request.contextPath}/admin/postList.adm">게시판관리</a>
       </li>
     </ul>
   </nav>
