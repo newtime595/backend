@@ -31,6 +31,7 @@ function diffDays(start, end) {
 [volunActPoint, volunActBeginTime, volunActEndTime].forEach((input) => {
 	input.addEventListener("input", (e) => {
 		e.target.value = e.target.value.replace(/[^0-9]/g, "");
+		
 	});
 });
 
@@ -156,6 +157,11 @@ registerButton.addEventListener("click", (e) => {
 		return;
 	}
 
+	if (Number(volunActPoint.value) > 500) {
+		alert("포인트는 최대 500까지만 입력 가능합니다.");
+		volunActPoint.focus();
+		return;
+	}
 	form.submit();
 });
 
