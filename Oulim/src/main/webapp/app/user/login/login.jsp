@@ -70,15 +70,14 @@
 							</div>
 							<div class="l-login-signup-layout">
 								<div>
-									<a href="${pageContext.request.contextPath}/app/user/signin/signup-terms.jsp">회원가입</a>
+									<a href="${pageContext.request.contextPath}/user/terms.usr">회원가입</a>
 								</div>
 								<div>
 									<a href="${pageContext.request.contextPath}/app/user/find-idpassword/id-find.jsp">아이디
 										찾기</a>
 								</div>
 								<div>
-									<a
-										href="${pageContext.request.contextPath}/app/user/find-idpassword/password-find.jsp">비밀번호
+									<a href="${pageContext.request.contextPath}/app/user/find-idpassword/password-find.jsp">비밀번호
 										찾기</a>
 								</div>
 							</div>

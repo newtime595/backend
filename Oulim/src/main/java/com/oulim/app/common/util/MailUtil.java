@@ -9,7 +9,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class MailUtil {
@@ -19,11 +18,12 @@ public class MailUtil {
 
     public static void sendMail(String toEmail, String authCode) {
         Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+        props.put("mail.smtp.host", "smtp.gmail.com");		// 지메일 서버에 접속하기 위한 설정
+        props.put("mail.smtp.port", "587");					// TLS 방식 최신버전 포트번호
+        props.put("mail.smtp.auth", "true");				// 메일 발송 시 로그인 허용 여부
+        props.put("mail.smtp.starttls.enable", "true");		// TLS 암호화 TLS = 인터넷에서 데이터를 암호화하여 보내는 기술
+        props.put("mail.smtp.ssl.protocols", "TLSv1.2");	// TLS 버전 설정
+
         
         Session session = Session.getInstance(props, new Authenticator() {
             @Override
@@ -37,13 +37,12 @@ public class MailUtil {
             System.out.println("TO_EMAIL: " + toEmail);
 
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(FROM_EMAIL, "어울림"));
-            message.setRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
+            message.setFrom(new InternetAddress(FROM_EMAIL, "어울림"));		// 발신자 설정
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));	// 수신자 설정
             message.setSubject("[어울림] 이메일 인증번호");
             message.setText("인증번호는 [" + authCode + "] 입니다.");
 
             Transport.send(message);
-            System.out.println("Transport.send 성공");
 
         } catch (Exception e) {
             System.out.println("MailUtil 예외 발생");
@@ -59,6 +58,7 @@ public class MailUtil {
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+
         
         Session session = Session.getInstance(props, new Authenticator() {
             @Override

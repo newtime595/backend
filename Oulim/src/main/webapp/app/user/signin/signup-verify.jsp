@@ -105,9 +105,13 @@
 							<h6>휴대전화</h6>
 							<div class="l-signup-verify-layout-btn">
 								<input type="text" name="userPhoneNum" id="user-phone"
-									class="c-input" placeholder="전화번호( - 제외) 입력" maxlength="11" />
+									class="c-input" placeholder="전화번호( - 제외) 입력" maxlength="15" />
+									<button type="button"
+										class="c-button c-button--secondary c-button--md"
+										id="phone-check-btn">중복확인</button>
 							</div>
 							<p id="is-user-phone-error" class="is-error-text"></p>
+							<div class="c-signup-btn">
 						</div>
 						<div class="c-signup-verify-nextbtn">
 							<button class="c-button c-button--primary c-button--md"

@@ -52,6 +52,10 @@ public class UserFrontController extends HttpServlet {
 			System.out.println("로그아웃 요청");
 			execute = new LogoutController();
 
+		} else if(target.equals("/user/terms.usr")) {
+			System.out.println("약관페이지 요청");
+		    execute = new TermsController();
+		    
 		} else if (target.equals("/user/normalJoinFirstOk.usr")) {
 			System.out.println("일반회원 1차 입력 처리 요청");
 			execute = new NormalJoinFirstOkController();

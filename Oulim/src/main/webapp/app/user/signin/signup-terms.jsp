@@ -40,7 +40,7 @@
 		<div class="l-container">
 			<div class="p-signup">
 				<form id="signup-terms-form"
-					action="${pageContext.request.contextPath}/app/user/signin/signup-verify.jsp"
+					action="${pageContext.request.contextPath}/user/signupVerify.usr"
 					method="get" data-context-path="${pageContext.request.contextPath}">
 					<input type="hidden" name="userType" id="user-type" value="1" />
 					<div class="l-signup-main">
@@ -163,8 +163,8 @@
 
 <p><strong>4. 동의 철회</strong></p>
 <p>회원은 언제든지 마케팅 정보 수신 동의를 철회할 수 있으며, 철회 이후에는 관련 안내가 발송되지 않습니다.</p></div>
-							<div type="submit" class="c-signup-btn">
-								<button class="c-button c-button--primary c-button--md"
+							<div class="c-signup-btn">
+								<button type="submit" class="c-button c-button--primary c-button--md"
 									id="is-next-btn">다음</button>
 							</div>
 						</div>

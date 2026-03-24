@@ -28,7 +28,8 @@ public class NormalJoinSecondOkController implements Execute {
         userDTO.setUserId(request.getParameter("userId"));
         userDTO.setUserPw(request.getParameter("userPw"));
         userDTO.setUserNickname(request.getParameter("userNickname"));
-
+        
+        
         System.out.println(userDTO);
 
         userDAO.normaljoin(userDTO);

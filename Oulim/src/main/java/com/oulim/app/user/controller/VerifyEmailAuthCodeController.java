@@ -38,12 +38,20 @@ public class VerifyEmailAuthCodeController implements Execute {
 		long limit = 3 * 60 * 1000;
 
 		if (now - authTime > limit) {
+			session.removeAttribute("emailAuthCode");
+		    session.removeAttribute("emailAuthEmail");
+		    session.removeAttribute("emailAuthTime");
+		    
 			out.print("expired");
 			return null;
 		}
 
 		if (sessionEmail.equals(userEmail) && sessionCode.equals(authCode)) {
 			session.setAttribute("emailVerified", true);
+			
+			session.removeAttribute("emailAuthCode");
+		    session.removeAttribute("emailAuthEmail");
+		    session.removeAttribute("emailAuthTime");
 			out.print("success");
 		} else {
 			out.print("fail");

@@ -12,6 +12,8 @@ let isEmailAvailable = false;
 
 const companyEmail = document.getElementById("company-email");
 const companyEmailCheckBtn = document.getElementById("company-email-check-btn");
+const phoneCheckBtn = document.getElementById("phone-check-btn");
+
 const companyEmailAuthCode = document.getElementById("company-email-auth-code");
 const companyEmailAuthConfirmBtn = document.getElementById("company-email-auth-confirm-btn");
 const companyEmailVerified = document.getElementById("company-email-verified");
@@ -154,7 +156,31 @@ companyForm.addEventListener("submit", function (e) {
   }
 });
 
+phoneCheckBtn.addEventListener("click", () => {
+    const phone = phoneInput.value.trim().replaceAll("-", "");
 
+    if (phone === "") {
+        alert("전화번호를 입력해주세요.");
+        phoneInput.focus();
+        return;
+    }
+
+    fetch(`${contextPath}/user/checkOk.usr?type=phone&value=${encodeURIComponent(phone)}`)
+        .then(response => response.text())
+        .then(result => {
+            if (result.trim() === "available") {
+                alert("사용 가능한 전화번호입니다.");
+            } else if (result.trim() === "duplicated") {
+                alert("이미 사용 중인 전화번호입니다.");
+            } else {
+                alert("중복확인 중 오류가 발생했습니다.");
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            alert("서버 통신 중 오류가 발생했습니다.");
+        });
+});
 
 nextBtn.addEventListener("click", function(e) {
 	let hasError = false;

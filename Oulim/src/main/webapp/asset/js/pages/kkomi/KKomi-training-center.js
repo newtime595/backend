@@ -62,8 +62,13 @@ document.addEventListener("DOMContentLoaded", () => {
 			return;
 		}
 
-				if (userType !== USER_TYPE.USER) {
+		if (userType !== USER_TYPE.USER) {
 			alert("기업 회원 및 관리자는 사용할 수 없습니다.");
+			return;
+		}
+		
+		if(mockData.remainPoint < 100){
+			alert("최소 사용 가능 포인트를 보유하고 있지 않습니다(최소 100)");
 			return;
 		}
 		
