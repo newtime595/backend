@@ -33,7 +33,7 @@
 			TO_CHAR(VOLUNACT_APPLYDATE, 'YYYY-MM-DD') AS volunActApplyDate,
 			COUNT(*) AS currentCount
 		FROM TBL_VOLUN_APPLY
-		WHERE VOLUN_ACT_NO = #{volunActNo} and VOLUNACT_APPLYSTATUS=1 
+		WHERE VOLUN_ACT_NO = #{volunActNo} and VOLUNACT_APPLYSTATUS IN(1,9) 
 		GROUP BY TO_CHAR(VOLUNACT_APPLYDATE, 'YYYY-MM-DD')
 		ORDER BY volunActApplyDate
 	</select>
@@ -42,7 +42,7 @@
 	<select id="selectVolunteerCount" parameterType="int" resultType="int">
 		SELECT COUNT(*)
 		FROM TBL_VOLUN_APPLY
-		WHERE VOLUN_ACT_NO = #{volunActNo} and VOLUNACT_APPLYSTATUS=1
+		WHERE VOLUN_ACT_NO = #{volunActNo} and VOLUNACT_APPLYSTATUS IN(1,9)
 	</select>	
 
 	<!--페이징 처리 퀴리문 -->
@@ -64,7 +64,7 @@
 				FROM TBL_VOLUN_APPLY A
 				JOIN TBL_USER U
 					ON A.USER_NO = U.USER_NO
-				WHERE A.VOLUN_ACT_NO = #{volunActNo} and A.VOLUNACT_APPLYSTATUS=1
+				WHERE A.VOLUN_ACT_NO = #{volunActNo} and A.VOLUNACT_APPLYSTATUS IN(1,9)
 				ORDER BY A.VOLUNACT_APPLYDATE DESC
 			) T
 			WHERE ROWNUM <= #{endRow}
@@ -116,7 +116,7 @@
 	<!-- 봉사자 상태 변경 -->
 	<update id="updateAttendanceStatus" parameterType="VolunApplyDTO">
 		UPDATE TBL_VOLUN_APPLY
-		SET VOLUNACT_APPLYSTATUS = 0,
+		SET VOLUNACT_APPLYSTATUS = 9,
 	    VOLUNACT_ATTENDANCE = #{volunActAttendance}
 		WHERE VOLUN_ACT_NO = #{volunActNo}
 	 	AND USER_NO = #{userNo}

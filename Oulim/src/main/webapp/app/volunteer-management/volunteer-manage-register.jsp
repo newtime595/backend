@@ -138,7 +138,7 @@
 						<div class="l-volunteer-manage-register_form-field">
 							<div class="postcode-wrap">
 								<input type="text" id="volunActAddress" name="volunActAddress" class="c-input"
-									placeholder="장소를 입력해주세요." value="${volunteer.volunActAddress}" readonly />
+									placeholder="장소를 입력해주세요." maxlength="50" value="${volunteer.volunActAddress}" readonly />
 								<input type="button" id="searchPostcode"
 									class="c-button c-button--secondary c-button--md"
 									value="우편번호 찾기" onclick="sample4_execDaumPostcode()" />
@@ -152,7 +152,7 @@
 					<div class="l-volunteer-manage-register_form-item">
 						<label class="l-volunteer-manage-register_form-label">상세주소</label>
 						<div class="l-volunteer-manage-register_form-field">
-							<input type="text" id="volunActAddressDetail" name="volunActAddressDetail" class="c-input"
+							<input type="text" id="volunActAddressDetail" maxlength="50" name="volunActAddressDetail" class="c-input"
 								placeholder="상세주소를 입력해주세요." value="${volunteer.volunActAddressDetail}" />
 						</div>
 					</div>
@@ -169,7 +169,7 @@
 						<label class="l-volunteer-manage-register_form-label">포인트</label>
 						<div class="l-volunteer-manage-register_form-field">
 							<input type="text" id="volunActPoint" name="volunActPoint" class="c-input"
-								placeholder="숫자만 입력 가능합니다." value="${volunteer.volunActPoint}" />
+								placeholder="숫자만 입력 가능합니다." maxlength="50" value="${volunteer.volunActPoint}" />
 						</div>
 					</div>
 				</div>
@@ -180,14 +180,14 @@
 					<label class="l-volunteer-manage-register_form-label">봉사 제목</label>
 					<div class="l-volunteer-manage-register_form-field">
 						<input type="text" id="volunActTitle" name="volunActTitle" class="c-input"
-							placeholder="제목을 입력해주세요." value="${volunteer.volunActTitle}" />
+							placeholder="제목을 입력해주세요." maxlength="100" value="${volunteer.volunActTitle}" />
 					</div>
 				</div>
 			</div>
 
 			<div class="l-volunteer-manage-register_detail">
 				<label class="l-volunteer-manage-register_detail-label">봉사 상세 내용</label>
-				<textarea id="volunActDetail" name="volunActDetail" class="c-input" placeholder="내용을 입력해주세요.">${volunteer.volunActDetail}</textarea>
+				<textarea id="volunActDetail" name="volunActDetail" maxlength="2000" class="c-input" placeholder="내용을 입력해주세요.">${volunteer.volunActDetail}</textarea>
 			</div>
 
 			<div class="c-button--volunteer-manage-register">
