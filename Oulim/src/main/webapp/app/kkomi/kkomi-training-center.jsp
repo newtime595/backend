@@ -71,7 +71,7 @@
 					<!-- 액션 -->
 					<div class="c-action-grid">
 						<button id="feedBtn" class="c-action-card js-feed">
-							<img src="${pageContext.request.contextPath}/asset/image/flower-icon.svg"> <span>먹이주기</span>
+							<img src="${pageContext.request.contextPath}/asset/image/flower-icon.svg"> <span>도력쌓기</span>
 						</button>
 						<button class="c-action-card js-mission">
 							<img src="${pageContext.request.contextPath}/asset/image/game-icon.svg"> <span>미션</span>
