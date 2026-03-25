@@ -1,6 +1,9 @@
 package com.oulim.app.volunteer.activity.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.oulim.app.common.controller.Execute;
 import com.oulim.app.common.controller.Result;
 import com.oulim.app.volunteer.dao.VolunteerActivityDAO;
+import com.oulim.app.volunteer.dto.VolunActivityDTO;
 import com.oulim.app.volunteer.dto.VolunApplyDTO;
 
 public class VolunActApplyController implements Execute {
@@ -40,6 +44,17 @@ public class VolunActApplyController implements Execute {
 		}
 
 		int volunActNo = Integer.parseInt(volunActNoStr);
+		VolunteerActivityDAO dao = new VolunteerActivityDAO();
+		VolunActivityDTO volunActDTO = dao.selectDetail(volunActNo);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate recruBeginTime = LocalDate.parse(volunActDTO.getVolunActRecruBegin(),formatter);
+		LocalDate recruEndTime = LocalDate.parse(volunActDTO.getVolunActRecruEnd(),formatter);
+		if(recruBeginTime.isBefore(LocalDate.now()) || recruEndTime.isAfter(LocalDate.now())) {
+			result.setRedirect(true);
+			result.setPath("/volunteer-activity/list.va");
+			return result;
+		}
+		
 
 		VolunApplyDTO dto = new VolunApplyDTO();
 		dto.setVolunActNo(volunActNo);
@@ -47,7 +62,6 @@ public class VolunActApplyController implements Execute {
 
 		System.out.println("dto : " + dto);
 
-		VolunteerActivityDAO dao = new VolunteerActivityDAO();
 		dao.applyVolunteer(dto);
 
 		System.out.println("=== 신청 완료 ===");
