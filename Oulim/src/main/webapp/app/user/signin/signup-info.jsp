@@ -91,7 +91,7 @@
 										class="c-input" maxlength="50" />
 									<button type="button" id="c-password-btn-toggle">
 										<img
-											src="${pageContext.request.contextPath}/asset/image/user/password-on.png"
+											src="${pageContext.request.contextPath}/asset/image/user/password-off.png"
 											alt="eye" id="c-password-toggle-img" />
 									</button>
 								</div>

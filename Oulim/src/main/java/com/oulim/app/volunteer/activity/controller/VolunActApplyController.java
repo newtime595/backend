@@ -48,12 +48,20 @@ public class VolunActApplyController implements Execute {
 		VolunActivityDTO volunActDTO = dao.selectDetail(volunActNo);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate recruBeginTime = LocalDate.parse(volunActDTO.getVolunActRecruBegin(),formatter);
-		LocalDate recruEndTime = LocalDate.parse(volunActDTO.getVolunActRecruEnd(),formatter);
-		if(recruBeginTime.isBefore(LocalDate.now()) || recruEndTime.isAfter(LocalDate.now())) {
+		LocalDate recruEndTime = LocalDate.parse(volunActDTO.getVolunActRecruEnd(),formatter).minusDays(1);
+		
+		 System.out.println("봉사 모집 시작시간 : " + recruBeginTime);
+		 System.out.println("신청 여부" + LocalDate.now().isBefore(recruBeginTime));
+		 System.out.println("봉사 모집 종료시간 : " + recruEndTime);
+		 System.out.println("신청 여부" + LocalDate.now().isAfter(recruEndTime));
+		
+		if( LocalDate.now().isBefore(recruBeginTime) ||
+			LocalDate.now().isAfter(recruEndTime)) { 
 			result.setRedirect(true);
-			result.setPath("/volunteer-activity/list.va");
-			return result;
-		}
+		  result.setPath("/volunteer-activity/list.va");
+		  return result;
+		  }
+	
 		
 
 		VolunApplyDTO dto = new VolunApplyDTO();
