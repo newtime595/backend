@@ -146,7 +146,11 @@ public class AdminFrontController extends HttpServlet {
 		case "/admin/memUpdateOk.adm":
 			System.out.println("유저정보 편집 페이지 요청");
 			result = new AdminMemUpdateOkController().execute(request, response);
-			break;		
+			break;
+		case "/admin/memDeleteOk.adm":
+			System.out.println("유저 강제 탈퇴 페이지 요청");
+			result = new AdminMemDeleteOkController().execute(request, response);
+			break;
 		}
 
 		if (result != null) {
