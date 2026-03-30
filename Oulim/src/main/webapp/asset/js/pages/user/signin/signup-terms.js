@@ -36,7 +36,7 @@ generalBtn.addEventListener("click", function () {
   generalTerms.style.display = "block";
   businessTerms.style.display = "none";
   userTypeInput.value = "1";
-  form.action = contextPath + "/app/user/signin/signup-verify.jsp";
+  form.action = contextPath + "/user/normalJoinFirst.usr";
   resetCheck();
 });
 
@@ -44,7 +44,7 @@ businessBtn.addEventListener("click", function () {
   generalTerms.style.display = "none";
   businessTerms.style.display = "block";
   userTypeInput.value = "2";
-  form.action = contextPath + "/app/user/signin/signup-verify-company.jsp";
+  form.action = contextPath + "/user/organJoinFirst.usr";
   resetCheck();
   
 });

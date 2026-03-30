@@ -56,6 +56,10 @@ public class UserFrontController extends HttpServlet {
 			System.out.println("약관페이지 요청");
 		    execute = new TermsController();
 		    
+		} else if (target.equals("/user/normalJoinFirst.usr")) {
+			System.out.println("일반회원 1차 처리 요청");
+			execute = new NormalJoinFirstController();
+
 		} else if (target.equals("/user/normalJoinFirstOk.usr")) {
 			System.out.println("일반회원 1차 입력 처리 요청");
 			execute = new NormalJoinFirstOkController();
@@ -64,7 +68,11 @@ public class UserFrontController extends HttpServlet {
 			System.out.println("일반회원 2차 입력 처리 요청");
 			execute = new NormalJoinSecondOkController();
 			
-		}else if (target.equals("/user/organJoinFirstOk.usr")) {
+		} else if (target.equals("/user/organJoinFirst.usr")) {
+			System.out.println("기업회원 1차 입력 처리 요청");
+			execute = new OrganJoinFirstController();
+
+		} else if (target.equals("/user/organJoinFirstOk.usr")) {
 			System.out.println("기업회원 1차 입력 처리 요청");
 			execute = new OrganJoinFirstOkController();
 
