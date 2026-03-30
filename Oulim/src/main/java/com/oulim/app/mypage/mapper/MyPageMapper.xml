@@ -120,11 +120,31 @@ WHERE ROWNUM = 1
 SELECT *
 FROM (
     SELECT 
-        Volun_Act_Title AS volunActTitle,
-        TO_CHAR(Volun_Act_Date, 'yyyy-mm-dd') AS finVolunActProcEnd
-    FROM TBL_VOLUN_HISTORY
-    WHERE User_No = #{userNo}
-    ORDER BY Volun_Act_Date DESC
+        volunActTitle,
+        finVolunActProcEnd
+    FROM (
+        -- 1) 이미 완료된 봉사 기록
+        SELECT 
+            Volun_Act_Title AS volunActTitle,
+            TO_CHAR(Volun_Act_Date, 'yyyy-mm-dd') AS finVolunActProcEnd,
+            Volun_Act_Date AS sortDate
+        FROM TBL_VOLUN_HISTORY
+        WHERE User_No = #{userNo}
+
+        UNION ALL
+
+        -- 2) 오늘 기준으로 종료된 봉사 기록 (출석/결석 구분 없이)
+        SELECT 
+            tvac.VOLUN_ACT_TITLE AS volunActTitle,
+            TO_CHAR(tvac.VOLUN_ACT_PROC_END, 'yyyy-mm-dd') AS finVolunActProcEnd,
+            tvac.VOLUN_ACT_PROC_END AS sortDate
+        FROM TBL_VOLUN_APPLY tvapp
+        JOIN TBL_VOLUN_ACTIVITY tvac
+            ON tvapp.VOLUN_ACT_NO = tvac.VOLUN_ACT_NO
+        WHERE tvapp.USER_NO = #{userNo}
+          AND tvac.VOLUN_ACT_PROC_END < SYSDATE
+    )
+    ORDER BY sortDate DESC
 )
 WHERE ROWNUM = 1
 ]]>
@@ -205,20 +225,25 @@ WHERE apl.user_no = #{userNo}
 
 	<!-- 5. 완료한 봉사 목록 조회 -->
 
-	<select id="finishVolunPage" parameterType="map" resultType="MyPageJoinDTO">
+<select id="finishVolunPage" parameterType="map" resultType="MyPageJoinDTO">
 <![CDATA[
 SELECT * FROM (
     SELECT
-        ROW_NUMBER() OVER (ORDER BY Volun_Act_Date DESC) AS rnum,
-    	Log_No AS volunActNo,
-        Volun_Act_Title AS volunActTitle,
-        TO_CHAR(Volun_Act_Date, 'yyyy-mm-dd') AS finVolunActProcEnd
-    FROM TBL_VOLUN_HISTORY
-    WHERE User_No = #{userNo}
+        ROW_NUMBER() OVER (ORDER BY tvac.VOLUN_ACT_PROC_END DESC) AS rnum,
+        tvapp.VOLUN_ACT_NO AS volunActNo,
+        tvac.VOLUN_ACT_TITLE AS volunActTitle,
+        TO_CHAR(tvac.VOLUN_ACT_PROC_END, 'yyyy-mm-dd') AS finVolunActProcEnd,
+        tvapp.VOLUNACT_APPLYSTATUS AS applyStatus,
+        tvapp.VOLUNACT_ATTENDANCE AS attendance
+    FROM TBL_VOLUN_APPLY tvapp
+    JOIN TBL_VOLUN_ACTIVITY tvac
+        ON tvapp.VOLUN_ACT_NO = tvac.VOLUN_ACT_NO
+    WHERE tvac.VOLUN_ACT_PROC_END < SYSDATE
+      AND tvapp.USER_NO = #{userNo}
 )
 WHERE rnum BETWEEN #{startRow} AND #{endRow}
 ]]>
-	</select>
+</select>
 	
 		<select id="finishVolunTotal" parameterType="int" resultType="int">
 <![CDATA[
