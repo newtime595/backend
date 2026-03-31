@@ -69,7 +69,7 @@ public class UserDAO {
     }
     
     public void updatePw(UserDTO userDTO) {
-    	sqlSession.update("user.updatePw", userDTO);
+    	sqlSession.update("user.updatePw", userDTO); 
     }
     
     // 재화 처리 관련

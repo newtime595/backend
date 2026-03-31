@@ -33,7 +33,7 @@ public class AdminMemUpdateOkController implements Execute{
 	    adminMemDetailDTO.setUserAddress(userAddress);
 	    adminMemDetailDTO.setUserAddressDetail(userAddressDetail);
 	    adminMemDAO.update(adminMemDetailDTO);
-	    
+	    System.out.println("업데이트 진입");
 	    String pointStr = request.getParameter("pointAmount");
 
 	    if(pointStr != null && !pointStr.isEmpty()) {

@@ -94,6 +94,11 @@ public class AdminFrontController extends HttpServlet {
 			System.out.println("회원 수정페이지 요청");
 			result = new AdminMemEditController().execute(request, response);
 			break;	
+
+		case "/admin/checkNickname.adm":
+			System.out.println("회원 닉네임 체크 요청");
+			result = new AdminNicknameCheckController().execute(request, response);
+			break;	
 			
 		case "/admin/volunlist.adm":
 			System.out.println("봉사 목록 요청");

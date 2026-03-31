@@ -106,7 +106,7 @@
               <!-- 입력창 + 버튼 한 줄 -->
               <div class="inline-row">
                 <input
-                  id="userNickname"
+                  id="newNickname"
                   type="text"
                   class="c-input detail-input flex-input"
                   name="newNickname"
@@ -114,8 +114,8 @@
                 />
                 
 
-                <button type="button" class="c-button c-button--primary c-button--md side-button">
-                  중복확인
+                <button type="button" id="checkNicknameBtn" class="c-button c-button--primary c-button--md side-button">
+                 중복확인
                 </button>
               </div>
 
@@ -140,11 +140,6 @@
                     placeholder="주소입력"
                     readonly
                   />
-                
-
-                <button type="button" class="c-button c-button--primary c-button--md side-button icon-button">
-                  돋보기
-                </button>
               </div>
             </div>
 
@@ -173,9 +168,10 @@
 
             <!-- 하단 버튼 -->
               <div class="button-group">
-                <button type="submit" class="c-button c-button--primary c-button--md action-button">
+                <a href="${pageContext.request.contextPath}/admin/memUpdateOk.adm?userNo=${member.userNo}" 
+                	class="c-button c-button--primary c-button--md action-button">
                   수정
-                </button>
+                </a>
 
                 <a href="${pageContext.request.contextPath}/admin/memDeleteOk.adm?userNo=${member.userNo}"
                    class="c-button c-button--secondary c-button--md action-button">
