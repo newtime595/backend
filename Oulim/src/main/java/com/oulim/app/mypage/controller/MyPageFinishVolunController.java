@@ -48,6 +48,9 @@ public class MyPageFinishVolunController implements Execute {
 		request.setAttribute("finishVol", finishVol);
 		request.setAttribute("page", page);
 		request.setAttribute("lastPage", lastPage);
+		
+		System.out.println("totalCount = " + totalCount);
+		System.out.println("lastPage = " + lastPage);
 
 		result.setPath("/app/mypage/volunteer-history/finish-volunteer.jsp");
 		result.setRedirect(false);

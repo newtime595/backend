@@ -134,7 +134,7 @@
 									id="c-password-toggle-2-img" />
 							</button>
 							<button type="submit" id="pwVerifyBtn"
-								class="c-button c-button--primary c-button--md">비밀번호 수정</button>
+								class="c-button c-button--primary c-button--md">수정</button>
 						</div>
 					</form>
 				</div>

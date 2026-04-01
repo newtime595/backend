@@ -152,7 +152,7 @@
 								<button type="button" class="c-password-toggle-btn"
 									onclick="togglePassword('newPassword', 'toggleImg1')">
 									<img
-										src="${pageContext.request.contextPath}/asset/image/user/password-on.png"
+										src="${pageContext.request.contextPath}/asset/image/user/password-off.png"
 										alt="eye" id="toggleImg1" />
 								</button>
 							</div>
@@ -168,7 +168,7 @@
 								<button type="button" class="c-password-toggle-btn"
 									onclick="togglePassword('confirmPassword', 'toggleImg2')">
 									<img
-										src="${pageContext.request.contextPath}/asset/image/user/password-on.png"
+										src="${pageContext.request.contextPath}/asset/image/user/password-off.png"
 										alt="eye" id="toggleImg2" />
 								</button>
 							</div>

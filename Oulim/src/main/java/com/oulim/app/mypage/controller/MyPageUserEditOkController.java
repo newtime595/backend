@@ -68,7 +68,7 @@ public class MyPageUserEditOkController implements Execute {
 		mypageDAO.userEdit(mypageDTO);
 
 		session.setAttribute("editSuccess", "회원정보가 수정되었습니다. 비밀번호를 재입력해주세요.");
-		result.setPath(request.getContextPath() + "/mypage/checkOk.mp");
+		result.setPath(request.getContextPath() + "/mypage/profile.mp");
 		result.setRedirect(true);
 		return result;
 	}

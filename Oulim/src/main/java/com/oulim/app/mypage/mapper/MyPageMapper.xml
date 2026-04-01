@@ -123,7 +123,6 @@ FROM (
         volunActTitle,
         finVolunActProcEnd
     FROM (
-        -- 1) 이미 완료된 봉사 기록
         SELECT 
             Volun_Act_Title AS volunActTitle,
             TO_CHAR(Volun_Act_Date, 'yyyy-mm-dd') AS finVolunActProcEnd,
@@ -133,7 +132,6 @@ FROM (
 
         UNION ALL
 
-        -- 2) 오늘 기준으로 종료된 봉사 기록 (출석/결석 구분 없이)
         SELECT 
             tvac.VOLUN_ACT_TITLE AS volunActTitle,
             TO_CHAR(tvac.VOLUN_ACT_PROC_END, 'yyyy-mm-dd') AS finVolunActProcEnd,
@@ -240,6 +238,8 @@ SELECT * FROM (
         ON tvapp.VOLUN_ACT_NO = tvac.VOLUN_ACT_NO
     WHERE tvac.VOLUN_ACT_PROC_END < SYSDATE
       AND tvapp.USER_NO = #{userNo}
+      
+      
 )
 WHERE rnum BETWEEN #{startRow} AND #{endRow}
 ]]>
@@ -252,7 +252,8 @@ FROM TBL_VOLUN_ACTIVITY tva
 JOIN TBL_VOLUN_APPLY apl
     ON tva.volun_act_no = apl.volun_act_no
 WHERE apl.user_no = #{userNo} 
-  AND apl.VOLUNACT_APPLYSTATUS = 2
+  
+  AND tva.VOLUN_ACT_PROC_END < SYSDATE
 ]]>
 	</select>
 
@@ -322,7 +323,9 @@ SELECT * FROM (
         tcp.post_No AS postNo,
         tcp.post_title AS postTitle,
         TO_CHAR(tcp.post_Date, 'yyyy-mm-dd') AS postDate,
-        tpl.post_Like_No AS postLikeNo
+        (SELECT COUNT(post_like_no)
+                          FROM tbl_post_like tpl
+                         WHERE tpl.post_no = tcp.post_no) AS postLikeNo
     FROM tbl_community_post tcp
     LEFT JOIN tbl_post_like tpl
         ON tcp.post_no = tpl.post_no

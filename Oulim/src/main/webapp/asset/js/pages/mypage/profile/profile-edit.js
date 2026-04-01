@@ -81,10 +81,10 @@ function togglePassword(inputId, imgId) {
 
   if (input.type === "password") {
     input.type = "text";
-    img.src = contextPath + "/asset/image/user/password-off.png";
+    img.src = contextPath + "/asset/image/user/password-on.png";
   } else {
     input.type = "password";
-    img.src = contextPath + "/asset/image/user/password-on.png";
+    img.src = contextPath + "/asset/image/user/password-off.png";
   }
 }
 

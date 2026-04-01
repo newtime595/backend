@@ -118,6 +118,7 @@ public class MyPageFrontController extends HttpServlet {
 
 		case "/mypage/finishVolun.mp": // 완료한 봉사 목록 조회
 			result = new MyPageFinishVolunController().execute(request, response);
+			System.out.println("완료 봉사 페이지 진입");
 			break;
 
 		case "/mypage/point.mp":

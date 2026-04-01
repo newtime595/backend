@@ -50,6 +50,8 @@ footer {
     margin: 5px 40px;
 }
 
+
+
 .pw-text {
     display: flex;
     position: relative;
@@ -87,13 +89,17 @@ footer {
     position: relative;
 }
 
+.c-input{
+	width: 80%;
+}
+
 
 
 #c-password-btn-toggle{
   position: absolute;
   width: 30px;
   height: 30px;
-  right: 3px;
+  right: 129px;
   top: 7px;
 }
 
@@ -108,13 +114,13 @@ footer {
   position: absolute;
   width: 30px;
   height: 30px;
-  right: 110px;
+  right: 129px;
   top: 7px;
 }
 
 #find-id-timer{
 	position:absolute;
-	right: 125px;
+	right: 140px;
 	top:10px;
 }
 
